@@ -1,3 +1,11 @@
+<head>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+
+$$ d $$
+
 \[ f(x) = \sum_{n = 0}^{\infty} \dfrac{f^{(n)}(x - a)}{n!} (x - a)^n  \]
 
 \[ f(x) = \sum_{n = 0}^{\infty} \dfrac{f^{(n)}(x)}{n!} x^n  \]

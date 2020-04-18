@@ -1,0 +1,280 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+
+
+\usepackage{amsmath, amssymb, amsthm}
+\theoremstyle{remark} 
+\newtheorem{Definition}{\hspace{1em} 定义}[subsection]
+\newtheorem{Theorem}{\hspace{1em} 定理}[subsection]
+\newtheorem*{Property}{\hspace{1em} 性质}
+\newtheorem{Concept}{\hspace{1em} }
+
+\newenvironment{definition}[1]
+{\begin{Definition}[#1] \hspace{0.5em}}
+{\end{Definition} \vspace{0.5em}}
+
+\newenvironment{theorem}[1]
+{\begin{Theorem}[#1] \hspace{0.5em}}
+{\end{Theorem} \vspace{0.5em}}
+
+\newenvironment{property}
+{\begin{Property} \hspace{0.5em}}
+{\end{Property} \vspace{0.5em}}
+
+\newenvironment{pf}
+{\begin{proof} }
+{\end{proof} \vspace{0.5em}}
+
+\newenvironment{concept}[1]
+{\hspace{1em} #1. \hspace{0.5em}}
+{\vspace{0.5em}}
+
+
+
+\usepackage{caption} 	 % 标题
+\usepackage{xcolor} 	 % 颜色
+\usepackage{graphicx} 	 % 引用图片
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{framed} 	 % 方框 \begin{framed}
+
+\usepackage{indentfirst} 	 % 首行缩进 
+    \setlength{\parindent}{0em}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+
+\usepackage{extarrows} 	 % 箭头宏包 \vv{}
+\usepackage{esvect} 	 %向量箭头
+\usepackage[version=3]{mhchem} 	 %化学方程式 \ce{}
+\usepackage{siunitx} 	 %国际单位 \si{unit} \SI{number}{unit} 
+
+
+\newcommand{\df}{\dfrac}
+\newcommand{\f}{\frac}
+\newcommand{\mb}{\mathbf}
+\newcommand{\e}{\mathrm e}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\rev}{^{-1}}
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+
+\pagestyle{empty}
+
+
+\begin{document}
+\section{行列式}
+\subsection{行列式定义}
+\begin{framed}
+    \begin{definition}{\textit{行列式}}
+        矩阵 $ \mb A $ 的行列式为一个确定的数, 记作 $ \det \mb A $ 或 $ |\mb A| $. 对 $ n \times n $ 矩阵 $ \mb A $, 其行列式可由下面方式定义:
+        \[ \det \mb A = \sum_{\sigma}\left[ (-1)^{\tau(\sigma_1, \sigma_2, \dots, \sigma_n)} \prod_{1 \leqslant i \leqslant n} a_{i, \sigma_i} \right] \]
+
+        其中, $ \sigma $ 为列角标的排列, $ \tau $ 为 $ \sigma $ 排列的逆序数.
+    \end{definition}
+
+    \begin{property} 
+        \begin{itemize}
+            \item 两行(列)\underline{\textbf{互换}}, 行列式变号.
+            \item 一行(列)元素全为 $ 0 $, 行列式的值为 $ 0 $.
+            \item 某一行(列)有\underline{\textbf{公因子}} $ k $, 则可以提出 $ k $.
+            \item 某一行(列)的每个元素是两数之和, 则此行列式可拆分为两个相加的行列式.
+            \item 有两行(列)对应\underline{\textbf{成比例}}或\underline{\textbf{相同}}, 则此行列式的值为 $ 0 $.
+            \item 将一行(列)的常数\underline{\textbf{倍加}}进另一行(列)里, 行列式的值不变.
+        \end{itemize}
+
+        行列式转置,值不变: 
+        \[ |\mb A| = |\mb A^{\rm T}| .\] 
+    
+        方块矩阵的乘积的行列式等于行列式的乘积:
+        \[ \det (\mb{AB}) = \det \mb A \cdot \det \mb B \]
+
+        $ \mb A $ 为 $ n $ 阶矩阵, $ c $ 为常数:
+        \[ |c \mb A| = c^n |\mb A| \]
+
+        \[ |\mb A^{-1}| = \dfrac{1}{|\mb A|} \]
+
+
+    \end{property}
+\end{framed}
+
+\begin{framed}
+    \begin{concept}{\textit{萨吕法则}}
+        对于 $ 2 $ 或 $ 3 $ 阶行列式:
+        \[ 
+        \begin{vmatrix}
+            {\color{red} a} & {\color{blue} b} \\
+            {\color{blue} c} & {\color{red} d}
+        \end{vmatrix} = {\color{red} ad} - {\color{blue} bc}    
+        \]
+
+        \begin{align*}
+            \begin{vmatrix} 
+                \square & \square & \square \\
+                \square & \square & \square \\
+                \square & \square & \square
+            \end{vmatrix}
+            &= 
+            \begin{vmatrix} 
+                \blacksquare & \square & \square \\
+                \square & \blacksquare & \square \\
+                \square & \square & \blacksquare
+            \end{vmatrix} + 
+            \begin{vmatrix} 
+                \square & \blacksquare & \square \\
+                \square & \square & \blacksquare \\
+                \blacksquare & \square & \square
+            \end{vmatrix} +
+            \begin{vmatrix} 
+                \square & \square & \blacksquare \\
+                \blacksquare & \square & \square \\
+                \square & \blacksquare & \square
+            \end{vmatrix} \\
+            &-
+            \begin{vmatrix} 
+                \square & \square & \blacksquare \\
+                \square & \blacksquare & \square \\
+                \blacksquare & \square & \square
+            \end{vmatrix} -
+            \begin{vmatrix} 
+                \blacksquare & \square & \square \\
+                \square & \square & \blacksquare \\
+                \square & \blacksquare & \square
+            \end{vmatrix} -
+            \begin{vmatrix} 
+                \square & \blacksquare & \square \\
+                \blacksquare & \square & \square \\
+                \square & \square & \blacksquare
+            \end{vmatrix}
+        \end{align*}     
+    \end{concept}
+    
+\end{framed}
+
+三角矩阵的行列式为主对角线上元素的乘积:
+\[ 
+\begin{vmatrix}
+    {\color{red} a_{11}} & a_{12} & \cdots & a_{1n} \\
+    0 & {\color{red} a_{22}} & \cdots & a_{2n} \\
+    0 & 0 & \ddots & \vdots \\
+    0 & 0 & \cdots & {\color{red} a_{nn}} \\
+\end{vmatrix} = \prod_{i = 1}^n a_{ii}   
+\]
+
+使用上述性质, 应用初等变换将行列式化为三角形式, 便可求得其值.
+
+次对角线上的三角矩阵行列式等于次对角线乘积乘 $ -1 $ 的 $ \dfrac{n(n-1)}{2} $ 次方:
+\[
+\begin{vmatrix}
+    a_{11} & a_{12} & \cdots & {\color{red} a_{1n}} \\
+    a_{21} & \cdots & {\color{red} a_{2, n-1}} &  \\
+    \vdots & \cdots &  &  \\
+    {\color{red} a_{n1}} &  &  &  \\
+\end{vmatrix} = (-1)^{ n(n-1)/2}\prod_{i + j = n + 1} a_{ij}   
+\]
+
+
+\begin{framed}
+    \begin{definition}{\textit{余子式}}
+        将某个元素 $ a_{ij} $ 所在行和列删去, 剩余元素组成的行列式为 $ a_{ij} $ 的余子式, 记作 $ M_{ij} $. 例:
+
+    \[ M_{23} = \begin{vmatrix}
+        \blacksquare & \blacksquare & \square \\
+        \square & \square & \square \\
+        \blacksquare & \blacksquare & \square
+        \end{vmatrix} = \begin{vmatrix}
+        \blacksquare & \blacksquare \\
+        \blacksquare & \blacksquare
+    \end{vmatrix} \]
+    \end{definition}
+
+    \begin{definition}{\textit{代数余子式}}
+    余子式前带上符号, 就成为代数余子式
+        \[ C_{ij} = (-1)^{i + j} M_{ij} \]
+
+        \[ \begin{bmatrix} 
+            + & - & + & - & + \\
+            - & + & - & + & - \\
+            + & - & + & - & + \\
+            - & + & - & + & - \\
+            + & - & + & - & + 
+        \end{bmatrix} \]
+    \end{definition}
+
+    \begin{definition}{\textit{余子矩阵}}
+        若矩阵 $ \mb C $ 里每一个元素都是 $ \mb A $ 对应元素的代数余子式, 则 $ \mb C $ 称为 $ \mb A $ 的余子矩阵. 即:
+        \[ \mb C = \begin{bmatrix}
+            C_{11} & C_{12} & \cdots \\
+            C_{21} & C_{22} & \cdots \\
+            \vdots & \vdots & \ddots 
+        \end{bmatrix} \]
+    \end{definition}
+\end{framed}
+
+\begin{framed}
+    \begin{theorem}{\textit{拉普拉斯展开}}
+        矩阵 $ \mb A_{n \times n} $ 可按任意一行或列展开, 得到 $ n $ 个 $ (n-1) $ 阶方阵之和. 沿第 $ i $ 行展开的表达式:
+        \[ \det \mb A = \sum_{k = 1}^{n} a_{ik} C_{ik} .\]
+
+        其中, $ C_{ik} $ 为 $ a_{ik} $ 的代数余子式. 按列展开同理
+        
+    \end{theorem}    
+\end{framed}
+
+\begin{framed}
+    \begin{definition}{\textit{范德蒙德行列式}}
+        形如:
+        \[ 
+            V = \begin{vmatrix}
+                1 & 1 & \cdots & 1 \\
+                x_1 & x_2 & \cdots & x_n \\
+                x_1^2 & x_2^2 & \cdots & x_n^2 \\ 
+                \vdots & \vdots & \ddots & \vdots \\
+                x_1^{n-1} & x_2^{n-1} & \cdots & x_n^{n-1}
+            \end{vmatrix}
+        \]
+        
+        的行列式称为范德蒙德行列式. 其值有:
+        \[ V = \prod_{1 \leqslant j < i \leqslant n} (x_i - x_j) \]
+
+    \end{definition}
+\end{framed}
+
+
+
+
+\subsection{行列式应用}
+\begin{framed}
+    \begin{definition}{\textit{伴随矩阵}}
+        将 $ \mb A $ 的余子矩阵转置, 得到的矩阵为伴随矩阵, 记作: $ \operatorname{adj} \mb A $ 或 $ \mb A^* $. 即:
+        \[ \mb A^* = \mb C^{\rm T} .\]
+    \end{definition}
+\end{framed}
+
+
+\begin{framed}
+    \begin{definition}{\textit{伴随矩阵与逆矩阵}}
+        $ n $ 阶矩阵 $ \mb A $ 和其伴随矩阵 $ \mb A^* $ 有如下关系:
+        \[ \mb A \mb A^* = |\mb A|\mb I_n .\]
+
+        所以有:
+        \[ \mb A^{-1} = \dfrac{\mb A^*}{|\mb A|} .\]
+    \end{definition}
+\end{framed}
+
+
+\begin{framed}
+    \begin{concept}{\textit{伴随矩阵与逆矩阵的行列式}}
+    $ \mb A $ 为 $ n \times n $ 矩阵, 则:
+    \[ |\mb A^*| = |\mb A|^{n - 1} \]
+    \[ |\mb A^{-1}| = \left| \dfrac{\mb A^*}{|\mb A|} \right| = \dfrac{1}{|\mb A|^n} |\mb A^*| = \dfrac{|\mb A|^{n - 1}}{|\mb A|^n} = \dfrac{1}{|\mb A|} \]
+    \end{concept}
+\end{framed}
+
+
+
+
+\end{document}
+

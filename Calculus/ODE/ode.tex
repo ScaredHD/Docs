@@ -1,0 +1,187 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{anyfontsize}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{caption} 	 % 标题
+\usepackage{xcolor} 	 % 颜色
+\usepackage{graphicx} 	 % 引用图片
+\usepackage{float}
+\usepackage{framed} 	 % 方框 \begin{framed}
+\usepackage{indentfirst} 	 % 首行缩进 
+    \setlength{\parindent}{0em}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows} 	 % 箭头宏包 \xLongrightarrow 
+\usepackage{esvect} 	 % 向量箭头 \vv{}
+\usepackage{siunitx} 	 % 国际单位 \si{unit} \SI{number}{unit} 
+\usepackage{esint} 	 % 积分符号
+\usepackage{mathrsfs}
+\usepackage{array, makecell, multirow}
+    \setcellgapes{5pt}
+
+% font
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mscr}{\mathscr}
+% common symbol
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+% differentiation
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+% matrix
+\newcommand{\transp}{^{\top}}
+\DeclareMathOperator{\tr}{tr}
+% complex
+\let\Re\relax
+\let\Im\relax
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Arg}{Arg}
+
+\pagestyle{empty}
+
+\begin{document}
+\section{复数}
+\textit{注: 为排版方便, 本文中的虚数单位 $ \I $ 和数学常数 $ \E $ 均使用斜体 $ i $ 和 $ e $}
+\vskip 1.5em
+
+对于复数 $ z = a + b i $, 记实部虚部为:
+\[ \begin{array}{c}
+    \Re z = a \\
+    \Im z = b
+\end{array} \]
+
+复数 $ a + b i $ 可类比平面向量 $ \langle a, b \rangle $.
+
+\subsection{运算}
+\vskip -1em
+\[ \sqrt{- n} = \sqrt{n}\cdot i \]
+对于 $ z_1 = a_1 + b_1 i $, $ z_2 = a_2 + b_2 i $:
+\[ z_1 \pm z_2 = (a_1 \pm b_2) + (b_1 \pm b_2)i \]
+\[ z_1 \cdot z_2 = (a_1 a_2 - b_1 b_2) + (a_1 b_2 + a_2 b_1) i \]
+\[ z_1 / z_2 = \dfrac{a_1 a_2 + b_1 b_2}{a_2^2 + b_2^2} + \dfrac{a_2 b_1 - a_1 b_2}{a_2^2 + b_2^2}i \]
+
+记 $ z $ 的长度(模, 幅值) $ |z| = \sqrt{a^2 + b^2} $:
+\[ |z w| = |z| |w| \qquad |z / w| = |z| / |w| \]
+
+
+记 $ \overline z = a - b i $ 为 $ z = a + b i $ 的共轭复数:
+\[ |z| = |\overline z| \]
+\[ z \overline z = |z|^2 = a^2 + b^2 \]
+\[ \overline{z \pm w} = \overline z \pm \overline w \]
+\[ \overline{z\cdot w} = \overline z \cdot \overline w \qquad \overline{z / w} = \overline z / \overline w \]
+\[ \frac{1}{z} = \frac {\overline z}{z \overline z} = \frac{\overline z}{|z|^2} = \frac{x}{x^2 + y^2} - \frac{y}{x^2 + y^2}i \]
+
+
+\subsection{欧拉公式}
+\vskip -2em
+\[ e^{i \theta} = \cos \theta + i \sin \theta \]
+所以:
+\[ r e^{i \theta} = r(\cos \theta + i \sin \theta) \]
+等式右边被称为三角形式. $ \theta $ 称 $ z $ 的辐角, 记作 $ \Arg z $; $ |z| = r $ 为复数的长度(模). 
+
+等式左边称为复数的指数形式.
+
+
+\subsection{棣莫弗公式}
+\vspace{-2em}
+\[ (\cos \theta + i \sin \theta)^n = \cos n\theta + i \sin n\theta \]
+
+从极坐标形式看这是显然的:
+\[ (\cos \theta + i \sin \theta)^n = \left( e^{i \theta} \right)^n = e^{i n \theta} = \cos n\theta + i \sin n\theta \]
+
+
+\section{微分方程}
+\subsection{二阶常系数齐次}
+对于微分方程
+\[ \DD 2.y.x + p \dd y.x + q y = 0  \]
+
+记 $ \dd .x = D $, 于是:
+\[ D^2 + p D + q = 0 \]
+
+以 $ \lambda $ 代 $ D $, 得到的方程即为二阶常系数齐次微分方程的特征方程:
+\[ \lambda^2 + p \lambda + q = 0 \]
+
+\begin{framed}
+    当特征方程解的情况不同时, 对于通解形式也不同
+    \begin{enumerate}
+        \item 有两相异实根 $ \lambda_1 $ 和 $ \lambda_2 $ 时, 通解: \[ y = C_1 e^{\lambda_1 x} + C_2 e^{\lambda_2 x} \]
+        \item 有两相同实根 $ \lambda_1 = \lambda_2 $ 时, 通解: \[ y = e^{\lambda_1 x} (C_1 + C_2 x) \]
+        \item 有一对共轭复根 $ \lambda = \alpha \pm \beta i $ 时, 通解: \[ e^{\alpha x} (C_1 \cos \beta x + C_2 \sin \beta x) \]
+    \end{enumerate}
+\end{framed}
+
+
+\subsection{二阶常系数非齐次}
+对于微分方程
+\[ \DD 2.y.x + p \dd y.x + q y = \phi(x) e^{z x} \]
+
+其中, $ \phi(x) $ 为 $ m $ 次多项式, 其特解有如下形式:
+\[ Y(x) = P(x) e^{z x} =  x^k Q(x) e^{z x}  \]
+
+其中, $ Q(x) $ 为 $ m $ 次多项式.
+
+\begin{framed}
+    特解有三种情况:
+    \begin{enumerate}
+        \item 当 $ z $ 不是特征方程的根, $ P(x) $ 与 $ \phi(x) $ 次数相同, 故设 $ Y(x) = Q(x) e^{z x} $, 代入 $ Y'' + p Y' + q = 0 $ 解出 $ Q(x) $
+        \item 当 $ z $ 为一重根, $ P'(x) $ 与 $ \phi(x) $ 次数相同, 故设 $ Y(x) = x Q(x) e^{z x} $, 代入 $ Y'' + p Y' + q = 0 $ 解出 $ Q(x) $
+        \item 当 $ z $ 为二重根, $ P''(x) $ 与 $ \phi(x) $ 次数相同, 故设 $ Y(x) = x^2 Q(x) e^{z x} $, 代入 $ Y'' + p Y' + q = 0 $ 解出 $ Q(x) $
+    \end{enumerate}    
+\end{framed}
+
+
+解出特解 $ y_0 $ 再与对于齐次方程的通解 $ y^* $ 相加, 即得到二阶常系数非齐次方程的通解: $ y = y_0 + y^* $.
+
+
+
+
+
+\section{其他常见微分方程通解}
+\begin{table}[H]
+    \centering
+    \makegapedcells
+    \begin{tabular}{c|c|c|c}
+        \hline
+        名称 & 形式 & 通解 & 解法 \\
+
+        \hline
+        可分离变量型 & $ \dd y.x = P(x) Q(y) $ 等 & & 分离变量 \\
+
+        \hline 
+        一阶线性齐次 & $ \dd y.x + P(x)\, y = 0 $ & $\displaystyle y = C e^{-\int P(x) \,dx} $ & 分离变量 \\
+
+        \hline
+        一阶线性非齐次$^{\rm 1}$ & $ \dd y.x + P(x)\, y = Q(x) $ & $\displaystyle y = \dfrac{1}{M(x)}\left[ \int Q(x) M(x) \,dx + C \right] $ & 常数变易 \\
+
+        \hline
+        \multirowcell{3}{\\ \\特殊二阶} & $ \DD 2.y.x = f(x) $ & $\displaystyle \iint f(x) \,dx\,dx $ & 积分两次 \\
+
+        \cline{2-4}
+        &$ \DD 2.y.x = f(x, y') $ & & $ \dd y.x = P(x) $ \\
+
+        \cline{2-4}
+        &$ \DD 2.y.x = f(y, y') $ & & $ \dd y.x = P(y) $ \\
+
+        \hline
+        
+
+    \end{tabular}
+\end{table}
+注:
+\begin{enumerate}
+    \item 积分因子 $ M(x) = e^{\int P(x) \,dx} $
+\end{enumerate}
+
+
+\end{document}

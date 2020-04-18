@@ -1,0 +1,83 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{anyfontsize}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm}
+    \newtheorem{definition}{Definition}
+\usepackage{caption} 	 % 标题
+\usepackage{xcolor} 	 % 颜色
+\usepackage{graphicx} 	 % 引用图片
+\usepackage{float}
+\usepackage{framed} 	 % 方框 \begin{framed}
+\usepackage{tcolorbox}
+    \newtcolorbox{defbox}{colback = blue!20!green!10!white}
+    \newtcolorbox{thmbox}{colback = black!5!white}
+\usepackage{indentfirst} 	 % 首行缩进 
+    \setlength{\parindent}{0em}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows} 	 % 箭头宏包 \xLongrightarrow 
+\usepackage{esvect} 	 % 向量箭头 \vv{}
+\usepackage{siunitx} 	 % 国际单位 \si{unit} \SI{number}{unit} 
+\usepackage{esint} 	 % 积分符号
+\usepackage{mathrsfs}
+
+
+% font
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\newcommand{\mr}{\mathrm}
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mscr}{\mathscr}
+% common symbol
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+% differentiation
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+% matrix
+\newcommand{\transp}{^{\top}}
+\DeclareMathOperator{\tr}{tr}
+
+\pagestyle{empty}
+
+\begin{document}
+\section{Matrix}
+\subsection{Permutation}
+\begin{definition}
+    A permutation
+\end{definition}
+
+
+
+\section{Group}
+\begin{defbox}
+    \begin{definition}
+        A group $ (G, \cdot) $ is a set $ G $ equipped with a binary operation $ \cdot $ which follows four axioms, namely \textbf{closure}, \textbf{associativity}, \textbf{identity} and \textbf{invertibility}.
+    \end{definition}    
+\end{defbox}
+
+
+The four axioms are defined below:
+\paragraph{closure}
+For all $ a, b $ in $ G $, the result of operation $ \cdot $ is still in $ G $. This can be written in the form: $ \forall a, b \in G, a \cdot b \in G $.
+
+\paragraph{associativity}
+$ \forall a, b, c \in G $, $ (a \cdot b) \cdot c = a \cdot (b \cdot c) $.
+
+\paragraph{identity}
+$ \exists\ e \in G $ such that, $ \forall a \in G $, the equation $ e \cdot a = a \cdot e = a $ holds. Such an element is unique and is called the \textbf{identity element}.
+
+\paragraph{invertibility}
+For each $ a \in G $, $ \exists\ b $ in $ G $, commonly denoted $ a^{-1} $, such that $ a \cdot b = b \cdot a = e $, where $ e $ is the identity element.
+
+
+
+\end{document}

@@ -15,6 +15,7 @@
 
 ## 常用泰勒展开式
 红色部分为常见等价无穷小.
+
 <img src="http://latex.codecogs.com/svg.latex?e%5Ex%20%3D%20%7B%5Ccolor%7Bred%7D%201%20&plus;%20x%7D%20&plus;%20%5Cdfrac%7Bx%5E2%7D%7B2%21%7D%20&plus;%20%5Cdfrac%7Bx%5E3%7D%7B3%21%7D%20&plus;%20o%28x%5E3%29" />
 
 <img src="http://latex.codecogs.com/svg.latex?%5Cln%20%281%20-%20x%29%20%3D%20-%20x%20-%20%5Cdfrac%7Bx%5E2%7D%7B2%7D%20-%20%5Cdfrac%7Bx%5E3%7D%7B3%7D%20-%20o%28x%5E3%29" />

@@ -1,0 +1,231 @@
+\documentclass[UTF8]{ctexart}
+\hfuzz=4pt
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=subsection,shaded={rulecolor=cyan,rulewidth=2pt,bgcolor=white}]{definition}
+    \declaretheorem[numberwithin=subsection,shaded={rulecolor=orange,rulewidth=2pt, bgcolor=white}]{theorem}
+    \newtheoremstyle{mystyle}{1em plus .2 em minus .2em}{1em plus .2 em minus .2em}{}{}{\bfseries}{.}{.5em}{}
+    \theoremstyle{mystyle}
+    \newtheorem{axiom}{Axiom}[subsection]
+    \newtheorem{lemma}{Lemma}[subsection]
+    \newtheorem{prop}{Proposition}[subsection]
+    \newtheoremstyle{myremark}{1em plus .2 em minus .2em}{1em plus .2 em minus .2em}{}{}{\itshape}{.}{.5em}{}
+    \theoremstyle{myremark}
+    \newtheorem*{remark}{Remark}
+    \theoremstyle{plain}
+    \newtheorem{corollary}{Corollary}[subsection]
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+
+    % font
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\renewcommand{\r}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+% common symbol
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\renewcommand{\C}{\mathbb C}
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\del}{\nabla}
+\newcommand{\transp}{^{\top}}
+\DeclareMathOperator{\tr}{tr}
+
+\title{集合论}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newpage
+\section{集合论基础}
+我们将公理作为集合论的基础, 随后由公理逐步推到出整个集合论. 这种集合论称为公理化集合论.
+
+\subsection{相等关系*} 
+相等 ($ = $) 是一种等价关系, 需满足下面四条公理:
+\begin{enumerate}
+    \item 自反公理: $ x = x $
+    \item 对称公理: $ x = y $ 则 $ y = x $
+    \item 传递公理: $ x = y $, $ y = z $ 则 $ x = z $
+    \item 代入公理: 给定两同类对象 $ x $, $ y $, 若 $ x = y $, 则对于一切函数和运算 $ f $, $ f(x) = f(y) $. 类似地, 对于任何依赖于 $ x $ 的性质 $ P(x) $, 若 $ x = y $, 则 $ P(y) $ 与 $ P(x) $ 等价.
+\end{enumerate}
+
+换句话说, 代入公理描述了: 相等的输入, 无论形式是否一样, 经过同一种运算, 应该得到相等的输出.
+
+\paragraph{例 (代入公理)} 若 $ x = y $, 则 $ x^2 = y^2 $, $ \sin x = \sin y $, $ x + z = y + z $.
+
+当定义一种新类型的两个对象相等时, 应该满足自反、对称和传递性; 而当定义这种类型上的新运算时, 运算应该满足代入公理, 这样定义出的运算才是良定义的 (well-defined), 否则就是病态定义的 (ill-defined).
+
+\subsection{定义集合}
+\begin{axiom}
+    集合是对象的汇集, 集合本身也是对象. 
+\end{axiom}
+
+如 $ \{2, 3\} $ 是一个集合, 也是一个数学对象, 它可以是另一个集合中的元素, 例如考虑下面的集合 $ \{2, 3\} \in \{\{2, 3\}, 4, 1\} $.
+
+\begin{remark}
+    区别 $ 2 $ 和 $ \set{2} $, 两者不是同一类型的对象.
+\end{remark}
+
+\begin{definition}[\text{集合相等}]
+    两个集合相等 $ A = B $ 当且仅当 $ A $ 的每个元素都是 $ B $ 的元素且 $ B $ 的每个元素都是 $ A $ 的元素.
+\end{definition}
+
+集合相等作为一种相等关系, 也是自反, 对称和传递的. 注意到: 根据集合相等的定义, 若 $ \forall x \in A $ 且 $ A = B $, 则 $ x \in B $. 意味着``属于''关系遵循代入公理. 因此我们关于集合定义的任何新运算都遵循代入律, 只要我们能纯粹使用属于 $ \in $ 来定义此运算. 本节定义的运算都是如此.
+
+\begin{remark}
+    按照定义, 两个集合相等, 集合内元素的顺序不一定相等. 集合的定义是无序的. 所以集合不存在 ``第一个元素'' 或 ``最后一个元素'' 等明显带有序性质的概念, 这样的概念违背了代入公理. 如: $ A = \{1, 2, 3 \} $, $ B = \{3, 2, 1\} $. 显然 $ A = B $. 但对于 ``$ A $ 的第一个元素是 $ 1 $'', 我们不能把 $ B $ 代入 $ A $ 得到 ``$ B $ 的第一个元素是 $ 1 $''.
+\end{remark}
+
+\subsection{构造集合}
+\begin{axiom}[\text{空集}]
+    存在集合 $ \varnothing $, 称为空集, 其中不含任何元素. 即对任意 $ x $, $ x \not\in \varnothing $.
+\end{axiom}    
+
+\begin{remark}
+    空集亦可记为 $ \{\} $. 空集是唯一的, 意味着如果有两个空集 $ \varnothing $ 和 $ \varnothing' $, 则必然 $ \varnothing = \varnothing' $.
+\end{remark}
+
+若一个集合不是空集, 则称其为非空的. 这就引出下面的引理
+
+\begin{lemma}[\text{单个选取}]
+    若 $ A $ 非空, 则存在一个对象 $ x $ 使得 $ x \in A $.
+\end{lemma}
+
+上面引理阐述了, 如果 $ A $ 是一个非空的集合, 我们一定可以从中选取出一个元素, 证明其非空性. 这个引理后面还会逐步拓展到多个集合的选取和无穷多个集合选取的情况.
+
+\begin{proof}
+    反证法. 若 $ A $ 非空, 但找不到对象 $ x $ 使得 $ x \in A $, 也就意味着对于一切对象 $ x $, 都有 $ x \notin A $, 意味着 $ A $ 是一个空集, 矛盾. 所以一定可以找到一个对象 $ x \in A $.
+\end{proof}
+
+\begin{axiom}[\text{单元素和双元素集}]
+    $ a $ 是一个对象, 则存在集合 $ \{a\} $, 它唯一的元素是 $ a $, 即对每个对象 $ y $, 有 $ y \in \{a\} $ 当且仅当 $ y = a $. 这个集合称为单元素集 (singleton).
+
+    $ a $, $ b $ 是对象, 则存在集合 $ \{a, b\} $, 仅有的元素为 $ a $ 和 $ b $, 即对每个对象 $ y $, 有 $ y \in \{a, b\} $ 当且仅当 $ y = a $ 或 $ y = b $. 这个集合称为 $ a $ 和 $ b $ 构成的双元素集 (pair set).
+\end{axiom}
+
+\begin{remark}
+    单元素集可以由双元素集定义 $ \{a\} = \{a, a\} $, 双元素集可以由单元素集和即将定义的并运算定义.
+\end{remark}
+
+\begin{definition}[\text{并运算}]
+    给定两个集合 $ A $, $ B $, 存在一个集合 $ A \cup B $, 称为 $ A $ 和 $ B $ 的并, 其元素由属于 $ A $ 或属于 $ B $ 或同属两者的一切元素组成. 即对于任意对象 $ x $: \[ x \in A \cup B \Longleftrightarrow x \in A \text{ 或 } x \in B \,.\]
+\end{definition}
+
+根据代入公理, 若 $ A $, $ B $, $ A' $ 都是集合且 $ A = A' $, 则 $ A \cup B = A' \cup B $: 因为属于 $ \in $ 遵循代入公理. 
+
+我们可以在此基础上证明 $ \cup $ 遵循交换律和结合律, 以及一些我们已经熟知的性质. 
+
+\begin{proof}[\text{证明并运算是结合的}]
+    设 $ A $, $ B $, $ C $ 为任意集合. 设 $ x \in (A \cup B) \cup C $, 按照定义, $ x \in A \cup B $ 或 $ x \in C $. 若 $ x \in C $, 则按照定义 $ x \in B \cup C $, 也就有 $ x \in A \cup (B \cup C) $; 若 $ x \in A \cup B $, 则 $ x \in A $ 或 $ x \in B $, 而 $ x \in A \Longrightarrow x \in A \cup (B \cup C) $, $ x \in B \Longrightarrow x \in B \cup C \Longrightarrow x \in A \cup (B \cup C) $. 所以若 $ x \in (A \cup B) \cup C $, $ x \in A \cup (B \cup C) $.
+
+    现设 $ x \in A \cup (B \cup C) $, 按照定义, $ x \in A $ 或 $ x \in B \cup C $. 若 $ x \in A $, 则 $ x \in A \cup B $, 也就有 $ x \in (A \cup B) \cup C $; 若 $ x \in B \cup C $, 则 $ x \in B $ 或 $ x \in C $, 而 $ x \in B \Longrightarrow x \in A \cup B \Longrightarrow x \in (A \cup B) \cup C $, $ x \in C \Longrightarrow x \in (A \cup B) \cup C $. 所以若 $ x \in A \cup (B \cup C) $, 则 $ x \in (A \cup B) \cup C $.
+
+    故 $ (A \cup B) \cup C $ 的所有元素在 $ A \cup (B \cup C) $ 中, $ A \cup (B \cup C) $ 的所有元素在 $ (A \cup B) \cup C $ 中. 按照定义 $ (A \cup B) \cup C = A \cup (B \cup C) $.
+\end{proof}
+
+由于存在结合律, $ A \cup B \cup C $ 的写法含义就明确了.
+
+\begin{prop}
+    $ A \cup \varnothing = A $.
+\end{prop}
+
+\begin{proof}
+    设 $ x \in A \cup \varnothing $, 按照并运算的定义, $ x \in A $ 或 $ x \in \varnothing $. 按照空集的定义, $ x \in \varnothing $, 所以 $ x \in A $. 设 $ x \in A $, 按照并运算的定义, $ x \in A \cup \varnothing $. 综上所述, $ A \cup \varnothing $ 中的所有元素都在 $ A $ 中, $ A $ 中的所有元素都在 $ A \cup \varnothing $ 中. 故 $ A \cup \varnothing = A $.
+\end{proof}
+
+\subsection{子集}
+\begin{definition}[\text{子集}]
+    $ A $, $ B $ 是集合. 称 $ A $ 是 $ B $ 的子集, 记作 $ A \subseteq B $, 当且仅当 $ A $ 的每个元素都是 $ B $ 的元素, 即 \[ \forall x \in A \Longrightarrow x \in B \,.\]
+
+    称 $ A $ 是 $ B $ 的真子集, 记作 $ A \subset B $, 如果 $ A \subseteq B $ 且 $ A \neq B $. 
+\end{definition}
+
+集合的包含关系就犹如数的 $ \leqslant $ 和 $ < $. 集合的包含也部分安排了序
+
+\begin{remark}
+    给定两个不同的自然数, 其中一个必然小于另一个. 但给定两个不同的集合, 其中一个不一定是另一个的子集. 所以说集合被部分安排了次序, 而自然数被完全安排了次序.
+\end{remark}
+
+\begin{prop}
+    设 $ A $, $ B $, $ C $ 为集合. 若 $ A \subseteq B $, $ B \subseteq C $ 则 $ A \subseteq C $. 若 $ A \subseteq B $ 且 $ B \subseteq A $ 则 $ A = B $. 若 $ A \subset B $, $ B \subset C $ 则 $ A \subset C $.
+\end{prop}
+
+$ A \subseteq B $ 且 $ B \subseteq A $ $ \Longrightarrow $ $ A = B $, 是证明集合相等的常用方法.
+
+同样, 子集也遵循代入公理: $ A \subseteq B $, $ A = A' $, $ B = B' $, 则 $ A' \subseteq B $ 以及 $ A \subseteq B' $.
+
+\begin{axiom}[\text{分类公理}]
+    设 $ A $ 是一个集合, $ \forall x \in A $, 设 $ P(x) $ 为一个关于 $ x $ 的性质(命题). 那么存在一个集合 $ \{ x \in A \mid P(x) \text{ 成立} \} $ 或简写为 $ \{ x \in A \mid P(x) \} $, 表示 $ A $ 中满足 $ P(x) $ (使 $ P(x) $ 成立) 的元素的集合. 即对任意对象 $ y $, \[ y \in \{x \in A \mid P(x)\} \Longleftrightarrow y \in A \text{ 且 } P(y) \text{ 成立} \,.\]
+\end{axiom}
+
+这个公理通过一个命题 $ P(x) $, 使得我们从原集合中构造出子集合. 
+
+\paragraph{例} 设关于 $ x $ 的命题 $ P(x) $ 代表 $ x < 3 $. 则对于集合 $ \set{1, 2, 3, 4, 5} $, 应用分类公理, 可得到集合 $ \set{x \in A \mid P(x)} = \set{x \in A \mid x < 3} = \set{1, 2} $.
+
+使用分类公理, 可以容易地定义交集.
+
+\begin{definition}[\text{交}]
+    给定两个集合 $ A $, $ B $, 定义其交集 $ A \cap B $ 为
+    \[ A \cap B \coloneqq \{x \in A \mid x \in B\} \,.\]
+
+    换句话说, 就是既属于 $ A $ 又属于 $ B $ 的元素构成的集合.
+\end{definition}
+
+
+\begin{definition}[\text{差}]
+    给定两个集合 $ A $ 和 $ B $. 定义 $ A $ 减去 $ B $:
+    \[ A \setminus B = \{x \in A \mid x \not\in B\} \,.\]
+\end{definition}
+
+这些运算满足的性质略过.
+
+\begin{axiom}[\text{替换公理}]
+    给定一个集合 $ A $, 对于所有 $ x \in A $ 和任意对象 $ y $ 有命题 $ P(x, y) $. 如果对于所有 $ x \in A $, 存在最多一个 $ y $ 满足 $ P(x, y) $, 则可以构造集合 $ \{ y \mid \text{某 } x \in A \text{ 满足 } P(x, y) \} $.
+\end{axiom}
+
+替换公理采用某种规则 $ P(x, y) $, 将 $ A $ 中的部分元素 $ x $ 替换为另一个元素 $ y $, 这些替换后的元素组成新的集合.
+
+\paragraph{例} 
+集合 $ A = \{2, 3, 4\} $, 经替换公理 $ B = \{y \mid \text{某 } x \in A \text{ 满足 } y = x^2 \} $, 得到的 $ B = \{4, 9, 16\} $.
+
+\paragraph{例} 
+集合 $ A = \{1, 2, 3, 4\} $, 经替换公理 $ B = \{y \in \Z \mid \text{某 } x \in A \text{ 满足 } y^2 = x \} $, 得到的 $ B = \{1, 2\} $.
+
+
+
+
+
+\section{函数}
+
+\section{像和逆像}
+
+\section{幂集}
+
+\section{笛卡尔积}
+
+\section{基数}
+
+\section{无穷集合}
+
+
+\end{document}

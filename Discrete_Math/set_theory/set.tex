@@ -27,6 +27,7 @@
 \usepackage{extarrows}
 \usepackage{hyperref}
     \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+\usepackage{centernot}
 
     % font
 \newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
@@ -135,6 +136,27 @@
 
 我们可以在此基础上证明 $ \cup $ 遵循交换律和结合律, 以及一些我们已经熟知的性质. 
 
+\begin{remark}
+    设 $ A $, $ B $ 为任意集合. 若 $ x \in A $, 那么 $ x \in A $ 或 $ x \in B $ 的命题就是真的, 这意味着也有 $ x \in A \cup B $.
+\end{remark}
+
+\begin{prop}
+    $ A \cup \varnothing = A $, 即 $ \varnothing $ 是并运算的单位元.
+\end{prop}
+
+\begin{proof}
+    设 $ x \in A \cup \varnothing $, 按照并运算的定义, $ x \in A $ 或 $ x \in \varnothing $. 按照空集的定义, $ x \in \varnothing $, 所以 $ x \in A $. 设 $ x \in A $, 按照并运算的定义, $ x \in A \cup \varnothing $. 综上所述, $ A \cup \varnothing $ 中的所有元素都在 $ A $ 中, $ A $ 中的所有元素都在 $ A \cup \varnothing $ 中. 故 $ A \cup \varnothing = A $.
+\end{proof}
+
+
+\begin{prop} \ 
+    \begin{enumerate}
+        \item 并运算是交换的: $ A \cup B = B \cup A $
+        \item 并运算是结合的: $ (A \cup B) \cup C = A \cup (B \cup C) $
+        \item 幂等律: $ A \cup A = A $
+    \end{enumerate}
+\end{prop}
+
 \begin{proof}[\text{证明并运算是结合的}]
     设 $ A $, $ B $, $ C $ 为任意集合. 设 $ x \in (A \cup B) \cup C $, 按照定义, $ x \in A \cup B $ 或 $ x \in C $. 若 $ x \in C $, 则按照定义 $ x \in B \cup C $, 也就有 $ x \in A \cup (B \cup C) $; 若 $ x \in A \cup B $, 则 $ x \in A $ 或 $ x \in B $, 而 $ x \in A \Longrightarrow x \in A \cup (B \cup C) $, $ x \in B \Longrightarrow x \in B \cup C \Longrightarrow x \in A \cup (B \cup C) $. 所以若 $ x \in (A \cup B) \cup C $, $ x \in A \cup (B \cup C) $.
 
@@ -145,13 +167,6 @@
 
 由于存在结合律, $ A \cup B \cup C $ 的写法含义就明确了.
 
-\begin{prop}
-    $ A \cup \varnothing = A $.
-\end{prop}
-
-\begin{proof}
-    设 $ x \in A \cup \varnothing $, 按照并运算的定义, $ x \in A $ 或 $ x \in \varnothing $. 按照空集的定义, $ x \in \varnothing $, 所以 $ x \in A $. 设 $ x \in A $, 按照并运算的定义, $ x \in A \cup \varnothing $. 综上所述, $ A \cup \varnothing $ 中的所有元素都在 $ A $ 中, $ A $ 中的所有元素都在 $ A \cup \varnothing $ 中. 故 $ A \cup \varnothing = A $.
-\end{proof}
 
 \subsection{子集}
 \begin{definition}[\text{子集}]
@@ -166,11 +181,25 @@
     给定两个不同的自然数, 其中一个必然小于另一个. 但给定两个不同的集合, 其中一个不一定是另一个的子集. 所以说集合被部分安排了次序, 而自然数被完全安排了次序.
 \end{remark}
 
-\begin{prop}
-    设 $ A $, $ B $, $ C $ 为集合. 若 $ A \subseteq B $, $ B \subseteq C $ 则 $ A \subseteq C $. 若 $ A \subseteq B $ 且 $ B \subseteq A $ 则 $ A = B $. 若 $ A \subset B $, $ B \subset C $ 则 $ A \subset C $.
+\begin{prop}[\text{子集性质}]
+    设 $ A $, $ B $, $ C $ 为集合. 
+    \begin{enumerate}
+        \item 自反: $ A \subseteq A $
+        \item 反对称: $ A \subseteq B $ 且 $ B \subseteq A $ $ \Longleftrightarrow $ $ A = B $
+        \item 传递: 若 $ A \subseteq B $, $ B \subseteq C $ 则 $ A \subseteq C $
+    \end{enumerate}
 \end{prop}
 
-$ A \subseteq B $ 且 $ B \subseteq A $ $ \Longrightarrow $ $ A = B $, 是证明集合相等的常用方法.
+\begin{prop}[\text{真子集性质}]
+    设 $ A $, $ B $, $ C $ 为集合. 
+    \begin{enumerate}
+        \item 非自反: $ A \not\subset A $
+        \item 非对称: $ A \subset B \centernot \Longrightarrow B \subset A $ 
+        \item 传递: 若 $ A \subset B $, $ B \subset C $ 则 $ A \subset C $
+    \end{enumerate}
+\end{prop}
+
+子集的反对称性是证明集合相等的常用方法.
 
 同样, 子集也遵循代入公理: $ A \subseteq B $, $ A = A' $, $ B = B' $, 则 $ A' \subseteq B $ 以及 $ A \subseteq B' $.
 
@@ -182,6 +211,8 @@ $ A \subseteq B $ 且 $ B \subseteq A $ $ \Longrightarrow $ $ A = B $, 是证明
 
 \paragraph{例} 设关于 $ x $ 的命题 $ P(x) $ 代表 $ x < 3 $. 则对于集合 $ \set{1, 2, 3, 4, 5} $, 应用分类公理, 可得到集合 $ \set{x \in A \mid P(x)} = \set{x \in A \mid x < 3} = \set{1, 2} $.
 
+\paragraph{例} 设命题 $ P(x) $: 存在 $ y \in \Z $, 使得 $ y^2 = x $. 即 $ P(x) $ 表示 $ x $ 是一个平方数. 则对集合 $ \set{1, 2, 3, 4, 5} $ 应用分类公理, 可以得到集合 $ \set{x \in A \mid P(x)} = \set{x \in A \mid \exists y \in \Z, y^2 = x} = \set{1, 4} $.
+
 使用分类公理, 可以容易地定义交集.
 
 \begin{definition}[\text{交}]
@@ -191,13 +222,53 @@ $ A \subseteq B $ 且 $ B \subseteq A $ $ \Longrightarrow $ $ A = B $, 是证明
     换句话说, 就是既属于 $ A $ 又属于 $ B $ 的元素构成的集合.
 \end{definition}
 
+\begin{prop}
+    $ A \cap \varnothing = \varnothing $, 即 $ \varnothing $ 是交运算的零元.
+\end{prop}
+
+\begin{proof}
+    反证法. 设 $ A \cap \varnothing $ 非空, 则根据单个选择公理, 可以从中选择出一个元素, 证明其非空性. 所以可以找到 $ x \in A \cap \varnothing $. 根据交集定义, 需要同时有 $ x \in A $ 和 $ x \in \varnothing $, 而这与空集的定义相违背, 因为不存在 $ x \in \varnothing $.
+\end{proof}
+
+\begin{prop} \ 
+    \begin{enumerate}
+        \item 交运算是交换的: $ A \cap B = B \cap A $
+        \item 交运算是结合的: $ (A \cap B) \cap C = A \cap (B \cap C) $
+        \item 幂等律: $ A \cap A = A $
+    \end{enumerate}
+\end{prop}
+
+\begin{prop} \ 
+    \begin{enumerate}
+        \item 并对交有分配律: \[ A \cup (B \cap C) = (A \cup B) \cap (A \cup C) \] \[ (A \cap B) \cup C = (A \cup C) \cap (B \cup C) \]
+        \item 交对并有分配律: \[ A \cap (B \cup C) = (A \cap B) \cup (A \cap C) \] \[ (A \cup B) \cap C = (A \cap C) \cup (B \cap C) \]
+        \item 吸收律: \[ A \cup (A \cap B) = A \] \[ A \cap (A \cup B) = A \]
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    此处证明左分配律, 右分配律可以由交换律和左分配律推出.
+
+    (1) 对于任意 $ x \in A \cup (B \cap C) $, 按照并定义 $ x \in A $ 或 $ x \in B \cap C $. 当 $ x \in A $ 时, $ x \in A \cup B $, 也有 $ x \in A \cup C $. 所以 $ x $ 同时属于 $ A \cup B $ 和 $ A \cup C $, $ x \in (A \cup B) \cap (A \cup C) $. 当 $ x \in B \cap C $ 时, $ x \in B $ 且 $ x \in C $. 由于 $ x \in B $, $ x \in A \cup B $; 由于 $ x \in C $, $ x \in A \cup C $. 所以同时有 $ x \in A \cup B $ 和 $ x \in A \cup C $. 综上有: $ A \cup (B \cap C) \subseteq (A \cup B) \cap (A \cup C) $.
+
+    对于任意 $ x \in (A \cup B) \cap (A \cup C) $, $ x \in A \cup B $ 和 $ x \in A \cup C $ 要同时满足.
+\end{proof}
+
+\begin{prop}
+    设 $ A \subseteq X $, $ B \subseteq X $: 
+    \begin{enumerate}
+        \item 最大元: \[ A \cup X = X \] \[ A \cap X = A \]
+        \item 分拆法: \[ X \cup (X \setminus A) = X \] \[ X \cap (X \setminus A) = \varnothing \]
+        \item De Morgan 律: \[ X \setminus (A \cup B) = (X \setminus A) \cap (X \setminus B) \] \[ X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B) \]
+    \end{enumerate}
+\end{prop}
 
 \begin{definition}[\text{差}]
     给定两个集合 $ A $ 和 $ B $. 定义 $ A $ 减去 $ B $:
     \[ A \setminus B = \{x \in A \mid x \not\in B\} \,.\]
 \end{definition}
 
-这些运算满足的性质略过.
+部分这些运算满足的性质及证明略过.
 
 \begin{axiom}[\text{替换公理}]
     给定一个集合 $ A $, 对于所有 $ x \in A $ 和任意对象 $ y $ 有命题 $ P(x, y) $. 如果对于所有 $ x \in A $, 存在最多一个 $ y $ 满足 $ P(x, y) $, 则可以构造集合 $ \{ y \mid \text{某 } x \in A \text{ 满足 } P(x, y) \} $.

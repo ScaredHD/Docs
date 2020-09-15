@@ -8,9 +8,9 @@
 \contentsline {paragraph}{例}{5}{paragraph*.4}
 \contentsline {paragraph}{例}{7}{paragraph*.5}
 \contentsline {paragraph}{例}{7}{paragraph*.6}
-\contentsline {section}{\numberline {2}函数}{7}{section.2}
-\contentsline {section}{\numberline {3}像和逆像}{7}{section.3}
-\contentsline {section}{\numberline {4}幂集}{7}{section.4}
-\contentsline {section}{\numberline {5}笛卡尔积}{7}{section.5}
-\contentsline {section}{\numberline {6}基数}{7}{section.6}
-\contentsline {section}{\numberline {7}无穷集合}{7}{section.7}
+\contentsline {section}{\numberline {2}函数}{8}{section.2}
+\contentsline {section}{\numberline {3}像和逆像}{8}{section.3}
+\contentsline {section}{\numberline {4}幂集}{8}{section.4}
+\contentsline {section}{\numberline {5}笛卡尔积}{8}{section.5}
+\contentsline {section}{\numberline {6}基数}{8}{section.6}
+\contentsline {section}{\numberline {7}无穷集合}{8}{section.7}

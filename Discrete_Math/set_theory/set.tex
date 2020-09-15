@@ -249,10 +249,31 @@
 \begin{proof}
     此处证明左分配律, 右分配律可以由交换律和左分配律推出.
 
-    (1) 对于任意 $ x \in A \cup (B \cap C) $, 按照并定义 $ x \in A $ 或 $ x \in B \cap C $. 当 $ x \in A $ 时, $ x \in A \cup B $, 也有 $ x \in A \cup C $. 所以 $ x $ 同时属于 $ A \cup B $ 和 $ A \cup C $, $ x \in (A \cup B) \cap (A \cup C) $. 当 $ x \in B \cap C $ 时, $ x \in B $ 且 $ x \in C $. 由于 $ x \in B $, $ x \in A \cup B $; 由于 $ x \in C $, $ x \in A \cup C $. 所以同时有 $ x \in A \cup B $ 和 $ x \in A \cup C $. 综上有: $ A \cup (B \cap C) \subseteq (A \cup B) \cap (A \cup C) $.
+    (1) 对于任意 $ x \in A \cup (B \cap C) $, 按照并定义 $ x \in A $ 或 $ x \in B \cap C $. 当 $ x \in A $ 时, $ x \in A \cup B $, 也有 $ x \in A \cup C $. 所以 $ x $ 同时属于 $ A \cup B $ 和 $ A \cup C $, $ x \in (A \cup B) \cap (A \cup C) $. 当 $ x \in B \cap C $ 时, $ x \in B $ 且 $ x \in C $. 由于 $ x \in B $, $ x \in A \cup B $; 由于 $ x \in C $, $ x \in A \cup C $. 所以同时有 $ x \in A \cup B $ 和 $ x \in A \cup C $. 以上说明了: $ A \cup (B \cap C) \subseteq (A \cup B) \cap (A \cup C) $.
 
-    对于任意 $ x \in (A \cup B) \cap (A \cup C) $, $ x \in A \cup B $ 和 $ x \in A \cup C $ 要同时满足.
+    对于任意 $ x \in (A \cup B) \cap (A \cup C) $, $ x \in A \cup B $ 和 $ x \in A \cup C $ 要同时满足. 我们可以考虑两种情况, 任意 $ x \in A $ 或 $ x \notin A $. 若 $ x \in A $, 则 $ x \in A \cup (B \cap C) $; 若 $ x \notin A $, 由于 $ x \in A \cup B $ 且 $ x \in A \cup C $, 所以 $ x \in B $ 且 $ x \in C $, 即 $ x \in B \cap C $, 所以 $ x \in A \cup (B \cap C) $. 以上说明了: $ (A \cup B) \cap (A \cup C) \subseteq A \cup (B \cap C) $.
+
+    综上所述: $ (A \cup B) \cap (A \cup C) = A \cup (B \cap C) $.
+
+    (2) 对于任意 $ x \in A \cap (B \cup C) $, $ x \in A $ 且 $ x \in B \cup C $. 当 $ x \in B $ 时, 由于同时有 $ x \in A $, 故 $ x \in A \cap B $, 也就有 $ x \in (A \cap B) \cup (A \cup C) $; 当 $ x \in C $ 时, 同理有 $ x \in A \cap C $, 也就有 $ x \in (A \cap B) \cup (A \cup C) $. 以上说明了: $ A \cap (B \cup C) \subseteq (A \cap B) \cup (A \cap C) $.
+
+    而对于任意 $ x \in (A \cap B) \cup (A \cap C) $, $ x \in A \cap B $ 或 $ x \in A \cap C $. 当 $ x \in A \cap B $ 时, $ x \in A $ 且 $ x \in B $, 故 $ x \in A $ 且 $ x \in B \cup C $, 即 $ x \in A \cap (B \cup C) $; 当 $ x \in A \cap C $ 时, $ x \in A $ 且 $ x \in C $, 故 $ x \in A $ 且 $ x \in B \cup C $, 即 $ x \in A \cap (B \cup C) $. 以上说明了: $ x \in A \cap (B \cup C) $.
+
+    综上所述: $ A \cap (B \cup C) = (A \cap B) \cup (A \cap C) $.
+
+    (3) 设 $ x \in A \cup (A \cap B) $, 则 $ x \in A $ 或 $ x \in A \cap B $. 当 $ x \in A $ 时, 直接推出, $ A \cup (A \cap B) \subseteq A $. 当 $ x \in A \cap B $ 时, $ x \in A $ 且 $ x \in B $. 所以 $ x \in A $ 成立, $ A \cup (A \cap B) \subseteq A $. 以上说明了: $ A \cup (A \cap B) \subseteq A $. 
+
+    现设 $ x \in A $, 显然有 $ x \in A \cup (A \cap B) $. 这说明了 $ A \subseteq A \cup (A \cap B) $.
+
+    综上所述: $ A \cup (A \cap B) = A $.
+
+    对于 $ A \cap (A \cup B) = A $ 的证明, 方法基本和上面类似, 此处省略.
 \end{proof}
+
+\begin{definition}[\text{差}]
+    给定两个集合 $ A $ 和 $ B $. 定义 $ A $ 减去 $ B $:
+    \[ A \setminus B = \{x \in A \mid x \not\in B\} \,.\]
+\end{definition}
 
 \begin{prop}
     设 $ A \subseteq X $, $ B \subseteq X $: 
@@ -264,15 +285,11 @@
 \end{prop}
 
 \begin{remark}
-    通过结合律, 可将 De Morgan 律推广到多个集合的并/交的补.
+    通过结合律以及归纳法, De Morgan 律可推广到多个集合的并/交的补. 即: \[ X \setminus (A_1 \cup \cdots \cup A_n) = (X \setminus A_1) \cap \cdots \cap (X \setminus A_n) \] \[ X \setminus (A_1 \cap \cdots \cap A_n) = (X \setminus A_1) \cup \cdots \cup (X \setminus A_n) \]
 \end{remark}
+    
 
-\begin{definition}[\text{差}]
-    给定两个集合 $ A $ 和 $ B $. 定义 $ A $ 减去 $ B $:
-    \[ A \setminus B = \{x \in A \mid x \not\in B\} \,.\]
-\end{definition}
 
-部分这些运算满足的性质及证明略过.
 
 \begin{axiom}[\text{替换公理}]
     给定一个集合 $ A $, 对于所有 $ x \in A $ 和任意对象 $ y $ 有命题 $ P(x, y) $. 如果对于所有 $ x \in A $, 存在最多一个 $ y $ 满足 $ P(x, y) $, 则可以构造集合 $ \{ y \mid \text{某 } x \in A \text{ 满足 } P(x, y) \} $.

@@ -6,11 +6,37 @@
 \contentsline {subsection}{\numberline {1.4}子集}{4}{subsection.1.4}
 \contentsline {paragraph}{例}{5}{paragraph*.3}
 \contentsline {paragraph}{例}{5}{paragraph*.4}
-\contentsline {paragraph}{例}{7}{paragraph*.5}
-\contentsline {paragraph}{例}{7}{paragraph*.6}
+\contentsline {paragraph}{例}{8}{paragraph*.5}
+\contentsline {paragraph}{例}{8}{paragraph*.6}
 \contentsline {section}{\numberline {2}函数}{8}{section.2}
-\contentsline {section}{\numberline {3}像和逆像}{8}{section.3}
-\contentsline {section}{\numberline {4}幂集}{8}{section.4}
-\contentsline {section}{\numberline {5}笛卡尔积}{8}{section.5}
-\contentsline {section}{\numberline {6}基数}{8}{section.6}
-\contentsline {section}{\numberline {7}无穷集合}{8}{section.7}
+\contentsline {subsection}{\numberline {2.1}基本定义}{8}{subsection.2.1}
+\contentsline {paragraph}{例}{8}{paragraph*.7}
+\contentsline {paragraph}{例}{8}{paragraph*.8}
+\contentsline {paragraph}{例}{9}{paragraph*.9}
+\contentsline {subsection}{\numberline {2.2}映射的类型}{9}{subsection.2.2}
+\contentsline {paragraph}{例}{9}{paragraph*.10}
+\contentsline {paragraph}{例}{10}{paragraph*.11}
+\contentsline {paragraph}{例}{10}{paragraph*.12}
+\contentsline {paragraph}{例}{10}{paragraph*.13}
+\contentsline {section}{\numberline {3}像与逆像}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}定义}{11}{subsection.3.1}
+\contentsline {paragraph}{例}{11}{paragraph*.14}
+\contentsline {paragraph}{例}{12}{paragraph*.15}
+\contentsline {subsection}{\numberline {3.2}值域}{12}{subsection.3.2}
+\contentsline {section}{\numberline {4}幂集}{12}{section.4}
+\contentsline {paragraph}{例}{13}{paragraph*.16}
+\contentsline {paragraph}{例}{13}{paragraph*.17}
+\contentsline {paragraph}{例}{13}{paragraph*.18}
+\contentsline {paragraph}{例}{13}{paragraph*.19}
+\contentsline {section}{\numberline {5}笛卡尔积}{14}{section.5}
+\contentsline {subsection}{\numberline {5.1}定义}{14}{subsection.5.1}
+\contentsline {paragraph}{例}{14}{paragraph*.20}
+\contentsline {subsection}{\numberline {5.2}多重笛卡尔积}{14}{subsection.5.2}
+\contentsline {section}{\numberline {6}基数}{15}{section.6}
+\contentsline {subsection}{\numberline {6.1}基数定义}{15}{subsection.6.1}
+\contentsline {paragraph}{例}{15}{paragraph*.21}
+\contentsline {paragraph}{例}{16}{paragraph*.22}
+\contentsline {subsection}{\numberline {6.2}基数性质}{16}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}有限集与无限集}{17}{subsection.6.3}
+\contentsline {paragraph}{例}{17}{paragraph*.23}
+\contentsline {section}{\numberline {7}无限集合}{18}{section.7}

@@ -471,6 +471,9 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei50.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei4e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei90.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong99.tfm
+INPUT d:/Programming/Docs/Discrete_Math/set_theory/./images/image.pdf
+INPUT ./images/image.pdf
+INPUT ./images/image.pdf
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai50.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisongsl50.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisongsl4e.tfm
@@ -527,9 +530,9 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong5c.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong53.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong5c.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong85.tfm
-INPUT d:/Programming/Docs/Discrete_Math/set_theory/implies.pdf
-INPUT d:/Programming/Docs/Discrete_Math/set_theory/implies.pdf
-INPUT d:/Programming/Docs/Discrete_Math/set_theory/implies.pdf
+INPUT d:/Programming/Docs/Discrete_Math/set_theory/./images/implies.pdf
+INPUT ./images/implies.pdf
+INPUT ./images/implies.pdf
 INPUT d:/Programming/Docs/Discrete_Math/set_theory/set.aux
 INPUT d:/Programming/Docs/Discrete_Math/set_theory/set.out
 INPUT d:/Programming/Docs/Discrete_Math/set_theory/set.out

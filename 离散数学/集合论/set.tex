@@ -665,6 +665,33 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
 \end{proof}
 
 
+\subsection{有限集与无限集}
+\begin{definition}[\text{有限集}]
+    一个集合是有限的, 当且仅当它的基数是某个自然数 $ n $; 否则集合称为无限的. 如果 $ X $ 是有限集, $ |X| $ 表示其基数.
+\end{definition}
+
+\paragraph{例}
+$ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| = 3 $, $ |\varnothing| = 0 $.
+
+\begin{lemma}[\text{有限序列有界}]
+    设存在有限序列 $ a_1, a_2, \dots, a_n $, $ n \in \Z^+ $, 则这个序列是有界的.
+\end{lemma}
+
+\begin{proof}
+    当 $ n = 1 $ 时, 序列只有一项 $ a_1 $. 显然能够找到 $ M_1 \in \R $ 使得 $ |a_1| \leqslant M_1 $. 这证明了基础情形. 现假设 $ a_1, a_2, \dots, a_n $ 是有界的, 要证明 $ a_1, a_2, \dots, a_{n + 1} $ 也是有界的.
+
+    设对所有 $ 1 \leqslant i \leqslant n $ 有 $ |a_i| \leqslant M $. 取 $ M' = M + |a_{n + 1}| $, 则有 $ |a_i| \leqslant M' $, 同时有 $ |a_{n + 1}| \leqslant M' $. 故 $ |a_i| \leqslant M' $ 对一切 $ 1 \leqslant i \leqslant n+1 $ 成立, 即 $ a_1, a_2, \dots, a_{n + 1} $ 有界, 而这完成了归纳.
+\end{proof}
+
+
+\begin{theorem}
+    自然数 $ \N $ 是无限集.
+\end{theorem}
+
+\begin{proof}
+    假设 $ \N $ 是有限集. 则存在自然数 $ n $, 以及双射 $ f \colon \set{i \in \N \colon 1 \leqslant i \leqslant n} \to \N $. 考虑序列 $ f(1), f(2), \dots, f(n) $. 这个序列是有限的, 则也是有界的. 那么存在 $ M \in \N $, 使得 $ |f(i)| \leqslant M $ 对一切 $ 1 \leqslant i \leqslant n $ 成立. 考虑陪域中的 $ M + 1 \in \N $, 在定义域中没有对应元素 $ x \in \set{i \in \N \colon 1 \leqslant i \leqslant n} $ 使得 $ f(x) = M + 1 $, 这和 $ f $ 双射的假设矛盾. 所以 $ \N $ 不是有限集, 也就是无限集.
+\end{proof}
+
 \subsection{基数性质}
 下面着重讲解有限集上的基数性质.
 
@@ -676,7 +703,7 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
     对于 $ X \subseteq Y $, 考虑映射 $ f\colon X \to Y $, $ f(x) = x $. 考虑 $ x, y \in X $ 且 $ x \neq y $, 则有 $ x = f(x) $ 和 $ y = f(y) $, 于是 $ f(x) \neq f(y) $, 即 $ f $ 为单射.
 \end{proof}
 
-\begin{proposition}[\text{有限集上的基数性质 I}] \label{cardinal II}
+\begin{proposition}[\text{有限集上的基数性质}] \label{cardinal II}
     设 $ X $, $ Y $ 均为有限集.
     \begin{enumerate}
         \item $ x \notin X $, 则 $ X \cup \set{x} $ 也为有限集, 且 $ |X \cup \set{x}| = |X| + 1 $
@@ -715,34 +742,6 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
     $ |X| \leqslant |Y| \Longrightarrow $ 单射: 记 $ I_{k} = \set{i \in \N \colon 1 \leqslant i \leqslant k} $. 同样设 $ |X| = n $, $ |Y| = m $, $ n \leqslant m $. 存在双射 $ f \colon X \to I_n $ 以及 $ g \colon Y \to I_m $. 可知 $ I_n \subseteq I_m $. 所以由引理 \ref{subset-injection}, 存在单射 $ h \colon I_n \to I_m $. 我们重新组织 $ f $, $ g $, $ h $ 的关系 (注意 $ Y $ 到 $ I_m $ 有双射, $ I_m $ 到 $ Y $ 也有双射): \[ X \xlongrightarrow{f} I_n \xlongrightarrow{h} I_m \xlongrightarrow{g} Y \,.\]
 
     那么存在 $ X $ 到 $ Y $ 的映射 $ g \circ h \circ f $, 且其为单射 (单射的复合仍为单射).
-\end{proof}
-
-
-\subsection{有限集与无限集}
-\begin{definition}[\text{有限集}]
-    一个集合是有限的, 当且仅当它的基数是某个自然数 $ n $; 否则集合称为无限的. 如果 $ X $ 是有限集, $ |X| $ 表示其基数.
-\end{definition}
-
-\paragraph{例}
-$ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| = 3 $, $ |\varnothing| = 0 $.
-
-\begin{lemma}[\text{有限序列有界}]
-    设存在有限序列 $ a_1, a_2, \dots, a_n $, $ n \in \Z^+ $, 则这个序列是有界的.
-\end{lemma}
-
-\begin{proof}
-    当 $ n = 1 $ 时, 序列只有一项 $ a_1 $. 显然能够找到 $ M_1 \in \R $ 使得 $ |a_1| \leqslant M_1 $. 这证明了基础情形. 现假设 $ a_1, a_2, \dots, a_n $ 是有界的, 要证明 $ a_1, a_2, \dots, a_{n + 1} $ 也是有界的.
-
-    设对所有 $ 1 \leqslant i \leqslant n $ 有 $ |a_i| \leqslant M $. 取 $ M' = M + |a_{n + 1}| $, 则有 $ |a_i| \leqslant M' $, 同时有 $ |a_{n + 1}| \leqslant M' $. 故 $ |a_i| \leqslant M' $ 对一切 $ 1 \leqslant i \leqslant n+1 $ 成立, 即 $ a_1, a_2, \dots, a_{n + 1} $ 有界, 而这完成了归纳.
-\end{proof}
-
-
-\begin{theorem}
-    自然数 $ \N $ 是无限集.
-\end{theorem}
-
-\begin{proof}
-    假设 $ \N $ 是有限集. 则存在自然数 $ n $, 以及双射 $ f \colon \set{i \in \N \colon 1 \leqslant i \leqslant n} \to \N $. 考虑序列 $ f(1), f(2), \dots, f(n) $. 这个序列是有限的, 则也是有界的. 那么存在 $ M \in \N $, 使得 $ |f(i)| \leqslant M $ 对一切 $ 1 \leqslant i \leqslant n $ 成立. 考虑陪域中的 $ M + 1 \in \N $, 在定义域中没有对应元素 $ x \in \set{i \in \N \colon 1 \leqslant i \leqslant n} $ 使得 $ f(x) = M + 1 $, 这和 $ f $ 双射的假设矛盾. 所以 $ \N $ 不是有限集, 也就是无限集.
 \end{proof}
 
 

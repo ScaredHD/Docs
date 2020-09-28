@@ -437,6 +437,10 @@ $ f(x) = x^2 $, 则 $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $.
     设 $ f \colon X \to Y $, $ S \subseteq X $, 则 $ f(S) \subseteq Y $.
 \end{proposition}
 
+\begin{proposition}[\text{限制陪域制造双射}]
+    设 $ f \colon X \to Y $ 是单射. 按照定义, 如果我们将陪域限制到定义域的像上, 那么 $ f $ 就变成了一个满射, 也就成为了双射. 即 $ \widetilde{f} \colon X \to f(X) $, $ \widetilde{f}(x) = f(x) $ 是一个双射.
+\end{proposition}
+
 \begin{remark}
     上面命题的逆命题不再为真. 即 $ f(x) \in f(S) \centernot \Longrightarrow x \in S $. 可以举出反例: $ f(x) = x^2 $, $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $, 有 $ f(-2) \in f(\set{-1, 0, 1, 2}) $, 但 $ -2 \not\in \set{-1, 0, 1, 2} $.
 \end{remark}
@@ -669,7 +673,7 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
     \begin{enumerate}
         \item $ x \notin X $, 则 $ X \cup \set{x} $ 也为有限集, 且 $ |X \cup \set{x}| = |X| + 1 $
         \item $ |X \cup Y| \leqslant |X| + |Y| $. 若 $ X $, $ Y $ 互斥, 即 $ X \cap Y = \varnothing $, 则 $ |X \cup Y| = |X| + |Y| $
-        \item 函数 $ f \colon X \to Y $. 有 $ |f(X)| \leqslant X $. 若 $ f $ 是单射, 则 $ |f(X)| = |X| $
+        \item 函数 $ f \colon X \to Y $. 有 $ |f(X)| \leqslant |X| $. 若 $ f $ 是单射, 则 $ |f(X)| = |X| $
         \item $ |X \times Y| = |X| \times |Y| $
         \item $ |Y^X| = |Y|^{|X|} $
     \end{enumerate}
@@ -677,6 +681,23 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
 
 \begin{proof}
     (1) 由引理 \ref{cardinary}, $ |X \cup \set{x} \setminus \set{x}| = |X| = |X \cup \set{x}| - 1 $. 所以 $ |X \cup \set{x}| = |X| + 1 $.
+
+    (2) 设 $ |X| = n $, $ |Y| = m $. 则存在双射 $ f \colon X \to \colon \set{i \in \N \colon 1 \leqslant i \leqslant n} $ 和双射 $ g \colon Y \to \set{i \in \N \colon 1 \leqslant i \leqslant m} $. 现定义函数 $ h \colon X \cup Y \to \set{i \in \N \colon 1 \leqslant i \leqslant m + n} $.
+    \[ h(x) = \begin{cases}
+        f(x) & x \in X \\
+        g(x) + n & x \in Y, x \notin X
+    \end{cases} \]
+
+    下面证明 $ h $ 是单射: 对于不同的 $ x, y \in X \cup Y $, 我们可以不失一般性地分类讨论三种情况. (i) 当 $ x, y \in X $: 那么 $ h(x) = f(x) $, $ h(y) = f(y) $. 由于 $ f $ 是双射, $ f(x) \neq f(y) $, 所以 $ h(x) \neq f(y) $. (ii) 当 $ x \in X $, $ y \in Y $ 且 $ y \notin X $: $ h(x) = f(x) $, $ h(y) = g(y) + n $. 由于 $ 1 \leqslant f(x) \leqslant n $, $ n + 1 \leqslant g(x) + n \leqslant n + m $, 所以有 $ h(x) \neq h(y) $. (iii) 当 $ x, y \in Y $ 且 $ x, y \notin X $: $ h(x) = g(x) + n $, $ h(y) = g(y) + n $. 而因为双射已经有 $ g(x) \neq g(y) $, 故 $ h(x) \neq h(y) $. 综上所述, $ h $ 为单射.
+
+    当 $ X $, $ Y $ 互斥, 即 $ X \cap Y = \varnothing $. 对于每一个 $ 1 \leqslant i \leqslant n $, 能找到对应的 $ x \in X $, 满足 $ i = h(x) = f(x) $; 而对于每一个 $ n + 1 \leqslant j \leqslant m + n $, 能找到对应 $ y \in Y $, 满足 $ j = h(y) = g(y) + n $. 所以 $ h $ 是满射.
+
+    当 $ X $, $ Y $ 不互斥, $ X \cap Y \neq \varnothing $. 考虑 $ x \in X \cap Y $, $ g(x) + n \in \set{i \in \N \colon 1 \leqslant i \leqslant m + n} $. 一方面: 对于一切 $ y \in X $, $ h(y) = f(y) $, $ 1 \leqslant f(y) \leqslant n $, $ n + 1 \leqslant g(x) + n \leqslant m + n $, 所以找不到 $ y \in X $, 满足 $ h(y) = g(x) + n $. 另一方面: 对于一切 $ y \in Y $ 但 $ y \notin X $, $ x \neq y $, $ h(y) = g(y) + n \neq g(x) + n $ (因为 $ g $ 是双射), 所以找不到 $ y \in Y $ 且 $ y \notin X $ 满足 $ h(y) = g(x) + n $. 综上所述, 找不到 $ y \in X \cup Y $, 满足 $ h(y) = g(x) + n $. 这说明 $ h $ 不是满射.
+
+    于是综上所述, 当 $ X $, $ Y $ 互斥时, $ h \colon X \cup Y \to \set{i \in \N \colon 1 \leqslant i \leqslant m + n} $ 是双射: $ |X \cup Y| = m + n = |X| + |Y| $. 而当 $ X $, $ Y $ 不互斥时, $ h $ 仅为单射, 通过限制陪域, 构造 $ \widetilde{h} \colon X \cup Y \to h(X \cup Y) $, $ \widetilde{h} (x) = h(x) $. $ \widetilde{h} $ 是一个双射, 故 $ |X \cup Y| = |h(X \cup Y)| $. 并且 $ h(X \cup Y) \subseteq \set{i \in \N \colon 1 \leqslant i \leqslant m + n} $. 不妨记 $ H = h(X \cup Y) $, $ I = \set{i \in \N \colon 1 \leqslant i \leqslant m + n} $, $ H \subseteq I $. $ I = (I \setminus H) \cup H $, 且 $ I \setminus H $ 和 $ H $ 是互斥的. 所以 $ |I| = |I \setminus H| + |H| $, 即 $ |H| \leqslant |I| $. 所以最终, $ |X \cup Y| = |h(X \cup Y)| \leqslant |I| = m + n = |X| + |Y| $.
+
+    
+
 \end{proof}
 
 \begin{proposition}[\text{有限集上基数性质 II}] \label{cardinal I}
@@ -695,7 +716,7 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
 \end{figure}
 
 \begin{proof}
-    (1): $ X \subseteq Y $, 则 $ Y = X \cup (Y \setminus X) $ 以及 $ X \cap (Y \setminus X) = \varnothing $. 于是由有限集上的基数性质 I-(2) $ |Y| = |X \cup (Y \setminus X)| = |X| + |Y \setminus X| \geqslant |X| $.
+    (1): $ X \subseteq Y $, 则 $ Y = X \cup (Y \setminus X) $ 以及 $ X \cap (Y \setminus X) = \varnothing $. 于是由有限集上的基数性质 I-(2) $ |Y| = |X \cup (Y \setminus X)| = |X| + |Y \setminus X| \geqslant |X| $. 若 $ X \subset Y $, 存在 $ a \in Y $ 但 $ a \notin X $. 对于每一个 $ b \in X $, $ b \in Y $, $ a \neq b $. 所以 $ b \in Y \setminus \set{a} $, 所以 $ X \subseteq Y \setminus \set{a} $. 所以 $ |X| \leqslant |Y - \set{a}| = |Y| - 1 $, 则 $ |X| < |Y| $.
 
     (2): 对于 $ X \subseteq Y $, 考虑映射 $ f\colon X \to Y $, $ f(x) = x $. 考虑 $ x, y \in X $ 且 $ x \neq y $, 则有 $ x = f(x) $ 和 $ y = f(y) $, 于是 $ f(x) \neq f(y) $, 即 $ f $ 为单射.
 

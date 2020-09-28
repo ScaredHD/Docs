@@ -8,7 +8,7 @@ if (没时间 OR 工科生) {
 
 > 在传统逻辑中，公理是没有经过证明，但被当作不证自明的一个命题. -- 维基百科
 
-忽略公理 (Axiom), 因为公理很自然也很好理解. 重点看定义 (Definition), 命题 (Proposition), 引理 (Lemma) 和定理 (Theorem). 会用命题和定理即可.
+忽略公理 (Axiom), 因为公理很自然也很好理解. 重点看定义 (Definition), 命题 (Proposition), 引理 (Lemma), 定理 (Theorem) 以及注释 (Remark). 会用命题和定理及其相关推论即可.
 } 
 
 else if (有时间 AND 愿意看) {

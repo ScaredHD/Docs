@@ -39,4 +39,4 @@
 \contentsline {subsection}{\numberline {6.2}基数性质}{17}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}有限集与无限集}{19}{subsection.6.3}
 \contentsline {paragraph}{例}{19}{paragraph*.23}
-\contentsline {section}{\numberline {7}无限集合}{20}{section.7}
+\contentsline {section}{\numberline {7}无限集合}{19}{section.7}

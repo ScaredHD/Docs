@@ -681,9 +681,9 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
     \begin{enumerate}
         \item $ x \notin X $, 则 $ X \cup \set{x} $ 也为有限集, 且 $ |X \cup \set{x}| = |X| + 1 $
         \item $ |X \cup Y| \leqslant |X| + |Y| $. 若 $ X $, $ Y $ 互斥, 即 $ X \cap Y = \varnothing $, 则 $ |X \cup Y| = |X| + |Y| $
-        \item $ X \subseteq Y $ 则 $ |X| \leqslant |Y| $. 而如果 $ X $ 是 $ Y $ 的真子集, 即 $ X \neq Y $, 则 $ |X| < |Y| $
-        \item 存在单射 $ f\colon X \to Y $ 当且仅当 $ |X| \leqslant |Y| $
-        \item 函数 $ f \colon X \to Y $. 有 $ |f(X)| \leqslant |X| $. 若 $ f $ 是单射, 则 $ |f(X)| = |X| $
+        \item (子集-基数) $ X \subseteq Y $ 则 $ |X| \leqslant |Y| $. 而如果 $ X $ 是 $ Y $ 的真子集, 即 $ X \neq Y $, 则 $ |X| < |Y| $
+        \item (单射-基数) 存在单射 $ f\colon X \to Y $ 当且仅当 $ |X| \leqslant |Y| $
+        \item (像的缩小) 函数 $ f \colon X \to Y $. 有 $ |f(X)| \leqslant |X| $. 若 $ f $ 是单射, 则 $ |f(X)| = |X| $
         \item $ |X \times Y| = |X| \times |Y| $
         \item $ |Y^X| = |Y|^{|X|} $
     \end{enumerate}
@@ -714,32 +714,8 @@ $ \set{-1, 0, 1, 2} $ 和 $ \set{i \in \N \colon i < 4} = \set{0, 1, 2, 3} $ 有
 
     $ |X| \leqslant |Y| \Longrightarrow $ 单射: 记 $ I_{k} = \set{i \in \N \colon 1 \leqslant i \leqslant k} $. 同样设 $ |X| = n $, $ |Y| = m $, $ n \leqslant m $. 存在双射 $ f \colon X \to I_n $ 以及 $ g \colon Y \to I_m $. 可知 $ I_n \subseteq I_m $. 所以由引理 \ref{subset-injection}, 存在单射 $ h \colon I_n \to I_m $. 我们重新组织 $ f $, $ g $, $ h $ 的关系 (注意 $ Y $ 到 $ I_m $ 有双射, $ I_m $ 到 $ Y $ 也有双射): \[ X \xlongrightarrow{f} I_n \xlongrightarrow{h} I_m \xlongrightarrow{g} Y \,.\]
 
-    那么存在 $ X $ 到 $ Y $ 的映射 $ g \circ h \circ f $, 且其为单射.
+    那么存在 $ X $ 到 $ Y $ 的映射 $ g \circ h \circ f $, 且其为单射 (单射的复合仍为单射).
 \end{proof}
-
-\begin{proposition}[\text{有限集上基数性质 II}] \label{cardinal I}
-    设 $ X $, $ Y $ 均为有限集.
-    \begin{enumerate}
-        
-        \item 
-        \item 
-    \end{enumerate}
-\end{proposition}
-即三者存在下面图中的蕴含关系.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width = 0.4\linewidth]{./images/implies.pdf}
-\end{figure}
-
-\begin{proof}
-    (1): 
-
-    (2): 
-
-    (3): 
-\end{proof}
-
 
 
 \subsection{有限集与无限集}

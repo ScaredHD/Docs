@@ -709,12 +709,19 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
         \item $ x \notin X $, 则 $ X \cup \set{x} $ 也为有限集, 且 $ |X \cup \set{x}| = |X| + 1 $
         \item $ |X \cup Y| \leqslant |X| + |Y| $. 若 $ X $, $ Y $ 互斥, 即 $ X \cap Y = \varnothing $, 则 $ |X \cup Y| = |X| + |Y| $
         \item (子集-基数) $ X \subseteq Y $ 则 $ |X| \leqslant |Y| $. 而如果 $ X $ 是 $ Y $ 的真子集, 即 $ X \neq Y $, 则 $ |X| < |Y| $
-        \item (单射-基数) 存在单射 $ f\colon X \to Y $ 当且仅当 $ |X| \leqslant |Y| $
+        \item (单射-基数) 存在单射 $ f\colon X \to Y $ 当且仅当 $ |X| \leqslant |Y| $, 两者是等价关系.
         \item (像的缩小) 函数 $ f \colon X \to Y $. 有 $ |f(X)| \leqslant |X| $. 若 $ f $ 是单射, 则 $ |f(X)| = |X| $
         \item $ |X \times Y| = |X| \times |Y| $
         \item $ |Y^X| = |Y|^{|X|} $
     \end{enumerate}
 \end{proposition}
+
+有限集中, 子集-单射-基数三者的关系可以表示如下:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.35\linewidth]{./images/implies.pdf}
+\end{figure}
+
 
 \begin{proof}
     (1) 由引理 \ref{cardinary}, $ |X \cup \set{x} \setminus \set{x}| = |X| = |X \cup \set{x}| - 1 $. 所以 $ |X \cup \set{x}| = |X| + 1 $.

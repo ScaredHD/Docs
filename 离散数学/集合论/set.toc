@@ -39,4 +39,6 @@
 \contentsline {subsection}{\numberline {6.2}有限集与无限集}{17}{subsection.6.2}
 \contentsline {paragraph}{例}{17}{paragraph*.23}
 \contentsline {subsection}{\numberline {6.3}基数性质}{17}{subsection.6.3}
-\contentsline {section}{\numberline {7}无限集合}{19}{section.7}
+\contentsline {paragraph}{证明 $ f $ 是单射}{20}{paragraph*.24}
+\contentsline {paragraph}{证明 $ f $ 是满射}{21}{paragraph*.25}
+\contentsline {section}{\numberline {7}无限集合}{22}{section.7}

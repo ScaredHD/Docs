@@ -437,8 +437,8 @@ $ f(x) = x^2 $, 则 $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $.
     设 $ f \colon X \to Y $, $ S \subseteq X $, 则 $ f(S) \subseteq Y $.
 \end{proposition}
 
-\begin{proposition}[\text{限制陪域制造双射}]
-    设 $ f \colon X \to Y $ 是单射. 按照定义, 如果我们将陪域限制到定义域的像上, 那么 $ f $ 就变成了一个满射, 也就成为了双射. 即 $ \widetilde{f} \colon X \to f(X) $, $ \widetilde{f}(x) = f(x) $ 是一个双射.
+\begin{proposition}[\text{限制陪域}]
+    设 $ f \colon X \to Y $. 按照定义, 如果我们将陪域限制到定义域的像上, 那么 $ f $ 就变成了一个满射. 而如果 $ f $ 还是个单射, 那么限制陪域后, $ f $ 也就成为了双射. 即 $ \widetilde{f} \colon X \to f(X) $, $ \widetilde{f}(x) = f(x) $ 是一个双射.
 \end{proposition}
 
 \begin{remark}
@@ -722,6 +722,13 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
     \includegraphics[width = 0.35\linewidth]{./images/implies.pdf}
 \end{figure}
 
+有限集中, 映射和基数的关系:
+\begin{itemize}
+    \item $ |X| < |Y| $ $ \Longleftrightarrow $ $ X \to Y $ 为单射, 但不是满射
+    \item $ |X| \leqslant |Y| $ $ \Longleftrightarrow $ $ X \to Y $ 为单射
+    \item $ |X| = |Y| $ $ \Longleftrightarrow $ $ X \to Y $ 为双射
+\end{itemize}
+
 
 \begin{proof}
     (1) 由引理 \ref{cardinary}, $ |X \cup \set{x} \setminus \set{x}| = |X| = |X \cup \set{x}| - 1 $. 所以 $ |X \cup \set{x}| = |X| + 1 $.
@@ -749,7 +756,93 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
     $ |X| \leqslant |Y| \Longrightarrow $ 单射: 记 $ I_{k} = \set{i \in \N \colon 1 \leqslant i \leqslant k} $. 同样设 $ |X| = n $, $ |Y| = m $, $ n \leqslant m $. 存在双射 $ f \colon X \to I_n $ 以及 $ g \colon Y \to I_m $. 可知 $ I_n \subseteq I_m $. 所以由引理 \ref{subset-injection}, 存在单射 $ h \colon I_n \to I_m $. 我们重新组织 $ f $, $ g $, $ h $ 的关系 (注意 $ Y $ 到 $ I_m $ 有双射, $ I_m $ 到 $ Y $ 也有双射): \[ X \xlongrightarrow{f} I_n \xlongrightarrow{h} I_m \xlongrightarrow{g} Y \,.\]
 
     那么存在 $ X $ 到 $ Y $ 的映射 $ g \circ h \circ f $, 且其为单射 (单射的复合仍为单射).
+
+    (5) 设 $ f \colon X \to Y $, 假设 $ |f(X)| > |X| $, 那么根据 (4) 存在单射 $ g \colon X \to f(X) $, 且 $ g $ 不是满射. 这意味着存在 $ e \in f(X) $, 使得所有 $ s \in X $, 都有 $ f(s) \neq e $. 而按照像的定义 $ e \in f(X) $ 意味着存在 $ x \in X $ 满足 $ f(x) = e $, 这就产生了矛盾. 所以 $ |f(X)| \leqslant |X| $.
+
+    而当 $ f $ 为单射. 通过限制陪域可以制造满射, 即 $ g \colon X \to f(X) $, $ g(x) = f(x) $ 是满射, 所以 $ g $ 也是双射. $ |X| \to |f(X)| $.
+
+    (6) 设 $ X = \set{x_1, x_2, \dots, x_n} $, $ Y = \set{y_1, y_2, \dots, y_m} $. 所以有 $ |X| = n $, $ |Y| = m $. 定义 $ [n..k] \coloneqq \set{i \in \N \colon n \leqslant i \leqslant k} $, 所以 $ [1..k] $ 为 $ 1 $ 开始的 $ k $ 个整数集合. 我们构造一个函数 $ f \colon X \times Y \to [1..mn] $, $ f(x_i, y_j) = (i - 1) m + j $ , 其中 $ 1 \leqslant i \leqslant n $, $ 1 \leqslant j \leqslant m $. 为何这样选择, 思路如下:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width = 0.4\linewidth]{./images/Cartesian_Product.png}
+    \end{figure}
+    
+    分别从 $ X $, $ Y $ 中选取元素, 组成了有序对, 这些有序对的集合为笛卡尔积 $ X \times Y $. 那么我们将 $ X $, $ Y $ 中的元素按行列排开, 这样笛卡尔积 $ X \times Y $ 中的元素就被排成了一个矩阵. 我们可以从左上角开始, 从左向右, 从上到下标上序号, 这样就形成了 $ X \times Y $ 中的元素到序号 $ 1, 2, \dots, n $ 的一一对应关系:
+    \[     
+    \begin{matrix}
+         & y_1 & y_2 & \cdots & y_m \\
+        x_1 & 1 & 2 & \cdots & m \\
+        x_2 & m + 1 & m + 2 & \cdots & 2m \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        x_n & n m - m + 1 & n m - m + 2 & \cdots & n m
+    \end{matrix} \,,
+    \]
+
+    那么很容易得到 $ i $ 行 $ j $ 列的 $ x_i $, $ y_j $ 两元素形成的有序对 $ (x_i, y_j) $ 对应整数 $ (i - 1) m + j $. 这就是为什么 $ f $ 定义为这样. 
+    
+    回到证明中, 我们需要证明 $ f $ 是双射.
+
+    \paragraph{证明 $ f $ 是单射} 
+    再选两个 $ 1 \leqslant i' \leqslant n $, $ 1 \leqslant j' \leqslant m $, 需满足 $ i $ 和 $ i' $, $ j $ 和 $ j' $ 不能同时相等, 即 $ |i - i'| + |j - j'| \neq 0 $. 首先有:
+    \[ i - i' \in [1 - n .. -1 ] \cup [1 .. n - 1] \,,\]
+    \[ j - j' \in [1 - m .. -1 ] \cup [1 .. m - 1] \,.\]
+    
+    于是 $ f(x_{i'}, y_{j'}) = (i' - 1) m + j' $.
+    \[ \Delta = f(x_i, y_j) - f(x_{i'}, y_{j'}) = (i - i') m + (j - j') \,.\] 
+    
+    若 $ i - i' = 0 $, 则 $ \Delta = 0 \cdot m + (j - j') $, 由于 $ j $, $ j' $ 不能相同, 故 $ \Delta \neq 0 $. 同理, $ j - j' = 0 $ 时, $ \Delta \neq 0 $. 那么现在考虑 $ i \neq i' $ 且 $ j \neq j' $, 假设 $ \Delta = 0 $:
+    \[ m = \dfrac{j' - j}{i - i'} \,.\]
+
+    由于 $ m $ 为正数, 分子和分母可能同正或者同负. 
+    
+    (i) 同正: 此时 $ 1 \leqslant j' - j \leqslant m - 1 $. 代入 $ m $:
+    \[ 1 \leqslant j' - j \leqslant \dfrac{j' - j}{i - i'} - 1 \,,\]
+
+    对于不等式的右半部分, 两边同时除以 $ j' - j $, 由于是正数, 不等号方向不变:
+    \[ 1 \leqslant \dfrac{1}{i - i'} - \dfrac{1}{j' - j} \,,\]
+
+    而此时 $ 1 \leqslant i - i' \leqslant n - 1 $, 放缩得到:
+    \[ 1 \leqslant \dfrac{1}{i - i'} - \dfrac{1}{j' - j} \leqslant \dfrac{1}{1} - \dfrac{1}{j' - j} \,,\]
+
+    而 $ \dfrac{1}{j' - j} $ 为正, 上面的不等式产生了矛盾. 故最初的假设 $ \Delta = 0 $ 错误, 应为 $ \Delta \neq 0 $.
+
+    (ii) 对于分子分母同负的情况, 同理, 也可以得到 $ \Delta \neq 0 $.
+
+    综上所述, 我们证明了无论何种情况, $ \Delta = f(x_i, y_j) - f(x_{i'}, y_{j'}) \neq 0 $. 即对于不同的输入, $ f $ 给出不同的输出, 所以 $ f $ 是单射.
+
+    \paragraph{证明 $ f $ 是满射} 
+    我们要证明, 对于任意的 $ t \in [1..mn] $, 总能找到 $ i \in [1..n] $, $ j \in [1..m] $, 满足 $ f(x_i, y_j) = (i - 1) m + j = t $. 我们采用归纳的思想.
+
+    基础情形: 可以找到 $ i = n $, $ j = m $, 满足 $ (i - 1) m + j = m n $.
+
+    现归纳地假设存在 $ t \in [1 .. mn] $, 使得存在 $ i \in [1 .. n] $, $ j \in [1 .. m] $, 满足 \[ (i - 1) m + j = t \tag{6a} \,,\] 
+    
+    要证明存在 $ i' \in [1 .. n] $, $ j' \in [1 .. m] $, 满足 \[ (i' - 1) m + j' = t - 1 \tag{6b} \,,\]
+
+    将 (6a) 代入 (6b), 得到:
+    \[ (i' - 1) m + j' = (i - 1) m + (j - 1) \tag{6c} \,.\]
+
+    由于已经证明 $ f $ 是单射, 这意味着 $ (a - 1) m + b = (c - 1) m + d $ 当且仅当 $ a = c $ 且 $ b = d $. 
+    
+    所以对于方程 (6c), 在 $ i, i' \in [1 .. n] $ 和 $ j, j' \in [1 .. m] $ 的范围内, 可以分两种情况解得:
+    \[ \begin{cases}
+        i' = i \\
+        j' = j - 1
+    \end{cases} \quad \text{当 } 2 \leqslant j \leqslant m \,,\]
+    \[ \begin{cases}
+        i' = i - 1 \\
+        j' = m
+    \end{cases} \quad \text{当 } j = 1 \,.\]
+
+    这说明了对于任意 $ t \in [1 .. m n] $, 都能找到 $ i \in [1 ... n] $, $ j \in [1 .. m] $, 满足 $ f(x_i, y_j) = (i - 1) m + j = t $. 即 $ f $ 为满射.
+
+    综上所述, $ f $ 既是单射, 又是满射, 即为双射. $ f $ 是由 $ X \times Y \to [1 .. mn] $ 的双射, 所以两者有相同的基数:
+    \[ |X \times Y| = |[1 .. mn]| = |\set{k \in \N \colon 1 \leqslant k \leqslant mn}| = m n = |X| |Y| \,.\]
 \end{proof}
+
+
+
 
 
 \section{无限集合}

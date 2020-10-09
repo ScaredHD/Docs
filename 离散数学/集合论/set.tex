@@ -314,7 +314,7 @@
 \begin{proof}
     命题 \ref{1.9} 已经证明了 $ A \setminus B $ 与 $ A \cap B $, $ B \setminus A $ 与 $ A \cap B $ 是分别互斥的. 下面只需要证明 $ A \setminus B $ 和 $ B \setminus A $ 是互斥的: 对于 $ x \in A \setminus B \Longrightarrow x \in A, x \notin B \Longrightarrow x \notin B \setminus A $. 同理可得 $ x \in B \setminus A \Longrightarrow x \notin A \setminus B $. 这说明了 $ A \setminus B $ 和 $ B \setminus A $ 是互斥的. 故三者都是互斥的.
 
-    三者的并: $ (A \setminus B) \cup (A \cap B) \cup (B \setminus A) $. 由 \ref{1.9}, 这等于 $ A \cup (B \setminus A) $. 容易证明 $ A \cup (B \setminus A) = A \cup B $.
+    $ A = (A \setminus B) \cup (A \cap B) $, $ B = (B \setminus A) \cup (A \cap B) $. $ A \cup B = (A \setminus B) \cup (A \cap B) \cup (B \setminus A) \cup (A \cap B) = (A \setminus B) \cup (A \cap B) \cup (B \setminus A) $.
 \end{proof}
 
 
@@ -873,21 +873,17 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
 \begin{proof}
     不难证得, $ A \cap B \subseteq A $, 由基数的性质 \ref{cardinal} (3), $ |A \cap B| \leqslant |A| $. 由 \ref{cardinal} (2), $ |A \cup B| \leqslant |A| + |B| $. 这两个不等式说明了, $ A \cap B $, $ A \cup B $ 为有限集.
 
-    现设 $ A $ 为任意集合, 我们对 $ B $ 的基数进行归纳. 设 $ |B| = 0 $, 此时 $ B = \varnothing $. $ |A \cup \varnothing| = |A| + |\varnothing| - |A \cap \varnothing| $ 成立, 基础情形得到证明.
+    由命题 \ref{1.9}, $ A = (A \setminus B) \cup (A \cap B) $, $ B = (B \setminus A) \cup (A \cap B) $. 且 $ A \setminus B $, $ A \cap B $, $ B \setminus A $ 互斥. 故由 \ref{cardinal} (2):
+    \[ |A| = |A \setminus B| + |A \cap B| \,,\]
+    \[ |B| = |B \setminus A| + |A \cap B| \,.\]
 
-    设当 $ B $ 是 $ n $ 元素集, 即 $ |B| = n $ 时 $ |A \cup B| = |A| + |B| - |A \cap B| $ 成立. 要证明 $ B $ 为 $ n + 1 $ 元素集时, 上式也成立.
+    于是:
+    \[ |A| + |B| - |A \cap B| = |A \setminus B| + |B \setminus A| + |A \cap B| \,,\]
 
-    设 $ B' = B \cup \set{x} $, 其中 $ x \notin B $. 则:
-    \begin{align*}
-        |A \cup B'| &= |A \cup B \cup \set{x}| \\
-        &= |A \cup B| + 1 \\
-        &= |A| + |B| - |A \cap B| + 1
-    \end{align*}
+    而由命题 \ref{1.10}: $ A \cup B = (A \setminus B) \cup (A \cap B) \cup (B \setminus A) $, 且三者互斥, 故
+    \[ |A \cup B| = |A \setminus B| + |B \setminus A| + |A \cap B| \,,\]
 
-    而 $ x \notin B $ 蕴含了 $ x \not $:
-    \begin{align*}
-        |A| + |B'| - |A \cap B'| &= |A| + (|B| + 1) -  \\
-    \end{align*}
+    所以综合两个等式, 有: $ |A \cup B| = |A| + |B| - |A \cap B| $.
 \end{proof}
 
 

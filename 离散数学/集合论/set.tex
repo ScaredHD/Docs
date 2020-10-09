@@ -184,6 +184,8 @@
     给定两个不同的自然数, 其中一个必然小于另一个. 但给定两个不同的集合, 其中一个不一定是另一个的子集. 所以说集合被部分安排了次序, 而自然数被完全安排了次序.
 \end{remark}
 
+注意, 对于空集, 由于不存在元素 $ x \in \varnothing $, $ \forall x \in A \Longrightarrow x \in B $ 前提恒假, 这个蕴含式恒真. 这种情况被称为空真 (vacuously true). 这说明空集是任意集合的子集.
+
 \begin{proposition}[\text{子集性质}]
     设 $ A $, $ B $, $ C $ 为集合. 
     \begin{enumerate}
@@ -289,9 +291,31 @@
 
 \begin{remark}
     通过结合律以及归纳法, De Morgan 律可推广到多个集合的并/交的补. 即: \[ X \setminus (A_1 \cup \cdots \cup A_n) = (X \setminus A_1) \cap \cdots \cap (X \setminus A_n) \] \[ X \setminus (A_1 \cap \cdots \cap A_n) = (X \setminus A_1) \cup \cdots \cup (X \setminus A_n) \]
-\end{remark}
+\end{remark} 
     
+\begin{proposition} \label{1.9}
+    $ A \setminus B $ 和 $ A \cap B $ 互斥, 且它们的并为 $ A $.
+\end{proposition}
 
+\begin{proof}
+    对任意 $ x \in A \setminus B $, $ x \in A $ 且 $ x \notin B $, 后者说明 $ x \notin A \cap B $. 而对于任意 $ x \in A \cap B $, $ x \in A $ 且 $ x \in B $, 后者说明 $ x \notin A \setminus B $. 故 $ A \setminus B $ 和 $ A \cap B $ 互斥.
+
+    现证明 $ (A \setminus B) \cup (A \cap B) = A $. 对于每一个 $ x \in (A \setminus B) \cup (A \cap B) $, $ x \in A \setminus B $ 或 $ x \in A \cap B $. (i) 若 $ x \in A \setminus B $, 则 $ x \in A $ 且 $ x \notin B $, 故 $ x \in A $; (ii) 若 $ x \in A \cap B $, $ x \in A $ 且 $ x \in B $, 故 $ x \in A $. 综上 $ x \in (A \setminus B) \cup (A \cap B) \Longrightarrow x \in A $, 即 $ (A \setminus B) \cup (A \cap B) \subseteq A $.
+
+    对每一个 $ x \in A $, $ x $ 都有两种情况, $ x \in B $ 或 $ x \notin B $. 所以有两种情况: (i) $ x \in A $ 且 $ x \in B $ (ii) $ x \in A $ 且 $ x \notin B $. 对于 (i), $ x \in A \cap B \Longrightarrow x \in (A \setminus B) \cup (A \cap B) $; 对于 (ii), $ x \in A \setminus B \Longrightarrow x \in (A \setminus B) \cup (A \cap B) $. 综上 $ x \in A \Longrightarrow x \in (A \setminus B) \cup (A \cap B) $, 即 $ A \subseteq (A \setminus B) \cup (A \cap B) $.
+
+    故 $ (A \setminus B) \cup (A \cap B) = A $.
+\end{proof}
+
+\begin{proposition} \label{1.10}
+    $ A \setminus B $, $ A \cap B $, $ B \setminus A $ 是互斥的, 且它们的并为 $ A \cup B $.
+\end{proposition}
+
+\begin{proof}
+    命题 \ref{1.9} 已经证明了 $ A \setminus B $ 与 $ A \cap B $, $ B \setminus A $ 与 $ A \cap B $ 是分别互斥的. 下面只需要证明 $ A \setminus B $ 和 $ B \setminus A $ 是互斥的: 对于 $ x \in A \setminus B \Longrightarrow x \in A, x \notin B \Longrightarrow x \notin B \setminus A $. 同理可得 $ x \in B \setminus A \Longrightarrow x \notin A \setminus B $. 这说明了 $ A \setminus B $ 和 $ B \setminus A $ 是互斥的. 故三者都是互斥的.
+
+    三者的并: $ (A \setminus B) \cup (A \cap B) \cup (B \setminus A) $. 由 \ref{1.9}, 这等于 $ A \cup (B \setminus A) $. 容易证明 $ A \cup (B \setminus A) = A \cup B $.
+\end{proof}
 
 
 \begin{axiom}[\text{替换公理}]
@@ -703,7 +727,7 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
     对于 $ X \subseteq Y $, 考虑映射 $ f\colon X \to Y $, $ f(x) = x $. 考虑 $ x, y \in X $ 且 $ x \neq y $, 则有 $ x = f(x) $ 和 $ y = f(y) $, 于是 $ f(x) \neq f(y) $, 即 $ f $ 为单射.
 \end{proof}
 
-\begin{proposition}[\text{有限集上的基数性质}] \label{cardinal II}
+\begin{proposition}[\text{有限集上的基数性质}] \label{cardinal}
     设 $ X $, $ Y $ 均为有限集.
     \begin{enumerate}
         \item $ x \notin X $, 则 $ X \cup \set{x} $ 也为有限集, 且 $ |X \cup \set{x}| = |X| + 1 $
@@ -841,6 +865,30 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
     \[ |X \times Y| = |[1 .. mn]| = |\set{k \in \N \colon 1 \leqslant k \leqslant mn}| = m n = |X| |Y| \,.\]
 \end{proof}
 
+
+\begin{proposition}[\text{容斥原理}]
+    设 $ A $, $ B $ 为有限集, 则 $ A \cup B $, $ A \cap B $ 也是有限集, 且有: $ |A \cup B| = |A| + |B| - |A \cap B| $.
+\end{proposition}
+
+\begin{proof}
+    不难证得, $ A \cap B \subseteq A $, 由基数的性质 \ref{cardinal} (3), $ |A \cap B| \leqslant |A| $. 由 \ref{cardinal} (2), $ |A \cup B| \leqslant |A| + |B| $. 这两个不等式说明了, $ A \cap B $, $ A \cup B $ 为有限集.
+
+    现设 $ A $ 为任意集合, 我们对 $ B $ 的基数进行归纳. 设 $ |B| = 0 $, 此时 $ B = \varnothing $. $ |A \cup \varnothing| = |A| + |\varnothing| - |A \cap \varnothing| $ 成立, 基础情形得到证明.
+
+    设当 $ B $ 是 $ n $ 元素集, 即 $ |B| = n $ 时 $ |A \cup B| = |A| + |B| - |A \cap B| $ 成立. 要证明 $ B $ 为 $ n + 1 $ 元素集时, 上式也成立.
+
+    设 $ B' = B \cup \set{x} $, 其中 $ x \notin B $. 则:
+    \begin{align*}
+        |A \cup B'| &= |A \cup B \cup \set{x}| \\
+        &= |A \cup B| + 1 \\
+        &= |A| + |B| - |A \cap B| + 1
+    \end{align*}
+
+    而 $ x \notin B $ 蕴含了 $ x \not $:
+    \begin{align*}
+        |A| + |B'| - |A \cap B'| &= |A| + (|B| + 1) -  \\
+    \end{align*}
+\end{proof}
 
 
 

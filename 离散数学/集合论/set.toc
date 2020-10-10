@@ -42,3 +42,6 @@
 \contentsline {paragraph}{证明 $ f $ 是单射}{21}{paragraph*.24}
 \contentsline {paragraph}{证明 $ f $ 是满射}{22}{paragraph*.25}
 \contentsline {section}{\numberline {7}无限集合}{23}{section.7}
+\contentsline {subsection}{\numberline {7.1}可数性}{23}{subsection.7.1}
+\contentsline {paragraph}{例}{23}{paragraph*.29}
+\contentsline {paragraph}{例}{24}{paragraph*.30}

@@ -468,6 +468,7 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei5c.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong70.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai6e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong95.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai72.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei50.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei4e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei90.tfm
@@ -537,10 +538,12 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei6e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong83.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong5f.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong5f.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong8a.tfm
 INPUT d:/Programming/Docs/离散数学/集合论/set.aux
 INPUT d:/Programming/Docs/离散数学/集合论/set.out
 INPUT d:/Programming/Docs/离散数学/集合论/set.out
 INPUT c:/WINDOWS/fonts/simsun.ttc
+INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simhei.ttf
 INPUT c:/WINDOWS/fonts/simhei.ttf
 INPUT c:/WINDOWS/fonts/simhei.ttf
@@ -562,6 +565,7 @@ INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simsun.ttc
+INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc

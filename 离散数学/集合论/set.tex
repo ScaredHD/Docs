@@ -49,8 +49,7 @@
 \def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
 \newcommand{\set}[1]{\{#1\}}
 \newcommand{\del}{\nabla}
-\newcommand{\transp}{^{\top}}
-\DeclareMathOperator{\tr}{tr}
+\newcommand{\vsubseteq}{\rotatebox[origin=c]{90}{$\subseteq$}}
 
 \title{集合论}
 
@@ -461,17 +460,31 @@ $ f(x) = x^2 $, 则 $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $.
     若 $ x \in S $, 则 $ f(x) \in f(S) $.
 \end{proposition}
 
-\begin{proposition}
-    设 $ f \colon X \to Y $, $ S \subseteq X $, 则 $ f(S) \subseteq Y $.
-\end{proposition}
-
-\begin{proposition}[\text{限制陪域}]
-    设 $ f \colon X \to Y $. 按照定义, 如果我们将陪域限制到定义域的像上, 那么 $ f $ 就变成了一个满射. 而如果 $ f $ 还是个单射, 那么限制陪域后, $ f $ 也就成为了双射. 即 $ \widetilde{f} \colon X \to f(X) $, $ \widetilde{f}(x) = f(x) $ 是一个双射.
-\end{proposition}
-
 \begin{remark}
     上面命题的逆命题不再为真. 即 $ f(x) \in f(S) \centernot \Longrightarrow x \in S $. 可以举出反例: $ f(x) = x^2 $, $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $, 有 $ f(-2) \in f(\set{-1, 0, 1, 2}) $, 但 $ -2 \not\in \set{-1, 0, 1, 2} $.
 \end{remark}
+
+\begin{proposition}
+    设 $ f \colon X \to Y $, $ S \subseteq X $, 则 $ f(S) \subseteq Y $. 所以对于任意映射 $ f \colon X \to Y $, 恒有值域为陪域的子集: $ f(X) \subseteq Y $.
+\end{proposition}
+
+\begin{proposition}[\text{限制陪域制造满射}]
+    设 $ f \colon X \to Y $. 按照定义, 如果我们将陪域限制到定义域的像上, 那么 $ f $ 就变成了一个满射. 而如果 $ f $ 还是个单射, 那么限制陪域后, $ f $ 也就成为了双射. 即 $ \widetilde{f} \colon X \to f(X) $, $ \widetilde{f}(x) = f(x) $ 是一个双射.
+\end{proposition}
+
+\begin{proposition}[\text{限制定义域}]
+    对于函数 $ f \colon X \to Y $. 设 $ S \subseteq X $, 将定义域限制在 $ S $ 上, 则存在一个 $ S $ 到 $ Y $ 的函数, 记作 $ f |_S \colon S \to Y $, 其中 $ f |_S (x) = f(x) $.
+\end{proposition}
+
+即有下面的关系:
+\[ \begin{array}{cccc}
+    f \colon & X & \to & Y \\
+     & \vsubseteq & & \vsubseteq \\
+    f \colon & X & \to & f(X) \\
+     & \vsubseteq & & \vsubseteq \\
+    f|_S \colon & S & \to & f(S)
+\end{array} \] 
+
 
 \begin{definition}[\text{逆像}]
     设函数 $ f \colon X \to Y $. 若 $ U \subseteq Y $, 定义 $ f^{-1} (U) $ 为集合 \[ f ^{-1} (U) \coloneqq \set{x \in X \colon f(x) \in U} \,.\]
@@ -732,11 +745,11 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
 \end{proof}
 
 \begin{proposition}[\text{有限集上的基数性质}] \label{cardinal}
-    设 $ X $, $ Y $ 均为有限集.
+    若无特殊说明, 则 $ X $, $ Y $ 均为有限集.
     \begin{enumerate}
         \item $ x \notin X $, 则 $ X \cup \set{x} $ 也为有限集, 且 $ |X \cup \set{x}| = |X| + 1 $
         \item $ |X \cup Y| \leqslant |X| + |Y| $. 若 $ X $, $ Y $ 互斥, 即 $ X \cap Y = \varnothing $, 则 $ |X \cup Y| = |X| + |Y| $
-        \item (子集-基数) $ X \subseteq Y $ 则 $ |X| \leqslant |Y| $. 而如果 $ X $ 是 $ Y $ 的真子集, 即 $ X \neq Y $, 则 $ |X| < |Y| $
+        \item (子集-基数) 对于有限集 $ X $, 若 $ X \subseteq Y $, 则 $ Y $ 也是有限集, 且 $ |X| \leqslant |Y| $. 而如果 $ X $ 是 $ Y $ 的真子集, 即 $ X \neq Y $, 则 $ |X| < |Y| $
         \item (单射-基数) 存在单射 $ f\colon X \to Y $ 当且仅当 $ |X| \leqslant |Y| $, 两者是等价关系.
         \item (像的缩小) 函数 $ f \colon X \to Y $. 有 $ |f(X)| \leqslant |X| $. 若 $ f $ 是单射, 则 $ |f(X)| = |X| $
         \item $ |X \times Y| = |X| \times |Y| $

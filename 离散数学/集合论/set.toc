@@ -24,24 +24,24 @@
 \contentsline {paragraph}{例}{13}{paragraph*.15}
 \contentsline {subsection}{\numberline {3.2}值域}{13}{subsection.3.2}
 \contentsline {section}{\numberline {4}幂集}{13}{section.4}
-\contentsline {paragraph}{例}{13}{paragraph*.16}
+\contentsline {paragraph}{例}{14}{paragraph*.16}
 \contentsline {paragraph}{例}{14}{paragraph*.17}
 \contentsline {paragraph}{例}{14}{paragraph*.18}
 \contentsline {paragraph}{例}{14}{paragraph*.19}
-\contentsline {section}{\numberline {5}笛卡尔积}{14}{section.5}
-\contentsline {subsection}{\numberline {5.1}定义}{14}{subsection.5.1}
+\contentsline {section}{\numberline {5}笛卡尔积}{15}{section.5}
+\contentsline {subsection}{\numberline {5.1}定义}{15}{subsection.5.1}
 \contentsline {paragraph}{例}{15}{paragraph*.20}
 \contentsline {subsection}{\numberline {5.2}多重笛卡尔积}{15}{subsection.5.2}
 \contentsline {section}{\numberline {6}基数}{16}{section.6}
 \contentsline {subsection}{\numberline {6.1}基数定义}{16}{subsection.6.1}
 \contentsline {paragraph}{例}{16}{paragraph*.21}
-\contentsline {paragraph}{例}{16}{paragraph*.22}
-\contentsline {subsection}{\numberline {6.2}有限集与无限集}{17}{subsection.6.2}
-\contentsline {paragraph}{例}{17}{paragraph*.23}
+\contentsline {paragraph}{例}{17}{paragraph*.22}
+\contentsline {subsection}{\numberline {6.2}有限集与无限集}{18}{subsection.6.2}
+\contentsline {paragraph}{例}{18}{paragraph*.23}
 \contentsline {subsection}{\numberline {6.3}基数性质}{18}{subsection.6.3}
 \contentsline {paragraph}{证明 $ f $ 是单射}{21}{paragraph*.24}
 \contentsline {paragraph}{证明 $ f $ 是满射}{22}{paragraph*.25}
-\contentsline {section}{\numberline {7}无限集合}{23}{section.7}
-\contentsline {subsection}{\numberline {7.1}可数性}{23}{subsection.7.1}
-\contentsline {paragraph}{例}{23}{paragraph*.29}
+\contentsline {section}{\numberline {7}无限集合}{24}{section.7}
+\contentsline {subsection}{\numberline {7.1}可数性}{24}{subsection.7.1}
+\contentsline {paragraph}{例}{24}{paragraph*.29}
 \contentsline {paragraph}{例}{24}{paragraph*.30}

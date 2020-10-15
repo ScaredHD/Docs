@@ -440,12 +440,6 @@ $ f \colon \N \to \N $, $ f(n) = 2 n + 1 $, 是一种双射. $ 0 \leftrightarrow
 
 也就是取 $ S $ 中所有的元素, 分别经 $ f $ 映射后得到对应的元素, 再将这些元素组成一个集合, 便是 $ f(S) $. 这可以看作替换公理在 $ P(x, y) \colon  y = f(x) $ 时的应用.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width = 0.3\linewidth]{./images/image.pdf}
-\end{figure}
-
-
 \paragraph{例}
 $ f(x) = x^2 $, 则 $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $.
 
@@ -464,12 +458,26 @@ $ f(x) = x^2 $, 则 $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $.
     上面命题的逆命题不再为真. 即 $ f(x) \in f(S) \centernot \Longrightarrow x \in S $. 可以举出反例: $ f(x) = x^2 $, $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $, 有 $ f(-2) \in f(\set{-1, 0, 1, 2}) $, 但 $ -2 \not\in \set{-1, 0, 1, 2} $.
 \end{remark}
 
-\begin{proposition}
-    设 $ f \colon X \to Y $, $ S \subseteq X $, 则 $ f(S) \subseteq Y $. 所以对于任意映射 $ f \colon X \to Y $, 恒有值域为陪域的子集: $ f(X) \subseteq Y $.
+\begin{proposition} \label{image-subseteq-codomain}
+    设 $ f \colon X \to Y $, $ S \subseteq X $, 则 $ f(S) \subseteq Y $. 特别地, 有 $ f(X) \subseteq Y $.
 \end{proposition}
 
+所以如果对陪域加以限制, 就能使 $ f(X) = Y $.
+
+\begin{proposition}
+    $ f \colon X \to Y $ 为函数, 那么 $ f(X) = Y $ 当且仅当 $ f $ 为满射.
+\end{proposition}
+
+\begin{proof}
+    设 $ f \colon X \to Y $ 为函数.
+
+    正推. 若 $ f(X) = Y $, 则 $ \forall y \in Y $, $ y \in f(X) $, 即 $ \exists x \in X $ 使得 $ f(x) = y $. 故 $ f $ 满射.
+
+    反推. 若 $ f $ 为满射. 由命题 \ref{image-subseteq-codomain}, 已经知道 $ f(X) \subseteq Y $. 只需证明 $ Y \subseteq f(X) $. 而对于任意 $ y \in Y $, 由于 $ f $ 满射, 存在 $ x \in X $, $ f(x) = y $, 这意味着 $ y \in f(X) $, 即 $ Y \subseteq f(X) $. 综上 $ Y = f(X) $.
+\end{proof}
+
 \begin{proposition}[\text{限制陪域制造满射}]
-    设 $ f \colon X \to Y $. 按照定义, 如果我们将陪域限制到定义域的像上, 那么 $ f $ 就变成了一个满射. 而如果 $ f $ 还是个单射, 那么限制陪域后, $ f $ 也就成为了双射. 即 $ \widetilde{f} \colon X \to f(X) $, $ \widetilde{f}(x) = f(x) $ 是一个双射.
+    设 $ f \colon X \to Y $. 按照上面的命题, 如果我们将陪域限制到定义域的像上, 那么 $ f \colon X \to f(X) $ 就变成了一个满射. 特别地, 如果 $ f $ 还是个单射, 那么限制陪域后, $ f $ 也就成为了双射.
 \end{proposition}
 
 \begin{proposition}[\text{限制定义域}]
@@ -520,9 +528,12 @@ $ f \colon \N \to \N $, $ f(x) = 2x $. 那么对于集合 $ \set{1, 2, 3} $ 有 
 \end{proof}
 
 \begin{proposition}
-    对于 $ f \colon X \to Y $ 和 $ f^{-1} $. 设 $ S \subseteq X $, 则有 $ f^{-1} \big( f (S) \big) \supseteq S $.
+    对于 $ f \colon X \to Y $ 和 $ f^{-1} $. 设 $ S \subseteq X $, 则有 $ f^{-1} \big( f (S) \big) \subseteq S $.
 \end{proposition}
 
+\begin{proof}
+    设 $ U = f(S) $, 要证 $ f^{-1} (U) \subseteq S $. $ \forall x \in f^{-1} (U) $, $ f(x) \in U $, 即 $ f(x) \in f(S) $. 故 $ x \in S $, $ f^{-1} (U) \subseteq S $.
+\end{proof}
 
 \subsection{值域}
 有了像的概念就很能引出我们熟知的值域定义.

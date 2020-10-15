@@ -23,7 +23,7 @@
 \contentsline {paragraph}{例}{11}{paragraph*.14}
 \contentsline {paragraph}{例}{13}{paragraph*.15}
 \contentsline {subsection}{\numberline {3.2}值域}{13}{subsection.3.2}
-\contentsline {section}{\numberline {4}幂集}{13}{section.4}
+\contentsline {section}{\numberline {4}幂集}{14}{section.4}
 \contentsline {paragraph}{例}{14}{paragraph*.16}
 \contentsline {paragraph}{例}{14}{paragraph*.17}
 \contentsline {paragraph}{例}{14}{paragraph*.18}

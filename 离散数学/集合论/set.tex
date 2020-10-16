@@ -30,12 +30,12 @@
     \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
 \usepackage{centernot}
 
-    % font
 \newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
 \newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
 \renewcommand{\r}{\mathrm}
 \renewcommand{\cal}{\mathcal}
-% common symbol
+\newcommand{\scr}{\mathscr}
+
 \newcommand{\E}{\mathrm e}
 \renewcommand{\I}{\mathrm i}
 \newcommand{\R}{\mathbb R}
@@ -43,11 +43,11 @@
 \newcommand{\N}{\mathbb N}
 \newcommand{\Q}{\mathbb Q}
 \renewcommand{\C}{\mathbb C}
+\DeclarePairedDelimiter\set{\{}{\}}
 \def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
 \def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
 \def \dd #1.#2 {\dfrac{d #1}{d #2}}
 \def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
-\newcommand{\set}[1]{\{#1\}}
 \newcommand{\del}{\nabla}
 \newcommand{\vsubseteq}{\rotatebox[origin=c]{90}{$\subseteq$}}
 
@@ -464,7 +464,7 @@ $ f(x) = x^2 $, 则 $ f(\set{-1, 0, 1, 2}) = \set{0, 1, 4} $.
 
 所以如果对陪域加以限制, 就能使 $ f(X) = Y $.
 
-\begin{proposition}
+\begin{proposition} \label{image-surjection}
     $ f \colon X \to Y $ 为函数, 那么 $ f(X) = Y $ 当且仅当 $ f $ 为满射.
 \end{proposition}
 
@@ -760,7 +760,7 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
     \begin{enumerate}
         \item $ x \notin X $, 则 $ X \cup \set{x} $ 也为有限集, 且 $ |X \cup \set{x}| = |X| + 1 $
         \item $ |X \cup Y| \leqslant |X| + |Y| $. 若 $ X $, $ Y $ 互斥, 即 $ X \cap Y = \varnothing $, 则 $ |X \cup Y| = |X| + |Y| $
-        \item (子集-基数) 对于有限集 $ X $, 若 $ X \subseteq Y $, 则 $ Y $ 也是有限集, 且 $ |X| \leqslant |Y| $. 而如果 $ X $ 是 $ Y $ 的真子集, 即 $ X \neq Y $, 则 $ |X| < |Y| $
+        \item (子集-基数) 对于有限集 $ Y $, 若 $ X \subseteq Y $, 则 $ X $ 也是有限集, 且 $ |X| \leqslant |Y| $. 而如果 $ X $ 是 $ Y $ 的真子集, 即 $ X \neq Y $, 则 $ |X| < |Y| $
         \item (单射-基数) 存在单射 $ f\colon X \to Y $ 当且仅当 $ |X| \leqslant |Y| $, 两者是等价关系.
         \item (像的缩小) 函数 $ f \colon X \to Y $. 有 $ |f(X)| \leqslant |X| $. 若 $ f $ 是单射, 则 $ |f(X)| = |X| $
         \item $ |X \times Y| = |X| \times |Y| $
@@ -929,12 +929,12 @@ $ |\set{0, 1, 2, 3}| = 4 $, $ |\set{i \in \N \colon 2 \leqslant i \leqslant 4}| 
 \begin{table}[h]
     \centering\begin{tabular}{c|ccc}\hline
         \text{名称} & \text{有限集} & \text{可数无限集} & \text{不可数无限集} \\ \hline
-        \text{简称} & \text{有限集} & \text{可数集} & \text{不可数集} \\ \hline
+        \text{简称} & \text{有限集} & \text{可数集} & \text{不可数集} \\ \hline 
     \end{tabular}
 \end{table}
 
 \paragraph{例}
-$ \N $ 为一个可数集, 因为 $ \N $ 和 $ \N $ 基数相同 (基数相同是自反的).
+$ \N $ 为一个可数集, 因为 $ \N $ 和 $ \N $ 基数相同.
 
 \paragraph{例}
 $ \N \setminus \set{0} $ 也是一个可数无限集, 因为存在双射 $ f\colon \N \to \N \setminus \set{0} $, $ f(x) = x + 1 $, 故 $ \N \setminus \set{0} $ 和 $ \N $ 基数相同.
@@ -943,6 +943,9 @@ $ \N \setminus \set{0} $ 也是一个可数无限集, 因为存在双射 $ f\col
 
 可见 $ X $ 中的元素可以排成一个序列, 这也是为何称 $ X $ 为可数集 (可列集), 因为我们可以按照某种顺序, 逐个数出其中元素. 
 
+\begin{proposition}
+    $ X $ 是无限集, 当且仅当存在 $ Y \subset X $ 且 $ Y $ 和 $ X $ 有相同基数. 换句话说, 无限集包含和它基数相同的真子集.
+\end{proposition}
 
 \begin{proposition}[\text{良序原理}]
     设 $ X $ 是 $ \N $ 的非空子集, 则恰好存在一个 $ n \in X $, 使得所有 $ m \in X $ 都有 $ n \leqslant m $. 换言之, 任何一个自然数的非空子集都有最小元素.
@@ -963,4 +966,203 @@ $ \N \setminus \set{0} $ 也是一个可数无限集, 因为存在双射 $ f\col
     通过反证法证明了对于存在 $ n \in X $, 使得对于所有 $ m \in X $, 满足 $ n \leqslant m $. 下面证明 $ n $ 的存在是唯一的: 假设同时还存在 $ n' \in X $, 使得对于所有的 $ m \in X $ 都有 $ n' \leqslant m $. 由于 $ n' \in X $, 应有 $ n \leqslant n' $, 同理也有 $ n' \leqslant n $. 于是 $ n = n' $, 这说明存在的唯一性.
 \end{proof}
 
+\begin{proposition} \label{at most countable I}
+    自然数 $ \N $ 的无限子集是可数的. 即: $ X \subseteq \N $ 且 $ X $ 为无限集, 则存在唯一严格增的双射 $ f \colon \N \to X $. 
+\end{proposition}
+
+这条命题, 结合命题 \ref{cardinal} (3) 可得到下面的推论:
+
+\vskip 1em
+\begin{corollary} \label{at most countable I-1}
+    $ \N $ 的任意子集都是至多可数的 (at most countable).
+\end{corollary}
+
+\vskip 1em
+\begin{corollary} \label{at most countable I-2}
+    $ X \subseteq Y $, 若 $ Y $ 至多可数, 则 $ X $ 也至多可数.
+\end{corollary}
+
+\begin{proof}
+    若 $ Y $ 有限, $ X $ 也有限, 故至多可数. 当 $ Y $ 可数, 则存在双射 $ f \colon Y \to \N $. 限制定义域和陪域, 可以得到 $ f|_X \colon X \to f(X) $. 已经知道限制完陪域 $ f|_X $ 为满射. 下面证明 $ f|_X $ 为单射:
+
+    由于 $ f $ 为双射, 其也为单射, 对于不同的 $ x, y \in Y $, $ f(x) \neq f(y) $. 由于 $ X \subseteq Y $, 故对于不同的 $ x, y \in X $, 也应该有 $ f(x) \neq f(y) $ 即 $ f|_X (x) \neq f|_X(y) $.
+
+    \[ \begin{array}{cccc}
+        f \colon & Y & \to & \N \\
+        & \vsubseteq & & \vsubseteq \\
+        f|_X \colon & X & \to & f(X)
+    \end{array} \] 
+
+
+    综上, $ f|_X $ 为双射. $ X $ 和 $ f(X) $ 有相同的基数. 而 $ f(X) \subseteq \N $, 所以 $ f(X) $ 至多可数, 从而 $ X $ 至多可数.
+\end{proof}
+
+
+\begin{proposition} \label{at most countable II}
+    $ \N $ 的像至多可数. 即有: 若 $ Y $ 为一个集合, $ f \colon \N \to Y $ 为函数, 则 $ f(\N) $ 至多可数.
+\end{proposition}
+
+\begin{proof}
+    构造集合 $ A \coloneqq \set{x \in \N \colon \forall n \in [0 .. x - 1], f(n) \neq f(x)} $, 简言之, $ A $ 由满足下面条件的自然数 $ x $ 构成: $ f(x) $ 不在序列 $ f(0), f(1), \dots, f(x - 1) $ 中.
+
+    下面限制定义域和陪域, 得到 $ f|_A \colon A \to f(\N) $. 现考察两个不同的 $ x, y \in A $, 并不失一般性地假设 $ x < y $ ($ y > x $ 的情况完全同理), 于是 $ f(y) $ 不在序列 $ f(0)$, $ f (1) $, $ \dots $, $ f(x) $, $ \dots $, $ f(y - 1) $ 中, $ f(y) \neq f(x) $, 即 $ f|_A (y) \neq f|_A (x) $. 所以 $ f|_A $ 为单射.
+
+    对于所有 $ y \in f(\N) $, 按照定义 $ \exists x \in \N $, $ f(x) = y $. 分两种情况: (i) $ \exists k \in [0 .. x - 1] $ 使得 $ f(k) = f(x) $, 那么这说明 $ x \notin A $ 而 $ k \in A $; 于是能够找到 $ k \in A $, $ f(k) = f(x) = y $. (ii) 若 $ \not\exists k \in [0 .. x - 1] $ 使得 $ f(k) = f(x) $, 即 $ \forall k \in [0 .. x - 1] $ 都有 $ f(k) \neq f(x) $, 这说明 $ x \in A $; 所以能够找到 $ x \in A $ 满足 $ f(x) = y $. 综上, 对于所有 $ y \in f(\N) $, 总能找到对应的 $ x \in A $, 满足 $ f(x) = f|_A(x) = y $. 故 $ f|_A $ 为满射.
+
+    所以 $ A $ 与 $ f|_A (A) $ 基数相同. 而 $ A \subseteq \N $, $ A $ 至多可数. 于是 $ f|_A (A) $ 至多可数.
+\end{proof}
+
+\begin{corollary} \label{at most countable II-1}
+    设 $ X $ 为可数集, $ f \colon X \to Y $ 为函数, 则 $ f(X) $ 至多可数.
+\end{corollary} 
+
+\begin{proof}
+    $ X $ 为可数集, 说明存在双射 $ g \colon \N \to X $. 由于 $ g $ 为满射, 于是 $ g(\N) = X $. $ f(X) = f \big( g (\N) \big) = f \circ g (\N) $. 根据上一个命题, $ \N $ 的像至多可数, 即 $ f \circ g (\N) $ 是至多可数的, 所以 $ f(X) $ 是至多可数的.
+\end{proof}
+
+\begin{proposition} \label{at most countable III}
+    $ X $, $ Y $ 为可数集, 则 $ X \cup Y $ 也为可数集.
+\end{proposition}
+
+\begin{proof}[\text{证明方法 1}]
+    按照题意, 存在双射 $ f \colon \N \to X $, 双射 $ g \colon \N \to Y $. 设 $ h \colon \N \to X \cup Y $, 其中对一切 $ n \in \N $:
+    \[ h(2 n) = f(n) \qquad h(2n + 1) = g(n) \,.\]
+
+    下面证明 $ h (\N) = X \cup Y $, 即 $ h $ 为满射.
+
+    一方面, $ \forall y \in h(\N) $, $ \exists x \in \N $, 使得 $ h(x) = y $. 若 $ x $ 为奇数, 则 $ y = g \big( (x - 1) / 2 \big) \in Y $, 故 $ y \in X \cup Y $; 若 $ x $ 为偶数, 则 $ y = f (x / 2) \in X $, 故 $ y \in X \cup Y $. 所以无论如何 $ y \in X \cup Y $, 这说明 $ h(\N) \subseteq X \cup Y $.
+
+    另一方面, $ \forall y \in X \cup Y $, $ y \in X $ 或 $ y \in Y $. 若 $ y \in X $, $ y = h(2n) $; 若 $ y \in Y $, $ y = h (2n+1) $. 而两种情况都有 $ y \in h(\N) $. 所以 $ X \cup Y \subseteq h(\N) $.
+
+    综上所述, $ h(\N) = X \cup Y $. 而 $ h(\N) $ 至多可数, $ X \cup Y $ 至多可数. 下面说明 $ X \cup Y $ 不是有限集.
+
+    假设 $ X \cup Y $ 为有限集, $ X \subseteq X \cup Y $, 故由 \ref{cardinal} (3), $ X $ 也是有限集, 这与 $ X $ 可数的事实矛盾.
+\end{proof}
+
+\begin{proof}[\text{证明方法 2}]
+    按照题意, 存在双射 $ f \colon \N \to X $, 双射 $ g \colon \N \to Y \setminus X $. 设 $ h \colon \N \to X \cup (Y \setminus X) = X \cup Y $, 其中对一切 $ n \in N $:
+    \[ h(2 n) = f(n) \qquad h(2n + 1) = g(n) \,.\]
+
+    对于任意 $ x $ 和 $ y $, 由于 $ X $ 和 $ Y \setminus X $ 互斥, 必然有 $ f(x) \neq f(y) $. 下面证明 $ h $ 为单射:
+
+    对于 $ x, y \in \N $, $ x \neq y $. (i) 若 $ x $, $ y $ 中有一个奇数和一个偶数, 那么根据刚才的论证一定有 $ h(x) = f(x / 2) \neq h(y) = g \big( (x - 1)/2 \big) $. (ii) 若 $ x $, $ y $ 同奇, 由于 $ g $ 为双射, $ h(x) = g \big( (x - 1) / 2 \big) \neq h(y) = g \big( (y - 1) / 2 \big) $. (iii) 若 $ x $, $ y $ 同偶, 由于 $ f $ 为双射, $ h(x) = f(x / 2) \neq h(y) = f(y / 2) $. 综上所述, $ h $ 为单射.
+
+    而对于任意 $ y \in X \cup (Y \setminus X) $, $ y \in X $ 或 $ y \in Y \setminus X $. 两种情况都能在 $ \N $ 中找到 $ x $, 分别满足 $ y = f(x) = h(2x) $ 和 $ y = g(x) = h(2x + 1) $. 这说明 $ h $ 为满射.
+
+    综上, $ h $ 为双射, $ \N $ 与 $ X \cup (Y \setminus X) = X \cup Y $ 有相同的基数. 故 $ X \cup Y $ 可数.
+\end{proof}
+
+总而言之, 命题 \ref{at most countable I}, \ref{at most countable II}, \ref{at most countable III} 及其推论 \ref{at most countable I-1}, \ref{at most countable I-2}, \ref{at most countable II-1}, 共 6 个结论, 说明了下面的事实: 
+\begin{theorem}
+    任意可数集的子集或像集是至多可数的; 任意有限个可数集的并集仍是可数的.
+\end{theorem}
+可数集的像集是至多可数的, 这和命题 \ref{cardinal} (5) 像的基数可能缩小的性质是相似的.
+
+结合命题 \ref{image-surjection}: 满射等价于像和陪域相同, 可以得到上面结论的一种等价变体:
+
+\begin{proposition}
+    若 $ X $ 可数, 且存在满射 $ f \colon X \to Y $, 则 $ Y $ 至多可数.
+\end{proposition}
+
+$ f \colon X \to Y $ 为满射 $ Y = f(X) $, 而 $ X $ 可数意味着 $ f(X) $ 至多可数, 上面的命题就是显然成立的.
+
+\vskip 2em
+
+上面说明了可数集的子集、像集、并集的性质, 下面研究可数集的笛卡尔积会有何性质.
+
+我们将通过下面的引理, 证明 $ \N \times \N $ 是可数的, 最终证明任意两个可数集的笛卡尔积也是可数的.
+
+\begin{lemma}
+    集合 $ A \coloneqq \set{(n, m) \in \N \times \N \colon 0 \leqslant m \leqslant n} $ 是可数的.
+\end{lemma}
+
+直观地说, $ A $ 是下面一系列元素 $ (n, m) $ 的集合:
+\[ 
+    \begin{array}{ccccc}
+        (0, 0) &        &        & &\\
+        (1, 0) & (1, 1) &        & &\\
+        (2, 0) & (2, 1) & (2, 2) & &\\
+        \vdots & \vdots & \vdots & \ddots &\\
+    \end{array}    
+\]
+
+\begin{proof}
+    定义 $ a_0 = 0 $, $ a_{n + 1} = a_n + n + 1 $, 简言之 $ a_n = 0 + 1 + \cdots + n = n(n + 1)/2 $, 即前 $ n $ 行的元素个数. 所以对 $ x > y $ 有 $ a_x > a_y $.
+
+    构造函数 $ f \colon A \to \N $, $ f(n, m) = a_n + m $. 接下来就要证明 $ f $ 为单射, 考虑 $ (n, m) \neq (n', m') $. 有三种情况:
+
+    (i) $ n = n' $, 那么 $ m \neq m' $, 因为如果 $ m = m' $ 则 $ (n, m) = (n', m') $. 所以 $ f(n', m') = a_n + m' \neq f(n, m) = a_n + m $.
+
+    (ii) $ n' > n $, 于是 $ n' \geqslant n + 1 $, 可以得到 $ f(n', m') = a_{n'} + m' \geqslant a_{n + 1} = a_n + n + 1 $. 由于 $ (n', m') \in A $, $ n + 1 > n \geqslant m $. 故 $ a_n + n + 1 > a_n + m $, $ f(n', m') > f(n, m) $. 同理可以证明 $ n > n' $ 时, $ f(n', m') \neq f(n, m) $.
+
+    所以 $ f \colon A \to \N $ 为单射. $ f \colon A \to f(A) $ 就应该为双射. $ f(A) \subseteq \N $, 故至多可数. 而 $ A $ 和 $ f(A) $ 有相同的基数, 故 $ A $ 至多可数. 而 $ A $ 显然不是有限的, 故 $ A $ 是可数的.
+\end{proof}
+
+由引理可以得到下面的命题:
+
+\begin{proposition}
+    $ \N \times \N $ 是可数的.
+\end{proposition}
+
+\begin{proof}
+    考虑下面两个集合:
+    \[ A = \set{(n, m) \in \N \times \N \colon 0 \leqslant m \leqslant n} \,,\]
+    \[ B = \set{(m, n) \in \N \times \N \colon 0 \leqslant m \leqslant n} \,.\]
+
+    可以证明 $ A \cup B = \N \times \N $:
+
+    一方面, 对任意 $ x \in A \cup B $, $ x \in A $ 或 $ x \in B $. 若 $ x \in A $, $ x = (n, m) \in \N \times \N $; 若 $ x \in B $, $ x = (m, n) \in \N \times \N $. 所以 $ A \cup B \subseteq \N \times $.
+
+    另一方面, 对任意 $ x \in \N \times \N $. 设 $ x = (a, b) $, 若 $ a \leqslant b $, 则 $ x \in A $; 若 $ a > b $, 则 $ x \in B $. 两种情况下都有 $ x \in A \cup B $, 所以 $ \N \times \N \subseteq A \cup B $.
+
+    所以 $ \N \times \N = A \cup B $. 而两个可数集 $ A $, $ B $ 的并集 $ A \cup B $ 是可数的, 所以 $ \N \times \N $ 是可数的.
+\end{proof}
+
+从上面的命题, 就可以得到最终的推论:
+
+\begin{theorem}
+    $ A $, $ B $ 为可数集, 则 $ A \times B $ 是可数的. 事实上, 有限个可数集的笛卡尔积仍是可数的.
+\end{theorem}
+
+\begin{proof}
+    存在双射 $ f \colon X \to \N $, 双射 $ g \colon Y \to \N $, 构造函数 $ h \colon X \times Y \to \N \times \N $, $ h(m, n) = \big( f(m), g(n) \big) $. 
+    
+    可以证明 $ h $ 为单射: 对 $ (m', n') \neq (m, n) $, $ h(m', n') = \big( f(m'), g(n') \big) \neq \big( f(m), g(n) \big) = h(m, n) $.
+
+    可以证明 $ h $ 为满射: 对于任意 $ (a, b) \in \N \times \N $, 由于 $ f $, $ g $ 为双射, $ \exists c \in X $, $ f(c) = a $; $ \exists d \in Y $, $ g(d) = b $. 故存在 $ (c, d) \in X \times Y $, $ h(c, d) = \big( f(c), g(d) \big) = (a, b) $.
+
+    故 $ h \colon X \times Y \to \N \times \N $ 为双射, 而 $ \N \times \N $ 可数, $ X \times Y $ 也就可数.
+
+    而有限个可数集 $ X_i $, $ 1 \leqslant i \leqslant n $, 很容易使用归纳法得到 $ \prod\limits_{i = 1}^n X_i $ 也是可数的.
+\end{proof}
+
+从前面的结论中, 我们终于可以确定 $ \Z $, $ \Q $ 的可数性.
+
+\begin{proposition}
+    整数集 $ \Z $ 是可数的.
+\end{proposition}
+
+\begin{proof}
+    $ \Z = \N \cup (-\N) $. 其中 $ -\N = \set{-n \colon n \in \N} $. 显然 $ f \colon \N \to -\N $, $ f(n) = -n $ 为一个双射, 由于 $ \N $ 可数, $ -\N $ 也可数. 故 $ \Z = \N \cup (-\N) $ 也是可数的.
+\end{proof}
+
+\begin{proposition}
+    有理数集 $ \Q $ 是可数的.
+\end{proposition}
+
+\begin{proof}
+    定义函数 $ f \colon \Z \times (\Z \setminus \set{0}) \to \Q $, $ f(a, b) = \dfrac{a}{b} $. 注意到有理数集的定义为: $ \Q \coloneqq \set[\Big]{\dfrac{a}{b} \colon a, b \in \Z, b \neq 0} = \set[\Big]{f(a, b) \colon (a, b) \in \Z \times (\Z \setminus \set{0})} = f \big( \Z \times (\Z \setminus \set{0}) \big) $. 这说明 $ f $ 自然为一个满射.
+
+    $ \Z \setminus \set{0} $ 显然为一个可数集, 因为存在 $ \Z $ 到 $ \Z \setminus \set{0} $ 的双射:
+    \[ \begin{cases}
+        x \mapsto x & x < 0 \\
+        x \mapsto x + 1 & x \geqslant 0
+    \end{cases} \,.\]
+
+    所以 $ \Z \times (\Z \setminus \set{0}) $ 是一个可数集, 且存在它到 $ \Q $ 的满射, 于是 $ \Q $ 至多可数. 而 $ \Q $ 包含无限集 $ \N $, $ \Q $ 不可能是有限集, 故 $ \Q $ 可数.
+\end{proof}
+
+\begin{remark}
+    $ \Q $ 可数, 这说明可以按一定顺序把有理数排成一排: \[ \Q = \set{a_0, a_1, a_2, \dots} \,.\]
+\end{remark}
 \end{document}

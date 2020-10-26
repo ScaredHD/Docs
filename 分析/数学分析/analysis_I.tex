@@ -2643,9 +2643,15 @@ $ f \colon X \to Y $ 为满射 $ Y = f(X) $, 而 $ X $ 可数意味着 $ f(X) $ 
 下面给出无限求和的重要定理.
 
 \begin{theorem}[\text{无限求和的 Fubini 定理}]
-    
+    若 $ f \colon \N \times \N \to \R $ 使得 $ \displaystyle \sum_{(n, m) \in \N \times \N} f(n, m) $ 绝对收敛, 则:
+    \begin{align*}
+        \sum_{n = 0}^\infty \left( \sum_{m = 0}^{\infty} f(n, m) \right) &= \sum_{(n, m) \in \N \times \N} f(n, m) \\
+        &= \sum_{(m, n) \in \N \times \N} f(n, m) \\
+        &= \sum_{m = 0}^\infty \left( \sum_{n = 0}^{\infty} f(n, m) \right)
+    \end{align*}\,.
 \end{theorem}
 
+换句话说, 若求和是绝对收敛的, 则可以交换求和的次序.
 
 
 

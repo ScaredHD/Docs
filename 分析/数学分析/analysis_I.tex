@@ -2618,7 +2618,7 @@ $ f \colon X \to Y $ 为满射 $ Y = f(X) $, 而 $ X $ 可数意味着 $ f(X) $ 
 \end{proof}
 
 \begin{remark}
-    $ \Q $ 可数, 这说明可以按一定顺序把有理数排成一排: \[ \Q = \set{a_0, a_1, a_2, \dots} \,.\]
+    $ \Q $ 可数, 这说明 (但不显然) 可以按一定顺序把有理数排成一排: \[ \Q = \set{a_0, a_1, a_2, \dots} \,.\]
 \end{remark}
 
 
@@ -2653,6 +2653,29 @@ $ f \colon X \to Y $ 为满射 $ Y = f(X) $, 而 $ X $ 可数意味着 $ f(X) $ 
 
 换句话说, 若求和是绝对收敛的, 则可以交换求和的次序.
 
+
+\subsection{不可数集}
+回顾一下:
+\begin{itemize}
+    \item 如果一个无限集不是可数的, 则其是不可数集
+    \item 集合 $ X $ 的所有子集构成的集合称为 $ X $ 的幂集, 记作 $ 2^X $ 或 $ \cal P(X) $
+\end{itemize}
+
+\begin{theorem}[\text{Cantor 定理}]
+    集合 $ X $ 和 $ 2^X $ 不可能有相同的基数.
+\end{theorem}
+
+\begin{proof}
+    假设 $ X $ 和 $ 2^X $ 基数相同, 则存在双射 $ f \colon X \to 2^X $. 现考虑 $ A \coloneqq \set{x \in X \colon x \notin f(x)} $, 这样一个由分类公理形成的集合 $ A $ 必然是 $ X $ 的子集, 也就必然在 $ 2^X $ 中. 那么因为 $ f $ 是双射, 对于元素 $ A \in 2^X $, 能够找到 $ x \in X $, 使得 $ f(x) = A $. 于是可以分两种情况讨论: 若 $ x \in A $, 则 $ x \notin f(x) = A $, 矛盾; 若 $ x \notin A $, 由于 $ f(x) = A $, 则 $ x \notin f(x) $, 根据定义 $ x \in A $, 矛盾. 两种情况都产生了矛盾, 说明最初的假设有误.
+\end{proof}
+
+\begin{corollary}
+    $ 2^\N $ 是不可数集.
+\end{corollary}
+
+\begin{proof}
+    $ 2^\N $ 和 $ \N $ 基数不同, 所以 $ 2^\N $ 不是可数集, 只能是有限集或不可数集. 考虑集合 $ \set{\set{0}, \set{1}, \set{2}, \dots} $, 这样的集合 $ A = \set{\set{n} \colon n \in \N} $ 与 $ \N $ 存在明显的双射, 故是可数集. 而 $ A $ 是 $ 2^\N $ 的子集, 所以 $ 2^\N $ 不是有限集, 只能是不可数集.
+\end{proof}
 
 
 

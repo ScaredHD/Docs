@@ -1,24 +1,32 @@
 \documentclass[UTF8]{ctexart}
-
+\hfuzz=4pt
 \usepackage{anyfontsize}
 \usepackage{geometry}
     \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
-\usepackage{amsmath, amssymb, amsthm}
-    \newtheorem{definition}{Definition}
-\usepackage{caption} 	 % 标题
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+    \setlength{\parskip}{1em}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+    \renewcommand*{\proofname}{proof}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=cyan,rulewidth=2pt,bgcolor=white}]{definition}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=orange,rulewidth=2pt, bgcolor=white}]{theorem} 
+    \newtheoremstyle{mystyle}{1em plus .2 em minus .2em}{1em plus .2 em minus .2em}{}{}{\bfseries}{.}{.5em}{}
+    \theoremstyle{mystyle}
+    \newtheorem{axiom}{Axiom}[section]
+    \newtheorem{lemma}{Lemma}[section]
+    \newtheorem{proposition}{Proposition}[section]
+    \newtheoremstyle{myremark}{1em plus .2 em minus .2em}{1em plus .2 em minus .2em}{}{}{\itshape}{.}{.5em}{}
+    \theoremstyle{myremark}
+    \newtheorem*{remark}{Remark}
+    \theoremstyle{plain}
+    \newtheorem{corollary}{Corollary}[section]
 \usepackage{xcolor} 	 % 颜色
 \usepackage{graphicx} 	 % 引用图片
 \usepackage{float}
-\usepackage{framed} 	 % 方框 \begin{framed}
-\usepackage{tcolorbox}
-    \newtcolorbox{defbox}{colback = blue!20!green!10!white}
-    \newtcolorbox{thmbox}{colback = black!5!white}
-\usepackage{indentfirst} 	 % 首行缩进 
-    \setlength{\parindent}{0em}
-\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
-\usepackage{extarrows} 	 % 箭头宏包 \xLongrightarrow 
-\usepackage{esvect} 	 % 向量箭头 \vv{}
-\usepackage{siunitx} 	 % 国际单位 \si{unit} \SI{number}{unit} 
+\usepackage{centernot}
+\usepackage{esvect} 	 % 向量箭头 \vv{} 
 \usepackage{esint} 	 % 积分符号
 \usepackage{mathrsfs}
 
@@ -37,35 +45,100 @@
 \newcommand{\N}{\mathbb N}
 \newcommand{\Q}{\mathbb Q}
 \newcommand{\C}{\mathbb C}
-% differentiation
-\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
-\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
-\def \dd #1.#2 {\dfrac{d #1}{d #2}}
-\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
 % matrix
 \newcommand{\transp}{^{\top}}
 \DeclareMathOperator{\tr}{tr}
 
+
 \pagestyle{empty}
 
 \begin{document}
-\section{Matrix}
-\subsection{Permutation}
-\begin{definition}
-    A permutation
+\section{Group}
+\subsection{Law of Composition}
+\begin{definition}[\text{Composition}]
+    Composition (or Law of composition) on a set S is to combine two element $ a, b \in S $, to get another element $ p $ in $ S $: \[ S \times S \to S \,.\] Here, $ \times $ means Cartesian product of two sets. We can denote the composition in several ways: \[ p = a b \quad p = a \cdot b \quad p = a \circ b \quad p = a + b \,.\]
 \end{definition}
 
+We will often use $ ab $ (or $ a \cdot b $ when neccessary) to denote the composition of $ a $ and $ b $ in this document.
 
+\paragraph{Example}
+\begin{itemize}
+    \item In the set $ \N $, operation ``add'' $ + $ is a law of composition. It takes two elements of $ a, b \in \N $ and gives an element $ a + b \in \N $. e.g.\ $ (2, 3) \mapsto 5 $, $ (5, 1) \mapsto 6 $
+    \item In the set $ \R $, operation ``multiply'' $ \cdot $ is a law of composition. It takes two elements of $ a, b \in \R $ and gives an element $ a \cdot b \in \R $. e.g.\ $ (-1, 4) \mapsto -4 $, $ (2, 3.5) \mapsto 7 $
+\end{itemize}
 
-\section{Group}
-\begin{defbox}
-    \begin{definition}
-        A group $ (G, \cdot) $ is a set $ G $ equipped with a binary operation $ \cdot $ which follows four axioms, namely \textbf{closure}, \textbf{associativity}, \textbf{identity} and \textbf{invertibility}.
-    \end{definition}    
-\end{defbox}
+Note that the definition of composition natrually brings out the property of closure --- the composition of two element of $ S $ is still in the same set.
 
+A way of defining composition is using functions. $ f \colon S \times S \to S $, so for $ a, b \in S $, $ f(a, b) $ is the composition of $ a $ and $ b $.
 
-The four axioms are defined below:
+\begin{definition}[\text{Associativity}]
+    For element $ a $, $ b $ and $ c $, if the composition satisfies $ (ab)c = a(bc) $, then the composition is \textbf{associative}.
+\end{definition}
+
+For multiple element $ a_1 $, $ a_2 $, $ \dots $, $ a_n $, there's only one distinct way to define the composition of them:
+\[ a_1 a_2 \cdots a_n = (a_1 \cdots a_i) (a_i \cdots a_n) \,,\]
+
+where $ 1 \leqslant i < n $. For instance,
+\[ a_1 a_2 a_3 a_4 = a_1 (a_2 a_3 a_4) = (a_1 a_2) (a_3 a_4) = (a_1 a_2 a_3) a_4 = a_1 (a_2 a_3) a_4 \,.\]
+
+\begin{definition}[\text{Commutativity}]
+    The composition of two element $ a $ and $ b $ is called \textbf{commutative} if $ ab = ba $.
+\end{definition}
+
+\paragraph{Example}
+Addtion in $ \R $ is commutative: $ a, b \in \R $, $ a + b = b + a $.
+
+\subsection{Special elements}
+\begin{definition}[\text{Identity element}]
+    If $ \forall s \in S $, $ \exists e \in S $ such that $ es = s $, then $ e $ is the \textbf{left identity} of $ S $. Likewise, $ e $ is the \textbf{right identity} if $ se = s $. If $ e $ is both left identity and right identity, then it's called a \textbf{two-sided identity} or simply \textbf{identity}.
+\end{definition}
+
+If we use multiplication to represent composition, then $ 1 $ is commonly used as the symbol of identity. And $ 0 $ is often identity for addition representation.
+
+\paragraph{Example}
+\begin{itemize}
+    \item Concider zero in $ \Z $. For all $ a \in \Z $, $ 0 + a = a $, so $ 0 $ is the left identity. And by commutativity we also have $ a + 0 = a $, so $ 0 $ is also the right identity. Therefore, $ 0 $ is the identity of addition on $ \Z $
+    \item $ 1 $ is the identity of multiplication on $ \R $, because $ \forall a \in Z $, $ 1 \cdot a = a \cdot 1 = a $
+\end{itemize}
+
+\begin{definition}[\text{Inverse}]
+    Let $ 1 $ be the identity. If $ \forall a \in S $, $ \exists l \in S $ such that $ l a = 1 $, then $ l $ is called the \textbf{left inverse} of $ a $. Likewise, $ a r = 1 $ then $ r $ is called the \textbf{right inverse} of $ a $. If $ b $ is both left and right inverse of $ a $, then it's called the \textbf{two-sided inverse} or simply \textbf{inverse} of $ a $, denoted by $ a^{-1} $.
+\end{definition}
+
+\paragraph{Example}
+\begin{itemize}
+    \item $ -3 $ is the additive inverse of $ 3 $ in $ \R $, because $ (-3) + 3 = 3 + (-3) = 0 $ and $ 0 $ is the identity of addition.
+    \item $ 1/2 $ is the multiplicative inverse of $ 2 $ in $ \R $, because $ (1/2) \times 2 = 2 \times (1/2) = 1 $ and $ 1 $ is the identity of multiplication.
+\end{itemize}
+
+A fraction $ \dfrac{a}{b} $ is exactly the composition of $ a $ and $ b^{-1} $. And the notation $ \dfrac{a}{b} $ is not recommended, because sometimes the composition is not commutative, therefore $ a b^{-1} $ and $ b^{-1} a $ are different.
+
+The notations like $ a^n $ or $ a^{-n} $, $ n \in \N $ can be recursively defined as below:
+\[ a^{n + 1} \coloneqq a^n a  \,,\]
+\[ a^{-n - 1} = a^{-n} a^{-1} \,,\] 
+\[ a^0 = 1 \,.\]
+
+\begin{proposition}
+    $ (a b)^{-1} = b^{-1} a^{-1} $.
+\end{proposition}
+
+\begin{proof}
+    $ (ab)^{-1} (ab) = 1 $ is true, multiply $ b^{-1} $ on the right for both sides. $ (a b)^{-1} (a b) b^{-1} = 1 \cdot b^{-1} $, which is $ (a b)^{-1} a (b b^{-1}) = (a b)^{-1} a \cdot 1 = b^{-1} $. This time multiply $ a^{-1} $ on the right for both sides: $ (a b)^{-1} a a^{-1} = b^{-1} a^{-1} $, the left-hand side is exactly $ (a b)^{-1} $.
+\end{proof}
+
+And this can be easily generalized to $ n $ elements (using associativity and induction):
+\[ (a_1 a_2 \dots a_n)^{-1} = a_n^{-1} \dots a_2^{-1} a_1^{-1} \,.\]
+
+\subsection{Group}
+\begin{definition}
+    A group $ (G, \cdot) $ is a set $ G $ equipped with a binary operation $ \cdot $ which follows four axioms, namely \textbf{closure}, \textbf{associativity}, \textbf{identity} and \textbf{invertibility}.
+\end{definition}    
+
+\begin{remark}
+    If a group is commutative, then it's called \textbf{abelian group}.
+\end{remark}
+
+The four axioms are explained below:
 \paragraph{closure}
 For all $ a, b $ in $ G $, the result of operation $ \cdot $ is still in $ G $. This can be written in the form: $ \forall a, b \in G, a \cdot b \in G $.
 
@@ -77,6 +150,49 @@ $ \exists\ e \in G $ such that, $ \forall a \in G $, the equation $ e \cdot a = 
 
 \paragraph{invertibility}
 For each $ a \in G $, $ \exists\ b $ in $ G $, commonly denoted $ a^{-1} $, such that $ a \cdot b = b \cdot a = e $, where $ e $ is the identity element.
+
+We use ordered pair to denote $ (G, \cdot) $ a set $ G $ equipped with operation $ \cdot $. So the two parts --- set and its operation --- together forms the algebraic structure. This is critical, because strictly speaking, a set on its own can not be a group. But informally, it's common to say that a set $ G $ is a group, if no ambiguity is caused.
+
+\paragraph{Example}
+These are some familiar abelian groups: $ (\Z, +) $, $ (\R, +) $, $ (\R^+, \times) $, $ (\C, +) $, $ (\C, \times) $. Take $ (\R^+, +) $ for example. 
+
+\begin{enumerate}
+    \item Two the addition of positive real numbers $ a, b $ is still a real number (closure)
+    \item $ (a + b) + c = a + (b + c) $, which is associativity
+    \item For any given $ a \in \R^+ $, $ 1 \times a = a \times 1 = a $ holds, which indicates that $ 1 $ is the multiplicative identity of $ \R^+ $
+    \item For any given $ a \in \R^+ $, $ \exists a^{-1} $ such that $ a^{-1} \times a = a \times a^{-1} = 1 $ holds, which indicates all $ a \in \R^+ $ is invertable
+\end{enumerate}
+
+Therefore, $ (\R^+, \times) $ is a group. Also, for any positive real number $ a $ and $ b $, $ a \times b = b \times a $. So $ (\R^+, \times) $ is also an abelian group.
+
+
+\begin{remark}
+    Note that $ (\R, \times) $ is not a group, because $ 0 $ is not invertable: $ \centernot\exists r \in \R $ such that $ r \times 0 = 0 \times r = 1 $.
+\end{remark}
+
+Because of invertibility property, a group has follows \textbf{cancellation law}.
+
+\begin{proposition}
+    Let $ a $, $ b $, $ c $ be elements of a group $ G $: 
+    \begin{itemize}
+        \item if $ ac = bc $ or $ ca = cb $ then $ a = b $
+        \item if $ ac = c $ or $ ca = c $ then $ a = 1 $
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    Proofs of all cases are analogous --- by multiplying $ c^{-1} $ to both sides.
+\end{proof}
+
+Since groups are sets equipped with operations, and we have cardinality to describe how many elements we have in a set, it's natural to have a similar concept to describe the number of elements contained in a group.
+
+\begin{definition}[\text{Order of a group}]
+    The order of a group describe the number of elements contained in this group. Suppose we have group $ (G, \cdot) $, the order of this group equals the cardinality of $ G $, denoted by $ |G| $.
+\end{definition}
+
+\paragraph{Example}
+The previous example, abelian group $ (\Z, +) $ is an infinite group, because $ \Z $ is an infinite set.
+
 
 
 

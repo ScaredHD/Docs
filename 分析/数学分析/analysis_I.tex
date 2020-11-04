@@ -2677,6 +2677,27 @@ $ f \colon X \to Y $ 为满射 $ Y = f(X) $, 而 $ X $ 可数意味着 $ f(X) $ 
     $ 2^\N $ 和 $ \N $ 基数不同, 所以 $ 2^\N $ 不是可数集, 只能是有限集或不可数集. 考虑集合 $ \set{\set{0}, \set{1}, \set{2}, \dots} $, 这样的集合 $ A = \set{\set{n} \colon n \in \N} $ 与 $ \N $ 存在明显的双射, 故是可数集. 而 $ A $ 是 $ 2^\N $ 的子集, 所以 $ 2^\N $ 不是有限集, 只能是不可数集.
 \end{proof}
 
+\begin{corollary}
+    $ \R $ 是不可数集.
+\end{corollary}
+
+
+前文提到, 在有限集中, $ X \to Y $ 的单射等价于 $ X $ 的基数小于 $ Y $. 而该结论可以推广到无限集中, 并且得到一个非常重要的结论.
+
+\begin{theorem}[\text{Schr\"oder-Bernstein 定理}]
+    对于任意集合 $ X $ 和 $ Y $, 若存在 $ X $ 到 $ Y $ 的单射, 则称 $ X $ 的基数小于等于 $ Y $, 记作 $ |X| \leqslant |Y| $. 若既存在 $ X \to Y $ 的单射和 $ Y \to X $ 的单射, 也就是说 $ |X| \leqslant |Y| $ 且 $ |Y| \leqslant |X| $, 那么此时存在 $ X $ 到 $ Y $ 的双射, 意味着 $ X $ 和 $ Y $ 基数相同.
+\end{theorem}
+
+\paragraph{例}
+考虑区间 $ (0, 1) $ 和 $ (0, 1] $. 存在 $ (0, 1) \to (0, 1] $ 的单射 $ x \mapsto x $. 另一方面, 存在 $ (0, 1] \to (0, 1) $ 的单射:
+\[ \begin{cases}
+    x \mapsto x / 2 & \text{若 } x \neq 1 \\
+    x \mapsto x & \text{若 } x = 1
+\end{cases} \,.\]
+
+所以既存在 $ (0, 1) \to (0, 1] $ 的单射, 也存在 $ (0, 1] \to (0, 1) $ 的单射, 于是存在 $ (0, 1) $ 与 $ (0, 1] $ 之间的双射, 意味着两者基数相同.
+
+
 
 
 \end{document}

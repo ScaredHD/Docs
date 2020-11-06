@@ -48,6 +48,8 @@
 % matrix
 \newcommand{\transp}{^{\top}}
 \DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\GL}{GL}
+\DeclarePairedDelimiter\set{\{}{\}}
 
 
 \pagestyle{empty}
@@ -170,6 +172,15 @@ Therefore, $ (\R^+, \times) $ is a group. Also, for any positive real number $ a
     Note that $ (\R, \times) $ is not a group, because $ 0 $ is not invertable: $ \centernot\exists r \in \R $ such that $ r \times 0 = 0 \times r = 1 $.
 \end{remark}
 
+Since groups are sets equipped with operations, and we have cardinality to describe how many elements we have in a set, it's natural to have a similar concept to describe the number of elements contained in a group.
+
+\begin{definition}[\text{Order of a group}]
+    The order of a group describe the number of elements contained in this group. Suppose we have group $ (G, \cdot) $, the order of this group equals the cardinality of $ G $, denoted by $ |G| $.
+\end{definition}
+
+\paragraph{Example}
+The previous example, abelian group $ (\Z, +) $ is an infinite group, because $ \Z $ is an infinite set.
+
 Because of invertibility property, a group has follows \textbf{cancellation law}.
 
 \begin{proposition}
@@ -184,14 +195,18 @@ Because of invertibility property, a group has follows \textbf{cancellation law}
     Proofs of all cases are analogous --- by multiplying $ c^{-1} $ to both sides.
 \end{proof}
 
-Since groups are sets equipped with operations, and we have cardinality to describe how many elements we have in a set, it's natural to have a similar concept to describe the number of elements contained in a group.
+Concider matrices. Not all matrices are invertable, so we can't just say matrix with multiplication operation is or is not a group.
 
-\begin{definition}[\text{Order of a group}]
-    The order of a group describe the number of elements contained in this group. Suppose we have group $ (G, \cdot) $, the order of this group equals the cardinality of $ G $, denoted by $ |G| $.
+\begin{definition}[\text{General linear group}]
+    The general linear group of degree $ n $ is the set of $ n \times n $ invertable matrices:
+    \[ \GL_n \coloneqq \set{n \times n \text{ invertable matrices}} \,.\]
+
+    And enable to distinguish what kind of elements we are having in the matrices, notations like $ \GL_n(\R) $ or $ \GL_n(\C) $ are used.
 \end{definition}
 
-\paragraph{Example}
-The previous example, abelian group $ (\Z, +) $ is an infinite group, because $ \Z $ is an infinite set.
+
+
+
 
 
 

@@ -261,6 +261,8 @@ INPUT d:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 INPUT d:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 OUTPUT d:/Programming/Docs/代数/抽象代数/alg.pdf
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT d:/Programming/Docs/代数/抽象代数/alg.aux
 INPUT d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb

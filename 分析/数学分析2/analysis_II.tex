@@ -1,0 +1,153 @@
+\documentclass[UTF8]{ctexart}
+\hfuzz=4pt
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+    \setlength{\parskip}{1em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=cyan,rulewidth=2pt,bgcolor=white}]{definition}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=orange,rulewidth=2pt, bgcolor=white}]{theorem} 
+    \newtheoremstyle{mystyle}{1em plus .2 em minus .2em}{1em plus .2 em minus .2em}{}{}{\bfseries}{.}{.5em}{}
+    \theoremstyle{mystyle}
+    \newtheorem{axiom}{Axiom}[section]
+    \newtheorem{lemma}{Lemma}[section]
+    \newtheorem{proposition}{Proposition}[section]
+    \newtheoremstyle{myremark}{1em plus .2 em minus .2em}{1em plus .2 em minus .2em}{}{}{\itshape}{.}{.5em}{}
+    \theoremstyle{myremark}
+    \newtheorem*{remark}{Remark}
+    \theoremstyle{plain}
+    \newtheorem{corollary}{Corollary}[section]
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{esint}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\renewcommand{\r}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+\newcommand{\scr}{\mathscr}
+
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\renewcommand{\C}{\mathbb C}
+\DeclarePairedDelimiter\set{\{}{\}}
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+\newcommand{\del}{\nabla}
+\DeclareMathOperator{\cl}{cl}
+
+\pagestyle{empty}
+
+\begin{document}
+\tableofcontents
+\section{实数轴上的连续函数}
+\subsection{实直线}
+区间的定义省略. 下面是关于区间的一些术语及概念:
+\begin{itemize}
+    \item 半无限区间: 一个端点是 $ -\infty $ 或 $ +\infty $ 的区间
+    \item 双无限区间: 两个端点都是 $ -\infty $ 或 $ +\infty $ 的区间
+    \item 有界区间: 不是无限区间. 意味着存在正实数 $ M $ 使得该区间是 $ [-M, M] $ 的子集.
+\end{itemize}
+
+退化区间:
+\begin{itemize}
+    \item 若 $ a > b $: $ (a, b) $, $ (a, b] $, $ [a, b) $ 和 $ [a, b] $ 都是空集
+    \item 若 $ a = b $: $ (a, b) $, $ (a, b] $, $ [a, b) $ 是空集, 而 $ [a, b] $ 为单点集 $ \set{a} $
+\end{itemize}
+
+\subsection{附着点与极限点}
+\subsubsection{附着点}
+\begin{definition}[\text{附着点 (Accumulation point)}]
+    对于 $ X \subseteq \R $, 称 $ x $ 为 $ X $ 的附着点, 当且仅当对任意实数 $ \epsilon > 0 $, 存在 $ y \in X $, 使得 $ |x - y| \leqslant \epsilon $.
+\end{definition}
+
+绝对值 $ |x - y| $ 的集合意义为 $ x $ 与 $ y $ 的距离, 既 $ d(x, y) $, 而 $ d(x, y) $ 小于任意给定正实数. 直观地说, 若 $ x $ 是 $ X $ 的附着点, 那么 $ x $ 无限靠近集合 $ X $. 此外, 若 $ x $ 本就是 $ X $ 中的元素, 那么 $ x $ 显然也是附着点.
+
+\paragraph{例}
+对于集合 $ (1, 2] \cup \set{3} $, $ 1 $, $ 2 $, $ 3 $ 都是其附着点, $ 1.5 $ 也是.
+
+\paragraph{例}
+对于集合 $ (1, 2] $, $ 0.5 $ 不是附着点. 因为对于 $ \epsilon = 0.1 $, 所有 $ (1, 2] $ 中的元素 $ y $ 与 $ 0.5 $ 的距离 $ |y - 0.5| $ 都大于 $ 0.1 $.
+
+集合的所有附着点, 构成了这个集合的闭包. 直观地说: 就是扩大集合, 使其包含所有无限靠近原集合的点.
+
+\begin{proposition}[\text{附着点的性质}] 设 $ X \subseteq \R $:
+    \begin{enumerate}
+        \item 若 $ x $ 为 $ X $ 的附着点, $ Y $ 为任意集合, 则 $ x $ 为 $ X \cup Y $ 的附着点
+        \item 若 $ x $ 为 $ X \cap Y $ 的附着点, $ x $ 同时为 $ X $ 和 $ Y $ 的附着点
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[\text{闭包 (Closure)}]
+    $ X $ 的所有附着点的集合称为 $ X $ 的闭包, 记作 $ \cl (X) $ 或 $ \overline X $.
+\end{definition}
+
+\begin{proposition}[\text{闭包算子的性质}] 设 $ X, Y \subseteq \R $:
+    \begin{enumerate}
+        \item $ X \subseteq \cl (X) $
+        \item $ \cl (X \cup Y) = \cl (X) \cup \cl (Y) $
+        \item $ \cl (X \cap Y) \subseteq \cl (X) \cap \cl (Y) $
+        \item $ \cl (\cl (X)) = \cl (X) $
+        \item $ X \subseteq Y $, 则 $ \cl (X) \subseteq \cl (Y) $
+    \end{enumerate}
+\end{proposition}
+
+\begin{remark}
+    $ \cl(X \cap Y) \subseteq \cl(X) \cap \cl(Y) $, 这个式子不能像并 $ \cup $ 情形的式子一样取等于. 因为可以找到反例: $ \cl \big( (0, 1) \cap (1, 2) \big) = \varnothing \neq \set{1} = \cl(0, 1) \cap \cl(1, 2) $.
+\end{remark}
+
+\begin{proposition}[\text{区间的闭包}]
+    若 $ I $ 为 $ (a, b) $, $ (a, b] $, $ [a, b) $, $ [a, b] $ 中的一个, 那么 $ \cl (I) = [a, b] $.
+\end{proposition}
+
+\begin{definition}[\text{闭区间}]
+    $ X \subseteq \R $, 若 $ X = \cl(X) $ 则称 $ X $ 为闭区间.
+\end{definition}
+
+\begin{proposition}
+    $ \varnothing $, $ \N $, $ \Z $, $ \R $ 的闭包为自身, $ \Q $ 的闭包为 $ \R $.
+\end{proposition}
+
+下面引理表明, 附着点可以由集合内的序列来逼近. 其证明用到选择公理.
+\begin{lemma}
+    $ X \subseteq \R $, 则 $ x $ 为 $ X $ 的附着点, 当且仅当存在一个收敛到 $ x $ 的序列 $ (x_n)_{n = 1}^\infty $, 且序列的每一项都是 $ X $ 中的值 ($ \forall n \geqslant 1 $, $ x_n \in X $).
+\end{lemma}
+
+\begin{proof}
+    考虑集合 $ X_n \coloneqq \set{e \in X \colon x - 1/n \leqslant e \leqslant x + 1/n} $. 由于 $ x $ 是 $ X $ 的附着点, $ \forall \epsilon > 0 $, $ \exists y \in X $, $ |x - y| \leqslant \epsilon $. 于是 $ x - \epsilon \leqslant y \leqslant x + \epsilon $ 对于任意正实数 $ \epsilon $ 均成立. 那么对任意 $ n \geqslant 1 $, 只需取 $ \epsilon = 1/n $, 此时能够找到 $ e \in X $, 满足 $ x - 1/n \leqslant e \leqslant x + 1/n $, 这说明所有 $ X_n $, $ n \geqslant 1 $ 都是非空的. 根据选择公理, 我们可以依次从中选出一个元素, 构成 $ (x_1, x_2, \dots) $. 所以序列 $ (x_i)_{i = 1}^\infty $ 的每一项 $ x - 1/n \leqslant x_i \leqslant x + 1/n $, 根据夹逼定理, 序列 $ (x_i)_{i = 1}^\infty $ 收敛于 $ x $.
+\end{proof}
+
+通过此条引理, 可以将闭包用序列的语言来定义.
+
+\begin{corollary}
+    $ X \subseteq \R $ 且 $ X $ 是闭的 ($ \cl(X) = X $). 序列 $ (x_n)_{n = 1}^\infty $ 的每一项 $ x_n $ 都是 $ X $ 中的元素, 则 $ (x_n)_{n = 1}^\infty $ 收敛到 $ X $ 中的一点. 反过来, 若 $ X $ 中的任意序列都收敛到 $ X $ 中的元素, 则 $ X $ 是闭的.
+\end{corollary}
+
+\subsubsection{极限点}
+下面是一个和附着点 (accumulation point) 非常相似但又有着细微差别的概念---极限点 (limit point).
+
+\begin{definition}[\text{极限点(limit point)}]
+    $ X \subseteq \R $, $ x $ 是 $ X $ 的极限点, 当且仅当 $ x $ 是 $ X \setminus \set{x} $ 的附着点. 若 $ x $ 不是 $ X \setminus \set{x} $ 的附着点, 即存在 $ \epsilon > 0 $, 对任意 $ y \in X \setminus \set{x} $ 都有 $ |x - y| > \epsilon $. 此时称 $ x $ 是 $ X $ 的孤立点, 简称孤点.
+\end{definition}
+
+也就是说, $ x $ 是 $ X $ 的附着点, 则 $ x $ 能被 $ X $ 中元素的序列 (包括 $ x $ 本身) 逼近. 而 $ x $ 是极限点, 则 $ x $ 能被 $ X $ 中不同于 $ x $ 的元素组成的序列 (即 $ X \setminus \set{x} $ 中的序列) 逼近. 
+
+\begin{lemma}
+    $ X \subseteq \R $, 则 $ x $ 为 $ X $ 的极限点, 当且仅当存在一个收敛到 $ x $ 的序列 $ (x_n)_{n = 1}^\infty $, 且序列的每一项都是 $ X \setminus \set{x} $ 中的值 ($ \forall n \geqslant 1 $, $ x_n \in X \setminus \set{x} $).
+\end{lemma}
+
+
+
+\end{document}

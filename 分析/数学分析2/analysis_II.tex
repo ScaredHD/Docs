@@ -22,6 +22,7 @@
     \theoremstyle{plain}
     \newtheorem{corollary}{Corollary}[section]
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{float}
 \usepackage{esint}
 \usepackage{hyperref}
@@ -69,7 +70,7 @@
 
 \subsection{附着点与极限点}
 \subsubsection{附着点}
-\begin{definition}[\text{附着点 (Accumulation point)}]
+\begin{definition}[\text{附着点 (Adherent point)}]
     对于 $ X \subseteq \R $, 称 $ x $ 为 $ X $ 的附着点, 当且仅当对任意实数 $ \epsilon > 0 $, 存在 $ y \in X $, 使得 $ |x - y| \leqslant \epsilon $.
 \end{definition}
 
@@ -89,6 +90,10 @@
         \item 若 $ x $ 为 $ X \cap Y $ 的附着点, $ x $ 同时为 $ X $ 和 $ Y $ 的附着点
     \end{enumerate}
 \end{proposition}
+
+\begin{proof}
+    按照定义即可.
+\end{proof}
 
 \begin{definition}[\text{闭包 (Closure)}]
     $ X $ 的所有附着点的集合称为 $ X $ 的闭包, 记作 $ \cl (X) $ 或 $ \overline X $.
@@ -112,12 +117,21 @@
     若 $ I $ 为 $ (a, b) $, $ (a, b] $, $ [a, b) $, $ [a, b] $ 中的一个, 那么 $ \cl (I) = [a, b] $.
 \end{proposition}
 
-\begin{definition}[\text{闭区间}]
-    $ X \subseteq \R $, 若 $ X = \cl(X) $ 则称 $ X $ 为闭区间.
+下面以 $ (a, b) $ 为例, 其余证明同理.
+\begin{proof}
+    首先, 证明 $ [a, b] $ 中的任意点 $ x $ 都是 $ (a, b) $ 的附着点. 有三种情况: (1) $ x \in (a, b) $, 则 $ x $ 自然为 $ (a, b) $ 的附着点; (2) $ x = a $, 则 $ x $ 按照定义是附着于 $ (a, b) $ 的; (3) $ x = b $, $ x $ 也是附着于 $ (a, b) $ 的.
+
+    接着证明 $ (a, b) $ 的所有附着点都位于 $ [a, b] $ 中. 设 $ x $ 为 $ (a, b) $ 的附着点, 但 $ x \notin [a, b] $. 于是有两种情况: (1) $ x < a $: $ \forall \epsilon > 0 $, $ \exists y \in (a, b) $, 使得 $ |x - y| \leqslant \epsilon $. 由于 $ a - x > 0 $, 取 $ \epsilon = a - x $, $ |x - y| \leqslant a - x $. 所以有 $ x - a \leqslant x - y $, 即 $ y \leqslant a $, 这与 $ y \in (a, b) $ 矛盾. (2) $ x > b $ 同理, 取 $ \epsilon = b - x $ 可以得到矛盾.
+
+    上面两方面结合起来说明了所有 $ (a, b) $ 附着点构成的集合恰好是 $ [a, b] $.
+\end{proof}
+
+\begin{definition}[\text{闭集合}]
+    $ X \subseteq \R $, 若 $ X = \cl(X) $ 则称集合 $ X $ 是闭的.
 \end{definition}
 
 \begin{proposition}
-    $ \varnothing $, $ \N $, $ \Z $, $ \R $ 的闭包为自身, $ \Q $ 的闭包为 $ \R $.
+    $ \varnothing $, $ \N $, $ \Z $, $ \R $ 的闭包为自身, $ \Q $ 的闭包为 $ \R $. 所以 $ \Q $ 不是闭集合, 而 $ \varnothing $, $ \N $, $ \Z $, $ \R $ 是闭集合.
 \end{proposition}
 
 下面引理表明, 附着点可以由集合内的序列来逼近. 其证明用到选择公理.
@@ -136,10 +150,10 @@
 \end{corollary}
 
 \subsubsection{极限点}
-下面是一个和附着点 (accumulation point) 非常相似但又有着细微差别的概念---极限点 (limit point).
+下面是一个和附着点 (adherent point) 非常相似但又有着细微差别的概念---极限点 (limit point).
 
 \begin{definition}[\text{极限点(limit point)}]
-    $ X \subseteq \R $, $ x $ 是 $ X $ 的极限点, 当且仅当 $ x $ 是 $ X \setminus \set{x} $ 的附着点. 若 $ x $ 不是 $ X \setminus \set{x} $ 的附着点, 即存在 $ \epsilon > 0 $, 对任意 $ y \in X \setminus \set{x} $ 都有 $ |x - y| > \epsilon $. 此时称 $ x $ 是 $ X $ 的孤立点, 简称孤点.
+    $ X \subseteq \R $, $ x $ 是 $ X $ 的极限点, 当且仅当 $ x $ 是 $ X \setminus \set{x} $ 的附着点. 若 $ x \in X $, 但 $ x $ 不是 $ X \setminus \set{x} $ 的附着点, 即存在 $ \epsilon > 0 $, 对任意 $ y \in X \setminus \set{x} $ 都有 $ |x - y| > \epsilon $. 此时称 $ x $ 是 $ X $ 的孤立点, 简称孤点.
 \end{definition}
 
 也就是说, $ x $ 是 $ X $ 的附着点, 则 $ x $ 能被 $ X $ 中元素的序列 (包括 $ x $ 本身) 逼近. 而 $ x $ 是极限点, 则 $ x $ 能被 $ X $ 中不同于 $ x $ 的元素组成的序列 (即 $ X \setminus \set{x} $ 中的序列) 逼近. 
@@ -147,6 +161,53 @@
 \begin{lemma}
     $ X \subseteq \R $, 则 $ x $ 为 $ X $ 的极限点, 当且仅当存在一个收敛到 $ x $ 的序列 $ (x_n)_{n = 1}^\infty $, 且序列的每一项都是 $ X \setminus \set{x} $ 中的值 ($ \forall n \geqslant 1 $, $ x_n \in X \setminus \set{x} $).
 \end{lemma}
+
+下面的命题说明了, 集合的附着点可以分为极限点和孤点互斥的两部分.
+\begin{proposition}
+    $ x $ 是 $ X $ 的附着点. 则 $ x $ 要么是 $ X $ 的极限点, 要么是 $ X $ 的孤点, 且不可同时成立.
+\end{proposition}
+
+\begin{proof}
+    设 $ x $ 为 $ X $ 的附着点. 若 $ x $ 还是 $ X \setminus \set{x} $ 的附着点, 则 $ x $ 为极限点. 反之, $ x $ 为孤点.
+
+    另一方面, 假设 $ x $ 为 $ X $ 的极限点. $ x $ 是 $ X \setminus \set{x} $ 的附着点, 那么 $ x $ 也是 $ X \setminus \set{x} \cup \set{x} = X $ 的附着点. 假设 $ x $ 为 $ X $ 的孤点, 按照定义 $ x \in X $, 于是 $ x $ 为 $ X $ 的附着点.
+\end{proof}
+
+\begin{proposition}[\text{区间与极限点}]
+    若 $ I $ 为下面区间的任意一个: $ (a, b) $, $ (a, b] $, $ [a, b) $, $ [a, b] $, $ (a, +\infty) $, $ [a, +\infty) $, $ (-\infty, b) $, $ (-\infty, b] $; 那么 $ I $ 中每一个点都是 $ I $ 的极限点.
+\end{proposition}
+
+下面以 $ [a, b] $ 为例证明, 其余同理.
+
+\begin{proof}
+    考虑 $ x \in [a, b] = I $. (1) $ x = a $: 考虑序列 $ (x + 1/n)_{n = N}^\infty $, 当 $ N $ 充分大时, 序列落入区间 $ I \setminus \set{a} $ 中, 且这个序列收敛到 $ x $, 说明 $ x $ 为极限点. (2) $ x = b $ 同理, 将序列换为 $ (x - 1/n)_{n = N}^\infty $ 即可. (3) $ x \in (a, b) $: 上面的论述仍然有效, 如 $ (x + 1/n)_{n = N}^\infty $ 在 $ N $ 充分大时落入 $ (x, b) \subseteq I \setminus \set{a} $ 且收敛到 $ x $.
+\end{proof}
+
+
+\subsubsection{有界集}
+\begin{definition}[\text{有界}]
+    实直线的子集 $ X $ 是有界的, 当且仅当 $ \exists M > 0 $, $ X \subseteq [-M, M] $.
+\end{definition}
+
+\begin{theorem}[\text{实直线上的 Heine-Borel 定理}]
+    设 $ X \subseteq \R $, 则下面两个命题等价:
+    \begin{itemize}
+        \item $ X $ 是闭的且有界
+        \item 若序列 $ (a_n)_{n = 0}^\infty $ 是 $ X $ 中的序列, 则存在子列 $ (a_{n_j})_{j = 0}^\infty $, 该子列收敛到 $ X $ 中的某个数.
+    \end{itemize}
+\end{theorem}
+
+\begin{remark}
+    $ \R $ 中有界的闭集合称为紧致集 (compact set), 简称紧集.
+\end{remark}
+
+换句话说, 紧致集中的任意序列都有收敛到该集合中的子列.
+
+要证明 Heine-Borel 定理, 要用到 Bolzano-Weirestrass 定理.
+
+\begin{proof}
+    
+\end{proof}
 
 
 

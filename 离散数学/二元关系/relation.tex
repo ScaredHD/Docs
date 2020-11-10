@@ -49,6 +49,7 @@
 \def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
 \newcommand{\del}{\nabla}
 
+
 \pagestyle{empty}
 
 \begin{document}
@@ -163,18 +164,23 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
 下面就来研究偏序集的子集上的一些特别元素及其性质.
 
 \begin{definition}[\text{极大元 (Maximal element)}]
-    $ X $ 是偏序集, $ Y \subseteq X $, 则 $ m $ 是 $ Y $ 的极大元, 当且仅当不存在 $ y \in Y $, $ y > m $. 换句话说, $ Y $ 中没有比 $ m $ 更大的元素. 
+    $ X $ 是偏序集, $ Y $ 是 $ X $ 的子集. 若 $ m \in Y $, 则 $ m $ 是 $ Y $ 的极大元, 当且仅当不存在 $ y \in Y $, $ y > m $. 换句话说, $ Y $ 中没有比 $ m $ 更大的元素. 
 \end{definition}
 
 \begin{remark}
-    不存在 $ y \in Y $, $ y > m $ 的等价表述为: 对于所有 $ y \in Y $, 要么 $ y \leqslant m $, 要么 $ y $ 和 $ m $ 不可比. 因为 $ x $ 和 $ y $ 只有四种状态 (见前文).
+    不存在 $ y \in Y $, $ y > m $ 的等价表述为: 对于所有 $ y \in Y $, 要么 $ y \le m $, 要么 $ y $ 和 $ m $ 不可比. 因为 $ x $ 和 $ y $ 只有四种状态 (见前文).
 \end{remark}
 
 \begin{definition}[\text{最大元 (Greatest element)}]
-    $ X $ 是偏序集, $ Y \subseteq X $, 则 $ m $ 是 $ Y $ 的极大元, 当且仅当 $ \forall y \in Y $, $ m \ge y $. 换句话说, $ m $ 大于 $ Y $ 中所有元素.
+    $ X $ 是偏序集, $ Y \subseteq X $. 若 $ m \in Y $, 则 $ m $ 是 $ Y $ 的极大元, 当且仅当 $ \forall y \in Y $, $ m \ge y $. 换句话说, $ m $ 大于 $ Y $ 中所有元素.
 \end{definition}
 
 极小元 (minimal element) 和最小元 (least element) 可以同理定义.
+
+\begin{remark}
+    由定义可以看出, 最大元蕴含极大元, 所以最大元比极大元更强. 最大元一定是极大元, 但极大元不一定是最大元.
+\end{remark}
+
 
 极大元和最大元是不同的概念. $ Y $ 中没有比 $ m $ 更大的元素, 不能说明 $ m $ 大于 $ Y $ 中所有元素. 考虑下面的偏序集 $ Y = \set{\varnothing, \set{1}, \set{1, 2}, \set{1, 3}} $ 及其上的偏序 $ \subseteq $: $ \set{1, 2} $ 是极大元, 没有比 $ \set{1, 2} $ 更大的元素, 因为在 $ Y $ 中找不到 $ y $ 满足 $ \set{1, 2} \subseteq y $. 同理 $ \set{1, 3} $ 也是极大元. 由此看出极大/小元可以不唯一.
 
@@ -185,22 +191,86 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
     \includegraphics[width = 0.6\linewidth]{./images/maximal_greatest.png}
 \end{figure} 
 
+考虑 $ X = (0, 1) \subseteq \R $ 和小于等于关系 $ \leqslant $, $ X $ 没有极大元和最大元. 考虑 $ X = \set{\set{1}, \set{2}, \set{1, 2}} $ 和子集关系 $ \subseteq $, $ X $ 有唯一极大元 $ \set{1, 2} $ 和唯一最大元 $ \set{1, 2} $. 设集合:
+\[ A = \set{\set{n} \colon n, k \in \N, n \leqslant k} \,,\]
+
+直观地说, $ A = \set{\set{0}, \set{1}, \set{2}, \dots, \set{k}} $.
+
+那么考虑集合 $ A \cup \set{\varnothing} = \set{\varnothing, \set{0}, \set{1}, \dots, \set{k}} $. 这个偏序集 $ (A, \subseteq) $ 有 $ k $ 个极大元, $ 0 $ 个最大元.
+
+由此看出:
+
 \begin{proposition}
-    $ X $ 为偏序集, 则 $ X $ 可以没有极大元, 或有任意个极大元. $ X $ 可以没有最大元或存在唯一最大元. 极小元和最小元同理.
+    $ X $ 为偏序集, 则 $ X $ 可能没有极大元, 或有任意个极大元. $ X $ 可能没有最大元或存在唯一最大元. 极小元和最小元同理.
 \end{proposition}
 
-
 \begin{proposition}
-    $ X $ 为偏序集, 若存在最大元, 则极大元也是唯一的, 且等于最大元. 反之, $ X $ 有唯一极大元 $ x $, 则 $ x $ 是 $ X $ 的最大元. 也就是说, 最大元存在时, 极大元和最大元等价. 极小元和最小元同理.
+    $ X $ 为偏序集, 若存在最大元, 则最大元是唯一的. 且此时极大元也是唯一的, 等于最大元. 也就是说, 最大元存在时, 极大元和最大元等价. 极小元和最小元同理.
 \end{proposition}
+
+\begin{remark}
+    注意上面的逆命题并不成立, 若 $ X $ 有唯一极大元 $ x $, 则 $ x $ 不一定是 $ X $ 的最大元. (如果限制到有限的偏序集上, 情况如何?)
+
+    针对这个逆命题, 我们可以举出反例, 定义集合 $ S_k \coloneqq \set{n \in \Z \colon 0 \leqslant n \leqslant k} $. 也就是说, $ S_k $ 为 $ 0 $ 到 $ k $ 的整数组成的集合:
+    \[ \begin{array}{c}
+        S_0 = \set{0} \\
+        S_1 = \set{0, 1} \\
+        S_2 = \set{0, 1, 2} \\
+        S_n = \set{0, 1, 2, \dots, n}
+    \end{array} \,.\]
+
+    考虑集合 $ A = \set{S_n \colon n \in \N} \cup \set{\set{0, -1}} $, 即:
+    \[ A = \set{\set{0, -1}, \set{0}, \set{0, 1}, \set{0, 1, 2}, \dots} \,.\]
+
+    这是一个无限集, 其有唯一极大元 $ \set{0, -1} $, 但没有最大元.
+\end{remark}
+
+\begin{proof}
+    设 $ (X, \le) $ 的一个子集 $ Y $ 存在最大元 $ m $. 假设存在另一个最大元 $ m' $, 按照定义 $ m, m' \in Y $, 且应该有 $ m \ge m' $ 和 $ m' \ge m $, 所以 $ m' = m $. 这说明最大元如果存在, 必然是唯一的.
+
+    假设存在极大元 $ n $, $ n \in Y $, 所以有 $ m \ge n $.
+    由于 $ m \in Y $, 所以要么 $ n \ge m $, 要么 $ n $ 和 $ m $ 不可比. 由于已经有 $ m \ge n $, 说明两者是可比的. 所以只可能 $ n \ge m $, 又有 $ m \ge n $, 则 $ m = n $. 这说明最大元存在时, 极大元是唯一等于最大元的.
+\end{proof}
+
+\begin{corollary}
+    若 $ X $ 是一个有限的偏序集, 且 $ X $ 存在唯一极大元 $ x $, 则 $ x $ 就是 $ X $ 的最大元.
+\end{corollary}
+
+\begin{proof}
+    
+\end{proof}
 
 \begin{proposition}
     $ X $ 为全序集, 则最大元和极大元始终等价. 极小元和最小元同理.
 \end{proposition}
 
-总结一下, 偏序集中: 极大元和最大元是两个不同的概念. 极大元可以有零个或任意个, 最大元只能有零个或一个. 且最大元存在时, 两者是等价的, 此时两者都是唯一的.
+\begin{proof} 
+    证明两部分: 最大元蕴含极大元; 极大元蕴含最大元.
+
+    
+    
+\end{proof}
+
+总结一下, 偏序集中: 极大元和最大元是两个不同的概念. 极大元可以有零个或任意个, 最大元只能有零个或一个. 且当最大元存在时, 两者等价, 此时两者都是唯一的.
 
 而全序集中, 由于可比性: 最大元和极大元是始终等价的概念, 要么同时没有, 要么同时有唯一相同的最大元和极大元.
+
+\paragraph{最大元和极大元的个数情况} \ 
+
+偏序集中, 最大元和极大元有四种情况:
+\begin{itemize}
+    \item $ 0 $ 个极大元, $ 0 $ 个最大元
+    \item $ 1 $ 个极大元, $ 0 $ 个最大元 (若偏序集有限, 不可能出现这种情况)
+    \item $ 1 $ 个极大元, $ 1 $ 个最大元
+    \item 多个极大元, $ 0 $ 个最大元
+\end{itemize}
+
+全序集中, 最大元和极大元等价, 有两种情况:
+\begin{itemize}
+    \item $ 0 $ 个极大元, $ 0 $ 个最大元
+    \item $ 1 $ 个极大元, $ 1 $ 个最大元
+\end{itemize}
+
 
 \subsubsection{上界与最小上界}
 \begin{definition}[\text{上界 (upper bound)}]

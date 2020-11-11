@@ -104,7 +104,7 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
 
 
 \section{序集}
-\subsection{偏序}
+\subsection{偏序集}
 \begin{definition}[\text{偏序集}]
     集合 $ X $ 连同其上的关系 $ \le $ 一起 $ (X, \le) $ 被称为偏序集 (partially ordered set, poset), 当且仅当其满足以下三条性质:
     \begin{itemize}
@@ -140,7 +140,7 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
 
 若 $ x $, $ y $ 满足其中前三种情况的一种 $ x < y $ 或 $ x = y $ 或 $ x > y $, 则称 $ x $ 和 $ y $ 是可比较的 (comparable).
 
-\subsection{全序}
+\subsection{全序集}
 \begin{definition}[\text{全序集}]
     若偏序集 $ X $ 中任意两个元素 $ x $, $ y $ 都是可比较的, 则称 $ X $ 是一个全序集 (totally ordered set, toset) 或链 (chain).
 \end{definition}
@@ -151,7 +151,11 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
 
 也就是说, 全序集是特殊的偏序集, 是偏序集的加强版本.
 
-\subsection{序集上的性质}
+\paragraph{例}
+$ \N $, $ \Z $, $ \Q $, $ \R $, $ \R^* $, 连同其上的小于等于关系, 都是全序集.
+
+
+\subsection{偏序集上的性质}
 首先是序集及其子集的性质.
 
 \begin{proposition}
@@ -203,6 +207,26 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
 \begin{proposition}
     $ X $ 为偏序集, 则 $ X $ 可能没有极大元, 或有任意个极大元. $ X $ 可能没有最大元或存在唯一最大元. 极小元和最小元同理.
 \end{proposition}
+
+\begin{proposition}
+    若 $ X $ 为有限偏序集, 则 $ X $ 必然存在极大元和极小元.
+\end{proposition}
+
+\begin{proof}
+    下面证明必然存在极大元, 极小元同理.
+
+    归纳法. 若偏序集 $ X $ 为单元素集, 则其唯一元素为极大元. 归纳地假设任意 $ n $ 元素偏序集存在极大元, 要证明 $ n + 1 $ 元素偏序集存在极大元.
+
+    设 $ X $ 为偏序集, $ |X| = n + 1 $, $ x \in X $. 则 $ X \setminus \set{x} $ 为 $ n $ 元素偏序集, 则 $ X \setminus \set{x} $ 存在极大元, 记为 $ m $. 现重新将 $ x $ 加入到 $ X \setminus \set{x} $ 中, 会出现三种情况: (1) $ m \le x $; (2) $ x \le m $; (3) $ x $, $ m $ 不可比.
+
+    (1) 若 $ m \le x $: $ X \setminus \set{x} $ 中找不到比 $ m $ 大的元素, 也就找不到比 $ x $ 大的元素. 于是 $ X $ 中, 找不到比 $ x $ 大的元素, 则 $ x $ 成为新的极大元.
+
+    (2) 若 $ x \le m $: 此时 $ X $ 中仍然找不到比 $ x $ 大的元素, 于是 $ m $ 仍是极大元.
+
+    (3) 若 $ m $, $ x $ 不可比: 加入后 $ X $ 中仍然没有比 $ x $ 大的元素, 这不影响 $ m $ 仍是极大元.
+
+    综上所述, 便完成了归纳. 于是对于任意有限偏序集, 总是存在极大元的.
+\end{proof}
 
 \begin{proposition}
     $ X $ 为偏序集, 若存在最大元, 则最大元是唯一的. 且此时极大元也是唯一的, 等于最大元. 也就是说, 最大元存在时, 极大元和最大元等价. 极小元和最小元同理.
@@ -303,6 +327,8 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
     一个偏序集可以没有上界, 或存在任意个上界; 可以没有最小下界, 或存在唯一最小下界. 下界和最大下界同理.
 \end{proposition}
 
+
+
 \begin{proposition}
     设 $ Y $ 是偏序集 $ X $ 的子集. 若 $ \beta $ 为 $ Y $ 的一个上界, 若 $ \beta \in Y $, 则有下面两条结论:
     \begin{itemize}
@@ -312,6 +338,83 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
 
     这就导出了最大元的等价定义: 若 $ Y $ 中存在元素等于最小上界, 则这个元素为最大元. 下界和最大下界同理.
 \end{proposition}
+
+\begin{proof}
+    设 $ Y $ 是偏序集 $ X $ 的子集, $ \beta $ 为 $ Y $ 的一个上界且 $ \beta \in Y $. 由于 $ \beta $ 为上界, $ \forall y \in Y $, $ y \le \beta $. 由于 $ \beta \in Y $, 按照定义 $ \beta $ 为 $ Y $ 的最大元. 若 $ Y $ 还存在上界 $ \beta' $, 由于 $ \beta \in Y $, $ \beta \le \beta' $. 所以 $ \beta $ 为最小上界.
+\end{proof}
+
+就此我们可以导出最小上界性质 (最大下界同理).
+
+\begin{proposition}[\text{最小上界性质}]
+    设 $ Y $ 是偏序集 $ X $ 的子集, $ \beta $ 为 $ Y $ 的最小上界. 若 $ y \in Y $ 且 $ y < \beta $, 则存在 $ y' \in Y $ 满足 $ y < y' \le \beta $.
+\end{proposition}
+
+\begin{proof}
+    假设对于给定 $ y < \beta $, 找不到 $ y' \in Y $ 使得 $ y < y' \le \beta $. 这等价于对于任意 $ y' \in Y $, 有 $ y' \le y $ 或 $ y' > \beta $. 对于前者, 所有的 $ y' \in Y $ 都有 $ y' \le y $, 则 $ y $ 为上界, 而 $ y $ 小于最小上界 $ \beta $, 这产生了矛盾. 后者也是不可能的, 因为 $ \beta $ 为上界, $ y' \le \beta $. 综上所述, 一定存在 $ Y $ 中的元素 $ y' $ 满足 $ y < y' \le \beta $.
+\end{proof}
+
+
+\section{良序集}
+\begin{definition}[\text{良序集}]
+    设 $ Y $ 为偏序集 $ X $ 的子集. 称 $ Y $ 是良序集 (well-ordered set, woset), 当且仅当 $ Y $ 的每个非空子集都存在最小元 $ \min(Y) $
+\end{definition}
+
+\begin{remark}
+    空集 $ \varnothing $ 是良序集. 因为其每个非空子集都存在最小元是一个空真的命题.
+\end{remark}
+
+
+\paragraph{例}
+$ \N $ 是良序的; $ \Z $, $ \Q $, $ \R $ 都不是良序的.
+
+\begin{proposition}
+    良序集的子集也是良序集.
+\end{proposition}
+
+\begin{proof}
+    设 $ X $ 为良序集, $ Y \subseteq X $. 若 $ Y $ 为空集, 则 $ Y $ 自然为良序集. 若 $ Y $ 非空, 考虑任意非空子集 $ Y' \subseteq Y \subseteq X $. 由于 $ Y' $ 是 $ X $ 的非空子集, 所以 $ Y' $ 有最小元. 故 $ Y $ 为良序集.
+\end{proof}
+
+\begin{remark}
+    因此, 偏序集、全序集、良序集的子集仍然分别为偏序集、良序集、全序集. 故子集保留原集的序.
+\end{remark}
+
+\begin{proposition}
+    有限的全序集是良序集.
+\end{proposition}
+
+\begin{proof}
+    使用归纳法. 设 $ X $ 为一个有限的全序集. 若 $ X $ 为单元素集, 则显然$ X $ 只有一个非空子集, 且其存在最小元素. 于是 $ X $ 为良序集, 这证明了基础情形. 下面归纳地假设有限的 $ n $ 元全序集为良序集, 要证明 $ n + 1 $ 元全序集也为良序集. 
+    
+    设 $ X $ 为一个 $ n + 1 $ 元全序集. 取其中一个元素 $ x $, 则 $ X \setminus \set{x} $ 为良序集. 现在将 $ x $ 加入到 $ X \setminus \set{x} $ 中, 考虑任意非空 $ Y \subseteq X $, 则其可能包含新加进去的 $ x $. 于是分两种情况讨论: 
+    
+    若 $ x \notin Y $, 则 $ Y \subseteq X \setminus \set{x} $, 也就为良序集, 有最小元.
+    
+    若 $ x \in Y $, 则 $ Y \setminus \set{x} \subseteq X \setminus \set{x} $, 也就为良序集, 有最小元 $ m $. 由于 $ Y \subseteq X $ 为全序集, $ Y $ 中加入的 $ x $ 与 $ m $ 有两种情况: $ x \le m $ 或 $ m \le x $. 前者 $ x $ 成为新的最小元, 后者 $ m $ 仍为最小元. 
+
+    综上所述, 如果 $ n $ 元素全序集是良序集. 则 $ n + 1 $ 元素全序集的任意非空子集都存在最小元, 于是为良序集.
+\end{proof}
+
+\begin{remark}
+    同理还可以证明: 全序集的有限子集存在最大元.
+\end{remark}
+
+良序集的重要性质在于, 可以在其上使用归纳法.
+
+\begin{proposition}[\text{强归纳原理}]
+    设 $ (X, \le) $ 为良序集, $ P(n) $ 是关于 $ n \in X $ 的命题. 若满足: ``对所有 $ m < n $, $ P(m) $ 成立, 则 $ P(n) $ 成立.'' 则 $ P(n) $ 对一切 $ n \in X $ 皆成立.
+\end{proposition}
+
+\begin{remark}
+    注意, 此处无需说明基础情形. 因为对于 $ X $ 的最小元 $ m_0 $, $ P(m_0) $ 是空真的.
+\end{remark}
+
+\begin{proof}
+    假设对于所有 $ m < n $, $ P(m) $ 成立, 则 $ P(n) $ 成立; 但存在 $ n \in X $, $ P(n) $ 不成立. 我们将所有使 $ P(n) $ 不成立的元素装在集合中:
+    \[ A \coloneqq \set{n \in X \colon P(n) \text{ 为假}} \,.\]
+
+    显然有 $ A \subseteq X $ 且 $ A $ 非空. 由于 $ X $ 为良序集, 所以 $ A $ 必然存在最小元, 记为 $ n_0 $. 那么对于任意 $ x < n_0 $, $ x \notin A $, 即 $ P(x) $ 成立. 于是根据归纳假设, $ P(n_0) $ 也成立, 这和 $ n_0 \in A $ 矛盾.
+\end{proof}
 
 
 \end{document}

@@ -354,6 +354,7 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei5e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei96.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei50.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei5e.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei96.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong5e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai8f.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai8d.tfm
@@ -387,7 +388,6 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai6b.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai94.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong94.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong72.tfm
-INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei96.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei60.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei8d.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong99.tfm
@@ -408,6 +408,7 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong98.tfm
 INPUT d:/Programming/Docs/离散数学/二元关系/./images/maximal_greatest.png
 INPUT ./images/maximal_greatest.png
 INPUT ./images/maximal_greatest.png
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong91.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai55.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai5c.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei54.tfm
@@ -416,6 +417,11 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei65.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei60.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei75.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei5c.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei82.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong4e.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong50.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong4e.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong50.tfm
 INPUT d:/Programming/Docs/离散数学/二元关系/relation.aux
 INPUT d:/Programming/Docs/离散数学/二元关系/relation.out
 INPUT d:/Programming/Docs/离散数学/二元关系/relation.out
@@ -423,8 +429,10 @@ INPUT c:/WINDOWS/fonts/simhei.ttf
 INPUT c:/WINDOWS/fonts/simhei.ttf
 INPUT c:/WINDOWS/fonts/simhei.ttf
 INPUT c:/WINDOWS/fonts/simhei.ttf
+INPUT c:/WINDOWS/fonts/simhei.ttf
 INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simkai.ttf
+INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc

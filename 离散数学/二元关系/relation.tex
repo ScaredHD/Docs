@@ -313,6 +313,8 @@ $ \N $, $ \Z $, $ \Q $, $ \R $, $ \R^* $, 连同其上的小于等于关系, 都
     设 $ Y $ 是偏序集 $ X $ 的子集. 对于 $ \beta \in X $, 称 $ \beta $ 为 $ Y $ 的上界, 当且仅当 $ \forall y \in Y $, $ \beta \ge y $.
 \end{definition}
 
+若 $ \beta \in X $ 为 $ Y $ 的上界, 且 $ \beta $ 不在 $ Y $ 中, 则称 $ \beta $ 为 $ Y $ 的严格上界. 这等价于 $ \forall y \in Y $, $ y < \beta $.
+
 \begin{definition}[\text{最小上界}]
     设 $ Y $ 是偏序集 $ X $ 的子集. 设 $ \beta \in X $ 为 $ Y $ 的上界, 称 $ \beta $ 为 $ Y $ 的最小上界, 当且仅当对于任意 $ Y $ 的上界 $ \beta' $ 满足 $ \beta \le \beta' $. 即 $ \beta $ 是所有上界的集合的最小元.
 \end{definition}
@@ -415,6 +417,17 @@ $ \N $ 是良序的; $ \Z $, $ \Q $, $ \R $ 都不是良序的.
 
     显然有 $ A \subseteq X $ 且 $ A $ 非空. 由于 $ X $ 为良序集, 所以 $ A $ 必然存在最小元, 记为 $ n_0 $. 那么对于任意 $ x < n_0 $, $ x \notin A $, 即 $ P(x) $ 成立. 于是根据归纳假设, $ P(n_0) $ 也成立, 这和 $ n_0 \in A $ 矛盾.
 \end{proof}
+
+\begin{lemma}
+    设 $ (X, \le) $ 为偏序集, $ x_0 \in X $. 则存在 $ X $ 的良序子集 $ Y $, 它以 $ x_0 $ 为最小元, 且没有严格上界.
+\end{lemma}
+
+由该引理可以导出一个重要推论.
+
+\begin{lemma}[\text{Zorn 引理 / 超限归纳原理}]
+    $ X $ 为非空偏序集且 $ X $ 的每个全序子集 $ Y $ 都有上界, 那么 $ X $ 有最大元.
+\end{lemma}
+
 
 
 \end{document}

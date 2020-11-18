@@ -189,11 +189,14 @@
     实直线的子集 $ X $ 是有界的, 当且仅当 $ \exists M > 0 $, $ X \subseteq [-M, M] $.
 \end{definition}
 
+\paragraph{例}
+半无限区间和双无限区间都是无界的. 以 $ (a, +\infty) $ 为例: 假设其为有界的, 则存在正的 $ M \in \R $, $ (a, +\infty) \subseteq [-M, M] $. 也就是说对于任意 $ x \in (a, +\infty) $, $ x \in [-M, M] $: 若 $ M <= a $, $ M <= a < x $, 所以 $ x $ 不在 $ [-M, M] $ 中; 若 $ M > a $, 取 $ x = M + 1 > M > a $, $ x \in (a, +\infty) $ 而  $ x \notin [-M, M] $. 所以产生了矛盾, $ (a, +\infty) $ 不是有界的.
+
 \begin{theorem}[\text{实直线上的 Heine-Borel 定理}]
     设 $ X \subseteq \R $, 则下面两个命题等价:
     \begin{itemize}
         \item $ X $ 是闭的且有界
-        \item 若序列 $ (a_n)_{n = 0}^\infty $ 是 $ X $ 中的序列, 则存在子列 $ (a_{n_j})_{j = 0}^\infty $, 该子列收敛到 $ X $ 中的某个数.
+        \item $ (a_n)_{n = 0}^\infty $ 是 $ X $ 中的序列, 则存在子列 $ (a_{n_j})_{j = 0}^\infty $, 该子列收敛到 $ X $ 中的某个数.
     \end{itemize}
 \end{theorem}
 
@@ -206,7 +209,9 @@
 要证明 Heine-Borel 定理, 要用到 Bolzano-Weirestrass 定理.
 
 \begin{proof}
-    
+    设 $ X $ 是紧致集, $ (a_n)_{n = 0}^\infty $ 是 $ X $ 中的序列, 即 $ \forall n \in \N $, $ a_n \in X $. 由 Bolzano-Weirestrass 定理, 该序列一定存在收敛子列, 且收敛到 $ X $ 中的某个数.
+
+    设 $ (a_n)_{n = 0}^\infty $ 是 $ X $ 中的任意序列, 且存在子列 $ (a_{n_j})_{j = 0}^\infty $ 收敛到 $ X $ 中的某个数 $ L $.
 \end{proof}
 
 

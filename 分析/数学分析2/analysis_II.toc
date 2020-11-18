@@ -6,3 +6,4 @@
 \contentsline {paragraph}{例}{2}{paragraph*.3}
 \contentsline {subsubsection}{\numberline {1.2.2}极限点}{3}{subsubsection.1.2.2}
 \contentsline {subsubsection}{\numberline {1.2.3}有界集}{4}{subsubsection.1.2.3}
+\contentsline {paragraph}{例}{4}{paragraph*.4}

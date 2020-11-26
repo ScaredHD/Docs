@@ -74,6 +74,8 @@
     \psi(e_4) = (d, c)
 \end{array} \,.\]
 
+图的边可以是有向的, 此时边 $ (a, b) $ 和 $ (b, a) $ 是不同的边, 这样的图叫有向图. 为了和无向图中的 $ (a, b) $ 区别开, 也可以使用 $ \langle a, b \rangle $. 图的每一条边可以给定一个权重, 这样得到的图为加权图. 本章主要描述无向图, 此时虽然边被写成二元组的形式, 但其实 $ (a, b) $ 和 $ (b, a) $ 指同一条边. 所以无向图中也可以用 $ \set{a, b} $ 表示一条边.
+
 下面概念描述了由原图得到其它图的方法.
 \begin{definition}[\text{子图}]
     设图 $ G = (V, E) $, $ V' \subseteq V $, $ E' \subseteq E $, 则图 $ G' = (V', E') $ 称为 $ G $ 的子图. 若 $ G' \neq G $, 则称 $ G' $ 为 $ G $ 的真子图.
@@ -88,7 +90,11 @@
 
 换句话说, $ G(V') $ 的边集由 $ E $ 中关联 $ V' $ 中任意顶点的的边构成. 这意味着两方面: (1) $ V' $ 中任意两点若在 $ G $ 中关联, 则这条边就在导出子图中; (2) 若 $ (a, b) $ 为导出子图中的一条边, 则 $ a, b $ 在原图中也是关联的.
 
-同理还可得到边导出子图.
+同理还可得到边导出子图: 设图 $ G $ 边集的子集 $ E' \subseteq E(G) $, 则 $ E' $ 的边导出子集:
+\[ \begin{cases}
+    V(G(E')) \coloneqq \set{a \mid \exists b, (a, b) \in E'} \\
+    E(G(E')) = E'
+\end{cases} \,.\]
 
 \begin{definition}[\text{删除点}]
     对于图 $ G = (V, E) $, 设 $ v \in V $. 则删掉这个点及其关联的边, 剩下的图记作 $ G - v $. 也即:
@@ -124,6 +130,10 @@
     出度为正, 入度为负的规定方式和散度的正负类似.
 \end{remark}
 
+图 $ G $ 中, 最大点度和最小点度定义为:
+\[ \Delta \coloneqq \max \set{d(v) \mid v \in V(G)} \,,\]
+\[ \delta \coloneqq \min \set{d(v) \mid v \in V(G)} \,.\]
+
 \begin{theorem}[\text{握手定理}]
     无向图 $ G = (V, E) $ 满足所有点度之和等于边数量的两倍:
     \[ \sum_{v \in V} d (v) = 2 |E| = 2 \varepsilon(G) \,.\]
@@ -134,12 +144,12 @@
 
 由握手定理可以得到下面的推论 (为引述方便, 称度数为奇数的点为奇点, 度数为偶数的点为偶点):
 \begin{proposition}
-    对于任意无向图, 奇点的个数一定为偶数.
+    对于任意简单无向图, 奇点的个数一定为偶数.
 \end{proposition}
 
 
 
-\section{连通性}
+\section{无向图的连通性}
 \begin{definition}[\text{道路, 简单道路与路径}]
     定义道路 (walk) 为一系列交替的点和边的序列: $ v_0, e_1, v_1, e_2, v_2, \dots, e_n, v_n $; 其中 $ e_i $ 关联 $ v_{i - 1} $ 和 $ v_i $. 
     \begin{itemize}
@@ -149,12 +159,28 @@
     \end{itemize}
 \end{definition}
 
+\begin{remark}
+    可以看出, 从道路, 到路径, 到简单道路, 条件逐渐加强.
+\end{remark}
+
 对于道路 $ v_0, e_1, v_1, \dots, v_{n - 1}, e_n, v_n $, 其含有 $ n $ 条边, 称这条道路的长度为 $ n $, 记作 $ d(v_0, v_n) = n $.
 
 下面几张示意图描述了上面几个术语之间的区别, 注意箭头并不表示有向图, 数字也不代表赋权, 此处只是形象化的表示出这条道路从起点到终点的行进过程和顺序.
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.7\linewidth]{./images/path_trail.png}
+\end{figure}
+
+
+\begin{definition}[\text{连通}]
+    对于无向图 $ G $ 中的两点 $ a $, $ b $, 称这两点是连通的, 如果能够找到一条道路, 使得 $ a $ 为起点 $ b $ 为终点或 $ b $ 为起点 $ a $ 为终点. 称 $ G $ 是连通的, 当且仅当任意 $ u, v \in V(G) $, $ u $ 和 $ v $ 是连通的.
+\end{definition}
+
+\paragraph{例}
+下图中, 红黄两点为连通的, 而这两点和蓝点是不连通的.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.25\linewidth]{./images/connected_1.png}
 \end{figure}
 
 
@@ -181,7 +207,7 @@
 \end{definition}
 
 \paragraph{例}
-下图中, 删除蓝色的点, 原本的连通图变得不再连通, 所以这个点为割点. 删除红色的边, 图也变得不连通, 所以这条边为割边(或桥).
+下图中, 删除蓝色的点, 原本的连通图变得不再连通, 所以这个点为一个割点. 删除红色的边, 图也变得不连通, 所以这条边为一条割边(或桥).
 \begin{figure}[H]
     \centering
     \includegraphics[width = 0.7\linewidth]{./images/bridge.png}

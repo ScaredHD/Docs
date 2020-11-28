@@ -204,6 +204,35 @@ Concider matrices. Not all matrices are invertable, so we can't just say matrix 
     And enable to distinguish what kind of elements we are having in the matrices, notations like $ \GL_n(\R) $ or $ \GL_n(\C) $ are used.
 \end{definition}
 
+\subsection{半群}
+半群是弱于群的概念.
+\begin{definition}[\text{半群}]
+    $ (G, \cdot) $ 被称为半群, 当且仅当 $ G $ 对 $ \cdot $ 封闭且 $ \cdot $ 满足结合律.
+\end{definition}
+
+如果 $ (G, \cdot) $ 中存在 $ a $, 满足 $ a a = a $. 则称 $ a $ 为 $ \cdot $ 运算的幂等元. 借助下面的引理可以证明, 有限的半群中必然存在幂等元.
+
+\begin{lemma}
+    如果对于有限半群 $ G $ 的元素 $ a $, 存在正整数 $ k \geqslant 2 $, 满足 $ a^k = a $, 则 $ G $ 中存在幂等元.
+\end{lemma}
+
+\begin{proof}
+    对于 $ a^k = a $, 若 $ k = 2 $, $ a $ 为幂等元, 引理得证. 若 $ k > 2 $, 则将等式两边同时乘以 $ a^{k - 2} $. 得到 $ a^{2(k - 1)} = a^{k - 1} $. 即 $ \left( a^{k - 1} \right)^2 = a^{k - 1} $, 而 $ a^{k - 1} \in G $, 所以 $ G $ 中存在幂等元 $ a^{k - 1} $.
+\end{proof}
+
+\begin{proposition}
+    有限的半群必然包含幂等元, 即若 $ G $ 为有限的半群, 则存在 $ a \in G $, 使得 $ aa = a $.
+\end{proposition}
+
+\begin{proof}
+    对于任意 $ a \in G $, 考虑无限序列 \[ \left( a^{2^p} \right)_{p = 0}^\infty \colon \quad a, a^2, a^4, a^8, a^{16}, \dots \]
+
+    由于封闭性, 序列中每一项都在 $ G $ 中, 于是必然存在不同的 $ s $, $ t $ 满足 $ a^{\displaystyle 2^s} = a^{\displaystyle 2^t} $. 因为如果不然, 序列中的每一项互不相同, 则 $ G $ 不可能有限. 不失一般性地假设 $ s > t $, 于是有: \[ a^{\displaystyle 2^{s}} = a^{\displaystyle 2^{t + (s - t)}} = a^{\displaystyle 2^{t} 2^{\displaystyle s - t}} = a^{\displaystyle 2^t} \,,\]
+
+    于是得到 $ \left( a^{\displaystyle 2^t} \right)^{\displaystyle 2^{s - t}} = a^{\displaystyle 2^t} $. 于是我们找到了 $ b = a^{\displaystyle 2^t} \in G $, 使得存在 $ k = 2^{s - t} $, 满足 $ b^k = b $, 根据上一个引理, $ G $ 中存在幂等元.
+\end{proof}
+
+
 
 
 

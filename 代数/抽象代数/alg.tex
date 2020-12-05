@@ -121,6 +121,14 @@ The notations like $ a^n $ or $ a^{-n} $, $ n \in \N $ can be recursively define
 \[ a^0 = 1 \,.\]
 
 \begin{proposition}
+    If inverse of $ a $ exists, which means $ a $ has left inverse and right inverse, then the left and right inverse are equal, therefore the inverse is unique.
+\end{proposition}
+
+\begin{proof}
+    If $ a \in G $ has left inverse $ b $ and right inverse $ c $. Concider element $ bac \in G $, $ (ba)c = 1 c = c $, and $ b(ac) = b 1 = b $. By associativity, $ (ba)c = b(ac) $, so $ c = b $. The inverse is unique.
+\end{proof}
+
+\begin{proposition}
     $ (a b)^{-1} = b^{-1} a^{-1} $.
 \end{proposition}
 
@@ -233,11 +241,74 @@ Concider matrices. Not all matrices are invertable, so we can't just say matrix 
 \end{proof}
 
 
+\subsection{子群}
+\begin{definition}[\text{子群}]
+    $ (G, \cdot) $ 为一个群, $ H \subseteq G $, 若 $ H $ :
+    \begin{itemize}
+        \item 满足封闭性
+        \item 存在单位元
+        \item 每个元素都可逆
+    \end{itemize}
+    则称 $ H $ 为 $ G $ 的子群, 记作 $ H \le G $.
+
+    每个群 $ G $ 都有两个明显的子群, 称为平凡子群, 即单位元构成的集合 $ \set{1} $ 以及 $ G $ 本身. 若 $ H \le G $, 且 $ H $ 不是平凡子群, 则称 $ H $ 为 $ G $ 的真子群, 记作 $ H < G $.
+\end{definition}
+
+子群只需满足三个条件, 因为结合律自动转移到子集上: $ \forall a, b, c \in H $, $ a, b, c \in G $, $ G $ 具有结合律, 所以 $ H $ 也满足结合律. 换句话说, 群 $ G $ 的子集 $ H $ 也是一个群, 则 $ H $ 为 $ G $ 的子群.
 
 
+定义 $ \Z a $ 为 $ a $ 的整倍数构成的集合:
+\[ \Z a \coloneqq \set{k a \mid k \in \Z} \,.\]
+
+等价的定义为:
+\[ \Z a \coloneqq \set{n \mid \exists k \in \Z, n = k a} \,.\]
+
+\paragraph{例}
+\[ \Z 0 = \set{0} \,,\]
+\[ \Z 1 = \set{0, 1, -1, 2, -2, \dots} = \Z \,,\]
+\[ \Z 2 = \set{0, 2, -2, 4, -4, \dots} \,,\]
+\[ \Z 5 = \set{0, 5, -5, 10, -10, \dots} \,.\]
 
 
+可以证明, $ \Z a $ 为 $ (\Z, +) $ 的子群. $ \Z a $ 满足封闭性: $ \forall n_1, n_2 \in \Z a $, $ \exists k_1, k_2 \in \Z $ 满足 $ n_1 = k_1 a $, $ n_2 = k_2 a $. 故 $ n_1 + n_2 = (k_1 + k_2) a $, 而 $ k_1 + k_2 \in Z $, 所以 $ n_1 + n_2 \in \Z a $.
 
+此外, $ 0 $ 为 $ \Z a $ 的单位元; 对于任意 $ a \in \Z a $, 都能找到 $ -a \in \Z a $, 使得 $ a + (-a) = 0 $, 即 $ \Z a $ 中每个元素可逆.
+
+
+\begin{proposition}
+    群 $ G $ 的单位元是唯一的.
+\end{proposition}
+
+\begin{proof}
+    设 $ i, i' \in G $ 为单位元, 且 $ i \neq i' $, 即 $ \forall a \in G $, $ a = a i $ 以及 $ i' a = a $. 所以 $ i' = i' i = i $.
+\end{proof}
+
+这也意味着, $ G $ 和其子群 $ H $ 共享唯一的单位元. 如果 $ G $ 的单位元 $ 1 $ 也在 $ H $ 中, 那么 $ 1 $ 也一定是 $ H $ 的单位元.
+
+$ \Z a $ 的重要之处在于下面的命题:
+\begin{proposition}
+    $ (\Z, +) $ 的子群一定有 $ \Z a $ 的形式.
+\end{proposition}
+
+
+下一个重要的抽象子群例子为:
+\begin{definition}[\text{循环群}]
+    群 $ G $ 中的元素 $ x $ 生成的子群: 
+    \[ \set{1, x, x^{-1}, x^2, x^{-2}, \dots} \]
+    称为循环子群.
+\end{definition}
+
+\begin{proposition}
+    $ S = \set{n \mid x^n = 1} $ 为 $ (\Z, +) $ 的子群.
+\end{proposition}
+
+\begin{proof}
+    封闭性: $ \forall n_1, n_2 \in S $, $ x^{n_1} = 1 $, $ x^{n_2} = 1 $, $ x^{n_1} x^{n_2} = x^{n_1 + n_2} = 1 $, 所以 $ n_1 + n_2 \in S $.
+
+    单位元: 只需考虑 $ (\Z, +) $ 的单位元 $ 0 $ 是否在 $ S $ 中即可. 显然, $ x^0 = 1 $, $ 0 \in S $, 所以 $ S $ 存在单位元 $ 0 $.
+
+    逆元: $ \forall n \in S $, $ x^n = 1 $, 所以 $ x^{-n} = x^{-n} x^n = x^0 = 1 $. 所以 $ -n \in S $.
+\end{proof}
 
 
 \end{document}

@@ -189,9 +189,9 @@ Since groups are sets equipped with operations, and we have cardinality to descr
 \paragraph{Example}
 The previous example, abelian group $ (\Z, +) $ is an infinite group, because $ \Z $ is an infinite set.
 
-Because of invertibility property, a group has follows \textbf{cancellation law}.
+Because of invertibility property, a group follows \textbf{cancellation law}.
 
-\begin{proposition}
+\begin{proposition}{\text{Cancellation law}}
     Let $ a $, $ b $, $ c $ be elements of a group $ G $: 
     \begin{itemize}
         \item if $ ac = bc $ or $ ca = cb $ then $ a = b $
@@ -202,6 +202,16 @@ Because of invertibility property, a group has follows \textbf{cancellation law}
 \begin{proof}
     Proofs of all cases are analogous --- by multiplying $ c^{-1} $ to both sides.
 \end{proof}
+
+Following corollary is the contrapositive of last proposition which is supported by invertability.
+
+\begin{corollary}
+    Let $ a $, $ b $, $ c $ be elements of a group $ G $: 
+    \begin{itemize}
+        \item if $ a \neq b $, then $ ca \neq cb $ and $ ac \neq bc $
+        \item if $ a \neq 1 $, then $ ca \neq c $ and $ ac \neq c $
+    \end{itemize}
+\end{corollary}
 
 Concider matrices. Not all matrices are invertable, so we can't just say matrix with multiplication operation is or is not a group.
 

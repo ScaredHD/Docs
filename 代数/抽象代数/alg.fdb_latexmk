@@ -1,13 +1,13 @@
 # Fdb version 3
-["pdflatex"] 1607002888 "d:/Programming/Docs/代数/抽象代数/alg.tex" "d:/Programming/Docs/代数/抽象代数/alg.pdf" "alg" 1607002890
-  "alg.aux" 1607002890 3336 5174d5f70f6a6b5cad9ad2b21db6b02a ""
-  "alg.tex" 1607002885 16445 d40f815e3668afbe8d3f1fc415d19d1f ""
+["pdflatex"] 1607242797 "d:/Programming/Docs/代数/抽象代数/alg.tex" "d:/Programming/Docs/代数/抽象代数/alg.pdf" "alg" 1607242799
+  "alg.aux" 1607242798 3411 93b836c06f5128776bff4a1cba5020c6 ""
+  "alg.tex" 1607242796 16846 42eccbd8724a2c26b863b1bad3f27249 ""
   "c:/WINDOWS/fonts/simhei.ttf" 1571147160 9753388 6abc0fcfbaa40600f9cecca3afeb3aa7 ""
   "c:/WINDOWS/fonts/simkai.ttf" 1571147160 11787328 76179557c160634a761c845ea111c893 ""
   "c:/WINDOWS/fonts/simsun.ttc" 1575709707 18214472 19674afc0754c3df8182b89fe7f0156d ""
   "c:/Windows/Fonts/msyh.ttc" 1575709707 19647736 ff2e53a6131130a07589812ea5b5b0d0 ""
-  "d:/Programming/Docs/代数/抽象代数/alg.aux" 1607002890 3336 5174d5f70f6a6b5cad9ad2b21db6b02a ""
-  "d:/Programming/Docs/代数/抽象代数/alg.tex" 1607002885 16445 d40f815e3668afbe8d3f1fc415d19d1f ""
+  "d:/Programming/Docs/代数/抽象代数/alg.aux" 1607242798 3411 93b836c06f5128776bff4a1cba5020c6 ""
+  "d:/Programming/Docs/代数/抽象代数/alg.tex" 1607242796 16846 42eccbd8724a2c26b863b1bad3f27249 ""
   "d:/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1530335056 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "d:/texlive/2017/texmf-dist/fonts/sfd/ttf2pk/UGBK.sfd" 1530337985 182544 bcd31d5d273400b38612a969fcab55f9 ""
   "d:/texlive/2017/texmf-dist/fonts/sfd/ttf2pk/Unicode.sfd" 1530337985 103212 c249c63d38b8b55408aee52d643b0c18 ""
@@ -256,8 +256,8 @@
   "d:/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1530338900 4125894 f425bd5c9ac82068da30c3280a947bf5 ""
   "d:/texlive/2017/texmf.cnf" 1530338549 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   (generated)
+  "d:/Programming/Docs/代数/抽象代数/alg.log"
   "alg.aux"
   "alg.pdf"
-  "d:/Programming/Docs/代数/抽象代数/alg.log"
-  "d:/Programming/Docs/代数/抽象代数/alg.pdf"
   "alg.log"
+  "d:/Programming/Docs/代数/抽象代数/alg.pdf"

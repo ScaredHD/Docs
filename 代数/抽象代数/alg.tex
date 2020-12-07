@@ -29,6 +29,7 @@
 \usepackage{esvect} 	 % 向量箭头 \vv{} 
 \usepackage{esint} 	 % 积分符号
 \usepackage{mathrsfs}
+\usepackage{csquotes}
 
 
 % font
@@ -188,6 +189,20 @@ Therefore, $ (\R^+, \times) $ is a group. Also, for any positive real number $ a
     $ e_L = e_L e_R = e_R $.
 \end{proof}
 
+
+\begin{proposition}
+    The (two-sided) identity of $ G $, if exists, must be unique.
+\end{proposition}
+
+\begin{proof}
+    Let $ e, e' \in G $ identities and $ e \neq e' $, i.e.\ $ \forall a \in G $, $ e = e i $ as well as $ e' a = a $. Hence $ e' = e' e = e $.
+\end{proof}
+
+The two propositions above can be concluded with quote below (from Wikipedia):
+\begin{displayquote}
+    ... it is possible for $ (S, *) $ to have several left identities. In fact, every element can be a left identity. In a similar manner, there can be several right identities. But if there is both a right identity and a left identity, then they must be equal, resulting in a single two-sided identity. 
+\end{displayquote}
+
 Since groups are sets equipped with operations, and we have cardinality to describe how many elements we have in a set, it's natural to have a similar concept to describe the number of elements contained in a group.
 
 \begin{definition}[\text{Order of a group}]
@@ -292,16 +307,8 @@ Concider matrices. Not all matrices are invertable, so we can't just say matrix 
 
 此外, $ 0 $ 为 $ \Z a $ 的单位元; 对于任意 $ a \in \Z a $, 都能找到 $ -a \in \Z a $, 使得 $ a + (-a) = 0 $, 即 $ \Z a $ 中每个元素可逆.
 
-
-\begin{proposition}
-    群 $ G $ 的单位元是唯一的.
-\end{proposition}
-
-\begin{proof}
-    设 $ e, e' \in G $ 为单位元, 且 $ e \neq e' $, 即 $ \forall a \in G $, $ e = e i $ 以及 $ e' a = a $. 所以 $ e' = e' e = e $.
-\end{proof}
-
-这也意味着, $ G $ 和其子群 $ H $ 共享唯一的单位元. 如果 $ G $ 的单位元 $ 1 $ 也在 $ H $ 中, 那么 $ 1 $ 也一定是 $ H $ 的单位元.
+ 
+由于 $ G $ 和其子群 $ H $ 共享唯一的单位元, 如果 $ G $ 的单位元 $ 1 $ 也在 $ H $ 中, 那么 $ 1 $ 也一定是 $ H $ 的单位元.
 
 $ \Z a $ 的重要之处在于下面的命题:
 \begin{proposition}

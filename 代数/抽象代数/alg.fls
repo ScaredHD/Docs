@@ -198,6 +198,14 @@ INPUT d:/texlive/2017/texmf-dist/tex/latex/esint/esint.sty
 INPUT d:/texlive/2017/texmf-dist/tex/latex/esint/esint.sty
 INPUT d:/texlive/2017/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 INPUT d:/texlive/2017/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
+INPUT d:/texlive/2017/texmf-dist/tex/latex/csquotes/csquotes.sty
+INPUT d:/texlive/2017/texmf-dist/tex/latex/csquotes/csquotes.sty
+INPUT d:/texlive/2017/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT d:/texlive/2017/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT d:/texlive/2017/texmf-dist/tex/latex/csquotes/csquotes.def
+INPUT d:/texlive/2017/texmf-dist/tex/latex/csquotes/csquotes.def
+INPUT d:/texlive/2017/texmf-dist/tex/latex/csquotes/csquotes.cfg
+INPUT d:/texlive/2017/texmf-dist/tex/latex/csquotes/csquotes.cfg
 INPUT d:/texlive/2017/texmf-dist/tex/latex/cjk/texinput/utf8/UTF8.bdg
 INPUT d:/texlive/2017/texmf-dist/tex/latex/cjk/texinput/utf8/UTF8.bdg
 INPUT d:/texlive/2017/texmf-dist/tex/latex/cjk/texinput/utf8/UTF8.enc
@@ -347,7 +355,6 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong7e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong81.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei4f.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong55.tfm
-INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong77.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong91.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong89.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong8c.tfm
@@ -391,7 +398,6 @@ INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simkai.ttf
-INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc

@@ -37,7 +37,6 @@
 \newcommand{\mr}{\mathrm}
 \newcommand{\mcal}{\mathcal}
 \newcommand{\mscr}{\mathscr}
-% common symbol
 \newcommand{\E}{\mathrm e}
 \renewcommand{\I}{\mathrm i}
 \newcommand{\R}{\mathbb R}
@@ -45,10 +44,10 @@
 \newcommand{\N}{\mathbb N}
 \newcommand{\Q}{\mathbb Q}
 \newcommand{\C}{\mathbb C}
-% matrix
 \newcommand{\transp}{^{\top}}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\im}{im}
 \DeclarePairedDelimiter\set{\{}{\}}
 
 
@@ -180,6 +179,15 @@ Therefore, $ (\R^+, \times) $ is a group. Also, for any positive real number $ a
     Note that $ (\R, \times) $ is not a group, because $ 0 $ is not invertable: $ \centernot\exists r \in \R $ such that $ r \times 0 = 0 \times r = 1 $.
 \end{remark}
 
+
+\begin{proposition}
+    Left identity $ e_L $ and right identity $ e_R $ of a group are the same.
+\end{proposition}
+
+\begin{proof}
+    $ e_L = e_L e_R = e_R $.
+\end{proof}
+
 Since groups are sets equipped with operations, and we have cardinality to describe how many elements we have in a set, it's natural to have a similar concept to describe the number of elements contained in a group.
 
 \begin{definition}[\text{Order of a group}]
@@ -290,7 +298,7 @@ Concider matrices. Not all matrices are invertable, so we can't just say matrix 
 \end{proposition}
 
 \begin{proof}
-    设 $ i, i' \in G $ 为单位元, 且 $ i \neq i' $, 即 $ \forall a \in G $, $ a = a i $ 以及 $ i' a = a $. 所以 $ i' = i' i = i $.
+    设 $ e, e' \in G $ 为单位元, 且 $ e \neq e' $, 即 $ \forall a \in G $, $ e = e i $ 以及 $ e' a = a $. 所以 $ e' = e' e = e $.
 \end{proof}
 
 这也意味着, $ G $ 和其子群 $ H $ 共享唯一的单位元. 如果 $ G $ 的单位元 $ 1 $ 也在 $ H $ 中, 那么 $ 1 $ 也一定是 $ H $ 的单位元.
@@ -304,12 +312,25 @@ $ \Z a $ 的重要之处在于下面的命题:
 下一个重要的抽象子群例子为:
 \begin{definition}[\text{循环群}]
     群 $ G $ 中的元素 $ x $ 生成的子群: 
-    \[ \set{1, x, x^{-1}, x^2, x^{-2}, \dots} \]
-    称为循环子群.
+    \[ \langle x \rangle \coloneqq \set{1, x, x^{-1}, x^2, x^{-2}, \dots} \]
+    称为 $ G $ 循环子群. 如果一个群 $ H $ 中任意元素都能写成某一元素 $ x $ 的幂次 $ x^n $, 即能由单个元素 $ x $ 生成, 则该群被称为循环群.
 \end{definition}
 
+\paragraph{例}
+考虑 $ (\R, \times) $ 的元素 $ -1 $. $ -1 $ 的不同幂次得到的元素可能是相同的:
+\[ \begin{array}{c}
+    \vdots \\
+    (-1)^2 = 1 \\
+    (-1)^3 = -1 \\
+    (-1)^4 = 1 \\
+    \vdots
+\end{array} \]
+
+所以实数乘群中, $ -1 $ 的生成的循环子群为 $ \langle -1 \rangle = \set{1, -1} $.
+
+
 \begin{proposition}
-    $ S = \set{n \mid x^n = 1} $ 为 $ (\Z, +) $ 的子群.
+    $ S = \set{n \in \Z \mid x^n = 1} $ 为 $ (\Z, +) $ 的子群.
 \end{proposition}
 
 \begin{proof}
@@ -319,6 +340,77 @@ $ \Z a $ 的重要之处在于下面的命题:
 
     逆元: $ \forall n \in S $, $ x^n = 1 $, 所以 $ x^{-n} = x^{-n} x^n = x^0 = 1 $. 所以 $ -n \in S $.
 \end{proof}
+
+
+\subsection{同态}
+\begin{definition}[\text{同态 (Homomophism)}]
+    同态 $ \varphi \colon G \to G' $ 是 群 $ G $ 到 $ G' $ 的映射, 该映射满足:
+    \[ \forall a, b \in G, \qquad \varphi(a b) = \varphi(a) \varphi(b) \,.\]
+
+    和映射一样, 同态也有像的概念:
+    \[ \varphi(G) \coloneqq \im \varphi \coloneqq \set{\varphi(x) \mid x \in G} \,.\]
+\end{definition}
+
+\begin{remark}
+    注意此处 $ G $ 和 $ G' $ 中的运算都是用乘法表示的, 不代表它们必须是同一种运算. 严格地定义同态应该是下面这样的, $ \varphi \colon (G, \circ) \to (G', *) $, 其中:
+    \[ \forall a, b \in G, \qquad \varphi(a \circ b) = \varphi(a) * \varphi(b) \,.\]
+\end{remark}
+
+换句话说, 先在 $ G $ 中对 $ a, b $ 做运算, 然后在映射到 $ G' $ 中; 和先映射 $ a, b $ 到 $ G' $ 中, 然后做 $ G' $ 中的运算; 两种路径得到的结果是一样的. 即: $ G $ 和 $ G' $ 中对应的两组元素, 分别在各自的群内合成, 得到的结果也是满足相同的对应关系. 如: $ a' = \varphi(a) $, $ b' = \varphi(b) $. 则 $ a \circ b = a' * b' $.
+
+\paragraph{例}
+$ \exp \colon (\R, +) \to (\R, \times) $, $ \exp(x) = \mr e^x $, 为一个同态, 因为 $ \exp(x + y) = \exp (x) \exp (y) $. 反过来, 指数函数不是 $ (\R, \times) $ 到 $ (\R, +) $ 的同态. 对于 $ x, y \in \R $, 先合成 $ x y $, 再映射 $ \exp (x y) $; 和先映射 $ \exp(x), \exp(y) $, 再合成 $ \exp(x) + \exp(y) $ 是不同的.
+
+绝对值 $ |~| \colon (\R, \times) \to (\R, \times) $ 也是一个同态, $ |x y| = |x| |y| $.
+
+\paragraph{几个明显的同态}
+平凡同态: $ \varphi \colon G \to G' $, 将 $ G $ 中的每个元素映射到 $ G' $ 中的单位元. 于是 $ \forall a, b \in G $, $ \varphi(a) = \varphi(b) = \varphi(a b) = e $. $ \varphi(a b) = e = ee = \varphi(a) \varphi(b) $.
+
+对于 $ H \le G $, 存在包含同态: $ i \colon H \to G $, $ i(x) = x $. $ H $ 和 $ G $ 的合成法则一致, $ \forall x \in H $, $ x \in G $, $ i(x) = x $. 所以 $ i (x y) = x y = i(x) i(y) $.
+
+\begin{proposition}
+    令 $ \varphi \colon G \to G' $ 为同态. 
+    \begin{enumerate}
+        \item $ a_1, a_2, \dots, a_k \in G $, $ \varphi(a_1 a_2 \cdots a_k) = \varphi(a_1) \varphi(a_2) \cdots \varphi(a_k) $
+        \item 恒等元映射到恒等元: $ \varphi(1_G) = 1_{G'} $
+        \item 逆元映射为逆元: $ \varphi(a^{-1}) = \varphi^{-1}(a) $
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    (1) 通过归纳法.
+
+    (2) $ \varphi(a) = \varphi(1_G a) = \varphi(1_G) \varphi(a) $. 两边同时右乘 $ \varphi(a) $ 在 $ G' $ 中的逆元: $ \varphi(a) \varphi^{-1}(a) = \varphi(1_G) \varphi(a) \varphi^{-1}(a) $. 而 $ \varphi(a) \varphi^{-1}(a) $ 为 $ G' $ 的单位元 $ 1_{G'} $. 所以 $ 1_{G'} = \varphi(1_G) 1_{G'} = \varphi(1_G) $.
+
+    (3) $ a a^{-1} = 1_G $, 同时应用 $ \varphi $, $ \varphi(a a^{-1}) = \varphi(a) \varphi(a^{-1}) = \varphi(1_G) = 1_{G'} $. 两边同时乘以 $ \varphi^{-1}(a) $, $ \varphi^{-1}(a) \varphi(a) \varphi(a^{-1}) = \varphi(a^{-1}) = \varphi^{-1}(a) 1_{G'} = \varphi^{-1} (a) $.
+\end{proof}
+
+\begin{proposition}
+    同态的像为陪域的子群. $ \varphi \colon H \to G $, 则 $ \varphi(H) $ 为 $ G $ 的子群.
+\end{proposition}
+
+\begin{proof}
+    封闭性: 对于任意 $ x, y \in \varphi(H) $, $ \exists a, b \in H $, $ x = \varphi(a) $, $ y = \varphi(b) $. $ x y = \varphi(a) \varphi(b) = \varphi(a b) $, 由于 $ ab \in H $, $ \varphi(a b) \in \varphi(H) $. 所以 $ x y \in \varphi(H) $.
+
+    单位元: $ \forall x \in \varphi(H) $, $ \exists a \in H $, $ \varphi(a) = x $. $ \varphi(a) = \varphi(a e_H) = \varphi(a) \varphi(e_H) $. 即 $ x = x \varphi(e_H) $. 同样地, 从 $ \varphi(a) = \varphi(e_H a) $ 可以得到 $ x = \varphi(e_H) x $. 所以 $ \varphi(e_H) $ 为 $ \varphi(H) $ 的单位元.
+
+    逆元: $ \forall x \in \varphi(H) $, $ \exists a \in H $, $ \varphi(a) = x $. $ \varphi(a a^{-1}) = \varphi(a) = \varphi(a^{-1}) = x \varphi(a^{-1}) = \varphi(e_H) = e_G $. 同理可以得到, $ \varphi(a^{-1}) x = e_G $. 所以 $ \varphi(a^{-1}) $ 为 $ x $ 的逆元.
+\end{proof}
+
+
+同态的核是定义域中所有映射到陪域单位元的元素集合.
+\begin{definition}[\text{核(kernel)}]
+    设 $ \varphi \colon G \to G' $ 为同态. 定义同态 $ \varphi $ 的核为: \[ \ker \varphi \coloneqq \set{x \in G \mid \varphi(x) = 1_{G'}} \,.\]
+\end{definition}
+
+
+容易验证下面的命题.
+\begin{proposition}
+    同态的核是定义域的子群. 设 $ \varphi \colon G \to G' $, $ \ker \varphi \le G $.
+\end{proposition}
+
+注意到, $ \ker \varphi $ 为 $ G $ 的子集, $ G $ 的单位元 $ e_G $ 也在 $ \ker \varphi $ 中, 故 $ e_G $ 是 $ \ker \varphi $ 的单位元.
+
 
 
 \end{document}

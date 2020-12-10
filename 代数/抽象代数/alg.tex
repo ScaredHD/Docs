@@ -290,6 +290,7 @@ Concider matrices. Not all matrices are invertable, so we can't just say matrix 
 子群只需满足三个条件, 因为结合律自动转移到子集上: $ \forall a, b, c \in H $, $ a, b, c \in G $, $ G $ 具有结合律, 所以 $ H $ 也满足结合律. 换句话说, 群 $ G $ 的子集 $ H $ 也是一个群, 则 $ H $ 为 $ G $ 的子群.
 
 
+\subsubsection{整数倍数子群 $ \Z a $}
 定义 $ \Z a $ 为 $ a $ 的整倍数构成的集合:
 \[ \Z a \coloneqq \set{k a \mid k \in \Z} \,.\]
 
@@ -315,7 +316,7 @@ $ \Z a $ 的重要之处在于下面的命题:
     $ (\Z, +) $ 的子群一定有 $ \Z a $ 的形式.
 \end{proposition}
 
-
+\subsubsection{循环群}
 下一个重要的抽象子群例子为:
 \begin{definition}[\text{循环群}]
     群 $ G $ 中的元素 $ x $ 生成的子群: 
@@ -348,8 +349,13 @@ $ \Z a $ 的重要之处在于下面的命题:
     逆元: $ \forall n \in S $, $ x^n = 1 $, 所以 $ x^{-n} = x^{-n} x^n = x^0 = 1 $. 所以 $ -n \in S $.
 \end{proof}
 
+\subsubsection{正规子群}
+\begin{definition}[\text{正规子群 (Normal subgroup)}]
+    群 $ G $ 的子群 $ N $ 被称为是正规子群, 当且仅当对任意 $ n \in N $, 和任意 $ g \in G $, $ gng^{-1} \in N $.
+\end{definition}
 
 \subsection{同态}
+两个群之间可以存在映射关系, 而满足一定条件的的映射称为同态.
 \begin{definition}[\text{同态 (Homomophism)}]
     同态 $ \varphi \colon G \to G' $ 是 群 $ G $ 到 $ G' $ 的映射, 该映射满足:
     \[ \forall a, b \in G, \qquad \varphi(a b) = \varphi(a) \varphi(b) \,.\]
@@ -380,16 +386,17 @@ $ \exp \colon (\R, +) \to (\R, \times) $, $ \exp(x) = \mr e^x $, 为一个同态
     \begin{enumerate}
         \item $ a_1, a_2, \dots, a_k \in G $, $ \varphi(a_1 a_2 \cdots a_k) = \varphi(a_1) \varphi(a_2) \cdots \varphi(a_k) $
         \item 恒等元映射到恒等元: $ \varphi(1_G) = 1_{G'} $
-        \item 逆元映射为逆元: $ \varphi(a^{-1}) = \varphi^{-1}(a) $
+        \item 逆元映射为逆元: $ \varphi(a^{-1}) = \varphi(a)^{-1} $
     \end{enumerate}
 \end{proposition}
+
 
 \begin{proof}
     (1) 通过归纳法.
 
-    (2) $ \varphi(a) = \varphi(1_G a) = \varphi(1_G) \varphi(a) $. 两边同时右乘 $ \varphi(a) $ 在 $ G' $ 中的逆元: $ \varphi(a) \varphi^{-1}(a) = \varphi(1_G) \varphi(a) \varphi^{-1}(a) $. 而 $ \varphi(a) \varphi^{-1}(a) $ 为 $ G' $ 的单位元 $ 1_{G'} $. 所以 $ 1_{G'} = \varphi(1_G) 1_{G'} = \varphi(1_G) $.
+    (2) $ \varphi(a) = \varphi(1_G a) = \varphi(1_G) \varphi(a) $. 两边同时右乘 $ \varphi(a) $ 在 $ G' $ 中的逆元: $ \varphi(a) \varphi(a)^{-1} = \varphi(1_G) \varphi(a) \varphi(a)^{-1} $. 而 $ \varphi(a) \varphi(a)^{-1} $ 为 $ G' $ 的单位元 $ 1_{G'} $. 所以 $ 1_{G'} = \varphi(1_G) 1_{G'} = \varphi(1_G) $.
 
-    (3) $ a a^{-1} = 1_G $, 同时应用 $ \varphi $, $ \varphi(a a^{-1}) = \varphi(a) \varphi(a^{-1}) = \varphi(1_G) = 1_{G'} $. 两边同时乘以 $ \varphi^{-1}(a) $, $ \varphi^{-1}(a) \varphi(a) \varphi(a^{-1}) = \varphi(a^{-1}) = \varphi^{-1}(a) 1_{G'} = \varphi^{-1} (a) $.
+    (3) $ a a^{-1} = 1_G $, 同时应用 $ \varphi $, $ \varphi(a a^{-1}) = \varphi(a) \varphi(a^{-1}) = \varphi(1_G) = 1_{G'} $. 两边同时乘以 $ \varphi(a)^{-1} $, $ \varphi(a)^{-1} \varphi(a) \varphi(a^{-1}) = \varphi(a^{-1}) = \varphi(a)^{-1} 1_{G'} = \varphi(a)^{-1} $.
 \end{proof}
 
 \begin{proposition}
@@ -418,6 +425,45 @@ $ \exp \colon (\R, +) \to (\R, \times) $, $ \exp(x) = \mr e^x $, 为一个同态
 
 注意到, $ \ker \varphi $ 为 $ G $ 的子集, $ G $ 的单位元 $ e_G $ 也在 $ \ker \varphi $ 中, 故 $ e_G $ 是 $ \ker \varphi $ 的单位元.
 
+\begin{proposition}
+    一个同态 $ \varphi \colon G \to G' $ 的核 $ \ker \varphi $ 是一个正规子群.
+\end{proposition}
 
+\begin{proof}
+    要证明 $ \forall a \in \ker \varphi $, $ \forall g \in G $, $ g a g^{-1} \in \ker \varphi $. 注意到: $ g a g^{-1} \in G $, 对其应用同态, $ \varphi(g a g^{-1}) = \varphi(g) \varphi(a) \varphi(g^{-1}) = \varphi(g) e_{G'} \varphi(g^{-1}) = \varphi(g) \varphi(g^{-1}) = e_{G'} $. 所以 $ g a g^{-1} \in \ker\varphi $.
+\end{proof}
+
+\begin{proposition}
+    同态 $ \varphi \colon G \to G' $ 是单射当且仅当 $ \ker \varphi = \set{e_G} $.
+\end{proposition}
+
+\begin{proof}
+    如果 $ \varphi $ 是单射的, 则存在唯一 $ a \in G $, 使得 $ \varphi(a) = e_{G'} $. 而 $ \varphi(e_{G}) = e_{G'} $, 所以 $ a = e_G $. 而对于其余元素, 其像都不为 $ e_{G'} $. 故 $ \ker \varphi = \set{e_G} $.
+
+    若 $ \ker \varphi = \set{e_G} $, 对于任意 $ a, b \in G $ 满足 $ \varphi(a) = \varphi(b) $. $ \varphi(a) \varphi(b)^{-1} = \varphi(b) \varphi(b)^{-1} = e_{G'} $. 于是 $ a b^{-1} \in \ker \varphi $. 而 $ \ker \varphi = \set{e_G} $ 为一个单元素集, 故 $ a b^{-1} = e_G $, $ a = b $. 说明 $ \varphi $ 为单射.
+\end{proof}
+
+\subsection{同构}
+\begin{definition}[\text{同构(Isomorphism)}]
+    若同态 $ \varphi \colon G \to G' $ 是双射的, 则称 $ G $ 和 $ G' $ 是同构的. 记作 $ G \cong G' $.
+\end{definition}
+
+由此可以看出, 同构是比同态更强的条件.
+
+\paragraph{例}
+$ \exp \colon (\R, +) \to (\R, \times) $, $ \exp(x) = \mr e^x $, 为一个同态, 也为一个同构, 因为 $ \exp \colon x \mapsto \mr e^x $ 为一个双射.
+
+\paragraph{验证同构的方法}
+由上一小节的命题, 同态 $ \varphi \colon G \to G' $ 是单射, 当且仅当 $ \ker \varphi = \set{e_G} $. 而 $ \varphi $ 为满射, 当且仅当像 $ \varphi(G) = G' $.
+
+\begin{lemma}
+    若 $ \varphi \colon G \to G' $ 为同构, 则其逆映射 $ \varphi^{-1} \colon G' \to G $ 也是同构.
+\end{lemma}
+
+这说明了, 两个同构的群本质是相同的. 二进制加法群和十进制加法群之间就是一种同构关系, 其结构是完全相同的.
+\[ 1011_2 + 0010_2 = 1101_2 \,,\]
+\[ 11_{10} + 2_{10} = 13_{10} \,.\]
+
+我们忽略了次要的信息, 而提取出两种代数结构的本质. 两个同构的群, 无论形式上有多么不同, 但其本质都是相同的.
 
 \end{document}

@@ -287,6 +287,8 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong70.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong4e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong67.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong75.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong51.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong65.tfm
 OUTPUT d:/Programming/Docs/分析/数学分析2/analysis_II.toc
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei5b.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei65.tfm
@@ -303,13 +305,11 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong53.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong95.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong97.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong66.tfm
-INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong51.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong8b.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong69.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong5f.tfm
 INPUT d:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 INPUT d:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
-INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong65.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong7a.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong62.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong90.tfm
@@ -400,6 +400,8 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong84.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai7e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai75.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai97.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei51.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei65.tfm
 INPUT d:/Programming/Docs/分析/数学分析2/analysis_II.aux
 INPUT d:/Programming/Docs/分析/数学分析2/analysis_II.out
 INPUT d:/Programming/Docs/分析/数学分析2/analysis_II.out

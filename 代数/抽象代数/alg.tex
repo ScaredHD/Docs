@@ -466,4 +466,46 @@ $ \exp \colon (\R, +) \to (\R, \times) $, $ \exp(x) = \mr e^x $, 为一个同态
 
 我们忽略了次要的信息, 而提取出两种代数结构的本质. 两个同构的群, 无论形式上有多么不同, 但其本质都是相同的.
 
+
+\subsection{等价关系与等价类}
+记 $ a \sim b $ 表示 $ a $ 和 $ b $ 等价. 等价关系满足下面的三条性质:
+\begin{itemize}
+    \item 自反: $ a \sim a $
+    \item 对称: $ a \sim b $ 则 $ b \sim a $
+    \item 传递: $ a \sim b $ 且 $ b \sim c $ 则 $ a \sim c $
+\end{itemize}
+
+\begin{definition}[\text{等价类}]
+    设集合 $ S $ 中有元素 $ a $, 则 $ S $ 中所有与 $ a $ 形成等价关系的元素构成的集合称为 $ a $ 生成的等价类:
+    \[ [a] \coloneqq \set{b \in S \mid a \sim b} \,.\]
+\end{definition}
+
+所以可以得到下面的性质:
+\begin{proposition}
+    设 $ S $ 以及等价关系 $ \sim $.
+    \begin{enumerate}
+        \item 对于任意 $ a \in S $, $ a \in [a] $
+        \item 对于任意 $ a, b \in S $, $ a \in [b] $ 当且仅当 $ a \sim b $
+        \item 对于任意 $ a \in S $, 若 $ a \in [b] $, 则 $ b \in [a] $
+        \item 若 $ a \in [b] $, 则对于任意 $ b' \in [b] $, $ a \sim b' $
+    \end{enumerate}
+\end{proposition}
+
+上面很多关系都直接来自等价类的定义, 可以相互推导.
+
+\subsection{等价类与划分}
+\begin{definition}[\text{划分(Partition)}]
+    设有非空集合 $ S $, 如果集族 $ A_i $, $ i \in [1..n] $ 满足下面的条件, 则称 $ \set{A_i}_{i = 1}^n = \set{A_1, A_2, \dots, A_n} $ 为 $ S $ 的一个划分:
+    \begin{itemize}
+        \item 非空: 对于任意 $ 1 \leqslant i \leqslant n $, $ A_i $ 非空
+        \item $ {A_i} $ 覆盖整个 $ S $: $ \displaystyle \bigcup_{i \in [1..n]} A_i = S $
+        \item 互斥: $ \forall i, j \in [1..n] $, 如果 $ i \neq j $, 则 $ A_i \cap A_j = \varnothing $
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    集合 $ S $ 上的等价类构成 $ S $ 的一个划分.
+\end{proposition}
+
+
 \end{document}

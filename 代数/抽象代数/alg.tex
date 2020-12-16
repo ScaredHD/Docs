@@ -482,11 +482,12 @@ $ \exp \colon (\R, +) \to (\R, \times) $, $ \exp(x) = \mr e^x $, 为一个同态
 
 所以可以得到下面的性质:
 \begin{proposition}
-    设 $ S $ 以及等价关系 $ \sim $.
+    设 $ S $ 以及等价关系 $ \sim $, 对于任意 $ a, b \in S $:
     \begin{enumerate}
-        \item 对于任意 $ a \in S $, $ a \in [a] $
-        \item 对于任意 $ a, b \in S $, $ a \in [b] $ 当且仅当 $ a \sim b $
-        \item 对于任意 $ a \in S $, 若 $ a \in [b] $, 则 $ b \in [a] $
+        \item $ a \in [a] $
+        \item $ a \in [b] $ 当且仅当 $ a \sim b $
+        \item 若 $ a \in [b] $, 则 $ [a] = [b] $
+        \item 若 $ a \in [b] $, 则 $ b \in [a] $
         \item 若 $ a \in [b] $, 则对于任意 $ b' \in [b] $, $ a \sim b' $
     \end{enumerate}
 \end{proposition}
@@ -503,8 +504,47 @@ $ \exp \colon (\R, +) \to (\R, \times) $, $ \exp(x) = \mr e^x $, 为一个同态
     \end{itemize}
 \end{definition}
 
+\begin{remark}
+    注意, 互斥条件可以使用等价的逆否命题: 若 $ A_i \cap A_j \neq \varnothing $, 则 $ i = j $, 即 $ A_i = A_j $.
+\end{remark}
+
 \begin{proposition}
     集合 $ S $ 上的等价类构成 $ S $ 的一个划分.
+\end{proposition}
+
+\begin{proof}
+    首先, 对于任意等价类 $ [a] $, 其一定是非空的. 所有元素 $ a \in S $ 的等价类之并覆盖整个 $ S $ 是相当自然的, 因为 $ a \sim [a] $. 考虑到如果两个元素如果存在等价关系, 则其等价类相同, 于是所有元素的等价类 $ [a], a \in S $ 中, 可能有重复的元素. 那么排除掉所有重复计算的等价类, 所有不同的等价类的并仍然覆盖整个 $ S $.
+
+    要证明互斥, 考虑不互斥的 $ [a] $ 和 $ [b] $, $ [a] \cap [b] \neq \varnothing $. 则取 $ x \in [a] \cap [b] $, 所以 $ x \sim a $ 且 $ x \sim b $, 根据等价关系的对称性质, $ a \sim x $. 对于任意 $ a' \in [a] $, $ a' \sim a $, 又有 $ a \sim x $, $ x \sim b $, 应用两次传递性 $ a' \sim b $, 所以 $ a' \in [b] $, $ [a] \subseteq [b] $. 对称地, 也有 $ [b] \subseteq [a] $. 所以 $ [a] = [b] $.
+\end{proof}
+
+\begin{definition}[\text{陪集(coset)}]
+    设有群 $ G $ 和其子群 $ H $. 设 $ a \in G $, 则集合:
+    \[ a H \coloneqq \set{a h \mid h \in H} \]
+    称为 $ H $ 在 $ G $ 中的左陪集(left coset).
+\end{definition}
+
+\begin{remark}
+    注意到: 子群一定包含单位元, $ e_G \in H $, 所以 $ aH $ 中一定包含 $ a $.
+\end{remark}
+
+\begin{proposition}
+    设子群 $ H \le G $, $ a, b \in G $, 下面三个命题等价:
+    \begin{enumerate}
+        \item $ a \in bH $
+        \item 存在 $ h \in H $, $ a = bh $
+        \item $ aH = bH $
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    (1) 和 (2) 就是定义的直接阐述.
+
+    下面证明 (1) $ \Longrightarrow $ (3): 若 $ a \in bH $, $ a = bh_1 $ 对 $ h_1 \in H $ 成立. 对于任意 $ x \in aH $, 存在 $ h_2 \in H $, $ x = ah_2 = b h_1 h_2 $. 由于 $ h_1 h_2 \in H $, 所以 $ x \in b H $. 而对于任意 $ x \in bH $, 存在 $ h_2 \in H $, $ x = b h_2 = a h_1^{-1} h_2 $, 由于 $ h_1^{-1} h_2 \in H $, 所以 $ x \in a H $.
+\end{proof}
+
+\begin{proposition}
+    群 $ G $ 的子群 $ H $ 的左陪集构成 $ G $ 的划分.
 \end{proposition}
 
 

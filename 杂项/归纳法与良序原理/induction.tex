@@ -1,0 +1,85 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+    \setlength{\parskip}{1em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \newtheorem{axiom}{Axiom}
+    \newtheorem{lemma}{Lemma}
+\pagestyle{empty}
+
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\renewcommand{\r}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+\newcommand{\scr}{\mathscr}
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\DeclarePairedDelimiter\set{\{}{\}}
+
+\title{数学归纳法与良序原理}
+
+
+\begin{document}
+\maketitle
+
+\paragraph{数学归纳法} 
+设有命题 $ P(n) $. 若满足下面两个条件:
+\begin{enumerate}
+    \item 基础情形: $ P(0) $ 为真
+    \item 归纳假设: 若 $ P(n) $ 为真, 则 $ P(n + 1) $ 也为真
+\end{enumerate}
+则 $ P(n) $ 对于任意 $ n \in \N $ 均为真.
+
+
+\paragraph{强归纳法(完全归纳法)}
+设有命题 $ P(n) $. 若能够证明对于任意自然数 $ m $ 都有: 对任意 $ k < m $, $ P(k) $ 为真, 则 $ P(m) $ 为真. 那么 $ P(n) $ 对于任意 $ n \in \N $ 均为真.
+
+首先, 注意此处的强归纳法无需显式地说明基础情形 $ P(0) $ 成立, 因为取 $ m = 0 $, 不存在 $ k < m $, 那么 $ P(k) $ 空真, 于是根据条件 $ P(m) = P(0) $ 真, 也就得到了基础情形. 这是我们在条件中使用 $ k < m $ 的好处. 当然, 将条件阐述为``对任意 $ k \leqslant m $ ...'' 也不是不行, 只是需要阐明 $ P(0) $ 为真, 因为条件不再蕴含这一信息.
+
+其次, 以上两个归纳法的起点都是 $ 0 $, 实际上归纳法可以更灵活. 下面用更加精简的记号重新推广上面的归纳法. 注: $ P(n) $ 默认表示 $ P(n) $ 为真.
+
+\vskip 1em
+\begin{lemma}[\text{数学归纳法(不完全归纳法)}]
+    若 $ P(n) $ 满足:
+    \begin{enumerate}
+        \item 基础情形: $ P(m_0) $
+        \item 归纳假设: 对任意 $ n \geqslant m_0 $, $ P(n) \Longrightarrow P(n + 1) $
+    \end{enumerate}
+    则 $ \forall n \geqslant m_0 $ 均为真.
+\end{lemma}
+
+\vskip 1em
+\begin{lemma}[\text{强归纳法(完全归纳法)}]
+    若对于任意 $ m \geqslant m_0 $, 都满足: 对任意 $ m_0 \leqslant k < m $, $ P(k) $ 成立, 那么 $ P(m) $ 成立. 则 $ P(n) $ 对任意 $ n \geqslant m_0 $ 均成立. 换句话说: \[ \forall m \geqslant m_0 \Bigl[ \Bigl( P(m_0) \land P(m_0 + 1) \land \cdots \land P(m - 1) \Bigr) \Longrightarrow P(m) \Bigr] \Longrightarrow (\forall n \geqslant m_0) P(n) \,.\]
+\end{lemma}
+
+也可以换种表述, 使之于数学归纳法对应:
+\begin{lemma}[\text{强归纳法(等价表述)}]
+    若 $ P(n) $ 满足:
+    \begin{enumerate}
+        \item 基础情形: $ P(m_0) $
+        \item 归纳假设: 对任意 $ m \geqslant m_0 $, $ P(m_0) \land P(m_0 + 1) \land \cdots \land P(m) \Longrightarrow P(m + 1) $
+    \end{enumerate}
+    则 $ \forall n \geqslant m_0 $, $ P(n) $ 为真
+\end{lemma}
+
+下面说明数学归纳法和强归纳法等价, 我们可以说明两者可以相互推导.
+\paragraph{强归纳法到数学归纳法}
+注意到, 如果对于任意 $ m \geqslant m_0 $: \[ \Bigl( P(m_0) \land P(m_0 + 1) \land \cdots \land P(m - 1) \Bigr) \Longrightarrow P(m) \] 设 $ Q(n) $ 表示 $ P(m_0) \land P(m_0 + 1) \land \cdots \land P(n - 1) $, 即 $ \forall m_0 \leqslant k < m $, $ P(k) $ 成立. 
+
+于是根据条件有任意的 $ m \geqslant m_0 $: $ Q(m) \Longrightarrow P(m) $. 只需证明 $ Q(n) $ 对所有 $ n \geqslant m_0 $ 成立, 即可证明 $ P(n) $ 对 $ n \geqslant m_0 $ 成立. 这便转化到了数学归纳法上:
+\begin{itemize}
+    \item $ Q(m_0) $ 成立, 因为 $ \forall m_0 \leqslant k < m_0, P(k) $ , 这是空真的命题
+    \item $ Q(n) $ 成立, 则 $ P(n) $ 成立, 于是 $ Q(n) \land P(n) = Q(n + 1) $ 成立
+\end{itemize}
+
+
+\end{document}

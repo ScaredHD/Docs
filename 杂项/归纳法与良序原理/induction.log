@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.6.30)  20 DEC 2020 20:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.6.30)  20 DEC 2020 20:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1215,11 +1215,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 LaTeX Font Info:    Try loading font information for U+msb on input line 31.
  (d:/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-LaTeX Warning: No \author given.
-
-[1
+) [1
 
 ]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 80.
@@ -1232,11 +1228,11 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.53937> not available
 Here is how much of TeX's memory you used:
  16076 strings out of 492995
  293578 string characters out of 6136402
- 323633 words of memory out of 5000000
+ 323620 words of memory out of 5000000
  19158 multiletter control sequences out of 15000+600000
  37594 words of font info for 142 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,6n,56p,10457b,307s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,5n,56p,10457b,307s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
 Output written on d:/Programming/Docs/杂项/归纳法与良序原理/induction.pdf (2 pages, 399728 bytes).
 PDF statistics:

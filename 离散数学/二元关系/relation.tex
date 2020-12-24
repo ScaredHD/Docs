@@ -100,7 +100,29 @@ $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), 
 \end{proof}
 
 
+\begin{proposition}
+    设 $ R $ 为 $ A $ 上的关系:
+    \begin{enumerate}
+        \item $ R $ 是对称的 $ \Longleftrightarrow $ $ R = R^{-1} $
+        \item $ R $ 是反对称的 $ \Longleftrightarrow $ $ R \cap R^{-1} \subseteq I_A $
+        \item $ R $ 是自反的 $ \Longleftrightarrow $ $ R^{-1} $ 自反
+        \item $ R $ 是自反的 $ \Longleftrightarrow $ $ \overline R $ 自反
+    \end{enumerate}
+\end{proposition}
 
+\begin{proposition}
+    $ R $ 是自反/对称关系, 则对任意正整数 $ n $, $ R^n $ 也是自反/对称的.
+\end{proposition}
+
+\begin{proposition}
+    $ R $ 是自反和传递的关系, 则对任意正整数 $ n $, $ R^n = R $.
+\end{proposition}
+
+\begin{proof}
+    一方面, $ R $ 是传递的, 根据传递性定理, $ R^n \subseteq R $ 对任意正整数 $ n $ 成立. 另一方面, $ R $ 是自反的, 可以通过归纳法证明 $ R \subseteq R^n $ 对任意 $ n $ 成立(注意应用自反的条件). 所以对任意 $ n \in \Z^+ $, $ R^n = R $.
+\end{proof}
+
+\subsection{关系的数量}
 
 
 \section{序集}
@@ -425,7 +447,7 @@ $ \N $ 是良序的; $ \Z $, $ \Q $, $ \R $ 都不是良序的.
 由该引理可以导出一个重要推论.
 
 \begin{lemma}[\text{Zorn 引理 / 超限归纳原理}]
-    $ X $ 为非空偏序集且 $ X $ 的每个全序子集 $ Y $ 都有上界, 那么 $ X $ 有最大元.
+    非空偏序集 $ X $ 的每个全序子集 $ Y $ 都有上界, 那么 $ X $ 存在极大元.
 \end{lemma}
 
 

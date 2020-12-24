@@ -387,10 +387,12 @@ INPUT d:/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai99.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai5c.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong6e.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong7f.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong73.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong8c.tfm
-INPUT d:/Programming/Docs/离散数学/图论/./images/path_trail.png
-INPUT ./images/path_trail.png
-INPUT ./images/path_trail.png
+INPUT d:/Programming/Docs/离散数学/图论/./images/walks.png
+INPUT ./images/walks.png
+INPUT ./images/walks.png
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong9e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong84.tfm
 INPUT d:/Programming/Docs/离散数学/图论/./images/connected_1.png
@@ -416,6 +418,8 @@ INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simkai.ttf
+INPUT c:/WINDOWS/fonts/simsun.ttc
+INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc

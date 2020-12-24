@@ -160,15 +160,25 @@
 \end{definition}
 
 \begin{remark}
-    可以看出, 从道路, 到路径, 到简单道路, 条件逐渐加强.
+    可以看出, 从道路, 到路径, 到简单道路, 条件逐渐加强. 
 \end{remark}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|ccc|cc}
+        限制 & 英文 & 翻译1 & 翻译2 & 闭合时 & 闭合时翻译 \\ \hline
+            & walk & 道路 & 道路 & closed walk & 回路 \\ \hline
+        edge-distinct & trail & 简单道路 & 路径 & circuit & 简单回路 \\ \hline
+        vertex-distinct & path & 基本道路 & 简单道路 & cycle & 环(基本回路)
+    \end{tabular}
+\end{table}
 
 对于道路 $ v_0, e_1, v_1, \dots, v_{n - 1}, e_n, v_n $, 其含有 $ n $ 条边, 称这条道路的长度为 $ n $, 记作 $ d(v_0, v_n) = n $.
 
 下面几张示意图描述了上面几个术语之间的区别, 注意箭头并不表示有向图, 数字也不代表赋权, 此处只是形象化的表示出这条道路从起点到终点的行进过程和顺序.
 \begin{figure}[H]
     \centering
-    \includegraphics[width = 0.7\linewidth]{./images/path_trail.png}
+    \includegraphics[width = 0.9\linewidth]{./images/walks.png}
 \end{figure}
 
 
@@ -229,7 +239,7 @@
 \begin{itemize}
     \item 点连通度为 $ 0 $: $ G $ 不连通或 $ G $ 只有一个顶点 (即 $ K_1 $)
     \item 点连通度为 $ 1 $: $ G $ 最少删去 $ 1 $ 个顶点就不再连通, 或 $ G $ 为完全图 $ K_2 $
-    \item 点连通度为 $ n $: $ G $ 最少删去 $ n $ 个顶点就不在连通, 或 $ G $ 为完全图 $ K_{n + 1} $
+    \item 点连通度为 $ n $: $ G $ 最少删去 $ n $ 个顶点就不再连通, 或 $ G $ 为完全图 $ K_{n + 1} $
 \end{itemize}
 
 \paragraph{例}

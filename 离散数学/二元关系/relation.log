@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.6.30)  24 DEC 2020 22:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2018.6.30)  24 DEC 2020 23:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1417,43 +1417,55 @@ File: zhwindowsfonts.tex 2017/04/01 v2.4.9 Windows font map loader for pdfTeX an
 ) [1
 
 ]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 126.
+
+
+Overfull \hbox (5.25443pt too wide) in paragraph at lines 149--150
+[][]\OT1/cmr/bx/n/10.53937 Proposition 1.7. []$\OML/cmm/m/it/10.53937 n$ \C70/rm/m/n/10.53937/51 C \C70/rm/m/n/10.53937/7d   \C70/rm/m/n/10.53937/96 Æ \C70/rm/m/n/10.53937/4e 
+ \C70/rm/m/n/10.53937/76 „ \C70/rm/m/n/10.53937/53 Í \C70/rm/m/n/10.53937/5b ù \C70/rm/m/n/10.53937/79 ð \C70/rm/m/n/10.53937/51 s \C70/rm/m/n/10.53937/7c û \C70/rm/m/n/10.53937/67 	 $\OT1/cmr/m/n/10.53937 2[]3[]$ \C70/rm/m/n/10.53937/4e *\OT1/cmr/m/n/10.53937 . \C70/rm/m/n/10.53937/97 ^ \C70/rm/m/n/10.53937/5b ù \C70/rm/m/n/10.53937/79 ð \C70/rm/m/n/10.53937/51 s \C70/rm/m/n/10.53937/7c û \C70/rm/m/n/10.53937/67 	 $\OT1/cmr/m/n/10.53937 3[]$
+ []
+
+[2]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.53937> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 133.
-Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 152.
- [2]
-Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 187.
- [3] <./images/maximal_greatest.png, id=271, 179.4705pt x 64.5612pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 175.
+Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 194.
+ [3]
+Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (quanjiao) on input line 229.
+ [4] <./images/maximal_greatest.png, id=292, 179.4705pt x 64.5612pt>
 File: ./images/maximal_greatest.png Graphic file (type png)
  <use ./images/maximal_greatest.png>
-Package pdftex.def Info: ./images/maximal_greatest.png used on input line 217.
+Package pdftex.def Info: ./images/maximal_greatest.png used on input line 259.
 (pdftex.def)             Requested size: 232.00613pt x 83.45963pt.
- [4 <./images/maximal_greatest.png>]
-Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 281.
- [5] [6] [7] [8]
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 444.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 455.
- [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 455.
+ [5 <./images/maximal_greatest.png>]
+Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 324.
+ [6] [7] [8] [9]
+Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 486.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 497.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 497.
  (d:/Programming/Docs/ÀëÉ¢ÊýÑ§/¶þÔª¹ØÏµ/relation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 455.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 455.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 497.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 497.
 Package rerunfilecheck Info: File `relation.out' has not changed.
-(rerunfilecheck)             Checksum: EEF62BA2806161742D590A84A9C6F0F8;917.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 455.
+(rerunfilecheck)             Checksum: BEAA89EE72743691D72C398F693CE4C7;931.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 497.
  ) 
 Here is how much of TeX's memory you used:
- 25138 strings out of 492995
- 428880 string characters out of 6136402
+ 25217 strings out of 492995
+ 430058 string characters out of 6136402
  465239 words of memory out of 5000000
- 27978 multiletter control sequences out of 15000+600000
- 47179 words of font info for 178 fonts, out of 8000000 for 9000
+ 28040 multiletter control sequences out of 15000+600000
+ 47989 words of font info for 181 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,8n,56p,10462b,516s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on d:/Programming/Docs/ÀëÉ¢ÊýÑ§/¶þÔª¹ØÏµ/relation.pdf (9 pages, 616045 bytes).
+<c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simkai.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simsun.ttc><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><c:/WINDOWS/fonts/simhei.ttf><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><d:/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on d:/Programming/Docs/ÀëÉ¢ÊýÑ§/¶þÔª¹ØÏµ/relation.pdf (10 pages, 645776 bytes).
 PDF statistics:
- 784 PDF objects out of 1000 (max. 8388607)
- 570 compressed objects within 6 object streams
- 95 named destinations out of 1000 (max. 500000)
- 334 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 817 PDF objects out of 1000 (max. 8388607)
+ 597 compressed objects within 6 object streams
+ 106 named destinations out of 1000 (max. 500000)
+ 338 words of extra memory for PDF output out of 10000 (max. 10000000)
 

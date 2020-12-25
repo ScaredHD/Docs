@@ -21,6 +21,7 @@
     \newtheorem*{remark}{Remark}
     \theoremstyle{plain}
     \newtheorem{corollary}{Corollary}[section]
+    \newenvironment{explanation}{\textit{说明}.}{\hfill$\blacksquare$}
 \usepackage{caption}
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -50,32 +51,6 @@
 
 \begin{document}
 \section{图与子图}
-
-图有两种定义方式, 一个为二元组, 一个为三元组.
-
-\begin{definition}[\text{图}]
-    图 $ G $ 为一个三元组 $ G \coloneqq (V, E, \psi) $, $ V $ 为顶点的集合, $ E $ 为边的集合, $ \psi $ 为边和顶点对的对应关系. 若隐式地的定义边和顶点对的对应关系, 则可以定义 $ G \coloneqq (V, E) $. 对于给定的图 $ G $, 可以记 $ V(G) $, $ E(G) $ 分别代表 $ G $ 的顶点和边集. 若 $ G $ 含有 $ n $ 个点, 则可以称 $ G $ 的阶数为 $ n $.
-\end{definition}
-
-一般地, 图 $ G = (V, E) $ 中点和边的数量可以采用下面的记号: $ |V| = \nu $, $ |E| = \varepsilon $. 所以对于图 $ G $, $ \nu(G) $ 表示点的数量, $ \varepsilon(G) $ 表示边的数量.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width = 0.35\linewidth]{./images/graph_definition.png}
-    \caption{图 $ G = (V, E, \psi) $}
-\end{figure}
-
-\paragraph{例}
-上图 $ G $, 其顶点集 $ V = \set{a, b, c, d, e} $, 边集 $ E = \set{e_1, e_2, e_3, e_4} $. 而边和点之间的对应关系为:
-\[ \begin{array}{c}
-    \psi(e_1) = (a, b) \,,\\
-    \psi(e_2) = (a, d) \,,\\
-    \psi(e_3) = (d, e) \,,\\
-    \psi(e_4) = (d, c)
-\end{array} \,.\]
-
-图的边可以是有向的, 此时边 $ (a, b) $ 和 $ (b, a) $ 是不同的边, 这样的图叫有向图. 为了和无向图中的 $ (a, b) $ 区别开, 也可以使用 $ \langle a, b \rangle $. 图的每一条边可以给定一个权重, 这样得到的图为加权图. 本章主要描述无向图, 此时虽然边被写成二元组的形式, 但其实 $ (a, b) $ 和 $ (b, a) $ 指同一条边. 所以无向图中也可以用 $ \set{a, b} $ 表示一条边.
-
 下面概念描述了由原图得到其它图的方法.
 \begin{definition}[\text{子图}]
     设图 $ G = (V, E) $, $ V' \subseteq V $, $ E' \subseteq E $, 则图 $ G' = (V', E') $ 称为 $ G $ 的子图. 若 $ G' \neq G $, 则称 $ G' $ 为 $ G $ 的真子图.
@@ -169,7 +144,7 @@
         限制 & 英文 & 翻译1 & 翻译2 & 闭合时 & 闭合时翻译 \\ \hline
             & walk & 道路 & 道路 & closed walk & 回路 \\ \hline
         edge-distinct & trail & 简单道路 & 路径 & circuit & 简单回路 \\ \hline
-        vertex-distinct & path & 基本道路 & 简单道路 & cycle & 环(基本回路)
+        vertex-distinct & path & 基本道路 & 简单道路 & cycle & 环/圈(基本回路)
     \end{tabular}
 \end{table}
 
@@ -180,6 +155,29 @@
     \centering
     \includegraphics[width = 0.9\linewidth]{./images/walks.png}
 \end{figure}
+
+
+\begin{lemma}
+    简单图中, 任何简单回路都包含圈.
+\end{lemma}
+
+\begin{explanation}
+    如果简单回路中不存在重复内点, 则其自身就是圈.
+
+    如果简单回路不是圈, 则其存在重复的内点 $ v_i = v_j $. 删掉其中的回路, 得到 $ v_0, e_1, v_1, \dots v_i, e_{j + 1}, v_{j + 1}, \dots, v_{n} = v_0 $, 如果剩下的回路不是圈, 则重复上面的步骤, 最终能够得到一个圈. 
+\end{explanation}
+
+\begin{lemma}
+    边 $ e $ 在圈中 $ \iff $ $ e $ 在简单回路中.
+\end{lemma}
+
+\begin{proof}
+    设 $ e $ 在圈中, 由于一个圈必然是一个简单回路, 所以 $ e $ 也在简单回路中.
+
+    设边 $ e $ 为简单回路 $ v_0, e_1, v_1, \dots, e_n, v_n $ 的一条边, 简单回路的内部点可以重复. 如果对任意的 $ 0 \leqslant i < j \leqslant n $, $ v_i \neq v_j $, 则证明完毕. 而如果其中存在相同的顶点, $ v_i = v_j $: \[ v_0, \dots v_i, \dots, v_j, \dots, v_n \,.\]
+    
+    那么此时又可以分两种情况: (1) 如果 $ e $ 在 $ v_i $ 和 $ v_j $ 的子路径
+\end{proof}
 
 
 \begin{definition}[\text{连通}]

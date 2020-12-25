@@ -158,7 +158,7 @@
 
 
 \begin{lemma}
-    简单图中, 任何简单回路都包含圈.
+    简单图中, 任何简单回路都包含圈. (任何简单图都可分为多个圈 ?)
 \end{lemma}
 
 \begin{explanation}
@@ -174,9 +174,7 @@
 \begin{proof}
     设 $ e $ 在圈中, 由于一个圈必然是一个简单回路, 所以 $ e $ 也在简单回路中.
 
-    设边 $ e $ 为简单回路 $ v_0, e_1, v_1, \dots, e_n, v_n $ 的一条边, 简单回路的内部点可以重复. 如果对任意的 $ 0 \leqslant i < j \leqslant n $, $ v_i \neq v_j $, 则证明完毕. 而如果其中存在相同的顶点, $ v_i = v_j $: \[ v_0, \dots v_i, \dots, v_j, \dots, v_n \,.\]
-    
-    那么此时又可以分两种情况: (1) 如果 $ e $ 在 $ v_i $ 和 $ v_j $ 的子路径
+    设边 $ e $ 为简单回路 $ v_0, e_1, v_1, \dots, e_n, v_n $ 的一条边, 任何简单回路都可以由几个圈组成, 故 $ e $ 也在其中.
 \end{proof}
 
 
@@ -256,8 +254,15 @@
 
 \begin{proposition}
     设有无向图 $ G $, 其点连通度 $ \kappa(G) $, 边连通度 $ \lambda(G) $ 和最小点度 $ \delta(G) $ 存在不等关系:
-    \[ \kappa(G) \leqslant \lambda(G) \leqslant \delta(G) \,.\]
+    \[ \kappa(G) \leqslant \lambda(G) \leqslant \delta(G) \,.\] 
+    当(且仅当? 待证)边割集中的边无公共端点时, $ \kappa(G) = \lambda(G) $.
 \end{proposition}
+
+\begin{proof}
+    证明 $ \lambda(G) \leqslant \delta(G) $: 取度最小的点 $ v $, $ d(v) = \delta(G) $. 删除与 $ v $ 关联的所有边, 一定能够使图不连通. 删除了 $ \delta(G) $ 条边, 边连通图 $ \lambda(G) \leqslant \delta(G) $.
+
+    证明 $ \kappa(G) \leqslant \lambda(G) $: 考虑最小的边割集 \[ \set{e_i \mid 1 \leqslant i \leqslant \lambda(G)} \,.\] 如果删除边割集中所有边关联的对应的两个端点之一, 则整个边割集中的边也都被删去, 图也就不连通. 当边割集中的边没有公共端点时, 删去每一条边的端点会导致不连通, 因而此时 $ \kappa(G) = \lambda(G) $; 而当边割集中的边存在公共端点时, 删去公共端点, 多条边被同时删去, 故此时需要删去的端点就少于边割集中边的数量, $ \kappa(G) < \lambda(G) $.
+\end{proof}
 
 
 

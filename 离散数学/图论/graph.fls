@@ -388,7 +388,6 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong81.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong8e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong9a.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong71.tfm
-INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong60.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unihei/unihei4f.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong9e.tfm
 INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong84.tfm
@@ -407,9 +406,13 @@ INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unikai/unikai68.tfm
 INPUT d:/Programming/Docs/离散数学/图论/./images/bridge.png
 INPUT ./images/bridge.png
 INPUT ./images/bridge.png
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong60.tfm
+INPUT d:/texlive/2017/texmf-dist/fonts/tfm/zhmetrics/unisong/unisong86.tfm
 INPUT d:/Programming/Docs/离散数学/图论/graph.aux
 INPUT d:/Programming/Docs/离散数学/图论/graph.out
 INPUT d:/Programming/Docs/离散数学/图论/graph.out
+INPUT c:/WINDOWS/fonts/simsun.ttc
+INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simkai.ttf
 INPUT c:/WINDOWS/fonts/simsun.ttc
@@ -417,7 +420,6 @@ INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simhei.ttf
-INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc
 INPUT c:/WINDOWS/fonts/simsun.ttc

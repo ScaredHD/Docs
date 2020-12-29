@@ -46,12 +46,8 @@
 \newcommand{\N}{\mathbb N}
 \newcommand{\Q}{\mathbb Q}
 \renewcommand{\C}{\mathbb C}
-\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
-\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
-\def \dd #1.#2 {\dfrac{d #1}{d #2}}
-\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
 \DeclarePairedDelimiter\set{\{}{\}}
-\newcommand{\del}{\nabla}
+\DeclareMathOperator{\vsubseteq}{\rotatebox[origin=c]{270}{$\subseteq$}}
 
 
 \begin{document}
@@ -68,7 +64,7 @@
     \item 代入公理: 给定两同类对象 $ x $, $ y $, 若 $ x = y $, 则对于一切函数和运算 $ f $, $ f(x) = f(y) $. 类似地, 对于任何依赖于 $ x $ 的性质 $ P(x) $, 若 $ x = y $, 则 $ P(y) $ 与 $ P(x) $ 等价.
 \end{enumerate}
 
-换句话说, 代入公理描述了: 相等的输入, 无论形式是否一样, 经过同一种运算, 应该得到相等的输出.
+换句话说, 代入公理描述了: 相等的输入, 无论形式是否一样, 经过同一种运算, 应该得到相等的输出. 注意, 代入公理无法逆向使用, 即该公理无法从 $ f(x) = f(y) $ 推出 $ x = y $, 这是单射的性质, 然而并非所有函数都满足单射.
 
 \paragraph{例 (代入公理)} 若 $ x = y $, 则 $ x^2 = y^2 $, $ \sin x = \sin y $, $ x + z = y + z $.
 

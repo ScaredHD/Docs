@@ -1,111 +1,111 @@
-\contentsline {section}{\numberline {1}自然数}{2}{section.1}
-\contentsline {subsection}{\numberline {1.1}相等关系*}{2}{subsection.1.1}
-\contentsline {paragraph}{例 (代入公理)}{2}{paragraph*.1}
-\contentsline {subsection}{\numberline {1.2}Peano 公理}{2}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}加法}{3}{subsection.1.3}
-\contentsline {subsubsection}{\numberline {1.3.1}运算律}{3}{subsubsection.1.3.1}
-\contentsline {subsubsection}{\numberline {1.3.2}正性}{4}{subsubsection.1.3.2}
-\contentsline {subsubsection}{\numberline {1.3.3}序}{5}{subsubsection.1.3.3}
-\contentsline {subsection}{\numberline {1.4}乘法}{5}{subsection.1.4}
-\contentsline {section}{\numberline {2}集合论}{6}{section.2}
-\contentsline {subsection}{\numberline {2.1}集合论基础}{6}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}相等关系*}{6}{subsubsection.2.1.1}
-\contentsline {paragraph}{例 (代入公理)}{6}{paragraph*.2}
-\contentsline {subsubsection}{\numberline {2.1.2}定义集合}{7}{subsubsection.2.1.2}
-\contentsline {subsubsection}{\numberline {2.1.3}构造集合}{7}{subsubsection.2.1.3}
-\contentsline {subsubsection}{\numberline {2.1.4}子集}{9}{subsubsection.2.1.4}
-\contentsline {paragraph}{例}{10}{paragraph*.3}
-\contentsline {paragraph}{例}{10}{paragraph*.4}
-\contentsline {paragraph}{例}{12}{paragraph*.5}
-\contentsline {paragraph}{例}{13}{paragraph*.6}
-\contentsline {subsection}{\numberline {2.2}函数}{13}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}基本定义}{13}{subsubsection.2.2.1}
-\contentsline {paragraph}{例}{13}{paragraph*.7}
-\contentsline {paragraph}{例}{13}{paragraph*.8}
-\contentsline {paragraph}{例}{13}{paragraph*.9}
-\contentsline {subsubsection}{\numberline {2.2.2}映射的类型}{14}{subsubsection.2.2.2}
-\contentsline {paragraph}{例}{14}{paragraph*.10}
-\contentsline {paragraph}{例}{14}{paragraph*.11}
-\contentsline {paragraph}{例}{14}{paragraph*.12}
-\contentsline {paragraph}{例}{14}{paragraph*.13}
-\contentsline {subsection}{\numberline {2.3}像与逆像}{15}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {2.3.1}定义}{15}{subsubsection.2.3.1}
-\contentsline {paragraph}{例}{15}{paragraph*.14}
-\contentsline {paragraph}{例}{17}{paragraph*.15}
-\contentsline {subsubsection}{\numberline {2.3.2}值域}{17}{subsubsection.2.3.2}
-\contentsline {subsection}{\numberline {2.4}幂集}{17}{subsection.2.4}
-\contentsline {paragraph}{例}{18}{paragraph*.16}
-\contentsline {paragraph}{例}{18}{paragraph*.17}
-\contentsline {paragraph}{例}{18}{paragraph*.18}
-\contentsline {paragraph}{例}{18}{paragraph*.19}
-\contentsline {subsection}{\numberline {2.5}笛卡尔积}{19}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}定义}{19}{subsubsection.2.5.1}
-\contentsline {paragraph}{例}{19}{paragraph*.20}
-\contentsline {subsubsection}{\numberline {2.5.2}多重笛卡尔积}{19}{subsubsection.2.5.2}
-\contentsline {subsection}{\numberline {2.6}基数}{20}{subsection.2.6}
-\contentsline {subsubsection}{\numberline {2.6.1}基数定义}{20}{subsubsection.2.6.1}
-\contentsline {paragraph}{例}{20}{paragraph*.21}
-\contentsline {paragraph}{例}{21}{paragraph*.22}
-\contentsline {subsubsection}{\numberline {2.6.2}有限集与无限集}{21}{subsubsection.2.6.2}
-\contentsline {paragraph}{例}{21}{paragraph*.23}
-\contentsline {subsubsection}{\numberline {2.6.3}基数性质}{22}{subsubsection.2.6.3}
-\contentsline {paragraph}{证明 $ f $ 是单射}{25}{paragraph*.24}
-\contentsline {paragraph}{证明 $ f $ 是满射}{26}{paragraph*.25}
-\contentsline {section}{\numberline {3}有理数和整数}{28}{section.3}
-\contentsline {subsection}{\numberline {3.1}有理数和整数}{28}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}绝对值和指数运算}{28}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}有理数的空隙}{28}{subsection.3.3}
-\contentsline {section}{\numberline {4}实数}{29}{section.4}
-\contentsline {subsection}{\numberline {4.1}Cauchy 序列}{29}{subsection.4.1}
-\contentsline {paragraph}{例}{30}{paragraph*.29}
-\contentsline {paragraph}{例}{30}{paragraph*.30}
-\contentsline {paragraph}{例}{30}{paragraph*.31}
-\contentsline {subsection}{\numberline {4.2}等价的 Cauchy 序列}{32}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}实数的构造}{32}{subsection.4.3}
-\contentsline {paragraph}{例}{33}{paragraph*.32}
-\contentsline {paragraph}{例}{33}{paragraph*.33}
-\contentsline {subsection}{\numberline {4.4}实数的序}{33}{subsection.4.4}
-\contentsline {paragraph}{例}{34}{paragraph*.34}
-\contentsline {subsection}{\numberline {4.5}实数的确界}{34}{subsection.4.5}
-\contentsline {paragraph}{例}{35}{paragraph*.35}
-\contentsline {subsubsection}{\numberline {4.5.1}最大/最小值}{36}{subsubsection.4.5.1}
-\contentsline {paragraph}{例}{36}{paragraph*.36}
-\contentsline {section}{\numberline {5}序列的极限}{36}{section.5}
-\contentsline {subsection}{\numberline {5.1}收敛及极限的算律}{36}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}广义实数系}{38}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}序列的确界}{38}{subsection.5.3}
-\contentsline {paragraph}{例}{39}{paragraph*.37}
-\contentsline {paragraph}{例}{39}{paragraph*.38}
-\contentsline {paragraph}{最小上界性质(集合)}{39}{paragraph*.39}
-\contentsline {subsection}{\numberline {5.4}上极限和下极限}{40}{subsection.5.4}
-\contentsline {paragraph}{例}{40}{paragraph*.40}
-\contentsline {paragraph}{例}{40}{paragraph*.41}
-\contentsline {paragraph}{例}{40}{paragraph*.42}
-\contentsline {paragraph}{例}{41}{paragraph*.43}
-\contentsline {paragraph}{例}{41}{paragraph*.44}
-\contentsline {paragraph}{正推}{43}{paragraph*.45}
-\contentsline {paragraph}{反推}{43}{paragraph*.46}
-\contentsline {subsection}{\numberline {5.5}常见极限}{45}{subsection.5.5}
-\contentsline {subsection}{\numberline {5.6}子序列}{46}{subsection.5.6}
-\contentsline {paragraph}{例}{46}{paragraph*.47}
-\contentsline {paragraph}{例}{46}{paragraph*.48}
-\contentsline {section}{\numberline {6}级数}{48}{section.6}
-\contentsline {subsection}{\numberline {6.1}有限级数 (求和)}{48}{subsection.6.1}
-\contentsline {subsubsection}{\numberline {6.1.1}集合上的求和}{50}{subsubsection.6.1.1}
-\contentsline {paragraph}{例}{50}{paragraph*.49}
-\contentsline {subsubsection}{\numberline {6.1.2}二重求和}{52}{subsubsection.6.1.2}
-\contentsline {subsection}{\numberline {6.2}无穷级数}{54}{subsection.6.2}
-\contentsline {paragraph}{例}{55}{paragraph*.50}
-\contentsline {paragraph}{正推}{57}{paragraph*.51}
-\contentsline {paragraph}{反推}{57}{paragraph*.52}
-\contentsline {subsection}{\numberline {6.3}非负项级数}{58}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}级数的重排}{61}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}方根判别法和比例判别法}{61}{subsection.6.5}
-\contentsline {subsection}{\numberline {6.6}级数判别法总结}{61}{subsection.6.6}
-\contentsline {section}{\numberline {7}无限集合}{61}{section.7}
-\contentsline {subsection}{\numberline {7.1}可数性}{61}{subsection.7.1}
-\contentsline {paragraph}{例}{62}{paragraph*.53}
-\contentsline {paragraph}{例}{62}{paragraph*.54}
-\contentsline {subsection}{\numberline {7.2}无限集上求和}{67}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}不可数集}{68}{subsection.7.3}
-\contentsline {paragraph}{例}{69}{paragraph*.55}
+\contentsline {section}{\numberline {1}自然数}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}相等关系*}{3}{subsection.1.1}
+\contentsline {paragraph}{例 (代入公理)}{3}{paragraph*.1}
+\contentsline {subsection}{\numberline {1.2}Peano 公理}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}加法}{4}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}运算律}{4}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}正性}{5}{subsubsection.1.3.2}
+\contentsline {subsubsection}{\numberline {1.3.3}序}{6}{subsubsection.1.3.3}
+\contentsline {subsection}{\numberline {1.4}乘法}{6}{subsection.1.4}
+\contentsline {section}{\numberline {2}集合论}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}集合论基础}{7}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}相等关系*}{7}{subsubsection.2.1.1}
+\contentsline {paragraph}{例 (代入公理)}{7}{paragraph*.2}
+\contentsline {subsubsection}{\numberline {2.1.2}定义集合}{8}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}构造集合}{8}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}子集}{10}{subsubsection.2.1.4}
+\contentsline {paragraph}{例}{11}{paragraph*.3}
+\contentsline {paragraph}{例}{11}{paragraph*.4}
+\contentsline {paragraph}{例}{13}{paragraph*.5}
+\contentsline {paragraph}{例}{14}{paragraph*.6}
+\contentsline {subsection}{\numberline {2.2}函数}{14}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}基本定义}{14}{subsubsection.2.2.1}
+\contentsline {paragraph}{例}{14}{paragraph*.7}
+\contentsline {paragraph}{例}{14}{paragraph*.8}
+\contentsline {paragraph}{例}{14}{paragraph*.9}
+\contentsline {subsubsection}{\numberline {2.2.2}映射的类型}{15}{subsubsection.2.2.2}
+\contentsline {paragraph}{例}{15}{paragraph*.10}
+\contentsline {paragraph}{例}{15}{paragraph*.11}
+\contentsline {paragraph}{例}{15}{paragraph*.12}
+\contentsline {paragraph}{例}{15}{paragraph*.13}
+\contentsline {subsection}{\numberline {2.3}像与逆像}{16}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}定义}{16}{subsubsection.2.3.1}
+\contentsline {paragraph}{例}{16}{paragraph*.14}
+\contentsline {paragraph}{例}{18}{paragraph*.15}
+\contentsline {subsubsection}{\numberline {2.3.2}值域}{18}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.4}幂集}{18}{subsection.2.4}
+\contentsline {paragraph}{例}{19}{paragraph*.16}
+\contentsline {paragraph}{例}{19}{paragraph*.17}
+\contentsline {paragraph}{例}{19}{paragraph*.18}
+\contentsline {paragraph}{例}{19}{paragraph*.19}
+\contentsline {subsection}{\numberline {2.5}笛卡尔积}{20}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}定义}{20}{subsubsection.2.5.1}
+\contentsline {paragraph}{例}{20}{paragraph*.20}
+\contentsline {subsubsection}{\numberline {2.5.2}多重笛卡尔积}{20}{subsubsection.2.5.2}
+\contentsline {subsection}{\numberline {2.6}基数}{21}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}基数定义}{21}{subsubsection.2.6.1}
+\contentsline {paragraph}{例}{21}{paragraph*.21}
+\contentsline {paragraph}{例}{22}{paragraph*.22}
+\contentsline {subsubsection}{\numberline {2.6.2}有限集与无限集}{22}{subsubsection.2.6.2}
+\contentsline {paragraph}{例}{22}{paragraph*.23}
+\contentsline {subsubsection}{\numberline {2.6.3}基数性质}{23}{subsubsection.2.6.3}
+\contentsline {paragraph}{证明 $ f $ 是单射}{26}{paragraph*.24}
+\contentsline {paragraph}{证明 $ f $ 是满射}{27}{paragraph*.25}
+\contentsline {section}{\numberline {3}有理数和整数}{29}{section.3}
+\contentsline {subsection}{\numberline {3.1}有理数和整数}{29}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}绝对值和指数运算}{29}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}有理数的空隙}{29}{subsection.3.3}
+\contentsline {section}{\numberline {4}实数}{30}{section.4}
+\contentsline {subsection}{\numberline {4.1}Cauchy 序列}{30}{subsection.4.1}
+\contentsline {paragraph}{例}{31}{paragraph*.29}
+\contentsline {paragraph}{例}{31}{paragraph*.30}
+\contentsline {paragraph}{例}{31}{paragraph*.31}
+\contentsline {subsection}{\numberline {4.2}等价的 Cauchy 序列}{33}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}实数的构造}{33}{subsection.4.3}
+\contentsline {paragraph}{例}{34}{paragraph*.32}
+\contentsline {paragraph}{例}{34}{paragraph*.33}
+\contentsline {subsection}{\numberline {4.4}实数的序}{34}{subsection.4.4}
+\contentsline {paragraph}{例}{35}{paragraph*.34}
+\contentsline {subsection}{\numberline {4.5}实数的确界}{35}{subsection.4.5}
+\contentsline {paragraph}{例}{36}{paragraph*.35}
+\contentsline {subsubsection}{\numberline {4.5.1}最大/最小值}{37}{subsubsection.4.5.1}
+\contentsline {paragraph}{例}{37}{paragraph*.36}
+\contentsline {section}{\numberline {5}序列的极限}{37}{section.5}
+\contentsline {subsection}{\numberline {5.1}收敛及极限的算律}{37}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}广义实数系}{39}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}序列的确界}{39}{subsection.5.3}
+\contentsline {paragraph}{例}{40}{paragraph*.37}
+\contentsline {paragraph}{例}{40}{paragraph*.38}
+\contentsline {paragraph}{最小上界性质(集合)}{40}{paragraph*.39}
+\contentsline {subsection}{\numberline {5.4}上极限和下极限}{41}{subsection.5.4}
+\contentsline {paragraph}{例}{41}{paragraph*.40}
+\contentsline {paragraph}{例}{41}{paragraph*.41}
+\contentsline {paragraph}{例}{41}{paragraph*.42}
+\contentsline {paragraph}{例}{42}{paragraph*.43}
+\contentsline {paragraph}{例}{42}{paragraph*.44}
+\contentsline {paragraph}{正推}{44}{paragraph*.45}
+\contentsline {paragraph}{反推}{44}{paragraph*.46}
+\contentsline {subsection}{\numberline {5.5}常见极限}{46}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}子序列}{47}{subsection.5.6}
+\contentsline {paragraph}{例}{47}{paragraph*.47}
+\contentsline {paragraph}{例}{47}{paragraph*.48}
+\contentsline {section}{\numberline {6}级数}{49}{section.6}
+\contentsline {subsection}{\numberline {6.1}有限级数 (求和)}{49}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {6.1.1}集合上的求和}{51}{subsubsection.6.1.1}
+\contentsline {paragraph}{例}{51}{paragraph*.49}
+\contentsline {subsubsection}{\numberline {6.1.2}二重求和}{53}{subsubsection.6.1.2}
+\contentsline {subsection}{\numberline {6.2}无穷级数}{55}{subsection.6.2}
+\contentsline {paragraph}{例}{56}{paragraph*.50}
+\contentsline {paragraph}{正推}{58}{paragraph*.51}
+\contentsline {paragraph}{反推}{58}{paragraph*.52}
+\contentsline {subsection}{\numberline {6.3}非负项级数}{59}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}级数的重排}{62}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}方根判别法和比例判别法}{62}{subsection.6.5}
+\contentsline {subsection}{\numberline {6.6}级数判别法总结}{62}{subsection.6.6}
+\contentsline {section}{\numberline {7}无限集合}{62}{section.7}
+\contentsline {subsection}{\numberline {7.1}可数性}{62}{subsection.7.1}
+\contentsline {paragraph}{例}{63}{paragraph*.53}
+\contentsline {paragraph}{例}{63}{paragraph*.54}
+\contentsline {subsection}{\numberline {7.2}无限集上求和}{68}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}不可数集}{69}{subsection.7.3}
+\contentsline {paragraph}{例}{70}{paragraph*.55}

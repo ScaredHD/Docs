@@ -23,7 +23,7 @@
     \theoremstyle{plain}
     \newtheorem{corollary}{Corollary}[section]
 \usepackage{xcolor} 	 % 颜色
-\usepackage{graphicx} 	 % 引用图片
+\usepackage{graphicx} 	 % 用图片
 \usepackage{float}
 \usepackage{centernot}
 \usepackage{esvect} 	 % 向量箭头 \vv{} 
@@ -354,12 +354,13 @@ $ \Z a $ 的重要之处在于下面的命题:
     群 $ G $ 的子群 $ N $ 被称为是正规子群, 当且仅当对任意 $ n \in N $, 和任意 $ g \in G $, $ gng^{-1} \in N $.
 \end{definition}
 
+正规子群的等价定义为: $ N $ 的左右陪集相等, 即 $ \forall a \in G $, $ aN = Na $.
+
 \subsection{同态}
 两个群之间可以存在映射关系, 而满足一定条件的的映射称为同态.
 \begin{definition}[\text{同态 (Homomophism)}]
     同态 $ \varphi \colon G \to G' $ 是 群 $ G $ 到 $ G' $ 的映射, 该映射满足:
     \[ \forall a, b \in G, \qquad \varphi(a b) = \varphi(a) \varphi(b) \,.\]
-
     和映射一样, 同态也有像的概念:
     \[ \varphi(G) \coloneqq \im \varphi \coloneqq \set{\varphi(x) \mid x \in G} \,.\]
 \end{definition}

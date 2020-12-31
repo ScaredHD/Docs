@@ -45,7 +45,7 @@
 \newcommand{\Q}{\mathbb Q}
 \renewcommand{\C}{\mathbb C}
 \DeclarePairedDelimiter\set{\{}{\}}
-\newcommand{\del}{\nabla}
+\newcommand{\connect}[1][]{\mathrel{\overset{#1}{\mbox{---}}}}
 
 \pagestyle{empty}
 
@@ -178,6 +178,7 @@
 \end{proof}
 
 
+
 \begin{definition}[\text{连通}]
     对于无向图 $ G $ 中的两点 $ a $, $ b $, 称这两点是连通的, 如果能够找到一条道路, 使得 $ a $ 为起点 $ b $ 为终点或 $ b $ 为起点 $ a $ 为终点. 称 $ G $ 是连通的, 当且仅当任意 $ u, v \in V(G) $, $ u $ 和 $ v $ 是连通的.
 \end{definition}
@@ -189,6 +190,17 @@
     \includegraphics[width = 0.25\linewidth]{./images/connected_1.png}
 \end{figure}
 
+\begin{proposition} \label{connectivity}
+    图 $ G = (n, m) $, 若存在一条 $ v_i $ 到 $ v_j $ 的道路, 当且仅当一定存在一条 $ v_i $ 到 $ v_j $ 的长度不大于 $ n - 1 $ 的道路.
+\end{proposition}
+
+\begin{proof}
+    充分条件是不证自明的.
+
+    对于必要条件, 若存在一条 $ v_i $ 到 $ v_j $ 的道路, 如果其长度大于 $ n - 1 $, 则其中必然存在重复的点. 如 $ v_1, v_2, \dots, v_i, \dots, v_j, \dots, v_k $, 其中 $ v_i = v_j $, 则可以删掉 $ v_i $ 到 $ v_j $ 的回路, 构造出一条更短的道路: $ v_1, \dots, v_i, v_{j + 1}, \dots, v_k $. 重复上面的过程, 当没有重复点的时候, 其长度必然不大于 $ n - 1 $.
+\end{proof}
+
+所以 $ G = (n, m) $ 中, $ u $ 和 $ v $ 是连通的充要条件可以等价地强化为存在一条 $ a $ 到 $ b $ 或 $ b $ 到 $ a $ 的长度不大于 $ n - 1 $ 的道路.
 
 \begin{definition}[\text{连通分支}]
     设 $ G $ 为无向图, 则 $ G $ 的一个连通分支是 $ G $ 的一个子图 $ G' $, 且 $ G' $ 不是另一连通分支的子图. 换句话说, $ G $ 的连通分支是 $ G $ 的一个极大连通子图. 图 $ G $ 连通分支的个数记作为 $ \omega(G) $.
@@ -263,6 +275,61 @@
 
     证明 $ \kappa(G) \leqslant \lambda(G) $: 考虑最小的边割集 \[ \set{e_i \mid 1 \leqslant i \leqslant \lambda(G)} \,.\] 如果删除边割集中所有边关联的对应的两个端点之一, 则整个边割集中的边也都被删去, 图也就不连通. 当边割集中的边没有公共端点时, 删去每一条边的端点会导致不连通, 因而此时 $ \kappa(G) = \lambda(G) $; 而当边割集中的边存在公共端点时, 删去公共端点, 多条边被同时删去, 故此时需要删去的端点就少于边割集中边的数量, $ \kappa(G) < \lambda(G) $.
 \end{proof}
+
+
+\section{图的表示}
+\subsection{邻接矩阵}
+设 $ \ve A = (a_{ij})_{n \times n} $ 为图 $ G $ 的邻接矩阵. 矩阵的幂 $ \ve A^n = \ve A \ve A \cdots \ve A $ 里包含了 $ G $ 中长度为 $ n $ 的道路(不妨称其 $ 1- $道路)的信息.
+
+\begin{remark}
+    $ \ve A^n = \ve A \ve A \cdots \ve A $ 区别于 $ \ve A^{[n]} = \ve A \odot \ve A \odot \cdots \odot \ve A $.
+\end{remark}
+
+令 $ w_{ij}^{(k)} $ 表示 $ v_i $ 到 $ v_j $ 的长度为 $ k $ 的道路数目. 显然: $ w_{ij}^{(1)} = a_{ij} $. 考虑 $ \ve B = \ve A^2 $: 
+\[ 
+    b_{ij} = \sum_{\gamma = 1}^{n} a_{i\gamma} a_{\gamma j} = \sum_{\gamma = 1}^{n} w_{i \gamma}^{(1)} a_{\gamma j}^{(1)} \,.
+\]
+而对于每一个 $ \gamma \in [1..n] $, $ w_{i\gamma}^{(1)} $ 为 $ v_i $ 到 $ v_\gamma $ 的 $ 1- $道路数, $ w_{\gamma j}^{(1)} $ 为 $ v_{\gamma} $ 到 $ v_j $ 的 $ 1- $道路数, 那么从计数原理中的乘法公式中, 可以知道: $ w_{i \gamma}^{(1)} w_{\gamma j}^{(1)} $ 表示 $ v_i $ 到途经 $ v_{\gamma} $ 到达 $ v_j $ 的道路数, 且该道路长度为 $ 2 $.
+
+那么 $ w_{i1}^{(1)} w_{1j}^{(1)} + w_{i2}^{(1)} w_{2j}^{(1)} + \dots + w_{in}^{(1)} w_{nj}^{(1)} $ 自然就得到 $ v_i $ 到 $ v_j $ 的 $ 2- $道路数.
+
+
+\begin{proposition}
+    若图 $ G $ 的邻接矩阵为 $ \ve A_{n \times n} $, 则 $\bigl( \ve A^k \bigr)_{ij} $ 表示 $ v_i $ 到 $ v_j $ 的长度为 $ k $ 的道路数. 换句话说, 令 $ \ve B = \ve A^k $, 则 $ b_{ij} = w_{ij}^{(k)} $.
+\end{proposition}
+
+\begin{proof}
+    对 $ k $ 归纳. 当 $ k = 1 $ 时, $ b_{ij} = a_{ij} = w_{ij}^{(1)} $. 这是基础情形. 现归纳地假设当 $ \ve B = \ve A^k $ 时, $ b_{ij} = w_{ij}^{(k)} $. 证明当 $ \ve B = \ve A^{k + 1} $ 时, $ b_{ij} = w_{ij}^{(k + 1)} $.
+
+    当 $ \ve B = \ve A^{k + 1} $ 时, 设 $ \ve C = \ve A^k $, 于是 $ \ve B = \ve C \ve A $:
+    \[ 
+        b_{ij} = \sum_{\gamma = 1}^{n} c_{i \gamma} a_{\gamma j} \,,
+    \]
+    而根据归纳假设和基础情形 $ c_{i \gamma} = w_{i \gamma}^{(k)} $, $ a_{i \gamma} = w_{i \gamma}^{(1)} $. 所以:
+    \[ 
+        b_{ij} = \sum_{\gamma = 1}^{n} w_{i \gamma}^{(k)} w_{\gamma j}^{(1)} \,.
+    \]
+    下面说明等式右侧就等于 $ w_{ij}^{(k + 1)} $. 下面为表述方便, 引入记号 $ \set[\big]{u \connect[k] v} $ 表示起点为 $ u $ 终点为 $ v $ 的长度为 $ k $ 的道路集合. 我们需要证明对于任意 $ 1 \leqslant \alpha < \beta \leqslant n $, 道路 $ \set[\big]{v_i \connect[k] v_\alpha \connect[1] v_j} $ 和 $ \set[\big]{v_i \connect[k] v_\beta \connect[1] v_j} $ 互斥, 这样同一条道路才不会被计算多次. 使用反证法, 假设存在一条 $ v_i \connect[k] v_\alpha \connect[1] v_j $ 和一条 $ v_i \connect[k] v_\beta \connect[1] v_j $ 相同, 记作 $ P $, 于是 $ v_\alpha $ 和 $ v_\beta $ 同在 $ P $ 上. 注意 $ v_\alpha \neq v_\beta $, 所以 $ v_\alpha $ 和 $ v_\beta $ 必然一前一后, 不失一般性地假设 $ P \colon v_i, \dots, v_\alpha, \dots, v_\beta, \dots, v_j $, 所以 $ d(v_i, v_\alpha) \neq d(v_i, v_\beta) $, 这与 $ d(v_i, v_\alpha) = d(v_i, v_\beta) = k $ 的假设矛盾.
+
+    所以等式右侧 $ \sum\limits_{\gamma = 1}^{n} w_{i \gamma}^{(k)} w_{\gamma j}^{(1)} = w_{ij}^{(k + 1)} $, 这便完成了归纳.
+\end{proof}
+
+所以我们得到了两点不连通的条件:
+\begin{corollary}
+    若图 $ G = (n, m) $ 的邻接矩阵为 $ \ve A $. 若对任意 $ 1 \leqslant k \leqslant n - 1 $, 都有:
+    \[ 
+        \bigl( \ve A^k \bigr)_{ij} = 0 \,,
+    \]
+    则 $ v_i $ 和 $ v_j $ 不连通. 其中: $ \bigl( \ve A^k \bigr)_{ij} $ 表示 $ \ve A^k $ 的 $ i $ 行 $ j $ 列元素.
+\end{corollary}
+
+\begin{proof}
+    条件说明 $ v_i $ 和 $ v_j $ 间不存在长度小于 $ n - 1 $ 的道路, 由命题 \ref{connectivity}, $ v_i $ 和 $ v_j $ 之间不存在道路.
+\end{proof}
+
+
+\subsection{可达性矩阵与关系矩阵}
+关系可以用图表示, 两者都可以用矩阵表示. 类比关系矩阵, 图也有可达性矩阵. 关系矩阵中, $ a_i $ 和 $ a_j $ 存在关系则矩阵对于元素为 $ 1 $; 图的可达性矩阵中, 若 $ v_i $ 和 $ v_j $ 连通则对应元素为 $ 1 $.
 
 
 

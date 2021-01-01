@@ -3,6 +3,7 @@
 
 \usepackage{parskip}
     \setlength{\parindent}{0em}
+    \setlength{\parskip}{1em}
 \usepackage{geometry}
     \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
 \usepackage{amsmath, amssymb, amsthm, mathtools}
@@ -48,6 +49,8 @@
 \def \dd #1.#2 {\dfrac{d #1}{d #2}}
 \def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
 \newcommand{\del}{\nabla}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\range}{range}
 
 
 \pagestyle{empty}
@@ -55,38 +58,86 @@
 \begin{document}
 \section{二元关系}
 \subsection{关系的定义}
-集合 $ A $ 到 $ B $ 的一个二元关系 $ R $ 是 $ A \times B $ 的子集.
+集合 $ A $ 到 $ B $ 的一个二元关系 $ R $ 是 $ A \times B $ 的子集, 可以看作是函数的推广.
 
 \paragraph{例}
 $ A = \set{a, b} $, $ B = \set{1, 2} $. 则 $ A \times B = \set{(a, 1), (a, 2), (b, 1), (b, 2)} $. 任取 $ A \times B $ 的一个子集, 就是 $ A $ 到 $ B $ 的一种关系: 如 $ R = \set{(a, 1), (b, 1)} $ 或 $ \set{(a, 1), (a, 2)} $.
 
+和部分函数类似, $ A $ 到 $ B $ 的关系, 不代表 $ A $ 中每个元素都有 $ B $ 中对应关联的元素. 如果 $ A $ 中每个元素都能在 $ B $ 中找到元素和该元素存在关系, 则称这个关系为左完全的 (left-total) 或是连续的 (serial). 
+
+\paragraph{例}
+$ A = \set{a, b} $, $ B = \set{1, 2} $. 则关系 $ R_1 = \set{(a, 1), (b, 1)} $ 是左完全的, 因为 $ A $ 中所有元素, 都有 $ B $ 中对应存在关系的元素. 而关系 $ R_2 = \set{(a, 1), (a, 2)} $ 就不是左完全的, 因为在 $ B $ 中没有任何与 $ b \in A $ 存在关系的元素.
+
+将函数中定义域的概念推广到关系中来, 定义 $ A $ 到 $ B $ 的关系 $ R $ 的定义域为 $ A $ 中存在关系的元素集
+\[ 
+    \dom R \coloneqq \set{a \in A \mid \exists b \in B, a R b }\,.
+\]
+所以一个关系 $ R \subseteq A \times B $ 为左完全的, 当且仅当 $ \dom R = A $.
+
+$ f \colon A \to B $ 如果是一个部分函数, 那么我们可以把定义域限制到 $ A $ 中有定义的那部分上. 同理, 如果 $ A $ 到 $ B $ 的关系 $ R $ 不是左完全的, 那么我们可以限制 $ A $ 到它的子集 $ C $ 上, 得到新的关系, 记作 $ R|_C $ 或 $ R \restriction _C $. 所以如果我们限制一个不是左完全的关系 $ R $ 到其定义域上 $ R|_{\dom R} $, 则关系也就成为左完全的.
+
+如上例中, $ A $ 到 $ B $ 的关系 $ R_2 = \set{(a, 1), (a, 2)} $ 不是左完全的, 但 $ \set{a} $ 到 $ B $ 的关系 $ R_2 |_{\set{a}} $ 是左完全的.
+
+由于关系是函数的一种推广, 可以看作是允许一对多的``函数'', 大多数函数中的概念都可以引入到关系中来.
+
+\subsection{关系的复合及性质}
 \begin{definition}[\text{关系的复合}]
     设集合 $ A $ 到 $ B $ 的关系 $ R $, 以及 $ B $ 到 $ C $ 的关系 $ S $. 则 $ R $ 与 $ S $ 的复合 $ S \circ R $ 定义为:
-    \[ S \circ R \coloneqq \set{(a, c) \mid \exists b \in B \text{ 使得 } (a, b) \in R \land (b, c) \in S} \,.\]
+    \[ S \circ R \coloneqq \set{(a, c) \mid \exists b \in B \text{ 使得 } (a, b) \in R \land (b, c) \in S} \,.\] 也可以采用记号 $ R;S $ 或 $ (R;S) $ 表示 $ R $ 与 $ S $ 复合.
 \end{definition}
 
+\begin{remark}
+    用 $ \circ $ 表示复合也是借用函数复合的记号, 所以其顺序也遵循函数复合, 从右向左: 复合函数 $ g \circ f $ 表示先 $ f $ 后 $ g $. 复合关系 $ S \circ R $ 表示先 $ R $ 后 $ S $. 而使用分号 $ R;S $ 或 $ (R;S) $ 作为后来定义的记号, 则是从左向右, 以方便阅读. 两种方式 $ S \circ R $ 和 $ R;S $ 只是记号上的不同, 均代表相同含义: $ R $ 与 $ S $ 复合.
+\end{remark}
 
 
 \begin{proposition}[\text{复合的性质}] \ 
     \begin{itemize}
         \item (结合律) $ (R \circ S) \circ T = R \circ (S \circ T) $
-        \item (恒等关系) $ R \circ I_A = R $, $ I_A \circ R = R $
-        \item (逆关系) $ R^{-1} \circ R = I_A $, $ R \circ R^{-1} = I_A $
+        \item (恒等关系) $ R \circ I_A = R $,\quad $ I_A \circ R = R $
+        \item (逆关系) $ R^{-1} \circ R = I_A|_R $,\quad $ R \circ R^{-1} = I_A|_{R^{-1}} $
         \item $ (R \circ S)^{-1} = S^{-1} \circ R^{-1} $
     \end{itemize}
 \end{proposition}
 
+特别要注意: $ R^{-1} \circ R $ 不一定等于 $ I_A $, 不要套用实数的幂法则 $ x^{-1} x = x^0 = 1 $. 
+
+
 递归地定义 $ R^n $:
 \[ R^n \coloneqq \begin{cases}
-    R & n = 1 \\
-    R^{n - 1} \circ R & n > 1
+    I_A & n = 0 \\
+    R^{n - 1} \circ R & n > 0
 \end{cases} \,.\]
+
 于是有:
 \[ \begin{array}{c}
-    R^1 = R \\
+    R^0 = I_A \\
+    R^1 = I_A \circ R = R \\
     R^2 = R^1 \circ R = R \circ R \\
     R^3 = R^2 \circ R = R \circ R \circ R
 \end{array} \]
+
+同时有下面关系:
+\[ \begin{array}{c}
+    \forall m,n \in \N, R^m \circ R^n = R^{m + n} \,, \\
+    \forall m,n \in \N, \bigl( R^m \bigr)^n = R^{mn} \,.
+\end{array} \]
+务必牢记, 上面的幂的指数都是定义在自然数内的, 并没有拓广到整数集上.
+
+\begin{proposition}
+    对任意自然数 $ n $, $ \bigl( R^n \bigr)^{-1} = \bigl( R^{-1} \bigr)^n $. 
+\end{proposition}
+
+\begin{proof}
+    通过归纳法, $ \bigl( R^{-1} \bigr)^1 = \bigl( R^1 \bigr)^{-1} $. 现归纳地假设 $ \bigl( R^{-1} \bigr)^n = \bigl( R^n \bigr)^{-1} $.
+    \begin{align*}
+        \bigl( R^{-1} \bigr)^{n + 1} &= \bigl( R^{-1} \bigr)^n \circ R^{-1} \\
+        &= \bigl( R^n \bigr)^{-1} \circ R^{-1} \\
+        &= \bigl( R \circ R^n \bigr)^{-1} \\
+        &= \bigl( R^{n + 1} \bigr)^{-1} \,.
+    \end{align*}
+\end{proof}
+
 
 \begin{theorem}[\text{传递性}]
     集合 $ A $ 上的关系 $ R $ 具有传递性, 当且仅当 $ R^n \subseteq R $ 对任意 $ n \in \Z^+ $ 均成立.

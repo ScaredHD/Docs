@@ -83,7 +83,7 @@ $ f \colon A \to B $ 如果是一个部分函数, 那么我们可以把定义域
 \subsection{关系的复合及性质}
 \begin{definition}[\text{关系的复合}]
     设集合 $ A $ 到 $ B $ 的关系 $ R $, 以及 $ B $ 到 $ C $ 的关系 $ S $. 则 $ R $ 与 $ S $ 的复合 $ S \circ R $ 定义为:
-    \[ S \circ R \coloneqq \set{(a, c) \mid \exists b \in B \text{ 使得 } (a, b) \in R \land (b, c) \in S} \,.\] 也可以采用记号 $ R;S $ 或 $ (R;S) $ 表示 $ R $ 与 $ S $ 复合.
+    \[ S \circ R \coloneqq \set{(a, c) \mid \exists b \in B \text{ 使得 } aRb \land bSc} \,.\] 也可以采用记号 $ R;S $ 或 $ (R;S) $ 表示 $ R $ 与 $ S $ 复合.
 \end{definition}
 
 \begin{remark}
@@ -95,7 +95,7 @@ $ f \colon A \to B $ 如果是一个部分函数, 那么我们可以把定义域
     \begin{itemize}
         \item (结合律) $ (R \circ S) \circ T = R \circ (S \circ T) $
         \item (恒等关系) $ R \circ I_A = R $,\quad $ I_A \circ R = R $
-        \item (逆关系) $ R^{-1} \circ R = I_A|_{\dom R} $,\quad $ R \circ R^{-1} = I_A|_{\dom R^{-1}} $. 使用另一种记号也可以有: $ R;R^{-1} = I_A|_{\dom R} $, \quad $ R^{-1};R = I_A|_{R^{-1}} $
+        \item (逆关系) $ R^{-1} \circ R = I_{\dom R} $,\quad $ R \circ R^{-1} = I_{\dom R^{-1}} $. 使用另一种记号也可以有: $ R;R^{-1} = I_{\dom R} $, \quad $ R^{-1};R = I_{\dom R^{-1}} $
         \item $ (R \circ S)^{-1} = S^{-1} \circ R^{-1} $
     \end{itemize}
 \end{proposition}
@@ -105,7 +105,7 @@ $ f \colon A \to B $ 如果是一个部分函数, 那么我们可以把定义域
 
 设 $ R $ 为 $ A $ 上的关系, 则可以递归地定义 $ R^n $:
 \[ R^n \coloneqq \begin{cases}
-    I_A|_{\dom R} & n = 0 \\
+    I_{\dom R} & n = 0 \\
     R^{n - 1} \circ R & n > 0
 \end{cases} \,.\]
 于是有:
@@ -121,6 +121,8 @@ $ f \colon A \to B $ 如果是一个部分函数, 那么我们可以把定义域
     \forall m,n \in \N, \bigl( R^m \bigr)^n = R^{mn} \,.
 \end{array} \]
 
+牢记幂指数 $ m, n $ 均定义在自然数上. 如果 $ m, n $ 中出现负数, 情况将变得很复杂. 不要简单地认为 $ (R^{-1})^2 \circ R = R^{-1} $. 不妨尝试 $ \set{1, 2} $ 上的关系 $ R = \set{(1, 2)} $, 其逆关系 $ R^{-1} = \set{(2, 1)} $. 此时 $ (R^{-1})^2 \circ R = \varnothing \neq \set{(2, 1)} = R^{-1} $.
+
 下面的性质使得记法 $ R^{-n} $ 是良定义的.
 \begin{proposition}
     对任意自然数 $ n $, $ \bigl( R^n \bigr)^{-1} = \bigl( R^{-1} \bigr)^n $.
@@ -135,6 +137,8 @@ $ f \colon A \to B $ 如果是一个部分函数, 那么我们可以把定义域
         &= \bigl( R^{n + 1} \bigr)^{-1} \,.
     \end{align*}
 \end{proof}
+
+    
 
 
 \begin{theorem}[\text{传递性}]

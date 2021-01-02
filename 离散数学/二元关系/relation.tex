@@ -141,7 +141,7 @@ $ f \colon A \to B $ 如果是一个部分函数, 那么我们可以把定义域
     
 
 
-\begin{theorem}[\text{传递性}]
+\begin{theorem}[\text{传递性}] \label{transitivity}
     集合 $ A $ 上的关系 $ R $ 具有传递性, 当且仅当 $ R^n \subseteq R $ 对任意 $ n \in \Z^+ $ 均成立.
 \end{theorem}
 
@@ -280,6 +280,46 @@ $ (a, b) \in R $ 与 $ (\ve M_R)_{ab} $ 的真值等价, 而 $ (b, c) \in S $ �
 \[ 
     (\ve M_R)^n = \ve M_{R^n} \,.
 \]
+
+\subsection{关系的闭包}
+$ A $ 上的关系 $ R $ 不一定具有性质 $ P $ (自反/对称/传递), 但向其中添加一些元素就可以满足 $ P $. 那么包含 $ R $ 且满足 $ P $ 的最小集合就称为 $ R $ 的 $ P $ 闭包.
+
+\begin{definition}[\text{闭包}]
+    设 $ A $ 上的二元关系 $ R $ 以及另一关系 $ R' $ 满足:
+    \begin{enumerate}
+        \item $ R \subseteq R' $
+        \item $ R' $ 具有 $ P $ 性质
+        \item 对任意满足前两个条件的的 $ R'' $, $ R' \subseteq R'' $
+    \end{enumerate}
+    则称 $ R' $ 为 $ R $ 的 $ P $ 闭包. $ R $ 的自反闭包, 对称闭包, 传递闭包分别记作 $ r(R) $, $ s(R) $ 和 $ t(R) $.
+\end{definition}
+
+自反闭包和对称闭包很容易求得:
+\begin{proposition}
+    设 $ R $ 是 $ A $ 上的二元关系:
+    \begin{itemize}
+        \item $ r(R) = R \cup I_A $
+        \item $ s(R) = R \cup R^{-1} $
+    \end{itemize}
+\end{proposition}
+
+传递闭包的求解则要复杂一些:
+\begin{proposition}
+    设 $ R $ 是 $ A $ 上的二元关系, 记 $ R^* = \bigcup\limits_{n = 1}^{\infty} R^{n} $, 则 $ t(R) = R^* $.
+\end{proposition}
+
+另外一种求传递闭包的算法---Warshall 算法.
+
+多重闭包的性质:
+\begin{proposition}
+    设 $ R $ 是 $ A $ 上的二元关系.
+    \begin{itemize}
+        \item $ rs(R) = sr(R) $
+        \item $ rt(R) = tr(T) $
+        \item $ st(R) \subseteq ts(R) $
+    \end{itemize}
+\end{proposition}
+
 
 \section{序集}
 \subsection{偏序集}

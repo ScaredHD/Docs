@@ -1,0 +1,816 @@
+<!DOCTYPE html><html><head>
+      <title>phy</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"],"messageStyle":"none","tex2jax":{"processEnvironments":false,"processEscapes":true,"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"TeX":{"extensions":["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]},"HTML-CSS":{"availableFonts":["TeX"]}});
+        </script>
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+        
+      
+      
+
+      
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <center><font size="7">&#x7269;&#x7406;</font></center>
+<ul>
+<li><a href="#%E7%83%AD%E5%8A%9B%E5%AD%A6">&#x70ED;&#x529B;&#x5B66;</a>
+<ul>
+<li><a href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81">&#x70ED;&#x529B;&#x5B66;&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</a>
+<ul>
+<li><a href="#%E5%B9%B3%E8%A1%A1%E6%80%81">&#x5E73;&#x8861;&#x6001;</a></li>
+<li><a href="#%E7%83%AD%E5%B9%B3%E8%A1%A1">&#x70ED;&#x5E73;&#x8861;</a></li>
+<li><a href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E6%B8%A9%E6%A0%87">&#x70ED;&#x529B;&#x5B66;&#x6E29;&#x6807;</a></li>
+</ul>
+</li>
+<li><a href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93">&#x7406;&#x60F3;&#x6C14;&#x4F53;</a>
+<ul>
+<li><a href="#%E7%89%A9%E6%80%81%E6%96%B9%E7%A8%8B">&#x7269;&#x6001;&#x65B9;&#x7A0B;</a></li>
+</ul>
+</li>
+<li><a href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%9A%84%E5%8E%8B%E5%BC%BA%E5%85%AC%E5%BC%8F">&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x7684;&#x538B;&#x5F3A;&#x516C;&#x5F0F;</a>
+<ul>
+<li><a href="#%E5%8E%8B%E5%BC%BA%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F">&#x538B;&#x5F3A;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;</a></li>
+<li><a href="#%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E6%B8%A9%E5%BA%A6%E7%9A%84%E5%9B%B4%E8%A7%82%E6%84%8F%E4%B9%89">&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x6E29;&#x5EA6;&#x7684;&#x56F4;&#x89C2;&#x610F;&#x4E49;</a></li>
+</ul>
+</li>
+<li><a href="#%E8%83%BD%E9%87%8F%E5%9D%87%E5%88%86%E5%AE%9A%E7%90%86">&#x80FD;&#x91CF;&#x5747;&#x5206;&#x5B9A;&#x7406;</a>
+<ul>
+<li><a href="#%E8%87%AA%E7%94%B1%E5%BA%A6">&#x81EA;&#x7531;&#x5EA6;</a></li>
+<li><a href="#%E5%86%85%E8%83%BD">&#x5185;&#x80FD;</a></li>
+</ul>
+</li>
+<li><a href="#%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E5%BE%8B">&#x9EA6;&#x514B;&#x65AF;&#x97E6;&#x901F;&#x7387;&#x5206;&#x5E03;&#x5F8B;</a>
+<ul>
+<li><a href="#%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0">&#x901F;&#x7387;&#x5206;&#x5E03;&#x51FD;&#x6570;</a></li>
+<li><a href="#%E6%9C%80%E6%A6%82%E7%84%B6%E9%80%9F%E7%8E%87">&#x6700;&#x6982;&#x7136;&#x901F;&#x7387;</a></li>
+<li><a href="#%E5%B9%B3%E5%9D%87%E9%80%9F%E7%8E%87">&#x5E73;&#x5747;&#x901F;&#x7387;</a></li>
+<li><a href="#%E6%96%B9%E5%9D%87%E6%A0%B9%E9%80%9F%E7%8E%87">&#x65B9;&#x5747;&#x6839;&#x901F;&#x7387;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%8C%AF%E5%8A%A8">&#x632F;&#x52A8;</a>
+<ul>
+<li><a href="#%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8">&#x7B80;&#x8C10;&#x632F;&#x52A8;</a>
+<ul>
+<li><a href="#%E9%80%9F%E5%BA%A6%E5%92%8C%E5%8A%A0%E9%80%9F%E5%BA%A6">&#x901F;&#x5EA6;&#x548C;&#x52A0;&#x901F;&#x5EA6;</a></li>
+<li><a href="#%E5%88%9D%E5%A7%8B%E6%9D%A1%E4%BB%B6">&#x521D;&#x59CB;&#x6761;&#x4EF6;</a></li>
+</ul>
+</li>
+<li><a href="#%E6%97%8B%E8%BD%AC%E7%9F%A2%E9%87%8F%E6%B3%95">&#x65CB;&#x8F6C;&#x77E2;&#x91CF;&#x6CD5;</a></li>
+<li><a href="#%E5%8D%95%E6%91%86">&#x5355;&#x6446;</a></li>
+<li><a href="#%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E8%83%BD%E9%87%8F">&#x7B80;&#x8C10;&#x632F;&#x52A8;&#x80FD;&#x91CF;</a></li>
+<li><a href="#%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90">&#x7B80;&#x8C10;&#x632F;&#x52A8;&#x7684;&#x5408;&#x6210;</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%80%E8%B0%90%E6%B3%A2">&#x7B80;&#x8C10;&#x6CE2;</a>
+<ul>
+<li><a href="#%E5%B9%B3%E9%9D%A2%E7%AE%80%E8%B0%90%E6%B3%A2%E5%87%BD%E6%95%B0">&#x5E73;&#x9762;&#x7B80;&#x8C10;&#x6CE2;&#x51FD;&#x6570;</a></li>
+<li><a href="#%E5%90%84%E5%8F%82%E6%95%B0%E5%85%B3%E7%B3%BB">&#x5404;&#x53C2;&#x6570;&#x5173;&#x7CFB;</a></li>
+<li><a href="#%E7%9B%B8%E4%BD%8D%E5%B7%AE">&#x76F8;&#x4F4D;&#x5DEE;</a></li>
+<li><a href="#%E6%B3%A2%E7%9A%84%E5%B9%B2%E6%B6%89">&#x6CE2;&#x7684;&#x5E72;&#x6D89;</a>
+<ul>
+<li><a href="#%E7%9B%B8%E4%BD%8D%E5%B7%AE-1">&#x76F8;&#x4F4D;&#x5DEE;</a></li>
+<li><a href="#%E5%B9%B2%E6%B6%89%E7%8A%B6%E6%80%81%E7%9A%84%E5%88%A4%E6%96%AD">&#x5E72;&#x6D89;&#x72B6;&#x6001;&#x7684;&#x5224;&#x65AD;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%85%89%E7%9A%84%E5%B9%B2%E6%B6%89">&#x5149;&#x7684;&#x5E72;&#x6D89;</a>
+<ul>
+<li><a href="#%E7%9B%B8%E5%B9%B2%E6%9D%A1%E4%BB%B6">&#x76F8;&#x5E72;&#x6761;&#x4EF6;</a></li>
+<li><a href="#%E5%85%89%E7%A8%8B">&#x5149;&#x7A0B;</a>
+<ul>
+<li><a href="#%E7%9B%B8%E4%BD%8D%E5%B7%AE-2">&#x76F8;&#x4F4D;&#x5DEE;</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9D%A8%E6%B0%8F%E5%8F%8C%E7%BC%9D%E5%B9%B2%E6%B6%89">&#x6768;&#x6C0F;&#x53CC;&#x7F1D;&#x5E72;&#x6D89;</a>
+<ul>
+<li><a href="#%E6%98%8E%E6%9A%97%E7%BA%B9%E5%85%AC%E5%BC%8F">&#x660E;&#x6697;&#x7EB9;&#x516C;&#x5F0F;</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AD%89%E5%80%BE%E5%B9%B2%E6%B6%89">&#x7B49;&#x503E;&#x5E72;&#x6D89;</a>
+<ul>
+<li><a href="#%E6%98%8E%E6%9A%97%E7%8E%AF%E5%85%AC%E5%BC%8F">&#x660E;&#x6697;&#x73AF;&#x516C;&#x5F0F;</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AD%89%E5%8E%9A%E5%B9%B2%E6%B6%89">&#x7B49;&#x539A;&#x5E72;&#x6D89;</a>
+<ul>
+<li><a href="#%E6%B5%8B%E9%87%8F%E8%A1%A8%E9%9D%A2%E5%B9%B3%E6%95%B4%E5%BA%A6">&#x6D4B;&#x91CF;&#x8868;&#x9762;&#x5E73;&#x6574;&#x5EA6;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%8B%AD%E4%B9%89%E7%9B%B8%E5%AF%B9%E8%AE%BA">&#x72ED;&#x4E49;&#x76F8;&#x5BF9;&#x8BBA;</a>
+<ul>
+<li><a href="#%E6%B4%9B%E4%BC%A6%E5%85%B9%E5%8F%98%E6%8D%A2">&#x6D1B;&#x4F26;&#x5179;&#x53D8;&#x6362;</a></li>
+<li><a href="#%E7%9B%B8%E5%AF%B9%E8%AE%BA%E6%95%88%E5%BA%94">&#x76F8;&#x5BF9;&#x8BBA;&#x6548;&#x5E94;</a>
+<ul>
+<li><a href="#%E5%B0%BA%E7%BC%A9">&#x5C3A;&#x7F29;</a></li>
+<li><a href="#%E9%92%9F%E6%85%A2">&#x949F;&#x6162;</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B4%A8%E9%87%8F-%E5%8A%A8%E9%87%8F-%E8%83%BD%E9%87%8F%E5%85%B3%E7%B3%BB">&#x8D28;&#x91CF;, &#x52A8;&#x91CF;, &#x80FD;&#x91CF;&#x5173;&#x7CFB;</a>
+<ul>
+<li><a href="#%E8%B4%A8%E9%87%8F">&#x8D28;&#x91CF;</a></li>
+<li><a href="#%E5%8A%A8%E9%87%8F">&#x52A8;&#x91CF;</a></li>
+<li><a href="#%E8%83%BD%E9%87%8F">&#x80FD;&#x91CF;</a></li>
+<li><a href="#%E5%8A%A8%E8%B4%A8%E8%83%BD%E5%85%B3%E7%B3%BB">&#x52A8;&#x8D28;&#x80FD;&#x5173;&#x7CFB;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%87%8F%E5%AD%90%E7%89%A9%E7%90%86%E5%9F%BA%E7%A1%80">&#x91CF;&#x5B50;&#x7269;&#x7406;&#x57FA;&#x7840;</a>
+<ul>
+<li><a href="#%E5%85%89%E5%AD%90">&#x5149;&#x5B50;</a></li>
+<li><a href="#%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94">&#x5149;&#x7535;&#x6548;&#x5E94;</a>
+<ul>
+<li><a href="#%E7%94%B5%E5%AD%90%E7%9A%84%E6%9C%80%E5%A4%A7%E5%88%9D%E5%8A%A8%E8%83%BD%E4%B8%8E%E6%88%AA%E6%AD%A2%E7%94%B5%E5%8E%8B">&#x7535;&#x5B50;&#x7684;&#x6700;&#x5927;&#x521D;&#x52A8;&#x80FD;&#x4E0E;&#x622A;&#x6B62;&#x7535;&#x538B;</a></li>
+<li><a href="#%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94%E6%96%B9%E7%A8%8B">&#x7231;&#x56E0;&#x65AF;&#x5766;&#x5149;&#x7535;&#x6548;&#x5E94;&#x65B9;&#x7A0B;</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BA%B7%E6%99%AE%E9%A1%BF%E6%95%A3%E5%B0%84">&#x5EB7;&#x666E;&#x987F;&#x6563;&#x5C04;</a>
+<ul>
+<li><a href="#%E6%95%A3%E5%B0%84%E5%85%AC%E5%BC%8F">&#x6563;&#x5C04;&#x516C;&#x5F0F;</a></li>
+</ul>
+</li>
+<li><a href="#%E7%8E%BB%E5%B0%94%E6%B0%A2%E5%8E%9F%E5%AD%90%E6%A8%A1%E5%9E%8B">&#x73BB;&#x5C14;&#x6C22;&#x539F;&#x5B50;&#x6A21;&#x578B;</a>
+<ul>
+<li><a href="#%E9%87%8C%E5%BE%B7%E4%BC%AF%E6%96%B9%E7%A8%8B">&#x91CC;&#x5FB7;&#x4F2F;&#x65B9;&#x7A0B;</a></li>
+<li><a href="#%E8%B7%83%E8%BF%81%E7%90%86%E8%AE%BA">&#x8DC3;&#x8FC1;&#x7406;&#x8BBA;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%B3%A2%E7%B2%92%E4%BA%8C%E8%B1%A1%E6%80%A7">&#x6CE2;&#x7C92;&#x4E8C;&#x8C61;&#x6027;</a>
+<ul>
+<li><a href="#%E7%89%A9%E8%B4%A8%E6%B3%A2">&#x7269;&#x8D28;&#x6CE2;</a>
+<ul>
+<li><a href="#%E5%BE%B7%E5%B8%83%E7%BD%97%E6%84%8F%E5%85%B3%E7%B3%BB">&#x5FB7;&#x5E03;&#x7F57;&#x610F;&#x5173;&#x7CFB;</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%8D%E7%A1%AE%E5%AE%9A%E5%8E%9F%E7%90%86">&#x4E0D;&#x786E;&#x5B9A;&#x539F;&#x7406;</a></li>
+</ul>
+</li>
+</ul>
+<p><span class="mathjax-exps">$\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}} \newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}} \newcommand{\mcal}{\mathcal} \newcommand{\mscr}{\mathscr} \newcommand{\mr}{\mathrm} \newcommand{\E}{\mathrm e} \renewcommand{\I}{\mathrm i} \newcommand{\R}{\mathbb R} \newcommand{\Z}{\mathbb Z} \newcommand{\N}{\mathbb N} \newcommand{\Q}{\mathbb Q} \newcommand{\C}{\mathbb C} \def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}} \def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}} \def \dd #1.#2 {\dfrac{d #1}{d #2}} \def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}}  \newcommand{\transp}{^{\top}} \DeclareMathOperator{\tr}{tr}$</span></p>
+<h1 class="mume-header" id="%E7%83%AD%E5%8A%9B%E5%AD%A6">&#x70ED;&#x529B;&#x5B66;</h1>
+
+<h2 class="mume-header" id="%E7%83%AD%E5%8A%9B%E5%AD%A6%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81">&#x70ED;&#x529B;&#x5B66;&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</h2>
+
+<h3 class="mume-header" id="%E5%B9%B3%E8%A1%A1%E6%80%81">&#x5E73;&#x8861;&#x6001;</h3>
+
+<p>&#x5E73;&#x8861;&#x6001;&#x662F;&#x6307;&#x5728;&#x6CA1;&#x6709;&#x5916;&#x754C;&#x5F71;&#x54CD;&#x65F6;, &#x7CFB;&#x7EDF;&#x7684;&#x5B8F;&#x89C2;&#x6027;&#x8D28;&#x4E0D;&#x968F;&#x65F6;&#x95F4;&#x7684;&#x53D8;&#x5316;&#x800C;&#x53D8;&#x5316;&#x7684;<strong>&#x5B8F;&#x89C2;&#x72B6;&#x6001;</strong>. &#x5BF9;&#x4E8E;&#x6C14;&#x4F53;, &#x53EA;&#x6709;&#x5728;&#x5E73;&#x8861;&#x6001;&#x65F6;, &#x624D;&#x80FD;&#x7528;&#x4E00;&#x7EC4;&#x72B6;&#x6001;&#x53C2;&#x91CF; <span class="mathjax-exps">$(p, V, T)$</span> &#x6765;&#x63CF;&#x8FF0;&#x5176;&#x6027;&#x8D28;; &#x800C;&#x975E;&#x5E73;&#x8861;&#x6001;&#x4E0B;, &#x538B;&#x5F3A;&#x3001;&#x4F53;&#x79EF;&#x53CA;&#x6E29;&#x5EA6;&#x7B49;&#x53C2;&#x6570;&#x90FD;&#x5728;&#x968F;&#x65F6;&#x95F4;&#x4E0D;&#x65AD;&#x53D8;&#x5316;.</p>
+<p>&#x5F53;&#x7CFB;&#x7EDF;&#x5728;&#x5B8F;&#x89C2;&#x4E0A;&#x5904;&#x4E8E;&#x5E73;&#x8861;&#x72B6;&#x6001;&#x65F6;, &#x7EC4;&#x6210;&#x7CFB;&#x7EDF;&#x7684;&#x5927;&#x91CF;&#x5FAE;&#x89C2;&#x7C92;&#x5B50;&#x4ECD;&#x5904;&#x4E8E;&#x4E0D;&#x65AD;&#x7684;&#x8FD0;&#x52A8;&#x4E2D;, &#x53EA;&#x662F;&#x5927;&#x91CF;&#x5FAE;&#x89C2;&#x7C92;&#x5B50;&#x8FD0;&#x52A8;&#x7684;&#x5E73;&#x5747;&#x6548;&#x679C;&#x4E0D;&#x53D8;&#x800C;&#x5DF2;. &#x7531;&#x6B64;&#x70ED;&#x529B;&#x5B66;&#x7684;&#x5E73;&#x8861;&#x6001;&#x65F6;&#x4E00;&#x79CD;&#x52A8;&#x6001;&#x5E73;&#x8861;, &#x5E38;&#x79F0;&#x70ED;&#x52A8;&#x5E73;&#x8861;.</p>
+<h3 class="mume-header" id="%E7%83%AD%E5%B9%B3%E8%A1%A1">&#x70ED;&#x5E73;&#x8861;</h3>
+
+<p>&#x4E24;&#x4E2A;&#x5904;&#x4E8E;&#x5E73;&#x8861;&#x6001;&#x7684;&#x70ED;&#x529B;&#x5B66;&#x7CFB;&#x7EDF;&#x76F8;&#x4E92;&#x63A5;&#x89E6;, &#x7531;&#x4E8E;&#x5176;&#x51B7;&#x70ED;&#x7A0B;&#x5EA6;&#x4E0D;&#x540C;, &#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x4F1A;&#x53D1;&#x751F;&#x80FD;&#x91CF;&#x4EA4;&#x6362;. &#x80FD;&#x91CF;&#x4EA4;&#x6362;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x540E;, &#x4E24;&#x4E2A;&#x7CFB;&#x7EDF;&#x4F1A;&#x8FBE;&#x5230;&#x5171;&#x540C;&#x7684;&#x5E73;&#x8861;&#x6001;, &#x79F0;&#x4E3A;&#x70ED;&#x5E73;&#x8861;.</p>
+<blockquote>
+<p>&#x70ED;&#x5E73;&#x8861;&#x5B9A;&#x5F8B; (&#x70ED;&#x529B;&#x5B66;&#x7B2C;&#x96F6;&#x5B9A;&#x5F8B;): &#x82E5; <span class="mathjax-exps">$A$</span>, <span class="mathjax-exps">$B$</span>, <span class="mathjax-exps">$C$</span> &#x662F;&#x4E09;&#x4E2A;&#x70ED;&#x529B;&#x5B66;&#x7CFB;&#x7EDF;, <span class="mathjax-exps">$A$</span> &#x4E0E; <span class="mathjax-exps">$C$</span>, <span class="mathjax-exps">$B$</span> &#x4E0E; <span class="mathjax-exps">$C$</span> &#x5206;&#x522B;&#x5904;&#x4E8E;&#x70ED;&#x5E73;&#x8861;&#x6001;. &#x5219; <span class="mathjax-exps">$A$</span> &#x548C; <span class="mathjax-exps">$B$</span> &#x5FC5;&#x7136;&#x5F7C;&#x6B64;&#x5904;&#x4E8E;&#x70ED;&#x5E73;&#x8861;&#x6001;.</p>
+</blockquote>
+<h3 class="mume-header" id="%E7%83%AD%E5%8A%9B%E5%AD%A6%E6%B8%A9%E6%A0%87">&#x70ED;&#x529B;&#x5B66;&#x6E29;&#x6807;</h3>
+
+<p>&#x6444;&#x6C0F;&#x6E29;&#x5EA6; <span class="mathjax-exps">$t \ (^\circ\mathrm{C})$</span> &#x4E0E;&#x70ED;&#x529B;&#x5B66;&#x6E29;&#x6807; <span class="mathjax-exps">$T\ (\mathrm K)$</span> &#x4E4B;&#x95F4;&#x7684;&#x6362;&#x7B97;&#x5173;&#x7CFB;&#x5982;&#x4E0B;:<br>
+</p><div class="mathjax-exps">$$T = t + 273.15.$$</div><p></p>
+<h2 class="mume-header" id="%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93">&#x7406;&#x60F3;&#x6C14;&#x4F53;</h2>
+
+<h3 class="mume-header" id="%E7%89%A9%E6%80%81%E6%96%B9%E7%A8%8B">&#x7269;&#x6001;&#x65B9;&#x7A0B;</h3>
+
+<p>&#x5BF9;&#x4E8E;&#x7406;&#x60F3;&#x6C14;&#x4F53;, &#x8BBE; <span class="mathjax-exps">$m$</span> &#x4E3A;&#x6C14;&#x4F53;&#x8D28;&#x91CF;, <span class="mathjax-exps">$M$</span> &#x4E3A;&#x8BE5;&#x6C14;&#x4F53;&#x7684;&#x6469;&#x5C14;&#x8D28;&#x91CF;. &#x5219;&#x6709;:<br>
+</p><div class="mathjax-exps">$$p V = \dfrac{m}{M} R T .$$</div><p></p>
+<p>&#x53C8;&#x56E0;&#x4E3A;&#x7269;&#x8D28;&#x7684;&#x91CF; <span class="mathjax-exps">$\nu = m / M$</span>, &#x6240;&#x4EE5;&#x8FD8;&#x53EF;&#x4EE5;&#x5199;&#x6210;&#x4E0B;&#x9762;&#x7684;&#x5F62;&#x5F0F;:<br>
+</p><div class="mathjax-exps">$$p V = \nu R T .$$</div><p></p>
+<p>&#x7ECF;&#x63A8;&#x5BFC;, &#x4EA6;&#x53EF;&#x8868;&#x8FBE;&#x4E3A;:<br>
+</p><div class="mathjax-exps">$$p = n k T .$$</div><p></p>
+<p>&#x5176;&#x4E2D; <span class="mathjax-exps">$n$</span> &#x4E3A;&#x5355;&#x4F4D;&#x4F53;&#x79EF;&#x5185;&#x5206;&#x5B50;&#x6570; (&#x6C14;&#x4F53;&#x5BC6;&#x5EA6;), <span class="mathjax-exps">$k = 1.38 \times 10^{-23}\ \mathrm{J \cdot K^{-1}}$</span>, &#x88AB;&#x79F0;&#x4E3A;&#x73BB;&#x5C14;&#x5179;&#x66FC;&#x5E38;&#x6570;. <span class="mathjax-exps">$R = 8.31 \ \mathrm{J/(mol\cdot K)}$</span> &#x662F;&#x63CF;&#x8FF0; <span class="mathjax-exps">$1 \ \mathrm{mol}$</span> &#x6C14;&#x4F53;&#x884C;&#x4E3A;&#x7684;&#x666E;&#x9002;&#x5E38;&#x91CF;.</p>
+<blockquote>
+<p>&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x6EE1;&#x8DB3;&#x4E0A;&#x8FF0;&#x7269;&#x6001;&#x65B9;&#x7A0B;, &#x53CD;&#x8FC7;&#x6765;, &#x6EE1;&#x8DB3;&#x4E0A;&#x8FF0;&#x65B9;&#x7A0B;&#x7684;&#x6C14;&#x4F53;&#x5C31;&#x662F;&#x7406;&#x60F3;&#x6C14;&#x4F53;.</p>
+</blockquote>
+<h2 class="mume-header" id="%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E7%9A%84%E5%8E%8B%E5%BC%BA%E5%85%AC%E5%BC%8F">&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x7684;&#x538B;&#x5F3A;&#x516C;&#x5F0F;</h2>
+
+<p>&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x5BF9;&#x5BB9;&#x5668;&#x58C1;&#x7684;&#x538B;&#x5F3A;&#x662F;<strong>&#x5927;&#x91CF;</strong>&#x5206;&#x5B50;&#x5BF9;&#x5668;&#x58C1;&#x6301;&#x7EED;&#x78B0;&#x649E;&#x540E;&#x7684;&#x5E73;&#x5747;&#x6548;&#x679C;.</p>
+<blockquote>
+<p>&#x6CE8;&#x610F;: &#x5FC5;&#x987B;&#x6709;<strong>&#x5927;&#x91CF;</strong>&#x5206;&#x5B50;.</p>
+</blockquote>
+<h3 class="mume-header" id="%E5%8E%8B%E5%BC%BA%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F">&#x538B;&#x5F3A;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;</h3>
+
+<p>&#x8BBE;&#x6C14;&#x4F53;&#x5355;&#x4F4D;&#x4F53;&#x79EF;&#x5206;&#x5B50;&#x6570;&#x91CF; (&#x5373;&#x6C14;&#x4F53;&#x5BC6;&#x5EA6;) &#x4E3A; <span class="mathjax-exps">$n$</span>, &#x6C14;&#x4F53;&#x8D28;&#x91CF;&#x4E3A; <span class="mathjax-exps">$m$</span>, &#x6C14;&#x4F53;&#x5206;&#x5B50;&#x901F;&#x5EA6;&#x7684;&#x5E73;&#x65B9;&#x5747;&#x503C;&#x4E3A; <span class="mathjax-exps">$\overline{v^2}$</span>, &#x5219;&#x6C14;&#x4F53;&#x5BF9;&#x5668;&#x58C1;&#x7684;&#x538B;&#x5F3A;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;:<br>
+</p><div class="mathjax-exps">$$p = \dfrac{1}{3} n m \overline{v^2} .$$</div><p></p>
+<p>&#x82E5;&#x7528; <span class="mathjax-exps">$\overline{\varepsilon_{\mathrm t}}$</span> &#x8868;&#x793A;&#x6BCF;&#x4E2A;&#x6C14;&#x4F53;&#x5206;&#x5B50;&#x7684;&#x5E73;&#x5747;&#x5E73;&#x52A8;&#x52A8;&#x80FD;, &#x5219;&#x53EF;&#x63A8;&#x5BFC;&#x51FA;:<br>
+</p><div class="mathjax-exps">$$p = \dfrac{2}{3} n \overline{\varepsilon_{\mathrm t}} .$$</div><p></p>
+<h3 class="mume-header" id="%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93%E6%B8%A9%E5%BA%A6%E7%9A%84%E5%9B%B4%E8%A7%82%E6%84%8F%E4%B9%89">&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x6E29;&#x5EA6;&#x7684;&#x56F4;&#x89C2;&#x610F;&#x4E49;</h3>
+
+<p>&#x5355;&#x4E2A;&#x6C14;&#x4F53;&#x5206;&#x5B50;&#x7684;&#x5E73;&#x5747;&#x5E73;&#x52A8;&#x52A8;&#x80FD;&#x53EF;&#x4EE5;&#x7531;&#x4E0B;&#x5F0F;&#x8BA1;&#x7B97;:<br>
+</p><div class="mathjax-exps">$$\overline{\varepsilon_{\mathrm t}} = \dfrac{1}{2} m \overline{v^2} .$$</div><p></p>
+<p>&#x7ED3;&#x5408; <span class="mathjax-exps">$p = n k T$</span> &#x4E0E; <span class="mathjax-exps">$p = \dfrac{2}{3} n \overline{\varepsilon_{\mathrm t}}$</span>, &#x53EF;&#x5F97;:<br>
+</p><div class="mathjax-exps">$$\overline{\varepsilon_{\mathrm t}} = \dfrac{3}{2} k T .$$</div><p></p>
+<blockquote>
+<p>&#x9053;&#x5C14;&#x987F;&#x5206;&#x538B;&#x5B9A;&#x5F8B;: &#x6709; <span class="mathjax-exps">$m$</span> &#x79CD;&#x4E0D;&#x540C;&#x7684;&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x5171;&#x540C;&#x5BC6;&#x5C01;&#x5728;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x4E2D;, &#x5904;&#x4E8E;&#x5E73;&#x8861;&#x72B6;&#x6001;, &#x5219;&#x6DF7;&#x5408;&#x6C14;&#x4F53;&#x7684;&#x538B;&#x5F3A;&#x7B49;&#x4E8E;&#x5404;&#x7EC4;&#x6210;&#x6C14;&#x4F53;&#x7684;&#x5206;&#x538B;&#x5F3A;&#x4E4B;&#x548C;<br>
+</p><div class="mathjax-exps">$$p = p_1 + p_2 + \cdots + p_m .$$</div><p></p>
+</blockquote>
+<h2 class="mume-header" id="%E8%83%BD%E9%87%8F%E5%9D%87%E5%88%86%E5%AE%9A%E7%90%86">&#x80FD;&#x91CF;&#x5747;&#x5206;&#x5B9A;&#x7406;</h2>
+
+<h3 class="mume-header" id="%E8%87%AA%E7%94%B1%E5%BA%A6">&#x81EA;&#x7531;&#x5EA6;</h3>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x5206;&#x5B50;&#x79CD;&#x7C7B;</th>
+<th style="text-align:center">&#x5E73;&#x52A8;&#x81EA;&#x7531;&#x5EA6;</th>
+<th style="text-align:center">&#x8F6C;&#x52A8;&#x81EA;&#x7531;&#x5EA6;</th>
+<th style="text-align:center">&#x603B;&#x81EA;&#x7531;&#x5EA6;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&#x5355;&#x539F;&#x5B50;&#x5206;&#x5B50;</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">&#x521A;&#x6027;&#x53CC;&#x539F;&#x5B50;&#x5206;&#x5B50;</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">&#x521A;&#x6027;&#x591A;&#x539F;&#x5B50;&#x5206;&#x5B50;</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">6</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5728;&#x5E73;&#x8861;&#x6001;&#x4E0B;, &#x6C14;&#x4F53;&#x5206;&#x5B50;&#x6BCF;&#x4E00;&#x4E2A;&#x81EA;&#x7531;&#x5EA6;&#x4E0A;&#x7684;&#x5E73;&#x5747;&#x52A8;&#x80FD;&#x76F8;&#x7B49;, &#x90FD;&#x7B49;&#x4E8E; <span class="mathjax-exps">$\dfrac{kT}{2}$</span>. &#x4E5F;&#x5C31;&#x662F;&#x8BF4;, &#x5206;&#x5B50;&#x7684;&#x5E73;&#x5747;&#x603B;&#x52A8;&#x80FD;&#x88AB;&#x5747;&#x5206;&#x5230;&#x6BCF;&#x4E2A;&#x81EA;&#x7531;&#x5EA6;&#x4E0A;.</p>
+<p>&#x53CC;&#x539F;&#x5B50;&#x5206;&#x5B50;&#x548C;&#x591A;&#x539F;&#x5B50;&#x5206;&#x5B50;&#x8FD8;&#x5177;&#x6709;&#x632F;&#x52A8;&#x4EA7;&#x751F;&#x7684;&#x52BF;&#x80FD;, &#x6BCF;&#x4E00;&#x4E2A;&#x81EA;&#x7531;&#x5EA6;&#x7684;&#x5E73;&#x5747;&#x52BF;&#x80FD;&#x4E5F;&#x4E3A; <span class="mathjax-exps">$\dfrac{kT}{2}$</span>. &#x6240;&#x4EE5;&#x81EA;&#x7531;&#x5EA6;&#x4E3A; <span class="mathjax-exps">$i$</span> &#x7684;&#x53CC;&#x539F;&#x5B50;&#x5206;&#x5B50;, &#x4EA7;&#x751F;&#x7684;&#x5E73;&#x5747;&#x52A8;&#x80FD;: <span class="mathjax-exps">$\dfrac{ikT}{2}$</span>, &#x5E73;&#x5747;&#x52BF;&#x80FD; <span class="mathjax-exps">$\dfrac{ikT}{2}$</span>, &#x5E73;&#x5747;&#x603B;&#x80FD;&#x91CF; <span class="mathjax-exps">$i k T$</span>.</p>
+<h3 class="mume-header" id="%E5%86%85%E8%83%BD">&#x5185;&#x80FD;</h3>
+
+<p>&#x7CFB;&#x7EDF;&#x603B;&#x80FD;&#x91CF;&#x4E3A;&#x6C14;&#x4F53;&#x7684;&#x5185;&#x80FD;, &#x662F;&#x7EC4;&#x6210;&#x7CFB;&#x7EDF;&#x7684;<strong>&#x6240;&#x6709;&#x5206;&#x5B50;&#x52A8;&#x80FD;&#x548C;&#x52BF;&#x80FD;&#x4E4B;&#x548C;</strong>. &#x7406;&#x60F3;&#x6C14;&#x4F53;&#x5206;&#x5B50;&#x95F4;&#x65E0;&#x76F8;&#x4E92;&#x4F5C;&#x7528;&#x529B;, &#x52BF;&#x80FD;&#x4E3A;&#x96F6;. &#x6545;&#x5BF9;&#x4E8E;&#x7406;&#x60F3;&#x6C14;&#x4F53;: <strong><font color="#00bfff">&#x6C14;&#x4F53;&#x5185;&#x80FD;&#x5373;&#x6240;&#x6709;&#x5206;&#x5B50;&#x52A8;&#x80FD;&#x603B;&#x548C;</font></strong>.</p>
+<p>&#x8BBE;&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x5206;&#x5B50;&#x6570; <span class="mathjax-exps">$N$</span>, &#x6BCF;&#x4E2A;&#x5206;&#x5B50;&#x5E73;&#x5747;&#x603B;&#x52A8;&#x80FD; <span class="mathjax-exps">$\overline \varepsilon = \dfrac{i k T}{2}$</span>, &#x6240;&#x4EE5;&#x603B;&#x52A8;&#x80FD; <span class="mathjax-exps">$E = N \overline \varepsilon = \dfrac{i N k T}{2}$</span>.<br>
+&#x7531;&#x4E8E; <span class="mathjax-exps">$k = \dfrac{R}{N_\mathrm{A}}$</span>, <span class="mathjax-exps">$\nu = \dfrac{N}{N_\mathrm{A}}$</span>, &#x5316;&#x7B80;&#x4E0A;&#x5F0F;, &#x5F97;&#x5230;&#x7406;&#x60F3;&#x6C14;&#x4F53;&#x7684;&#x5185;&#x80FD;&#x516C;&#x5F0F;:<br>
+</p><div class="mathjax-exps">\[E = \dfrac{i \nu R T}{2} \,.\]</div><p></p>
+<p>&#x5B9A;&#x4E49; <span class="mathjax-exps">$1 \ \mathrm{mol}$</span> &#x7406;&#x60F3;&#x6C14;&#x4F53;&#x5185;&#x80FD;&#x4E3A;&#x6469;&#x5C14;&#x5185;&#x80FD;: <span class="mathjax-exps">$E_\mathrm{m} = iRT/2$</span>.</p>
+<h2 class="mume-header" id="%E9%BA%A6%E5%85%8B%E6%96%AF%E9%9F%A6%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E5%BE%8B">&#x9EA6;&#x514B;&#x65AF;&#x97E6;&#x901F;&#x7387;&#x5206;&#x5E03;&#x5F8B;</h2>
+
+<h3 class="mume-header" id="%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0">&#x901F;&#x7387;&#x5206;&#x5E03;&#x51FD;&#x6570;</h3>
+
+<p>&#x8BB0;&#x5206;&#x5B50;&#x603B;&#x6570;&#x4E3A; <span class="mathjax-exps">$N$</span>, &#x5728;&#x901F;&#x7387;&#x533A;&#x95F4; <span class="mathjax-exps">$(v, v + dv)$</span> &#x4E2D;&#x7684;&#x5206;&#x5B50;&#x6570;&#x4E3A; <span class="mathjax-exps">$dN$</span>, &#x5219;&#x8BB0; <span class="mathjax-exps">$f(v) = \dfrac{dN}{N\,dv}$</span> &#x4E3A;&#x901F;&#x7387;&#x5206;&#x5E03;&#x51FD;&#x6570;. &#x7C7B;&#x6BD4;&#x6982;&#x7387;&#x5206;&#x5E03;&#x51FD;&#x6570;, <span class="mathjax-exps">$f(v)\, dv = dN / N$</span> &#x8BB0;&#x5F55;&#x4E86;&#x901F;&#x7387;&#x843D;&#x5728; <span class="mathjax-exps">$(v, v + dv)$</span> &#x4E2D;&#x7684;&#x5206;&#x5B50;&#x5360;&#x603B;&#x6570;&#x7684;&#x6BD4;&#x4F8B; (&#x5373;&#x4E00;&#x5206;&#x5B50;&#x5904;&#x4E8E;&#x8FD9;&#x6BB5;&#x901F;&#x7387;&#x7684;&#x6982;&#x7387;).</p>
+<p>&#x901A;&#x8FC7;&#x6982;&#x7387;&#x8BBA;&#x77E5;&#x8BC6;, &#x5BB9;&#x6613;&#x7C7B;&#x6BD4;&#x5F97;&#x5230;&#x4E0B;&#x9762;&#x7684;&#x6027;&#x8D28;:<br>
+</p><div class="mathjax-exps">\[\int_{0}^{\infty} f(v) \,dv = 1 \,.\]</div><p></p>
+<h3 class="mume-header" id="%E6%9C%80%E6%A6%82%E7%84%B6%E9%80%9F%E7%8E%87">&#x6700;&#x6982;&#x7136;&#x901F;&#x7387;</h3>
+
+<p>&#x7C92;&#x5B50;&#x5904;&#x4E8E;&#x8BE5;&#x901F;&#x7387;&#x7684;&#x6982;&#x7387;&#x6700;&#x5927;,<br>
+</p><div class="mathjax-exps">\[v_\mathrm{p} = \sqrt{\dfrac{2kT}{m}} = \sqrt{\dfrac{2RT}{M}} \approx 1.41\sqrt{\dfrac{RT}{M}} \,.\]</div><p></p>
+<h3 class="mume-header" id="%E5%B9%B3%E5%9D%87%E9%80%9F%E7%8E%87">&#x5E73;&#x5747;&#x901F;&#x7387;</h3>
+
+<p>&#x671F;&#x671B; (&#x5747;&#x503C;) <span class="mathjax-exps">$\displaystyle E(X) = \int_{\R} x f(x) \,dx$</span>, &#x6240;&#x4EE5;&#x6C14;&#x4F53;&#x5206;&#x5B50;&#x8FD0;&#x52A8;&#x7684;&#x5E73;&#x5747;&#x901F;&#x7387;:<br>
+</p><div class="mathjax-exps">\[\overline v = \int_{0}^{\infty} v f(v) \,dv \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[\overline v = \sqrt{\dfrac{8RT}{\pi M}} \approx 1.6 \sqrt{\dfrac{RT}{M}} \,.\]</div><p></p>
+<h3 class="mume-header" id="%E6%96%B9%E5%9D%87%E6%A0%B9%E9%80%9F%E7%8E%87">&#x65B9;&#x5747;&#x6839;&#x901F;&#x7387;</h3>
+
+<p><span class="mathjax-exps">$\displaystyle E(X^2) = \int_{\R} x^2 f(x) \,dx$</span>, &#x6240;&#x4EE5;:<br>
+</p><div class="mathjax-exps">\[\overline{v^2} = \int_0^\infty v^2 f(v)\, dv \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[\overline{v^2} = \sqrt{\dfrac{3RT}{M}} \approx 1.73\sqrt{\dfrac{RT}{M}} \,.\]</div><p></p>
+<h1 class="mume-header" id="%E6%8C%AF%E5%8A%A8">&#x632F;&#x52A8;</h1>
+
+<h2 class="mume-header" id="%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8">&#x7B80;&#x8C10;&#x632F;&#x52A8;</h2>
+
+<p>&#x5F39;&#x7C27;&#x632F;&#x5B50;&#x7CFB;&#x7EDF;&#x7531;&#x8D28;&#x91CF;&#x4E3A; <span class="mathjax-exps">$m$</span>, &#x5F39;&#x6027;&#x7CFB;&#x6570; <span class="mathjax-exps">$k$</span> &#x7684;&#x5F39;&#x7C27;&#x6784;&#x6210;. &#x8BE5;&#x8FD0;&#x52A8;&#x6EE1;&#x8DB3;&#x5FAE;&#x5206;&#x65B9;&#x7A0B;:<br>
+</p><div class="mathjax-exps">\[\DD 2.x.t + \omega^2 x = 0 \,.\]</div><p></p>
+<p>&#x5177;&#x6709;&#x8FD9;&#x79CD;&#x7279;&#x5F81;&#x7684;&#x632F;&#x52A8;, &#x79F0;&#x4E3A;&#x7B80;&#x8C10;&#x632F;&#x52A8;. &#x53EF;&#x4EE5;&#x8BC1;&#x660E;: <strong>&#x5408;&#x5916;&#x529B;&#x4E3A;&#x7EBF;&#x6027;&#x6062;&#x590D;&#x529B;&#x7684;&#x632F;&#x52A8;&#x4E3A;&#x7B80;&#x8C10;&#x632F;&#x52A8;.</strong></p>
+<p>&#x5176;&#x4E2D;: <span class="mathjax-exps">$\omega^2 = k / m$</span>, &#x5373;: <span class="mathjax-exps">$\omega = \sqrt{\dfrac{k}{m}}$</span>.</p>
+<p>&#x8BE5;&#x65B9;&#x7A0B;&#x7684;&#x901A;&#x89E3;&#x4E3A;:<br>
+</p><div class="mathjax-exps">\[x = A \cos(\omega t + \varphi_0) \,.\]</div><p></p>
+<p>&#x5176;&#x4E2D;:<br>
+<span class="mathjax-exps">$A$</span>: &#x632F;&#x5E45;, &#x7269;&#x4F53;&#x79BB;&#x5F00;&#x5E73;&#x8861;&#x4F4D;&#x7F6E;&#x7684;&#x6700;&#x5927;&#x8DDD;&#x79BB;<br>
+<span class="mathjax-exps">$\omega$</span>: &#x89D2;&#x9891;&#x7387;, &#x8868;&#x5F81;&#x7269;&#x4F53;&#x632F;&#x52A8;&#x5FEB;&#x6162;<br>
+<span class="mathjax-exps">$\omega t + \varphi_0$</span>: &#x76F8;&#x4F4D;<br>
+<span class="mathjax-exps">$\varphi_0$</span>: &#x521D;&#x76F8;(&#x89D2;)</p>
+<p>&#x89D2;&#x9891;&#x7387; <span class="mathjax-exps">$\omega\ (\mathrm{s}^{-1})$</span>, &#x5468;&#x671F; <span class="mathjax-exps">$T\ (\mathrm{s})$</span>, &#x9891;&#x7387; <span class="mathjax-exps">$f\ (\mathrm{s}^{-1})$</span> &#x4E4B;&#x95F4;&#x7684;&#x8F6C;&#x5316;:<br>
+</p><div class="mathjax-exps">\[\omega = 2 \pi f \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[\omega T = 2 \pi \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[f = \dfrac{1}{T} \,.\]</div><p></p>
+<p>&#x53EA;&#x8981;&#x6E05;&#x695A;&#x4E09;&#x8005;&#x7684;&#x91CF;&#x7EB2;, &#x5C31;&#x5BB9;&#x6613;&#x8BB0;&#x5FC6;.</p>
+<h3 class="mume-header" id="%E9%80%9F%E5%BA%A6%E5%92%8C%E5%8A%A0%E9%80%9F%E5%BA%A6">&#x901F;&#x5EA6;&#x548C;&#x52A0;&#x901F;&#x5EA6;</h3>
+
+<p></p><div class="mathjax-exps">\[v = \dd x.t = -A\omega \sin(\omega t + \varphi_0) = A\omega \cos\left(\omega t + \varphi_0 + \dfrac{\pi}{2}\right) \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[a = \DD 2.x.t = -A \omega^2 \cos(\omega t + \varphi_0) = A\omega \cos (\omega t + \varphi_0 + \pi) \,.\]</div><p></p>
+<p>&#x6BD4;&#x8F83; <span class="mathjax-exps">$a$</span> &#x548C; <span class="mathjax-exps">$x$</span> &#x7684;&#x8868;&#x8FBE;&#x5F0F;:<br>
+</p><div class="mathjax-exps">\[a = - \omega^2 x \,.\]</div><p></p>
+<h3 class="mume-header" id="%E5%88%9D%E5%A7%8B%E6%9D%A1%E4%BB%B6">&#x521D;&#x59CB;&#x6761;&#x4EF6;</h3>
+
+<p>&#x5F53; <span class="mathjax-exps">$t = 0$</span> &#x65F6;, &#x7269;&#x4F53;&#x7684;&#x521D;&#x59CB;&#x4F4D;&#x7F6E; <span class="mathjax-exps">$x_0 = A \cos \varphi_0$</span>, &#x521D;&#x59CB;&#x901F;&#x5EA6; <span class="mathjax-exps">$v_0 = -A\omega \sin \varphi_0$</span>. &#x8054;&#x7ACB;&#x89E3;&#x5F97;:<br>
+</p><div class="mathjax-exps">\[A = \sqrt{x_0^2 + \dfrac{v_0^2}{\omega^2}} \qquad \tan \varphi_0 = - \dfrac{v_0}{\omega x_0} \,.\]</div><p></p>
+<h2 class="mume-header" id="%E6%97%8B%E8%BD%AC%E7%9F%A2%E9%87%8F%E6%B3%95">&#x65CB;&#x8F6C;&#x77E2;&#x91CF;&#x6CD5;</h2>
+
+<p>&#x61D2;&#x5F97;&#x5199;</p>
+<h2 class="mume-header" id="%E5%8D%95%E6%91%86">&#x5355;&#x6446;</h2>
+
+<p>&#x5C0F;&#x89D2;&#x5EA6;&#x6446;&#x52A8;&#x4E0B;, &#x6EE1;&#x8DB3;&#x7B80;&#x8C10;&#x632F;&#x52A8;:<br>
+</p><div class="mathjax-exps">\[\omega = \sqrt{\dfrac{g}{l}} \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[T = 2\pi \sqrt{\dfrac{l}{g}} \,.\]</div><p></p>
+<blockquote>
+<p>&#x6570;&#x503C;&#x4E0A; <span class="mathjax-exps">$g \approx 9.87$</span> &#x2013; <span class="mathjax-exps">$9.83$</span>, &#x800C; <span class="mathjax-exps">$\pi^2 \approx 9.8696$</span>. &#x5982;&#x679C;&#x628A; <span class="mathjax-exps">$g$</span> &#x548C; <span class="mathjax-exps">$\pi^2$</span> &#x770B;&#x4F5C;&#x8FD1;&#x4F3C;&#x76F8;&#x7B49;. &#x5219;&#x5355;&#x6446;&#x5468;&#x671F;&#x516C;&#x5F0F;&#x53EF;&#x7B80;&#x5316;:<br>
+</p><div class="mathjax-exps">\[T = 2 \pi \sqrt{\dfrac{l}{g}} = 2 \pi \sqrt{\dfrac{l}{\pi^2}} = 2 \sqrt{l} \,.\]</div><p></p>
+</blockquote>
+<h2 class="mume-header" id="%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E8%83%BD%E9%87%8F">&#x7B80;&#x8C10;&#x632F;&#x52A8;&#x80FD;&#x91CF;</h2>
+
+<p>&#x4EE5;&#x5F39;&#x7C27;&#x632F;&#x5B50;&#x4E3A;&#x4F8B;, &#x4EFB;&#x610F;&#x65F6;&#x523B;&#x5176;&#x52A8;&#x80FD;&#x548C;&#x52BF;&#x80FD;&#x5206;&#x522B;&#x4E3A;:<br>
+</p><div class="mathjax-exps">\[E_{\mathrm k} = \dfrac{1}{2}mv^2 = \dfrac{1}{2} m \omega^2 A^2 \sin^2 (\omega t + \varphi_0) \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[E_{\mathrm p} = \dfrac{1}{2} k x^2 = \dfrac{1}{2} k A^2 \cos^2 (\omega t + \varphi_0)\]</div>. &#x56E0;&#x6B64;&#x603B;&#x673A;&#x68B0;&#x80FD;&#x4E3A;:<br>
+<div class="mathjax-exps">\[E = E_{\mathrm k} + E_{\mathrm k} = \dfrac{1}{2} m \omega^2 A^2 = \dfrac{1}{2} k A^2 \,.\]</div><p></p>
+<h2 class="mume-header" id="%E7%AE%80%E8%B0%90%E6%8C%AF%E5%8A%A8%E7%9A%84%E5%90%88%E6%88%90">&#x7B80;&#x8C10;&#x632F;&#x52A8;&#x7684;&#x5408;&#x6210;</h2>
+
+<p>&#x4E24;&#x4E2A;&#x540C;&#x65B9;&#x5411;, &#x540C;&#x9891;&#x7387;&#x7684;&#x7B80;&#x8C10;&#x632F;&#x52A8;:<br>
+</p><div class="mathjax-exps">\[x_1 = A_1 \cos (\omega t + \varphi_{10}) \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[x_2 = A_2 \cos (\omega t + \varphi_{20}) \,.\]</div><p></p>
+<p>&#x5408;&#x6210;&#x5F97;&#x5230;:<br>
+</p><div class="mathjax-exps">\[x = x_1 + x_2 = A \cos (\omega t + \varphi_0) \,,\]</div><p></p>
+<p>&#x5176;&#x4E2D;,<br>
+</p><div class="mathjax-exps">\[A = \sqrt{A_1^2 + A_2^2 + 2 A_1 A_2 \cos(\varphi_{20} - \varphi_{10})} \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[\varphi_0 = \dfrac{A_1 \sin\varphi_{10} + A_2 \sin \varphi_{20}}{A_1 \cos\varphi_{10} + A_2 \cos \varphi_{20}} \,.\]</div><p></p>
+<p>&#x4E0A;&#x5F0F;&#x5BB9;&#x6613;&#x901A;&#x8FC7;&#x65CB;&#x8F6C;&#x77E2;&#x91CF;&#x6CD5;&#x8BC1;&#x660E;.</p>
+<h1 class="mume-header" id="%E7%AE%80%E8%B0%90%E6%B3%A2">&#x7B80;&#x8C10;&#x6CE2;</h1>
+
+<p>&#x6A2A;&#x6CE2;: &#x8D28;&#x5143;&#x632F;&#x52A8;&#x65B9;&#x5411;&#x4E8E;&#x6CE2;&#x4F20;&#x64AD;&#x65B9;&#x5411;&#x5782;&#x76F4;. &#x5982;: &#x7EF3;&#x6CE2;<br>
+&#x7EB5;&#x6CE2;: &#x8D28;&#x5143;&#x632F;&#x52A8;&#x65B9;&#x5411;&#x4E8E;&#x6CE2;&#x4F20;&#x64AD;&#x65B9;&#x5411;&#x5E73;&#x884C;. &#x5982;: &#x5F39;&#x7C27;</p>
+<h2 class="mume-header" id="%E5%B9%B3%E9%9D%A2%E7%AE%80%E8%B0%90%E6%B3%A2%E5%87%BD%E6%95%B0">&#x5E73;&#x9762;&#x7B80;&#x8C10;&#x6CE2;&#x51FD;&#x6570;</h2>
+
+<p>&#x539F;&#x70B9; <span class="mathjax-exps">$O$</span> &#x5904;&#x7684;&#x632F;&#x52A8;&#x65B9;&#x7A0B; </p><div class="mathjax-exps">\[y(0, t) = A \cos (\omega t + \varphi_0 ) \,,\]</div><p></p>
+<p>&#x8003;&#x5BDF; <span class="mathjax-exps">$x$</span> &#x8F74;&#x4E0A;&#x4EFB;&#x610F;&#x4E00;&#x70B9; <span class="mathjax-exps">$P$</span> &#x7684;&#x632F;&#x52A8;. <span class="mathjax-exps">$P$</span> &#x5750;&#x6807;&#x4E3A; <span class="mathjax-exps">$x$</span>, &#x6CE2;&#x6CBF;&#x6B63;&#x5411;&#x4F20;&#x64AD;, &#x6240;&#x4EE5; <span class="mathjax-exps">$O$</span> &#x70B9;&#x7684;&#x632F;&#x52A8;&#x72B6;&#x6001;&#x7ECF; <span class="mathjax-exps">$\Delta t = \dfrac{x}{u}$</span> &#x65F6;&#x95F4;&#x4F20;&#x5230; <span class="mathjax-exps">$P$</span> &#x5904;, &#x5373;: <span class="mathjax-exps">$t$</span> &#x65F6;&#x523B; <span class="mathjax-exps">$P$</span> &#x70B9;&#x7684;&#x632F;&#x52A8;&#x72B6;&#x6001;&#x4E0E; <span class="mathjax-exps">$O$</span> &#x70B9;&#x5728; <span class="mathjax-exps">$t - \Delta t$</span> &#x65F6;&#x523B;&#x7684;&#x632F;&#x52A8;&#x72B6;&#x6001;&#x76F8;&#x540C;:<br>
+</p><div class="mathjax-exps">\[y(x, t) = y(0, t - \Delta t) = A \cos \left[ \omega \left( t - \dfrac{x}{u} \right) + \varphi_0 \right] \,.\]</div><p></p>
+<p>&#x82E5;&#x6CE2;&#x6CBF;&#x8D1F;&#x5411;&#x4F20;&#x64AD;, <span class="mathjax-exps">$P$</span> &#x7684;&#x632F;&#x52A8;&#x8D85;&#x524D;&#x4E8E; <span class="mathjax-exps">$O$</span> &#x70B9;, &#x5373;: <span class="mathjax-exps">$P$</span> &#x5728; <span class="mathjax-exps">$t$</span> &#x65F6;&#x523B;&#x7684;&#x632F;&#x52A8;&#x72B6;&#x6001;&#x548C; <span class="mathjax-exps">$O$</span> &#x5728; <span class="mathjax-exps">$t + \Delta t$</span> &#x65F6;&#x523B;&#x632F;&#x52A8;&#x72B6;&#x6001;&#x4E00;&#x81F4;:<br>
+</p><div class="mathjax-exps">\[y(x, t) = y(0, t + \Delta t) = A \cos \left[ \omega \left( t + \dfrac{x}{u} \right) + \varphi_0 \right] \,.\]</div><p></p>
+<h2 class="mume-header" id="%E5%90%84%E5%8F%82%E6%95%B0%E5%85%B3%E7%B3%BB">&#x5404;&#x53C2;&#x6570;&#x5173;&#x7CFB;</h2>
+
+<p>&#x6CE2;&#x957F;: <span class="mathjax-exps">$\lambda$</span>, &#x6CE2;&#x901F;: <span class="mathjax-exps">$u$</span>, &#x5468;&#x671F;: <span class="mathjax-exps">$T$</span>, &#x89D2;&#x9891;&#x7387;: <span class="mathjax-exps">$\omega$</span>, &#x9891;&#x7387;: <span class="mathjax-exps">$f$</span></p>
+<p></p><div class="mathjax-exps">\[\lambda = uT \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[\omega = \dfrac{2 \pi}{T} = 2 \pi f \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[u = \lambda f \,.\]</div><p></p>
+<p>&#x5B9A;&#x4E49;&#x89D2;&#x6CE2;&#x6570; <span class="mathjax-exps">$k$</span> &#x4E3A; <span class="mathjax-exps">$2 \pi$</span> &#x7A7A;&#x95F4;&#x5185;&#x542B;&#x6709;&#x7684;&#x5B8C;&#x6574;&#x6CE2;&#x7684;&#x4E2A;&#x6570;:<br>
+</p><div class="mathjax-exps">\[k = \dfrac{2 \pi}{\lambda} = \dfrac{\omega}{u} \,.\]</div><p></p>
+<p>&#x7528;&#x89D2;&#x6CE2;&#x6570;&#x91CD;&#x5199;&#x6CE2;&#x51FD;&#x6570;:<br>
+</p><div class="mathjax-exps">\[\begin{align*}       y(x, t)  &amp;= \color{red}{A \cos \left[ \omega \left( t + \dfrac{x}{u} \right) + \varphi_0 \right]} \\     &amp;= A \cos \left( \omega t + \dfrac{\omega}{u} x + \varphi_0 \right) \\     &amp;= A \cos \left( \omega t + \dfrac{\omega T}{u T} x + \varphi_0 \right) \\     &amp;= \color{red}{A \cos \left( \omega t + \dfrac{2 \pi}{\lambda} x + \varphi_0 \right)} \\     &amp;= \color{red}{A \cos \left( \omega t + k x + \varphi_0 \right)}   \end{align*}\]</div><p></p>
+<h2 class="mume-header" id="%E7%9B%B8%E4%BD%8D%E5%B7%AE">&#x76F8;&#x4F4D;&#x5DEE;</h2>
+
+<p>&#x540C;&#x4E00;&#x65F6;&#x523B; <span class="mathjax-exps">$t$</span>, &#x6CE2;&#x7EBF;&#x4E0A;&#x5750;&#x6807;&#x5206;&#x522B;&#x4E3A; <span class="mathjax-exps">$x_1$</span> &#x548C; <span class="mathjax-exps">$x_2$</span> &#x7684;&#x4E24;&#x4E2A;&#x8D28;&#x5143;, &#x5B83;&#x4EEC;&#x7684;&#x76F8;&#x4F4D;&#x4E4B;&#x5DEE;:<br>
+</p><div class="mathjax-exps">\[\Delta \varphi = \dfrac{2\pi}{\lambda} (x_2 - x_1) = \dfrac{2 \pi}{\lambda} \Delta x \,.\]</div><p></p>
+<blockquote>
+<p><span class="mathjax-exps">$y_1(x_1, t) = A \cos\left[ \omega\left( t - \dfrac{x_1}{u} \right) + \varphi \right] = A \cos \left( \omega t - \dfrac{x_1 \omega}{u} + \varphi \right) = A \cos \varphi_1$</span>,<br>
+<span class="mathjax-exps">$y_2(x_2, t) = A \cos \left( \omega t - \dfrac{x_2 \omega}{u} + \varphi \right) = A \cos \varphi_2$</span>.<br>
+<span class="mathjax-exps">$\Delta \varphi = \varphi_1 - \varphi_2 = -\dfrac{\omega}{u}(x_1 - x_2) = \dfrac{2\pi}{\lambda} (x_2 - x_1)$</span>.</p>
+</blockquote>
+<h2 class="mume-header" id="%E6%B3%A2%E7%9A%84%E5%B9%B2%E6%B6%89">&#x6CE2;&#x7684;&#x5E72;&#x6D89;</h2>
+
+<p>&#x4E24;&#x5217;&#x6CE2;&#x5728;&#x540C;&#x4E00;&#x70B9;&#x53E0;&#x52A0;, &#x5F53;&#x4E24;&#x6CE2;&#x76F8;&#x4F4D;&#x5DEE;&#x6052;&#x5B9A;, &#x6839;&#x636E;&#x540C;&#x9891;&#x7387;&#x7B80;&#x8C10;&#x632F;&#x52A8;&#x7684;&#x5408;&#x6210;, &#x5408;&#x6210;&#x632F;&#x5E45; <span class="mathjax-exps">$A$</span> &#x6EE1;&#x8DB3;:<br>
+</p><div class="mathjax-exps">\[A = \sqrt{A_1^2 + A_2^2 + 2 A_1 A_2 \cos \Delta \varphi} \,.\]</div><p></p>
+<p>&#x7A7A;&#x95F4;&#x4E2D;, &#x4EFB;&#x610F;&#x4E00;&#x70B9;&#x632F;&#x52A8;&#x5F3A;&#x5EA6;&#x4E0E;&#x632F;&#x5E45;&#x5E73;&#x65B9;&#x6210;&#x6B63;&#x6BD4;, <span class="mathjax-exps">$I \propto A^2$</span>, &#x4E8E;&#x662F;:<br>
+</p><div class="mathjax-exps">\[I = I_1 + I_2 + 2\sqrt{I_1 I_2} \cos \Delta \varphi \,.\]</div><p></p>
+<h3 class="mume-header" id="%E7%9B%B8%E4%BD%8D%E5%B7%AE-1">&#x76F8;&#x4F4D;&#x5DEE;</h3>
+
+<p>&#x4E0B;&#x9762;&#x8BA1;&#x7B97;&#x4E24;&#x6CE2;&#x5728;&#x4E00;&#x70B9;&#x5904;&#x5E72;&#x6D89;&#x7684;&#x76F8;&#x4F4D;&#x5DEE;,</p>
+<p>&#x4E24;&#x6CE2;&#x5728; <span class="mathjax-exps">$P$</span> &#x7684;&#x632F;&#x52A8;&#x5206;&#x522B;&#x4E3A;:<br>
+</p><div class="mathjax-exps">\[y_1 = A_1 \cos \left[ \omega \left( t - \dfrac{r_1}{u} \right) + \varphi_{01}  \right] = A_1 \cos \left( \omega  t - \dfrac{2\pi}{\lambda} r_1 + \varphi_{01}  \right) = A_1 \cos \left( \omega  t - k r_1 + \varphi_{01}  \right)  \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[y_2 =  A_2 \cos \left( \omega  t - \dfrac{2\pi}{\lambda} r_2 + \varphi_{02}  \right) = A_2 \cos \left( \omega  t - k r_2 + \varphi_{02}  \right)  \,.\]</div><p></p>
+<p>&#x8BB0; <span class="mathjax-exps">$\varphi_1 =  - k r_1 + \varphi_{01}$</span>, <span class="mathjax-exps">$\varphi_2 =  - k r_2 + \varphi_{02}$</span>, &#x4E8E;&#x662F;:<br>
+</p><div class="mathjax-exps">\[y_1 = A_1 \cos (\omega t + \varphi_1) \,,\]</div><p></p>
+<p></p><div class="mathjax-exps">\[y_2 = A_2 \cos (\omega t + \varphi_2) \,.\]</div><p></p>
+<p></p><div class="mathjax-exps">\[\Delta \varphi = \varphi_1 - \varphi_2 = -k (r_1 - r_2) + (\varphi_{01} - \varphi_{02}) = - \dfrac{2 \pi}{\lambda} \Delta r + \Delta \varphi \,.\]</div><p></p>
+<h3 class="mume-header" id="%E5%B9%B2%E6%B6%89%E7%8A%B6%E6%80%81%E7%9A%84%E5%88%A4%E6%96%AD">&#x5E72;&#x6D89;&#x72B6;&#x6001;&#x7684;&#x5224;&#x65AD;</h3>
+
+<p>&#x5F53; <span class="mathjax-exps">$\Delta \varphi = k \cdot 2\pi$</span> &#x65F6;, &#x5373;: &#x4E24;&#x6CE2;&#x5728; <span class="mathjax-exps">$P$</span> &#x53D1;&#x751F;&#x76F8;&#x957F;&#x5E72;&#x6D89;, &#x53E0;&#x52A0;&#x6CE2;&#x7684;&#x5F3A;&#x5EA6;&#x6700;&#x5927;.</p>
+<h1 class="mume-header" id="%E5%85%89%E7%9A%84%E5%B9%B2%E6%B6%89">&#x5149;&#x7684;&#x5E72;&#x6D89;</h1>
+
+<h2 class="mume-header" id="%E7%9B%B8%E5%B9%B2%E6%9D%A1%E4%BB%B6">&#x76F8;&#x5E72;&#x6761;&#x4EF6;</h2>
+
+<p>&#x632F;&#x52A8;&#x65B9;&#x5411;&#x76F8;&#x540C;, &#x632F;&#x52A8;&#x9891;&#x7387;&#x76F8;&#x540C;, &#x521D;&#x76F8;&#x4F4D;&#x5DEE;&#x7A33;&#x5B9A;, &#x5149;&#x6CE2;&#x7684;&#x53E0;&#x52A0;&#x4E3A;&#x76F8;&#x5E72;&#x53E0;&#x52A0;, &#x53D1;&#x751F;&#x5149;&#x7684;&#x5E72;&#x6D89;.</p>
+<h2 class="mume-header" id="%E5%85%89%E7%A8%8B">&#x5149;&#x7A0B;</h2>
+
+<p>&#x5B9A;&#x4E49;&#x5149;&#x7A0B; <span class="mathjax-exps">$L = n l$</span>, &#x7B49;&#x4E8E;&#x5149;&#x5728;&#x4ECB;&#x8D28;&#x4E2D;&#x901A;&#x8FC7;&#x7684;&#x96C6;&#x5408;&#x8DEF;&#x5F84; <span class="mathjax-exps">$l$</span> &#x4E0E;&#x8BE5;&#x4ECB;&#x8D28;&#x6298;&#x5C04;&#x7387; <span class="mathjax-exps">$n$</span> &#x7684;&#x4E58;&#x79EF;. &#x5149;&#x7A0B;&#x8868;&#x793A;&#x5149;&#x5728;&#x4ECB;&#x8D28;&#x4E2D;&#x901A;&#x8FC7;&#x771F;&#x5B9E;&#x8DEF;&#x7A0B;&#x6240;&#x9700;&#x65F6;&#x95F4;&#x5185;, &#x5728;&#x771F;&#x7A7A;&#x4E2D;&#x6240;&#x80FD;&#x4F20;&#x64AD;&#x7684;&#x8DEF;&#x7A0B;.</p>
+<h3 class="mume-header" id="%E7%9B%B8%E4%BD%8D%E5%B7%AE-2">&#x76F8;&#x4F4D;&#x5DEE;</h3>
+
+<p>&#x5149;&#x8DEF;&#x4E0A;&#x4E24;&#x70B9;&#x7684;&#x76F8;&#x4F4D;&#x5DEE;, &#x53EA;&#x4E0E;&#x771F;&#x7A7A;&#x6CE2;&#x957F; <span class="mathjax-exps">$\lambda$</span> &#x548C;&#x4E24;&#x70B9;&#x4E4B;&#x95F4;&#x8DEF;&#x7A0B;&#x5BF9;&#x5E94;&#x603B;&#x5149;&#x7A0B;&#x5DEE;&#x6709;&#x5173;:<br>
+</p><div class="mathjax-exps">\[\color{red}{\Delta \varphi = \dfrac{2 \pi}{\lambda} \Delta L} \,.\]</div><p></p>
+<blockquote>
+<p>&#x539F;&#x4ECB;&#x8D28;&#x6298;&#x5C04;&#x7387;&#x4E3A; <span class="mathjax-exps">$n$</span>, &#x5149;&#x4F20;&#x64AD;&#x8DEF;&#x7A0B; <span class="mathjax-exps">$l$</span>.<br>
+&#x5728;&#x539F;&#x5149;&#x8DEF;&#x4E2D;&#x52A0;&#x5165;&#x5BBD;&#x5EA6;&#x4E3A; <span class="mathjax-exps">$e$</span>, &#x6298;&#x5C04;&#x7387;&#x4E3A; <span class="mathjax-exps">$n&apos;$</span> &#x7684;&#x4ECB;&#x8D28;, &#x5149;&#x7A0B;&#x5DEE;&#x53D8;&#x4E3A;: <span class="mathjax-exps">$n (l - e) + n&apos; e = n l + (n&apos; - n) e$</span>.<br>
+&#x63D2;&#x5165;&#x65B0;&#x4ECB;&#x8D28;&#x524D;&#x540E;&#x5149;&#x7A0B;&#x5DEE;&#x53D8;&#x5316;&#x91CF;&#x4E3A; <span class="mathjax-exps">$(n&apos; - n) e$</span>. &#x5F53;&#x539F;&#x4ECB;&#x8D28;&#x4E3A;&#x7A7A;&#x6C14;&#x65F6;: <span class="mathjax-exps">$\Delta L = (n&apos; - 1) e$</span>.</p>
+</blockquote>
+<p>&#x4ECE;&#x4E24;&#x4E2A;&#x5149;&#x6E90; <span class="mathjax-exps">$S_1$</span>, <span class="mathjax-exps">$S_2$</span> &#x53D1;&#x51FA;&#x7684;&#x76F8;&#x5E72;&#x5149;&#x5728;&#x4E00;&#x70B9; <span class="mathjax-exps">$P$</span> &#x53D1;&#x751F;&#x5E72;&#x6D89;. &#x7B2C;&#x4E00;&#x675F;&#x5149;&#x4ECE; <span class="mathjax-exps">$S_1$</span> &#x4F20;&#x64AD;&#x5230; <span class="mathjax-exps">$P$</span>, &#x76F8;&#x4F4D;&#x6EDE;&#x540E;&#x4E86; <span class="mathjax-exps">$\Delta \varphi_1$</span>, &#x6240;&#x4EE5;&#x7B2C;&#x4E00;&#x675F;&#x5149;&#x5728; <span class="mathjax-exps">$P$</span> &#x7684;&#x632F;&#x52A8;&#x76F8;&#x4F4D;&#x4E3A; <span class="mathjax-exps">$\varphi_1 = \varphi_{01} - \Delta \varphi_1 = \varphi_{01} - \dfrac{2 \pi}{\lambda} L_1$</span>. &#x540C;&#x7406;: <span class="mathjax-exps">$\varphi_2 = \varphi_{02} - \dfrac{2 \pi}{\lambda} L_2$</span>.</p>
+<p>&#x76F8;&#x4F4D;&#x5DEE;&#x4E3A;: </p><div class="mathjax-exps">\[\Delta \varphi = \varphi_1 - \varphi_2 = \varphi_{01} - \varphi_{02} - \dfrac{2 \pi}{\lambda} (L_1 - L_2) = -\dfrac{2 \pi}{\lambda} \Delta L + \Delta \varphi \,.\]</div><p></p>
+<h2 class="mume-header" id="%E6%9D%A8%E6%B0%8F%E5%8F%8C%E7%BC%9D%E5%B9%B2%E6%B6%89">&#x6768;&#x6C0F;&#x53CC;&#x7F1D;&#x5E72;&#x6D89;</h2>
+
+<center><img src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDcuNDIgMTAzLjI4Ij48ZGVmcz48c3R5bGU+LmNscy0xLC5jbHMtMiwuY2xzLTMsLmNscy00LC5jbHMtNSwuY2xzLTZ7ZmlsbDpub25lO3N0cm9rZS1taXRlcmxpbWl0OjEwO30uY2xzLTF7c3Ryb2tlOiNmOGI2MmQ7c3Ryb2tlLXdpZHRoOjAuNzVweDt9LmNscy0yLC5jbHMtM3tzdHJva2U6I2I1YjViNjt9LmNscy0yLC5jbHMtMywuY2xzLTQsLmNscy01LC5jbHMtNntzdHJva2Utd2lkdGg6MC41cHg7fS5jbHMtM3tzdHJva2UtZGFzaGFycmF5OjQuOTkgMi45OTt9LmNscy00e3N0cm9rZTojZTYwMDEyO30uY2xzLTV7c3Ryb2tlOiMwMGEwZTk7fS5jbHMtNntzdHJva2U6IzIzMTgxNTt9LmNscy03e2ZpbGw6I2U2MDAxMjt9LmNscy04e2ZpbGw6IzAwYTBlOTt9LmNscy05e2ZpbGw6IzcyNzE3MTt9LmNscy0xMHtmaWxsOiMwNDAwMDA7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5kb3VibGUtc2xpdDwvdGl0bGU+PGcgaWQ9IuWbvuWxgl8yIiBkYXRhLW5hbWU9IuWbvuWxgiAyIj48ZyBpZD0i5Zu+5bGCXzEtMiIgZGF0YS1uYW1lPSLlm77lsYIgMSI+PGxpbmUgY2xhc3M9ImNscy0xIiB4MT0iNDkuNSIgeTE9IjIwIiB4Mj0iNDkuNSIgeTI9IjQxIi8+PGxpbmUgY2xhc3M9ImNscy0xIiB4MT0iNDkuNSIgeTE9IjQ0LjI1IiB4Mj0iNDkuNSIgeTI9IjY5LjA0Ii8+PGxpbmUgY2xhc3M9ImNscy0xIiB4MT0iNDkuNSIgeTE9IjcyLjI4IiB4Mj0iNDkuNSIgeTI9Ijk0LjI4Ii8+PGxpbmUgY2xhc3M9ImNscy0xIiB4MT0iMTczLjI1IiB4Mj0iMTczLjI1IiB5Mj0iMTAzLjI4Ii8+PGxpbmUgY2xhc3M9ImNscy0yIiB5MT0iNTYuNjQiIHgyPSIyLjUiIHkyPSI1Ni42NCIvPjxsaW5lIGNsYXNzPSJjbHMtMyIgeDE9IjUuNDkiIHkxPSI1Ni42NCIgeDI9IjIwMy40MyIgeTI9IjU2LjY0Ii8+PGxpbmUgY2xhc3M9ImNscy0yIiB4MT0iMjA0LjkyIiB5MT0iNTYuNjQiIHgyPSIyMDcuNDIiIHkyPSI1Ni42NCIvPjxsaW5lIGNsYXNzPSJjbHMtNCIgeDE9IjE3LjA2IiB5MT0iNTYuNjQiIHgyPSI0OS41IiB5Mj0iNDIuNjkiLz48bGluZSBjbGFzcz0iY2xzLTUiIHgxPSI0OS41IiB5MT0iNDIuNjkiIHgyPSIxNzMuMjUiIHkyPSIxOS45MSIvPjxsaW5lIGNsYXNzPSJjbHMtNSIgeDE9IjQ5LjUiIHkxPSI3MS4wMiIgeDI9IjE3My4yNSIgeTI9IjE5LjkxIi8+PGxpbmUgY2xhc3M9ImNscy00IiB4MT0iMTcuMDYiIHkxPSI1Ni42NCIgeDI9IjQ5LjUiIHkyPSI3MS4wMiIvPjxsaW5lIGNsYXNzPSJjbHMtNiIgeDE9IjU5LjUiIHkxPSI2Ni44OSIgeDI9IjQ5LjUiIHkyPSI0Mi42OSIvPjxwYXRoIGlkPSJnMC0xMDgiIGNsYXNzPSJjbHMtNyIgZD0iTTMxLjc3LDQxLjQzYS4zNi4zNiwwLDAsMCwwLS4xYzAtLjA3LS4wNy0uMDctLjA4LS4wN2wtLjM5LDAtLjM1LDBjLS4xNywwLS4yMiwwLS4yMi4xNXMuMDcuMDcuMTQuMDdjLjM2LDAsLjM2LjA2LjM2LjEzYS40Ni40NiwwLDAsMSwwLC4xN2wtLjg3LDMuNTJhLjYuNiwwLDAsMCwwLC4yNS42MS42MSwwLDAsMCwuNjIuNjMuNTguNTgsMCwwLDAsLjUxLS4zNywzLjMyLDMuMzIsMCwwLDAsLjIyLS43MXMwLS4wNi0uMDctLjA2LS4wOCwwLS4xLjE0Yy0uMTMuNDktLjI2Ljg2LS41NC44NnMtLjIyLS4yMi0uMjItLjMyYTEuNTgsMS41OCwwLDAsMSwuMDUtLjM4WiIvPjxwYXRoIGlkPSJnMS00OSIgY2xhc3M9ImNscy03IiBkPSJNMzMuNTIsNDQuMjNjMC0uMTMsMC0uMTQtLjE0LS4xNGExLjE2LDEuMTYsMCwwLDEtLjg5LjMxdi4xNWExLjU2LDEuNTYsMCwwLDAsLjY1LS4xMnYyLjQyYzAsLjE3LDAsLjIzLS40Ni4yM2gtLjE3di4xNmMuMiwwLC42LDAsLjgyLDBzLjYyLDAsLjgxLDB2LS4xNkgzNGMtLjQ1LDAtLjQ2LS4wNi0uNDYtLjIzWiIvPjxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTMxLjI4LDY2LjIyczAtLjA3LDAtLjEtLjA3LS4wNy0uMDktLjA3bC0uMzksMC0uMzUsMGMtLjE3LDAtLjIyLDAtLjIyLjE1cy4wNy4wNy4xNC4wN2MuMzYsMCwuMzYuMDYuMzYuMTNhLjYuNiwwLDAsMSwwLC4xN2wtLjg4LDMuNTJhLjgyLjgyLDAsMCwwLDAsLjI1LjYyLjYyLDAsMCwwLC42My42My41Ny41NywwLDAsMCwuNS0uMzcsMy4zMiwzLjMyLDAsMCwwLC4yMi0uNzFzMC0uMDYtLjA3LS4wNi0uMDcsMC0uMS4xNGMtLjEzLjQ5LS4yNi44Ni0uNTQuODZzLS4yMS0uMjMtLjIxLS4zMmExLjU4LDEuNTgsMCwwLDEsLjA1LS4zOFoiLz48cGF0aCBpZD0iZzEtNTAiIGNsYXNzPSJjbHMtNyIgZD0iTTMyLjg3LDcxLjA2Yy4wNy0uMDcuMjctLjIzLjM1LS4yOWExLjMyLDEuMzIsMCwwLDAsLjU3LTEsMSwxLDAsMCwwLTEuMDYtLjkzLjkuOSwwLDAsMC0uOTQuODUuMjUuMjUsMCwxLDAsLjQ5LDBBLjI1LjI1LDAsMCwwLDMyLDY5LjVhLjczLjczLDAsMCwxLC42OC0uNDYuNy43LDAsMCwxLC42Ny43N2MwLC40OS0uMzUuODUtLjksMS40MmwtLjYuNjJjLS4wNS4wNS0uMDUuMDYtLjA1LjE4aDEuODZsLjE0LS44NWgtLjE1YTEuMzEsMS4zMSwwLDAsMS0uMTEuNDIsMS42MSwxLjYxLDAsMCwxLS40NiwwaC0uODRaIi8+PHBhdGggaWQ9ImcwLTExNCIgY2xhc3M9ImNscy04IiBkPSJNMTAxLjI0LDI3LjM0YS4zNi4zNiwwLDAsMC0uMzMuMzUuMjIuMjIsMCwwLDAsLjIzLjIzLjM3LjM3LDAsMCwwLC4zNi0uMzljMC0uMjItLjIyLS40Mi0uNTctLjQyYTEuMTEsMS4xMSwwLDAsMC0uOTEuNTYuNi42LDAsMCwwLS42MS0uNTYuNTkuNTksMCwwLDAtLjUxLjM3LDMuNSwzLjUsMCwwLDAtLjIyLjcxLjA3LjA3LDAsMCwwLC4wNy4wN2MuMDYsMCwuMDcsMCwuMTEtLjE3LjExLS40My4yNC0uODQuNTItLjg0cy4yMi4xMi4yMi4zM2E0LDQsMCwwLDEtLjEyLjY1bC0uMTkuNzZjMCwuMTQtLjExLjQ2LS4xNS41OWE1LjM1LDUuMzUsMCwwLDAtLjEyLjU1LjE3LjE3LDAsMCwwLC4xOC4xNy4yNy4yNywwLDAsMCwuMjYtLjE5YzAtLjA1LjI4LTEuMTIuMzItMS4yOXMuMDgtLjMuMTEtLjQ2LjA2LS4yMS4wOC0uM2EyLjMsMi4zLDAsMCwxLC4zOS0uNTcuODEuODEsMCwwLDEsLjU2LS4yNEEuNS41LDAsMCwxLDEwMS4yNCwyNy4zNFoiLz48cGF0aCBjbGFzcz0iY2xzLTgiIGQ9Ik0xMDMuMDgsMjguMjljMC0uMTMsMC0uMTMtLjEzLS4xM2ExLjIzLDEuMjMsMCwwLDEtLjkuM3YuMTVhMS41OCwxLjU4LDAsMCwwLC42Ni0uMTJ2Mi40MmMwLC4xNywwLC4yMy0uNDYuMjNoLS4xN3YuMTZjLjIsMCwuNiwwLC44MSwwcy42MywwLC44Miwwdi0uMTZoLS4xNmMtLjQ1LDAtLjQ3LS4wNi0uNDctLjIzWiIvPjxwYXRoIGNsYXNzPSJjbHMtOCIgZD0iTTEwMiw0My42YS4zNy4zNywwLDAsMC0uMzMuMzUuMjIuMjIsMCwwLDAsLjIzLjIzLjM3LjM3LDAsMCwwLC4zNi0uMzhjMC0uMjMtLjIyLS40My0uNTctLjQzYTEuMSwxLjEsMCwwLDAtLjkxLjU2LjYxLjYxLDAsMCwwLS42Mi0uNTYuNTkuNTksMCwwLDAtLjUuMzcsMy41OCwzLjU4LDAsMCwwLS4yMy43Mi4wOC4wOCwwLDAsMCwuMDguMDZjLjA2LDAsLjA3LDAsLjExLS4xNy4xMS0uNDMuMjQtLjg0LjUyLS44NHMuMjIuMTIuMjIuMzNhNCw0LDAsMCwxLS4xMi42NWwtLjIuNzdjMCwuMTMtLjEuNDUtLjE0LjU4cy0uMTMuNTEtLjEzLjU1YS4xOC4xOCwwLDAsMCwuMTkuMTguMjYuMjYsMCwwLDAsLjI1LS4xOWMwLS4wNi4yOS0xLjEzLjMzLTEuMjlzLjA4LS4zMS4xMS0uNDYuMDYtLjIyLjA4LS4zMWEyLDIsMCwwLDEsLjM5LS41Ny44Ni44NiwwLDAsMSwuNTYtLjI0QS41Mi41MiwwLDAsMSwxMDIsNDMuNloiLz48cGF0aCBjbGFzcz0iY2xzLTgiIGQ9Ik0xMDMuNzIsNDYuNTlsLjM1LS4yOWExLjMyLDEuMzIsMCwwLDAsLjU3LTEsMSwxLDAsMCwwLTEuMDYtLjkyLjkuOSwwLDAsMC0uOTQuODUuMjUuMjUsMCwxLDAsLjQ5LDBjMC0uMjQtLjIzLS4yNC0uMjktLjI0YS43NC43NCwwLDAsMSwuNjktLjQ3LjY5LjY5LDAsMCwxLC42Ni43N2MwLC40OS0uMzQuODUtLjksMS40MmwtLjU5LjYyYy0uMDYsMC0uMDYuMDYtLjA2LjE4aDEuODZsLjE0LS44NWgtLjE1YTEuNTEsMS41MSwwLDAsMS0uMS40MiwxLjY4LDEuNjgsMCwwLDEtLjQ3LDBoLS44NFoiLz48cGF0aCBpZD0iZzAtODMiIGNsYXNzPSJjbHMtOSIgZD0iTTE0LjM5LDU4LjA3YzAtLjA3LS4wNS0uMDctLjA3LS4wN3MwLDAtLjEyLjEybC0uMzQuNDJhMS4wNiwxLjA2LDAsMCwwLTEtLjU0LDEuNzcsMS43NywwLDAsMC0xLjcxLDEuNjIsMSwxLDAsMCwwLC42NiwxbC43MS4xOWMuMzYuMS40Ni4xMy42MS4yOGEuODYuODYsMCwwLDEsLjE3LjUzQTEuNCwxLjQsMCwwLDEsMTIsNjIuOTNjLS41OCwwLTEuMjMtLjI0LTEuMjMtMWExLjY1LDEuNjUsMCwwLDEsLjA1LS4zNy41Ni41NiwwLDAsMSwwLS4wNy4wNy4wNywwLDAsMC0uMDctLjA3Yy0uMDcsMC0uMDcsMC0uMS4xNEwxMC4yOCw2M2wwLC4xYS4wNi4wNiwwLDAsMCwuMDcuMDdzMCwwLC4xMi0uMTFsLjMzLS40M2ExLjM0LDEuMzQsMCwwLDAsMS4xOS41NCwxLjg2LDEuODYsMCwwLDAsMS43NS0xLjc3LDEsMSwwLDAsMC0uMzQtLjgyYy0uMTUtLjE1LS4yNy0uMTktLjkzLS4zNi0uNDctLjEzLS41My0uMTUtLjY2LS4yNmEuNzIuNzIsMCwwLDEtLjIxLS41MywxLjMxLDEuMzEsMCwwLDEsMS4yNy0xLjIxYy43LDAsMSwuNDMsMSwxLjEsMCwuMTksMCwuMzgsMCwuNDFzLjA1LjA2LjA3LjA2LjA4LDAsLjEtLjE0WiIvPjxwYXRoIGlkPSJnMC04MCIgY2xhc3M9ImNscy05IiBkPSJNMTc3LjU2LDIwLjkyaDEuMTljMSwwLDItLjcyLDItMS41MywwLS41NS0uNDctMS4wNi0xLjM2LTEuMDZoLTIuMTljLS4xNCwwLS4yLDAtLjIuMTRzLjA2LjA3LjE3LjA3Yy40MywwLC40My4wNi40My4xM2EuNi42LDAsMCwxLDAsLjE3bC0uOTUsMy44MWMtLjA3LjI1LS4wOC4zMi0uNTguMzItLjEzLDAtLjIsMC0uMi4xM3MuMDYuMDcuMS4wN2gxLjY2Yy4wNiwwLC4xNCwwLC4xNC0uMTNzLS4wNy0uMDctLjE3LS4wN2MtLjQzLDAtLjQ0LDAtLjQ0LS4xMmEuNDMuNDMsMCwwLDEsMC0uMTJabS41MS0yLjFjLjA2LS4yNy4wOS0uMjguMzctLjI4aC43Yy41MywwLDEsLjE3LDEsLjdhMS44LDEuOCwwLDAsMS0uNDIsMS4xMSwxLjQ3LDEuNDcsMCwwLDEtMS4xLjRoLTFaIi8+PHBhdGggaWQ9ImcwLTc5IiBjbGFzcz0iY2xzLTkiIGQ9Ik0xODAuNjMsNjFhMS43MywxLjczLDAsMCwwLTEuNzYtMS44OCwzLjQsMy40LDAsMCwwLTMsMy4yNywxLjc0LDEuNzQsMCwwLDAsMS43NiwxLjg3QTMuMzYsMy4zNiwwLDAsMCwxODAuNjMsNjFabS0zLDMuMDljLS41OCwwLTEuMTktLjQyLTEuMTktMS41M2E0LjE2LDQuMTYsMCwwLDEsLjgxLTIuNDEsMi4xNywyLjE3LDAsMCwxLDEuNTktLjg4Yy42MiwwLDEuMjMuNDYsMS4yMywxLjQ4YTQuNDYsNC40NiwwLDAsMS0uNzUsMi4yOUEyLjIyLDIuMjIsMCwwLDEsMTc3LjYzLDY0LjA5WiIvPjxwYXRoIGlkPSJnMC0xMjAiIGNsYXNzPSJjbHMtMTAiIGQ9Ik0xNzAuMzYsMzhhLjM1LjM1LDAsMCwwLS4zMS4zNS4yMS4yMSwwLDAsMCwuMjMuMjIuMzcuMzcsMCwwLDAsLjM3LS4zN2MwLS4zLS4zNS0uNDQtLjY0LS40NGEuOTIuOTIsMCwwLDAtLjc0LjU2LjczLjczLDAsMCwwLS43My0uNTZjLS43MiwwLTEuMS45My0xLjEsMS4wOXMwLC4wNi4wNy4wNi4wNywwLC4wOS0uMDdjLjI0LS43OC43MS0uOTMuOTItLjkzcy4zOC4yOS4zOC40NmEyLjcsMi43LDAsMCwxLS4xMy42NmwtLjI0LDFjLS4xLjQzLS4zMS44Mi0uNjguODJhLjcuNywwLDAsMS0uMzYtLjA5LjM4LjM4LDAsMCwwLC4zMS0uMzUuMjMuMjMsMCwwLDAtLjI0LS4yMy4zOC4zOCwwLDAsMC0uMzYuMzhjMCwuMy4zMy40My42NC40M2EuODguODgsMCwwLDAsLjczLS41Ni43NC43NCwwLDAsMCwuNzMuNTZjLjcyLDAsMS4xLS45MywxLjEtMS4wOGEuMDYuMDYsMCwwLDAtLjA3LS4wN2MtLjA2LDAtLjA3LDAtLjA5LjA5LS4xOS42My0uNi45Mi0uOTIuOTJzLS4zOC0uMTktLjM4LS40OGEzLjMyLDMuMzIsMCwwLDEsLjE0LS43M2wuMjUtMWMuMS0uNDIuMzQtLjczLjY3LS43M0EuNzkuNzksMCwwLDEsMTcwLjM2LDM4WiIvPjxwYXRoIGlkPSJnMC02OCIgY2xhc3M9ImNscy0xMCIgZD0iTTEwMi43OSw2Ny40NWMtLjA2LjI1LS4wOC4zMi0uNTcuMzItLjE0LDAtLjIxLDAtLjIxLjEzczAsLjA4LjE5LjA4aDIuMjRhMy4xMiwzLjEyLDAsMCwwLDIuODMtMy4wNiwxLjYyLDEuNjIsMCwwLDAtMS42Mi0xLjc4aC0yLjI4Yy0uMTMsMC0uMiwwLS4yLjEzcy4wNy4wNy4xNy4wN2MuNDQsMCwuNDQuMDYuNDQuMTRhLjU2LjU2LDAsMCwxLDAsLjE2Wm0xLjUtMy44M2MuMDYtLjI2LjA5LS4yOC4zNy0uMjhoLjc3YTEuMiwxLjIsMCwwLDEsMS4yOCwxLjM0LDQuMDYsNC4wNiwwLDAsMS0uODMsMi4zNywyLjEsMi4xLDAsMCwxLTEuNTUuNzJoLTFjLS4wOCwwLS4wOSwwLS4wOS0uMDhhMS40MywxLjQzLDAsMCwxLDAtLjE2WiIvPjxwYXRoIGlkPSJnMC0xMDAiIGNsYXNzPSJjbHMtMTAiIGQ9Ik00OC4zNSw1OC42OGEuMjkuMjksMCwwLDAsMC0uMWMwLS4wNy0uMDctLjA3LS4wOS0uMDdsLS4zOSwwLS4zNSwwYy0uMTgsMC0uMjMsMC0uMjMuMTVzLjA2LjA3LjE2LjA3Yy4zNCwwLC4zNS4wNi4zNS4xNGEuNDMuNDMsMCwwLDEsMCwuMTJsLS40MywxLjcyYS43LjcsMCwwLDAtLjY0LS40NywyLjA4LDIuMDgsMCwwLDAtMS42NywyLjA4YzAsLjcuNDIsMS4xMi45LDEuMTJhMS4zNCwxLjM0LDAsMCwwLC45Mi0uNTQuNjEuNjEsMCwwLDAsLjYxLjU0LjU2LjU2LDAsMCwwLC41MS0uMzksMy4yOSwzLjI5LDAsMCwwLC4yMi0uNy4wNy4wNywwLDAsMC0uMDctLjA2Yy0uMDcsMC0uMDcsMC0uMS4xNC0uMTEuNDItLjI0Ljg2LS41My44NnMtLjIyLS4xOC0uMjItLjMyYTEuNTgsMS41OCwwLDAsMSwwLS4zOFptLTEuNDMsMy45YS41Mi41MiwwLDAsMS0uMTMuMjcsMS4xOSwxLjE5LDAsMCwxLS44LjVjLS4yOSwwLS40Ni0uMjYtLjQ2LS42OGE0Ljk0LDQuOTQsMCwwLDEsLjM2LTEuNDhjLjI0LS40OS41Ny0uNzUuODUtLjc1LjQ3LDAsLjU2LjU4LjU2LjY0YS40NS40NSwwLDAsMSwwLC4xMVoiLz48cGF0aCBpZD0iZzAtMTgiIGNsYXNzPSJjbHMtMTAiIGQ9Ik01Mi4xNCw1MS4xM2MwLS41MS0uMTYtMS0uNTctMS0uNywwLTEuNDQsMS40Ny0xLjQ0LDIuNTcsMCwuMjMsMCwxLC41NywxQzUxLjM4LDUzLjcsNTIuMTQsNTIuMjYsNTIuMTQsNTEuMTNabS0xLjUxLjdBNC4zMyw0LjMzLDAsMCwxLDUxLDUwLjc2Yy4xNi0uMy4zNC0uNTQuNTYtLjU0cy4yNy4xNC4yNy42MmEzLjUxLDMuNTEsMCwwLDEtLjE2LDFabTEsLjE1YTQuNTcsNC41NywwLDAsMS0uNDEsMS4xM2MtLjE1LjI1LS4zMi40OS0uNTMuNDlzLS4yOC0uMTItLjI4LS42MmE0LjM0LDQuMzQsMCwwLDEsLjE2LTFaIi8+PHBhdGggaWQ9ImcwLTE4LTIiIGRhdGEtbmFtZT0iZzAtMTgiIGNsYXNzPSJjbHMtMTAiIGQ9Ik05Ni43Myw1My41NWMwLS40NS0uMTUtLjg5LS41MS0uODktLjYyLDAtMS4yOSwxLjMtMS4yOSwyLjI4LDAsLjIxLDAsLjkuNTIuOVM5Ni43Myw1NC41Niw5Ni43Myw1My41NVptLTEuMzUuNjNhNC4wNyw0LjA3LDAsMCwxLC4zNC0xYy4xNC0uMjcuMy0uNDguNDktLjQ4cy4yNS4xMi4yNS41NWEzLjIzLDMuMjMsMCwwLDEtLjE0Ljg4Wm0uOTEuMTRhNC4xMiw0LjEyLDAsMCwxLS4zNywxYy0uMTMuMjMtLjI4LjQ0LS40Ny40NHMtLjI1LS4xMS0uMjUtLjU1YTMuODQsMy44NCwwLDAsMSwuMTQtLjg4WiIvPjwvZz48L2c+PC9zdmc+" width="60%"></center>
+&#x7A7A;&#x6C14;&#x4ECB;&#x8D28;&#x4E2D;, &#x5149;&#x7A0B;&#x5DEE;&#x4E3A;:
+\[ \Delta L = (l_1 + r_1) - (l_2 + r_2) \,,\]
+<p>&#x65F6;&#x5E38;&#x6709; <span class="mathjax-exps">$l_1 = l_2$</span>, &#x6240;&#x4EE5;:<br>
+</p><div class="mathjax-exps">\[\Delta L = r_1 - r_2 \,\]</div><p></p>
+<p>&#x4F5C;&#x8FC7;&#x4E00;&#x4E2A;&#x53CC;&#x7F1D;&#x5411;&#x53E6;&#x4E00;&#x6761;&#x5149;&#x7EBF;&#x4F5C;&#x5782;&#x7EBF;, &#x5149;&#x7A0B;&#x5DEE;&#x53EF;&#x4F5C;&#x8FD1;&#x4F3C;&#x5904;&#x7406;:<br>
+</p><div class="mathjax-exps">\[\Delta L = r_2 - r_1 = d \sin\theta  \,,\]</div><p></p>
+<p>&#x5176;&#x4E2D;, <span class="mathjax-exps">$\sin \theta$</span> &#x4E5F;&#x53EF;&#x4F5C;&#x8FD1;&#x4F3C;&#x5904;&#x7406;:<br>
+</p><div class="mathjax-exps">\[\sin \theta = \dfrac{x}{D} \,,\]</div><p></p>
+<p>&#x6700;&#x7EC8;:<br>
+</p><div class="mathjax-exps">\[\Delta L = d \dfrac{x}{D} \,.\]</div><p></p>
+<h3 class="mume-header" id="%E6%98%8E%E6%9A%97%E7%BA%B9%E5%85%AC%E5%BC%8F">&#x660E;&#x6697;&#x7EB9;&#x516C;&#x5F0F;</h3>
+
+<p>&#x5149;&#x7A0B;&#x5DEE;&#x4E3A;&#x534A;&#x6CE2;&#x957F;&#x7684;&#x5076;&#x6570;&#x500D;&#x65F6;, &#x5373; <span class="mathjax-exps">$\Delta L = 2 k \dfrac{\lambda}{2} = k \lambda$</span>, &#x63A5;&#x6536;&#x5C4F;&#x4E0A;&#x5F97;&#x5230;&#x660E;&#x6761;&#x7EB9;, &#x6240;&#x4EE5; <span class="mathjax-exps">$d\dfrac{x}{D} = k \lambda$</span>:<br>
+</p><div class="mathjax-exps">\[x = k \dfrac{D}{d} \lambda \,,\]</div><p></p>
+<p>&#x540C;&#x7406;&#x6697;&#x6761;&#x7EB9;&#x4F4D;&#x7F6E;:<br>
+</p><div class="mathjax-exps">\[x = \dfrac{2k - 1}{2} \dfrac{D}{d} \lambda \,.\]</div><p></p>
+<p>&#x76F8;&#x90BB;&#x4E24;&#x660E;&#x6761;&#x7EB9;&#x6216;&#x6697;&#x6761;&#x7EB9;&#x4E2D;&#x5FC3;&#x8DDD;&#x79BB;:<br>
+</p><div class="mathjax-exps">\[\Delta x = \dfrac{D}{d} \lambda \,.\]</div><p></p>
+<blockquote>
+<p>&#x4ECE; <span class="mathjax-exps">$\Delta L = d \dfrac{x}{D}$</span> &#x53EF;&#x4EE5;&#x770B;&#x51FA;: &#x82E5;&#x539F;&#x5149;&#x7A0B;&#x5DEE; <span class="mathjax-exps">$\Delta L$</span> &#x53D8;&#x5316; <span class="mathjax-exps">$\Delta (\Delta L)$</span>, &#x660E;/&#x6697;&#x6761;&#x7EB9;&#x4E5F;&#x4F1A;&#x5728;&#x5C4F;&#x4E0A;&#x79FB;&#x52A8; <span class="mathjax-exps">$\Delta x = \Delta (\Delta L)$</span>.</p>
+</blockquote>
+<h2 class="mume-header" id="%E7%AD%89%E5%80%BE%E5%B9%B2%E6%B6%89">&#x7B49;&#x503E;&#x5E72;&#x6D89;</h2>
+
+<center><img src="./pic/Interference_of_a_parallel_plate.png" width="30%"></center>
+<p>&#x5F53;&#x5149;&#x4ECE;&#x5149;&#x758F;&#x5C04;&#x5165;&#x5149;&#x5BC6;&#x65F6;, &#x53CD;&#x5C04;&#x5149;&#x4F1A;&#x53D1;&#x751F; <span class="mathjax-exps">$\pi$</span> &#x7684;&#x76F8;&#x4F4D;&#x8DC3;&#x53D8;, &#x6240;&#x4EE5;&#x6709;&#x65F6;&#x8981;&#x9644;&#x52A0; <span class="mathjax-exps">$\dfrac{\lambda}{2}$</span> &#x7684;&#x5149;&#x7A0B;&#x5DEE;. &#x8BB0;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#x4E09;&#x5C42;&#x7684;&#x6298;&#x5C04;&#x7387;&#x5206;&#x522B;&#x4E3A; <span class="mathjax-exps">$n_1$</span>, <span class="mathjax-exps">$n_2$</span>, <span class="mathjax-exps">$n_3$</span>:</p>
+<ul>
+<li>&#x5F53; <span class="mathjax-exps">$n_1 &lt; n_2 &lt; n_3$</span> &#x6216; <span class="mathjax-exps">$n_1 &gt; n_2 &gt; n_3$</span>, &#x524D;&#x8005;&#x4E0A;&#x4E0B;&#x4E24;&#x4E2A;&#x8868;&#x9762;&#x7684;&#x53CD;&#x5C04;&#x5149;&#x540C;&#x65F6;&#x9644;&#x52A0;&#x534A;&#x6CE2;&#x957F;&#x7684;&#x5149;&#x7A0B;&#x5DEE;, &#x800C;&#x540E;&#x8005;&#x4E24;&#x53CD;&#x5C04;&#x90FD;&#x4E0D;&#x9644;&#x52A0;, &#x6240;&#x4EE5;&#x6700;&#x7EC8;&#x53CD;&#x5C04;&#x60C5;&#x51B5;&#x5B8C;&#x5168;&#x76F8;&#x540C;, &#x65E0;&#x9644;&#x52A0;&#x5149;&#x7A0B;&#x5DEE;:<br>
+<div class="mathjax-exps">\[\Delta L = 2 d \sqrt{n_2^2 - n_1^2 \sin^2 i} \,.\]</div></li>
+<li>&#x5F53; <span class="mathjax-exps">$n_1 &lt; n_2 &gt; n_3$</span> &#x6216; <span class="mathjax-exps">$n_1 &gt; n_2 &lt; n_3$</span>, &#x4E24;&#x4E2A;&#x53CD;&#x5C04;&#x9762;&#x53CD;&#x5C04;&#x60C5;&#x51B5;&#x76F8;&#x53CD; (&#x4E00;&#x4E2A;&#x9762;&#x9644;&#x52A0;, &#x53E6;&#x4E00;&#x4E2A;&#x4E0D;&#x9644;&#x52A0;), &#x6240;&#x4EE5;&#x6700;&#x540E;&#x8981;&#x9644;&#x52A0; <span class="mathjax-exps">$\dfrac{\lambda}{2}$</span> &#x7684;&#x5149;&#x7A0B;&#x5DEE;:<br>
+<div class="mathjax-exps">\[\Delta L = 2 d \sqrt{n_2^2 - n_1^2 \sin^2 i} + \dfrac{\lambda}{2} \,.\]</div></li>
+</ul>
+<p>&#x900F;&#x5C04;&#x5149;&#x9053;&#x7406;&#x76F8;&#x540C;.</p>
+<h3 class="mume-header" id="%E6%98%8E%E6%9A%97%E7%8E%AF%E5%85%AC%E5%BC%8F">&#x660E;&#x6697;&#x73AF;&#x516C;&#x5F0F;</h3>
+
+<p>&#x540C;&#x53CC;&#x7F1D;&#x5E72;&#x6D89;, &#x5F53;&#x5149;&#x7A0B;&#x5DEE;&#x7B49;&#x4E8E;&#x534A;&#x6CE2;&#x957F;&#x7684;&#x5076;&#x6570;&#x500D;&#x65F6;&#x660E;&#x73AF;, &#x5947;&#x6570;&#x500D;&#x5219;&#x662F;&#x6697;&#x73AF;.</p>
+<h2 class="mume-header" id="%E7%AD%89%E5%8E%9A%E5%B9%B2%E6%B6%89">&#x7B49;&#x539A;&#x5E72;&#x6D89;</h2>
+
+<p>&#x901A;&#x5E38;&#x65F6;&#x5E73;&#x884C;&#x5149;&#x5782;&#x76F4;&#x7167;&#x5C04;&#x5288;&#x5C16;, &#x5373;&#x5DE6;&#x56FE;. &#x53D6;&#x7B49;&#x503E;&#x5E72;&#x6D89;&#x4E2D;&#x5165;&#x5C04;&#x89D2; <span class="mathjax-exps">$i = 0$</span>, &#x5373;&#x5F97;&#x5230;<br>
+</p><div class="mathjax-exps">\[\Delta L = 2 d \sqrt{n_2^2 - n_1^2 \sin^2 i} = 2 d n_2 \,.\]</div><p></p>
+<center><img src="./pic/Equal_thickness_interference.png" width="70%"></center>
+&#x5149;&#x7A0B;&#x5DEE; \[ \Delta L = 2 n e + \dfrac{\lambda}{2} \,, \] 
+<p>&#x5176;&#x4E2D; <span class="mathjax-exps">$e$</span> &#x4E3A;&#x5165;&#x5C04;&#x70B9;&#x7684;&#x5288;&#x5C16;&#x539A;&#x5EA6;.</p>
+<p>&#x540C;&#x53CC;&#x7F1D;&#x5E72;&#x6D89;, &#x5F53;&#x5149;&#x7A0B;&#x5DEE;&#x7B49;&#x4E8E;&#x534A;&#x6CE2;&#x957F;&#x7684;&#x5076;&#x6570;&#x500D;&#x65F6;&#x660E;&#x7EB9;, &#x5947;&#x6570;&#x500D;&#x5219;&#x662F;&#x6697;&#x7EB9;.</p>
+<p>&#x76F8;&#x90BB;&#x4E24;&#x4E2A;&#x660E;&#x7EB9;&#x6216;&#x6697;&#x7EB9;&#x7684;&#x5149;&#x7A0B;&#x5DEE;&#x4E3A;&#x4E00;&#x4E2A;&#x6CE2;&#x957F;, <span class="mathjax-exps">$2 n e_k + \dfrac{\lambda}{2} = k \lambda$</span>, <span class="mathjax-exps">$2 n e_{k + 1} + \dfrac{\lambda}{2} = (k + 1) \lambda$</span>, &#x5BB9;&#x6613;&#x8BA1;&#x7B97;&#x5F97;, &#x76F8;&#x90BB;&#x4E24;&#x660E;&#x7EB9;&#x6216;&#x6697;&#x7EB9;&#x5BF9;&#x5E94;&#x7684;&#x819C;&#x539A;&#x4E4B;&#x5DEE;:<br>
+</p><div class="mathjax-exps">\[\Delta e = \dfrac{\lambda}{2n} \,.\]</div><p></p>
+<p>&#x6240;&#x4EE5;&#x76F8;&#x90BB;&#x660E;&#x7EB9;&#x6216;&#x6697;&#x7EB9;<strong>&#x5728;&#x8868;&#x9762;&#x4E0A;&#x7684;&#x95F4;&#x8DDD;</strong>&#x4E3A; (<span class="mathjax-exps">$\theta$</span> &#x4E3A;&#x8584;&#x819C;&#x503E;&#x89D2;):<br>
+</p><div class="mathjax-exps">\[\Delta l = \dfrac{\Delta e}{\sin \theta} \approx \dfrac{\Delta e}{\theta} = \dfrac{\lambda}{2 n \theta} \,.\]</div><p></p>
+<h3 class="mume-header" id="%E6%B5%8B%E9%87%8F%E8%A1%A8%E9%9D%A2%E5%B9%B3%E6%95%B4%E5%BA%A6">&#x6D4B;&#x91CF;&#x8868;&#x9762;&#x5E73;&#x6574;&#x5EA6;</h3>
+
+<center><img src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNjEuMyAyMjcuMzIiPjxkZWZzPjxzdHlsZT4uY2xzLTEsLmNscy0xMSwuY2xzLTEyLC5jbHMtMTMsLmNscy0zLC5jbHMtNCwuY2xzLTUsLmNscy02LC5jbHMtNywuY2xzLTgsLmNscy05e2ZpbGw6bm9uZTtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9LmNscy0xLC5jbHMtOXtzdHJva2U6I2Y4YjYyZDt9LmNscy0ye2ZpbGw6I2Y4YjYyZDt9LmNscy0xMSwuY2xzLTEyLC5jbHMtMTMsLmNscy0zLC5jbHMtNntzdHJva2U6IzIzMTgxNTt9LmNscy0zLC5jbHMtNHtzdHJva2Utd2lkdGg6MC41cHg7fS5jbHMtNCwuY2xzLTd7c3Ryb2tlOiNlNjAwMTI7fS5jbHMtNSwuY2xzLTh7c3Ryb2tlOiMwMGEwZTk7fS5jbHMtNXtzdHJva2Utd2lkdGg6MC43NXB4O30uY2xzLTl7c3Ryb2tlLXdpZHRoOjJweDt9LmNscy0xMHtmaWxsOiMyMzE4MTU7fS5jbHMtMTEsLmNscy0xMiwuY2xzLTEze3N0cm9rZS13aWR0aDowLjI1cHg7fS5jbHMtMTJ7c3Ryb2tlLWRhc2hhcnJheTo1LjA5IDMuMDU7fS5jbHMtMTN7c3Ryb2tlLWRhc2hhcnJheTo0Ljk2IDIuOTg7fS5jbHMtMTR7ZmlsbDojMDQwMDAwO30uY2xzLTE1e2ZpbGw6IzAwYTBlOTt9LmNscy0xNntmaWxsOiNlNjAwMTI7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5zdXJmYWNlX3Rlc3Q8L3RpdGxlPjxnIGlkPSLlm77lsYJfMiIgZGF0YS1uYW1lPSLlm77lsYIgMiI+PGcgaWQ9IuWbvuWxgl8xLTIiIGRhdGEtbmFtZT0i5Zu+5bGCIDEiPjxsaW5lIGNsYXNzPSJjbHMtMSIgeDE9IjEzMy4zOSIgeTE9IjE0NS43OCIgeDI9IjIzNi4yNCIgeTI9IjExNy4xNCIvPjxsaW5lIGNsYXNzPSJjbHMtMSIgeDE9IjAuMTMiIHkxPSI2OC4yNCIgeDI9IjI1MC4zMiIgeTI9IjAuNDgiLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yNDQuNDgsMTguNTdWNjcuMjRIMTkwLjgzVjE4LjU3aDUzLjY1bTEtMUgxODkuODNWNjguMjRoNTUuNjVWMTcuNTdaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNLjEzLDY4LjI0SDExMy4zMWMwLC4xNywxLjM0LDYuMzYsMi45Myw3LjU5YTMuNjEsMy42MSwwLDAsMCw0LjI0LjE0YzEuMzMtMSwyLjY1LTcuNzMsMi42NS03LjczSDI2MS4zIi8+PGxpbmUgY2xhc3M9ImNscy0zIiB4MT0iMTE4LjE1IiB5MT0iNjguMjQiIHgyPSIxMTguMTUiIHkyPSIzNi4zNiIvPjxsaW5lIGNsYXNzPSJjbHMtNCIgeDE9IjExOC4xNSIgeTE9Ijc2LjU5IiB4Mj0iMTE4LjE1IiB5Mj0iNjguMjQiLz48bGluZSBjbGFzcz0iY2xzLTUiIHgxPSIxNDguMTIiIHkxPSI2OC4yNCIgeDI9IjE0OC4xMiIgeTI9IjI4LjAyIi8+PGxpbmUgY2xhc3M9ImNscy01IiB4MT0iOTYuNyIgeTE9IjY4LjI5IiB4Mj0iOTYuNyIgeTI9IjQyLjA5Ii8+PGxpbmUgY2xhc3M9ImNscy0zIiB4MT0iMTE4LjE1IiB5MT0iMzYuMzYiIHgyPSIxNDguMTIiIHkyPSIzNi4zNiIvPjxsaW5lIGNsYXNzPSJjbHMtNiIgeDE9IjE2Ni42OCIgeTE9IjE5NC40MSIgeDI9IjE2Ni42OCIgeTI9IjEzNi41MSIvPjxsaW5lIGNsYXNzPSJjbHMtNyIgeDE9IjE2Ni42OCIgeTE9IjIwOS41NyIgeDI9IjE2Ni42OCIgeTI9IjE5NC40MSIvPjxsaW5lIGNsYXNzPSJjbHMtOCIgeDE9IjIyMS4xMSIgeTE9IjE5NC40MSIgeDI9IjIyMS4xMSIgeTI9IjEyMS4zNSIvPjxsaW5lIGNsYXNzPSJjbHMtMyIgeDE9IjE2Ni42OCIgeTE9IjEzNi41MSIgeDI9IjIyMS4xMSIgeTI9IjEzNi41MSIvPjxwYXRoIGNsYXNzPSJjbHMtOSIgZD0iTTY5LjQxLDEyMS41NlYxNjRzLTUuNTUuNjMtOC4zOCwzLjYtNC4wOCw4LjUzLTIsMTEuNzNjMi4yNiwzLjQsMTAuMjgsMy45LDEwLjI4LDMuOWwuMjgsMzguMjYiLz48cGF0aCBjbGFzcz0iY2xzLTkiIGQ9Ik01MC42NCwxMjEuNTZWMTY0cy01LjU1LjYzLTguMzcsMy42LTQuMDksOC41My0yLDExLjczYzIuMjcsMy40LDEwLjI4LDMuOSwxMC4yOCwzLjlsLjI4LDM4LjI2Ii8+PHBhdGggY2xhc3M9ImNscy05IiBkPSJNODguMzQsMTIxLjU2VjE2NHMtNS41NC42My04LjM3LDMuNi00LjA4LDguNTMtMiwxMS43M2MyLjI3LDMuNCwxMC4yOSwzLjksMTAuMjksMy45bC4yNywzOC4yNiIvPjxwYXRoIGNsYXNzPSJjbHMtOSIgZD0iTTMxLjg4LDEyMS41NlYxNjRzLTUuNTUuNjMtOC4zOCwzLjYtNC4wOCw4LjUzLTIsMTEuNzNjMi4yNywzLjQsMTAuMjksMy45LDEwLjI5LDMuOWwuMjgsMzguMjYiLz48cGF0aCBjbGFzcz0iY2xzLTkiIGQ9Ik0xMy4xMSwxMjEuNTZWMTY0cy01LjU1LjYzLTguMzgsMy42LTQuMDgsOC41My0yLDExLjczYzIuMjYsMy40LDEwLjI4LDMuOSwxMC4yOCwzLjlsLjI4LDM4LjI2Ii8+PGxpbmUgY2xhc3M9ImNscy0zIiB4MT0iNTEuMjkiIHkxPSIxMjcuMDIiIHgyPSI2OC45OSIgeTI9IjEyNy4wMiIvPjxwYXRoIGNsYXNzPSJjbHMtMTAiIGQ9Ik01My42OSwxMjguN2EuMTkuMTksMCwwLDAtLjA2LS4yNUw1MS4zNywxMjdsMi4yNi0xLjQ0YS4xOC4xOCwwLDAsMCwuMDYtLjI0LjE4LjE4LDAsMCwwLS4yNS0uMDZMNTEsMTI2Ljg3YS4xOC4xOCwwLDAsMC0uMDguMTUuMTYuMTYsMCwwLDAsLjA4LjE0bDIuNDksMS41OWEuMTkuMTksMCwwLDAsLjEsMEEuMTkuMTksMCwwLDAsNTMuNjksMTI4LjdaIi8+PHBhdGggY2xhc3M9ImNscy0xMCIgZD0iTTY2LjYsMTI4LjdhLjE4LjE4LDAsMCwxLC4wNS0uMjVMNjguOTEsMTI3bC0yLjI2LTEuNDRhLjE3LjE3LDAsMCwxLS4wNS0uMjQuMTcuMTcsMCwwLDEsLjI0LS4wNmwyLjQ5LDEuNTlhLjE4LjE4LDAsMCwxLC4wOC4xNS4xNi4xNiwwLDAsMS0uMDguMTRsLTIuNDksMS41OWEuMTcuMTcsMCwwLDEtLjEsMEEuMTcuMTcsMCwwLDEsNjYuNiwxMjguN1oiLz48bGluZSBjbGFzcz0iY2xzLTMiIHgxPSI1Ni42OCIgeTE9IjE2Ni40OCIgeDI9IjU2LjY4IiB5Mj0iMTk5Ljg5Ii8+PGxpbmUgY2xhc3M9ImNscy0zIiB4MT0iNTcuMTEiIHkxPSIxOTYiIHgyPSI2OC44IiB5Mj0iMTk2Ii8+PHBhdGggY2xhc3M9ImNscy0xMCIgZD0iTTU5LjUsMTk3LjY4YS4xNy4xNywwLDAsMC0uMDYtLjI0TDU3LjE5LDE5NmwyLjI1LTEuNDRhLjE3LjE3LDAsMCwwLC4wNi0uMjQuMTguMTgsMCwwLDAtLjI0LS4wNmwtMi40OSwxLjU5YS4xOS4xOSwwLDAsMC0uMDkuMTUuMTcuMTcsMCwwLDAsLjA5LjE0bDIuNDksMS41OWEuMTYuMTYsMCwwLDAsLjA5LDBBLjE5LjE5LDAsMCwwLDU5LjUsMTk3LjY4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMTAiIGQ9Ik02Ni40MSwxOTcuNjhhLjE4LjE4LDAsMCwxLDAtLjI0TDY4LjcyLDE5NmwtMi4yNi0xLjQ0YS4xOC4xOCwwLDAsMSwwLS4yNC4xOC4xOCwwLDAsMSwuMjQtLjA2bDIuNDksMS41OWEuMTguMTgsMCwwLDEsLjA4LjE1LjE2LjE2LDAsMCwxLS4wOC4xNGwtMi40OSwxLjU5YS4xNi4xNiwwLDAsMS0uMDksMEEuMTguMTgsMCwwLDEsNjYuNDEsMTk3LjY4WiIvPjxsaW5lIGNsYXNzPSJjbHMtMTEiIHgxPSI5OS40NCIgeTE9IjY4LjI0IiB4Mj0iMTI1LjIzIiB5Mj0iNjguMjQiLz48bGluZSBjbGFzcz0iY2xzLTExIiB4MT0iMTAwLjUyIiB5MT0iNzYuNTkiIHgyPSIxMjYuMyIgeTI9Ijc2LjU5Ii8+PGxpbmUgY2xhc3M9ImNscy0xMSIgeDE9IjEwNC4xIiB5MT0iNjguNDIiIHgyPSIxMDQuMSIgeTI9Ijc2LjQxIi8+PHBhdGggY2xhc3M9ImNscy0xMCIgZD0iTTEwMy4zOCw2OS40NWEuMDguMDgsMCwwLDAsLjEsMGwuNjItMSwuNjEsMWEuMDkuMDksMCwwLDAsLjExLDAsLjA5LjA5LDAsMCwwLDAtLjExbC0uNjgtMS4wNmEuMDguMDgsMCwwLDAtLjA2LDAsLjEuMSwwLDAsMC0uMDcsMGwtLjY4LDEuMDZzMCwwLDAsMEEuMS4xLDAsMCwwLDEwMy4zOCw2OS40NVoiLz48cGF0aCBjbGFzcz0iY2xzLTEwIiBkPSJNMTAzLjM4LDc1LjM4YS4wNy4wNywwLDAsMSwuMSwwbC42MiwxLC42MS0xYS4wOC4wOCwwLDAsMSwuMTEsMCwuMDkuMDksMCwwLDEsMCwuMTFsLS42OCwxLjA3YS4wNy4wNywwLDAsMS0uMDYsMCwuMDkuMDksMCwwLDEtLjA3LDBsLS42OC0xLjA3djBBLjEuMSwwLDAsMSwxMDMuMzgsNzUuMzhaIi8+PGNpcmNsZSBjbGFzcz0iY2xzLTEyIiBjeD0iMTMzLjE0IiBjeT0iMjkuOTQiIHI9IjIyLjAzIi8+PGNpcmNsZSBjbGFzcz0iY2xzLTEzIiBjeD0iMTkzLjg5IiBjeT0iMTY0LjAyIiByPSI2My4xOCIvPjxsaW5lIGNsYXNzPSJjbHMtMyIgeDE9IjE2Ni42OCIgeTE9IjE5NC40MSIgeDI9IjIyMS4xMSIgeTI9IjE5NC40MSIvPjxsaW5lIGNsYXNzPSJjbHMtMyIgeDE9IjE2Ni42OCIgeTE9IjIwOS41NyIgeDI9IjIyMS4xMSIgeTI9IjE5NC40MSIvPjxwYXRoIGNsYXNzPSJjbHMtMTEiIGQ9Ik0xOTIuMzIsMTMwYTI4LjYxLDI4LjYxLDAsMCwxLC41NywyLjkzLDI5LjI0LDI5LjI0LDAsMCwxLC4yNCwzIi8+PHBvbHlnb24gY2xhc3M9ImNscy0xMCIgcG9pbnRzPSIxOTEuOTIgMTMxLjQ0IDE5Mi4xNSAxMzEuNDcgMTkyLjMxIDEzMCAxOTMuMTMgMTMxLjIzIDE5My4zMSAxMzEuMTEgMTkyLjE2IDEyOS4zNyAxOTEuOTIgMTMxLjQ0Ii8+PHBvbHlnb24gY2xhc3M9ImNscy0xMCIgcG9pbnRzPSIxOTIuMzUgMTM0LjU3IDE5Mi41NiAxMzQuNDkgMTkzLjExIDEzNS44NSAxOTMuNTcgMTM0LjQ1IDE5My43OCAxMzQuNTIgMTkzLjEzIDEzNi41MSAxOTIuMzUgMTM0LjU3Ii8+PHBhdGggaWQ9ImcxLTEwNyIgY2xhc3M9ImNscy0xNCIgZD0iTTY5LjM3LDExMS4zM2EuNTguNTgsMCwwLDAsMC0uMTRjMC0uMDktLjA5LS4wOS0uMTEtLjA5bC0uNS4wNS0uNDUsMGMtLjIxLDAtLjI4LDAtLjI4LjE5cy4wOS4wOS4xOC4wOWMuNDYsMCwuNDYuMDkuNDYuMThhLjc5Ljc5LDAsMCwxLDAsLjIxTDY3LjM3LDExN2EuNTcuNTcsMCwwLDAsMCwuMjEuMjEuMjEsMCwwLDAsLjI0LjIzYy4yNiwwLC4zMS0uMi4zOC0uNDhsLjQzLTEuNjljLjY1LjA4LDEsLjM1LDEsLjc4YS44Ni44NiwwLDAsMSwwLC4yMywxLDEsMCwwLDAsMCwuMjkuODEuODEsMCwwLDAsLjgxLjg3Ljg3Ljg3LDAsMCwwLC43LS41LDMuMzgsMy4zOCwwLDAsMCwuMzEtLjg4LjA5LjA5LDAsMCwwLS4wOS0uMDhjLS4wOCwwLS4wOSwwLS4xMy4xOC0uMTIuNDctLjMxLDEuMS0uNzcsMS4xLS4xOCwwLS4zLS4wOS0uMy0uNDNhMiwyLDAsMCwxLC4wNy0uNTEuODEuODEsMCwwLDAsMC0uMjhjMC0uNTMtLjQ4LS44My0xLjMxLS45NGE0LjMzLDQuMzMsMCwwLDAsLjc3LS42OGMuNTItLjU4Ljg3LS44NywxLjI5LS44N2EuMzcuMzcsMCwwLDEsLjMyLjExLjQ2LjQ2LDAsMCwwLS40Ni40NS4yOC4yOCwwLDAsMCwuMy4yOS40OC40OCwwLDAsMCwuNDYtLjUuNTYuNTYsMCwwLDAtLjYxLS41M2MtLjUsMC0uOTEuMzUtMS41NSwxLjA3YTIuMDksMi4wOSwwLDAsMS0uNzYuNThaIi8+PHBhdGggY2xhc3M9ImNscy0xNCIgZD0iTTgyLjUyLDExMWEuNTguNTgsMCwwLDAsMC0uMTRjMC0uMDktLjA5LS4wOS0uMTEtLjA5bC0uNSwwLS40NSwwYy0uMjIsMC0uMjgsMC0uMjguMTlzLjA5LjA5LjE4LjA5Yy40NiwwLC40Ni4wOC40Ni4xN2EuNzcuNzcsMCwwLDEsMCwuMjJsLTEuMyw1LjE3YS43MS43MSwwLDAsMCwwLC4yMS4yMi4yMiwwLDAsMCwuMjQuMjNjLjI2LDAsLjMxLS4yLjM4LS40OGwuNDMtMS42OWMuNjUuMDcsMSwuMzUsMSwuNzhhLjguOCwwLDAsMSwwLC4yMiwxLDEsMCwwLDAsMCwuMjkuODEuODEsMCwwLDAsLjgxLjg4Ljg2Ljg2LDAsMCwwLC43LS41MSwzLjM2LDMuMzYsMCwwLDAsLjMxLS44Ny4wOC4wOCwwLDAsMC0uMDktLjA4Yy0uMDgsMC0uMDksMC0uMTMuMTgtLjEzLjQ3LS4zMSwxLjEtLjc4LDEuMS0uMTgsMC0uMjktLjA5LS4yOS0uNDNhMiwyLDAsMCwxLC4wNy0uNTEsMS4wNiwxLjA2LDAsMCwwLDAtLjI4YzAtLjUzLS40Ny0uODMtMS4zMS0uOTRhNC4wNyw0LjA3LDAsMCwwLC43OC0uNjljLjUyLS41Ny44Ny0uODYsMS4yOC0uODZhLjQyLjQyLDAsMCwxLC4zMy4xLjQ4LjQ4LDAsMCwwLS40Ni40Ni4yOC4yOCwwLDAsMCwuMy4yOS40OC40OCwwLDAsMCwuNDYtLjUuNTYuNTYsMCwwLDAtLjYyLS41M2MtLjQ5LDAtLjkuMzUtMS41NCwxLjA3YTIuMzIsMi4zMiwwLDAsMS0uNzYuNThaIi8+PHBhdGggaWQ9ImczLTQzIiBjbGFzcz0iY2xzLTE0IiBkPSJNOTAuNDgsMTE1SDkzYy4xMiwwLC4yOCwwLC4yOC0uMTZzLS4xNS0uMTctLjI4LS4xN2gtMi41di0yLjVjMC0uMTIsMC0uMjgtLjE2LS4yOHMtLjE3LjE1LS4xNy4yOHYyLjVoLTIuNWMtLjEyLDAtLjI5LDAtLjI5LjE2cy4xNi4xNy4yOS4xN2gyLjV2Mi41YzAsLjEyLDAsLjI5LjE2LjI5cy4xNy0uMTYuMTctLjI5WiIvPjxwYXRoIGlkPSJnMy00OSIgY2xhc3M9ImNscy0xNCIgZD0iTTk4LjM0LDExMS4yOGMwLS4yMSwwLS4yMi0uMTgtLjIyYTIsMiwwLDAsMS0xLjYuNTh2LjI2YTIuNjcsMi42NywwLDAsMCwxLjE2LS4yM3Y0LjdjMCwuMzMsMCwuNDQtLjgyLjQ0aC0uMjh2LjI2Yy4yNCwwLDEuMTIsMCwxLjQxLDBzMS4xNywwLDEuNDEsMHYtLjI2aC0uMjhjLS43OSwwLS44Mi0uMTEtLjgyLS40NFoiLz48cGF0aCBpZD0iZzEtMTAxIiBjbGFzcz0iY2xzLTE1IiBkPSJNMjI4LjY3LDE2M2E1LjMzLDUuMzMsMCwwLDAsMS43LS4yNCwxLjM0LDEuMzQsMCwwLDAsMS0xLjI0YzAtLjUzLS40NS0xLTEuMjQtMWEzLjIxLDMuMjEsMCwwLDAtMywzLjI0LDEuODcsMS44NywwLDAsMCwxLjgsMi4xMiwzLjE1LDMuMTUsMCwwLDAsMi42NC0xLjQyLjE1LjE1LDAsMCwwLS4xMi0uMTNzLS4wNSwwLS4xNi4xMmEzLDMsMCwwLDEtMi4zNCwxLjE5Yy0uNjgsMC0xLS41My0xLTEuNDFBNS4xLDUuMSwwLDAsMSwyMjgsMTYzWm0tLjU3LS4yNGMuNTEtMS44MywxLjY0LTIsMi0yYS43OC43OCwwLDAsMSwuODguNzZjMCwxLjI0LTEuOSwxLjI0LTIuNCwxLjI0WiIvPjxwYXRoIGlkPSJnMC0xMDciIGNsYXNzPSJjbHMtMTUiIGQ9Ik0yMzQuMjQsMTYyLjIzczAtLjEyLDAtLjEzYS4xMi4xMiwwLDAsMC0uMTMtLjExbC0uNDYsMC0uNDQsMGMtLjE4LDAtLjI2LDAtLjI2LjE3cy4xMS4xMS4yMS4xMWMuMzgsMCwuMzgsMCwuMzguMTJhLjY1LjY1LDAsMCwxLDAsLjE4bC0xLjEzLDQuNTFhLjc2Ljc2LDAsMCwwLDAsLjE4LjI1LjI1LDAsMCwwLC4yNi4yNGMuMjcsMCwuMzQtLjI1LjM3LS4zNi4wOC0uMzMuMjgtMS4xNy4zNy0xLjUxLjQ0LjA1LDEsLjIsMSwuNjVhLjU2LjU2LDAsMCwxLDAsLjE2LDIuMSwyLjEsMCwwLDAsMCwuMjYuNzguNzgsMCwwLDAsMS40NS40MSwyLjgyLDIuODIsMCwwLDAsLjMyLS44MmMwLS4wOC0uMDYtLjEtLjEyLS4xcy0uMTEuMDUtLjE0LjE5Yy0uMS4zNy0uMzEuOS0uNjguOS0uMjEsMC0uMjYtLjE3LS4yNi0uMzlhMS43LDEuNywwLDAsMSwuMDUtLjM4LDEuMDcsMS4wNywwLDAsMCwwLS4yNGMwLS42NS0uODItLjgtMS4yMi0uODVhMy41NCwzLjU0LDAsMCwwLC42Ni0uNTVjLjQzLS40My43OS0uNzIsMS4xNy0uNzJhLjMxLjMxLDAsMCwxLC4yNi4xLjQ1LjQ1LDAsMCwwLS40My40NC4zLjMsMCwwLDAsLjMxLjI5LjQ3LjQ3LDAsMCwwLC40Ni0uNS41NS41NSwwLDAsMC0uNTktLjU1LDIuMDksMi4wOSwwLDAsMC0xLjMyLjgsMi4yOCwyLjI4LDAsMCwxLS43OS41OVoiLz48cGF0aCBjbGFzcz0iY2xzLTE0IiBkPSJNMTQyLDg4LjI4YTQuMiw0LjIsMCwwLDAsMS4yOS0uMTgsMSwxLDAsMCwwLC43NS0uOTVjMC0uNC0uMzQtLjc2LS45NC0uNzZhMi40NSwyLjQ1LDAsMCwwLTIuMzEsMi40NywxLjQyLDEuNDIsMCwwLDAsMS4zNywxLjYsMi4zOSwyLjM5LDAsMCwwLDItMS4wNy4xMS4xMSwwLDAsMC0uMDktLjFzMCwwLS4xMi4wOWEyLjI4LDIuMjgsMCwwLDEtMS43OC45Yy0uNTEsMC0uNzgtLjQtLjc4LTEuMDdhMy44MywzLjgzLDAsMCwxLC4xMy0uOTNabS0uNDMtLjE4Yy4zOS0xLjM5LDEuMjUtMS41MywxLjUzLTEuNTNhLjYuNiwwLDAsMSwuNjcuNThjMCwuOTUtMS40NC45NS0xLjgyLjk1WiIvPjxwYXRoIGNsYXNzPSJjbHMtMTQiIGQ9Ik0xNDYuMjIsODcuNzNzMC0uMDksMC0uMWEuMDguMDgsMCwwLDAtLjA5LS4wOGwtLjM1LDAtLjM0LDBjLS4xMywwLS4xOSwwLS4xOS4xM3MuMDguMDguMTUuMDhjLjI5LDAsLjI5LDAsLjI5LjA5YS41LjUsMCwwLDEsMCwuMTRsLS44NSwzLjQzYS40OC40OCwwLDAsMCwwLC4xMy4xOS4xOSwwLDAsMCwuMi4xOWMuMjEsMCwuMjUtLjE5LjI4LS4yOGwuMjgtMS4xNGMuMzMsMCwuNzQuMTUuNzQuNDlhLjMyLjMyLDAsMCwxLDAsLjEyYzAsLjA4LDAsLjE3LDAsLjJhLjYuNiwwLDAsMCwuNjIuNjEuNjMuNjMsMCwwLDAsLjQ5LS4zLDIuMjMsMi4yMywwLDAsMCwuMjQtLjYyLjA4LjA4LDAsMCwwLS4wOS0uMDhjLS4wNywwLS4wOSwwLS4xMS4xNC0uMDguMjktLjI0LjY5LS41Mi42OXMtLjE5LS4xMy0uMTktLjI5YTEuMTcsMS4xNywwLDAsMSwwLS4yOS43NS43NSwwLDAsMCwwLS4xOWMwLS40OS0uNjItLjYtLjkyLS42NGEzLjE0LDMuMTQsMCwwLDAsLjUtLjQyYy4zMy0uMzMuNi0uNTUuODktLjU1YS4yNC4yNCwwLDAsMSwuMi4wOC4zNC4zNCwwLDAsMC0uMzMuMzMuMjIuMjIsMCwwLDAsLjI0LjIyLjM1LjM1LDAsMCwwLC4zNC0uMzguNDIuNDIsMCwwLDAtLjQ1LS40MiwxLjU5LDEuNTksMCwwLDAtMSwuNjEsMS44MSwxLjgxLDAsMCwxLS42LjQ1WiIvPjxwYXRoIGlkPSJnMi00MyIgY2xhc3M9ImNscy0xNCIgZD0iTTE1MC41Nyw5MC4zNmgxLjc3Yy4wOCwwLC4yMSwwLC4yMS0uMTRzLS4xMy0uMTMtLjIxLS4xM2gtMS43N1Y4OC4zMWMwLS4wOSwwLS4yMi0uMTQtLjIycy0uMTQuMTMtLjE0LjIydjEuNzhoLTEuNzhjLS4wOCwwLS4yMSwwLS4yMS4xM3MuMTMuMTQuMjEuMTRoMS43OHYxLjc4YzAsLjA4LDAsLjIyLjE0LjIycy4xNC0uMTQuMTQtLjIyWiIvPjxwYXRoIGlkPSJnMi00OSIgY2xhc3M9ImNscy0xNCIgZD0iTTE1NC43OSw4Ny44OWMwLS4xNiwwLS4xNy0uMTctLjE3YTEuNSwxLjUsMCwwLDEtMS4xNC4zOXYuMmExLjksMS45LDAsMCwwLC44My0uMTZ2My4wOWMwLC4yMiwwLC4yOS0uNTkuMjloLS4yMXYuMmMuMjUsMCwuNzcsMCwxLDBzLjc5LDAsMSwwdi0uMmgtLjIxYy0uNTcsMC0uNTktLjA3LS41OS0uMjlaIi8+PHBhdGggaWQ9ImcxLTE0IiBjbGFzcz0iY2xzLTE2IiBkPSJNMTA3Ljc4LDcxLjYzYTIuNzYsMi43NiwwLDAsMC0yLDIuNTQsMS4zOSwxLjM5LDAsMCwwLDEuMzgsMS41MWMxLjA2LDAsMS43OS0xLjQ3LDEuNzktMi42N2EyLjUsMi41LDAsMCwwLS42MS0xLjYxLDMuNjcsMy42NywwLDAsMS0uODgtMS41NS40Ni40NiwwLDAsMSwuNTItLjQyLDEuMjgsMS4yOCwwLDAsMSwuNzIuMjUsMS4wOCwxLjA4LDAsMCwwLC40MS4xNy4zNC4zNCwwLDAsMCwuMzItLjMzYzAtLjE4LS4xMy0uMi0uNDUtLjI4YTIuNzcsMi43NywwLDAsMC0uNy0uMDkuOTIuOTIsMCwwLDAtMSwuOTNBMy43LDMuNywwLDAsMCwxMDcuNzgsNzEuNjNabS4xLjE3YTMuMTgsMy4xOCwwLDAsMSwuNDgsMS41N2MwLC43MS0uMzgsMi4xMy0xLjE4LDIuMTMtLjM2LDAtLjg2LS4yNC0uODYtMS4wOEMxMDYuMzIsNzMuODMsMTA2LjY1LDcyLjEzLDEwNy44OCw3MS44WiIvPjxwYXRoIGlkPSJnMS0xNC0yIiBkYXRhLW5hbWU9ImcxLTE0IiBjbGFzcz0iY2xzLTE2IiBkPSJNMTYxLjM5LDIwMGEzLjYzLDMuNjMsMCwwLDAtMi42MiwzLjM0LDEuODMsMS44MywwLDAsMCwxLjgxLDJjMS40LDAsMi4zNi0xLjkzLDIuMzYtMy41MWEzLjI5LDMuMjksMCwwLDAtLjgtMi4xMiw0Ljc2LDQuNzYsMCwwLDEtMS4xNS0yLC41OS41OSwwLDAsMSwuNjctLjU2LDEuNzYsMS43NiwwLDAsMSwxLC4zMywxLjQ1LDEuNDUsMCwwLDAsLjU0LjIzLjQ2LjQ2LDAsMCwwLC40My0uNDRjMC0uMjMtLjE4LS4yNi0uNi0uMzZhMy42MiwzLjYyLDAsMCwwLS45Mi0uMTIsMS4yMSwxLjIxLDAsMCwwLTEuMzcsMS4yMUE1LDUsMCwwLDAsMTYxLjM5LDIwMFptLjEzLjIzYTQuMDcsNC4wNywwLDAsMSwuNjMsMi4wNmMwLC45My0uNSwyLjgtMS41NiwyLjgtLjQ2LDAtMS4xMy0uMzEtMS4xMy0xLjQyQzE1OS40NiwyMDIuOSwxNTkuOSwyMDAuNjUsMTYxLjUyLDIwMC4yM1oiLz48cGF0aCBpZD0iZzEtMTQtMyIgZGF0YS1uYW1lPSJnMS0xNCIgY2xhc3M9ImNscy0xNiIgZD0iTTIxNy43NSwxMjguMzNhMy42MywzLjYzLDAsMCwwLTIuNjIsMy4zNCwxLjgzLDEuODMsMCwwLDAsMS44MSwyYzEuNCwwLDIuMzYtMS45MywyLjM2LTMuNTFhMy4zMSwzLjMxLDAsMCwwLS44LTIuMTIsNC43Niw0Ljc2LDAsMCwxLTEuMTUtMiwuNTkuNTksMCwwLDEsLjY3LS41NiwxLjgyLDEuODIsMCwwLDEsMSwuMzMsMS4zNCwxLjM0LDAsMCwwLC41My4yMy40Ni40NiwwLDAsMCwuNDMtLjQ0YzAtLjIzLS4xOC0uMjYtLjYtLjM2YTMuNjIsMy42MiwwLDAsMC0uOTItLjEyLDEuMjEsMS4yMSwwLDAsMC0xLjM3LDEuMjJBNSw1LDAsMCwwLDIxNy43NSwxMjguMzNabS4xMy4yM2E0LjEsNC4xLDAsMCwxLC42MywyLjA3YzAsLjkyLS41LDIuNzktMS41NiwyLjc5LS40NiwwLTEuMTMtLjMxLTEuMTMtMS40MkMyMTUuODIsMTMxLjIzLDIxNi4yNiwxMjksMjE3Ljg4LDEyOC41NloiLz48cGF0aCBpZD0iZzEtMTgiIGNsYXNzPSJjbHMtMTQiIGQ9Ik00MC42NSw2MS40MmMwLS45Mi0uMjktMS44MS0xLTEuODEtMS4yNiwwLTIuNjEsMi42NC0yLjYxLDQuNjMsMCwuNDIuMDksMS44MiwxLDEuODJDMzkuMjgsNjYuMDYsNDAuNjUsNjMuNDcsNDAuNjUsNjEuNDJaTTM3LjkyLDYyLjdhNy44LDcuOCwwLDAsMSwuNjgtMS45NGMuMy0uNTQuNjItMSwxLTFzLjUuMjUuNSwxLjEyYTYuODYsNi44NiwwLDAsMS0uMjksMS43OVptMS44NC4yN0E4LDgsMCwwLDEsMzksNjVjLS4yNi40Ni0uNTguODktMSwuODlzLS41MS0uMjItLjUxLTEuMTFhOCw4LDAsMCwxLC4yOS0xLjhaIi8+PHBhdGggaWQ9ImcxLTE4LTIiIGRhdGEtbmFtZT0iZzEtMTgiIGNsYXNzPSJjbHMtMTQiIGQ9Ik0yMDAuNiwxMjkuNDVjMC0xLjIxLS4zOS0yLjM4LTEuMzYtMi4zOC0xLjY2LDAtMy40NCwzLjQ4LTMuNDQsNi4wOSwwLC41NS4xMiwyLjM5LDEuMzcsMi4zOUMxOTguNzksMTM1LjU1LDIwMC42LDEzMi4xNSwyMDAuNiwxMjkuNDVaTTE5NywxMzEuMTNhMTAuMzIsMTAuMzIsMCwwLDEsLjkxLTIuNTRjLjM5LS43Mi44LTEuMjksMS4zMy0xLjI5cy42NS4zNC42NSwxLjQ4YTguNTgsOC41OCwwLDAsMS0uMzgsMi4zNVptMi40My4zNmExMC4xMywxMC4xMywwLDAsMS0xLDIuNjZjLS4zNC42MS0uNzYsMS4xNy0xLjI2LDEuMTdzLS42Ni0uMjktLjY2LTEuNDdhMTAuMjcsMTAuMjcsMCwwLDEsLjM4LTIuMzZaIi8+PHBhdGggaWQ9ImczLTEiIGNsYXNzPSJjbHMtMTQiIGQ9Ik01OSwxMzAuMjVjLS4wNi0uMTItLjA4LS4xNi0uMi0uMTZzLS4xNiwwLS4yMi4xNmwtMyw2LjExYS4yNC4yNCwwLDAsMCwwLC4xMmMwLC4wNSwwLC4wNi4xOC4wNmg2LjE2Yy4xOCwwLC4xOSwwLC4xOS0uMDZhLjI1LjI1LDAsMCwwLDAtLjEyWm0tLjQ4LjY3LDIuNDYsNUg1Ni4wNVoiLz48cGF0aCBpZD0iZzEtMTA4IiBjbGFzcz0iY2xzLTE0IiBkPSJNNjQuNzQsMTMwLjVhLjU4LjU4LDAsMCwwLDAtLjE0YzAtLjA5LS4wOS0uMDktLjExLS4wOWwtLjUsMC0uNDUsMGMtLjIyLDAtLjI4LDAtLjI4LjE5cy4wOS4wOS4xOC4wOWMuNDYsMCwuNDYuMDguNDYuMTdhLjc3Ljc3LDAsMCwxLDAsLjIybC0xLjEyLDQuNDhhLjkzLjkzLDAsMCwwLDAsLjMyLjc5Ljc5LDAsMCwwLC44LjgxLjc1Ljc1LDAsMCwwLC42NC0uNDgsNC4wOSw0LjA5LDAsMCwwLC4yOC0uOS4wOC4wOCwwLDAsMC0uMDktLjA4Yy0uMDgsMC0uMDksMC0uMTMuMTgtLjE2LjYyLS4zMywxLjEtLjY5LDEuMXMtLjI3LS4yOS0uMjctLjQxYTEuNzksMS43OSwwLDAsMSwuMDctLjQ4WiIvPjxwYXRoIGlkPSJnMS05OCIgY2xhc3M9ImNscy0xNCIgZD0iTTYyLjg1LDE5OS4yMmEuNTguNTgsMCwwLDAsMC0uMTRjMC0uMDktLjA5LS4wOS0uMTEtLjA5bC0uNSwwLS40NSwwYy0uMjIsMC0uMjgsMC0uMjguMTlzLjA5LjA5LjE4LjA5Yy40NiwwLC40Ni4wOC40Ni4xN2E0LjI3LDQuMjcsMCwwLDEtLjExLjQ5bC0uMjEuODdjLS4wOS4zNi0uNjEsMi40MS0uNjQsMi41N2EyLjExLDIuMTEsMCwwLDAsMCwuNWMwLC45Mi41MSwxLjQsMS4xLDEuNCwxLDAsMi4xMy0xLjM1LDIuMTMtMi42NiwwLS44My0uNDctMS40MS0xLjE0LTEuNDFhMS42MywxLjYzLDAsMCwwLTEuMDcuNTdabS0uNTcsNS45NWMtLjI5LDAtLjYtLjIyLS42LS45MmEzLjU0LDMuNTQsMCwwLDEsLjE5LTEuMWMwLS4xMi4xNy0uNy4yLS44MnMuNTUtLjg3LDEuMTctLjg3Yy40LDAsLjU4LjM5LjU4Ljg2YTYuNDIsNi40MiwwLDAsMS0uNDgsMS45M0M2My4xMSwyMDQuNzQsNjIuNywyMDUuMTcsNjIuMjgsMjA1LjE3WiIvPjxwYXRoIGlkPSJnMS05OC0yIiBkYXRhLW5hbWU9ImcxLTk4IiBjbGFzcz0iY2xzLTE0IiBkPSJNMTk1LjExLDE4NC41MWEuNDMuNDMsMCwwLDAsMC0uMTdjMC0uMTItLjEyLS4xMi0uMTQtLjEybC0uNjYuMDYtLjU5LDBjLS4yOSwwLS4zNywwLS4zNy4yNXMuMTIuMTIuMjQuMTJjLjYsMCwuNi4xMS42LjIzcy0uMDkuNDMtLjE0LjY0bC0uMjgsMS4xNGMtLjEyLjQ4LS44LDMuMTgtLjg1LDMuMzlhMywzLDAsMCwwLS4wNi42NmMwLDEuMjEuNjgsMS44NCwxLjQ1LDEuODQsMS4zOCwwLDIuODEtMS43NywyLjgxLTMuNSwwLTEuMDktLjYyLTEuODYtMS41MS0xLjg2YTIuMTksMi4xOSwwLDAsMC0xLjQuNzRabS0uNzUsNy44NGMtLjM4LDAtLjc5LS4yOC0uNzktMS4yMWE0LjgyLDQuODIsMCwwLDEsLjI1LTEuNDVjMC0uMTYuMjItLjkyLjI3LTEuMDdzLjczLTEuMTYsMS41NC0xLjE2Yy41MiwwLC43Ni41My43NiwxLjE1YTguNDUsOC40NSwwLDAsMS0uNjMsMi41M0MxOTUuNDYsMTkxLjc4LDE5NC45MSwxOTIuMzUsMTk0LjM2LDE5Mi4zNVoiLz48cGF0aCBpZD0iZzItMTAxIiBjbGFzcz0iY2xzLTE1IiBkPSJNMTUyLjQsNTguODNhNC4xMSw0LjExLDAsMCwwLDEuMjMtLjE3LDEsMSwwLDAsMCwuNzItLjkxLjguOCwwLDAsMC0uOS0uNzMsMi4zMywyLjMzLDAsMCwwLTIuMjEsMi4zNiwxLjM2LDEuMzYsMCwwLDAsMS4zLDEuNTQsMi4yNywyLjI3LDAsMCwwLDEuOTItMSwuMS4xLDAsMCwwLS4wOC0uMDlzMCwwLS4xMi4wOWEyLjIxLDIuMjEsMCwwLDEtMS43Ljg2Yy0uNDksMC0uNzUtLjM5LS43NS0xYTMuNTIsMy41MiwwLDAsMSwuMTMtLjg5Wm0tLjQyLS4xN2MuMzctMS4zNCwxLjE5LTEuNDcsMS40Ny0xLjQ3YS41OC41OCwwLDAsMSwuNjQuNTZjMCwuOTEtMS4zOC45MS0xLjc1LjkxWiIvPjxwYXRoIGlkPSJnMS0xMDctMiIgZGF0YS1uYW1lPSJnMS0xMDciIGNsYXNzPSJjbHMtMTUiIGQ9Ik0xNTYuNDQsNTguM2EuMzIuMzIsMCwwLDAsMC0uMDkuMDkuMDksMCwwLDAtLjEtLjA4bC0uMzMsMC0uMzIsMGMtLjEzLDAtLjE5LDAtLjE5LjEycy4wOC4wOS4xNS4wOWMuMjgsMCwuMjgsMCwuMjguMDhhLjQxLjQxLDAsMCwxLDAsLjEzbC0uODIsMy4yOWEuNTYuNTYsMCwwLDAsMCwuMTIuMTguMTgsMCwwLDAsLjE5LjE4Yy4xOSwwLC4yNC0uMTguMjYtLjI2bC4yNy0xLjFjLjMyLDAsLjcxLjE1LjcxLjQ3YS42Mi42MiwwLDAsMSwwLC4xMi45Mi45MiwwLDAsMCwwLC4xOC41Ny41NywwLDAsMCwuNTkuNTkuNTYuNTYsMCwwLDAsLjQ2LS4yOSwxLjkzLDEuOTMsMCwwLDAsLjIzLS41OWMwLS4wNiwwLS4wNy0uMDgtLjA3cy0uMDgsMC0uMTEuMTNjLS4wNy4yNy0uMjIuNjYtLjQ5LjY2cy0uMTktLjEzLS4xOS0uMjhhMS4xNiwxLjE2LDAsMCwxLDAtLjI4LDEuMywxLjMsMCwwLDAsMC0uMThjMC0uNDctLjYtLjU3LS44OS0uNjFhMi45MSwyLjkxLDAsMCwwLC40OC0uNGMuMzEtLjMxLjU3LS41My44NS0uNTNhLjIyLjIyLDAsMCwxLC4xOS4wOC4zMy4zMywwLDAsMC0uMzEuMzIuMjEuMjEsMCwwLDAsLjIyLjIxLjM0LjM0LDAsMCwwLC4zMy0uMzYuNC40LDAsMCwwLS40Mi0uNDEsMS41NiwxLjU2LDAsMCwwLTEsLjU4LDEuOCwxLjgsMCwwLDEtLjU3LjQ0WiIvPjxwYXRoIGNsYXNzPSJjbHMtMTUiIGQ9Ik04Miw1OS4zOWEzLjg2LDMuODYsMCwwLDAsMS4yMy0uMTgsMSwxLDAsMCwwLC43Mi0uOTFjMC0uMzgtLjMzLS43Mi0uOS0uNzJhMi4zMywyLjMzLDAsMCwwLTIuMjEsMi4zNiwxLjM2LDEuMzYsMCwwLDAsMS4zLDEuNTQsMi4yOSwyLjI5LDAsMCwwLDEuOTItMSwuMTEuMTEsMCwwLDAtLjA4LS4xczAsMC0uMTEuMDlhMi4yMiwyLjIyLDAsMCwxLTEuNzEuODdjLS40OSwwLS43NS0uMzktLjc1LTFhMy41MiwzLjUyLDAsMCwxLC4xMy0uODlabS0uNDItLjE4Yy4zNy0xLjMzLDEuMi0xLjQ2LDEuNDctMS40NmEuNTcuNTcsMCwwLDEsLjY0LjU1YzAsLjkxLTEuMzguOTEtMS43NS45MVoiLz48cGF0aCBjbGFzcz0iY2xzLTE1IiBkPSJNODYsNTguODZhLjQ3LjQ3LDAsMCwwLDAtLjA5LjA5LjA5LDAsMCwwLS4wOS0uMDhsLS4zNCwwLS4zMiwwYy0uMTMsMC0uMTksMC0uMTkuMTJzLjA4LjA4LjE1LjA4Yy4yOCwwLC4yOCwwLC4yOC4wOWEuNDguNDgsMCwwLDEsMCwuMTNsLS44MiwzLjI4YS41OS41OSwwLDAsMCwwLC4xMy4xOC4xOCwwLDAsMCwuMTkuMThjLjIsMCwuMjQtLjE5LjI2LS4yNy4wNi0uMjQuMjEtLjg1LjI4LTEuMDkuMzEsMCwuNy4xNC43LjQ3YS42Mi42MiwwLDAsMSwwLC4xMi44Mi44MiwwLDAsMCwwLC4xOC41Ny41NywwLDAsMCwuNTkuNTkuNTYuNTYsMCwwLDAsLjQ2LS4yOSwyLjA1LDIuMDUsMCwwLDAsLjI0LS41OS4wOC4wOCwwLDAsMC0uMDktLjA4Yy0uMDcsMC0uMDgsMC0uMS4xNC0uMDguMjctLjIzLjY2LS41LjY2cy0uMTktLjEzLS4xOS0uMjlhMS4xNiwxLjE2LDAsMCwxLDAtLjI3czAtLjEyLDAtLjE4YzAtLjQ3LS42LS41OC0uODktLjYyYTIuNDgsMi40OCwwLDAsMCwuNDgtLjRjLjMyLS4zMS41OC0uNTIuODUtLjUyYS4yNC4yNCwwLDAsMSwuMTkuMDcuMzMuMzMsMCwwLDAtLjMxLjMyLjIxLjIxLDAsMCwwLC4yMy4yMS4zMy4zMywwLDAsMCwuMzItLjM2LjM5LjM5LDAsMCwwLS40Mi0uNCwxLjUxLDEuNTEsMCwwLDAtMSwuNTgsMS41OSwxLjU5LDAsMCwxLS41Ny40M1oiLz48cGF0aCBpZD0iZzAtMCIgY2xhc3M9ImNscy0xNSIgZD0iTTkxLjY5LDYxLjM4Yy4wOSwwLC4yMSwwLC4yMS0uMTNzLS4xMi0uMTMtLjIxLS4xM0g4OC4zOGMtLjA5LDAtLjIyLDAtLjIyLjEzcy4xMy4xMy4yMi4xM1oiLz48cGF0aCBjbGFzcz0iY2xzLTE1IiBkPSJNOTQuMjEsNTljMC0uMTYsMC0uMTctLjE2LS4xN2ExLjQsMS40LDAsMCwxLTEuMDkuMzd2LjE5YTEuOTEsMS45MSwwLDAsMCwuOC0uMTV2M2MwLC4yMSwwLC4yOC0uNTcuMjhIOTN2LjE5Yy4yNCwwLC43MywwLDEsMHMuNzYsMCwxLDBWNjIuNWgtLjJjLS41NSwwLS41Ny0uMDctLjU3LS4yOFoiLz48cGF0aCBjbGFzcz0iY2xzLTEwIiBkPSJNNDQuMzUsMTExLjM1YTEsMSwwLDAsMCwwLS4xNC4xNC4xNCwwLDAsMC0uMTUtLjEzbC0uNTMsMC0uNTEsMGMtLjIsMC0uMjksMC0uMjkuMTlzLjEzLjEzLjI0LjEzYy40NCwwLC40NCwwLC40NC4xNGEuNzkuNzksMCwwLDEtLjA1LjIxTDQyLjI1LDExN2EuNzYuNzYsMCwwLDAsMCwuMi4yOS4yOSwwLDAsMCwuMy4yOWMuMzEsMCwuMzktLjMuNDItLjQyLjA5LS4zOS4zMy0xLjM1LjQzLTEuNzMuNSwwLDEuMTEuMjMsMS4xMS43NGEuNzYuNzYsMCwwLDEsMCwuMTksMS4zLDEuMywwLDAsMCwwLC4yOS45MS45MSwwLDAsMCwuOTIuOTMuOTIuOTIsMCwwLDAsLjc0LS40NiwzLDMsMCwwLDAsLjM2LS45NGMwLS4wOS0uMDctLjExLS4xMy0uMTFzLS4xMywwLS4xNy4yMWMtLjExLjQzLS4zNSwxLS43OCwxLS4yMywwLS4yOS0uMi0uMjktLjQ1YTEuNzEsMS43MSwwLDAsMSwuMDYtLjQzczAtLjE4LDAtLjI4YzAtLjc1LS45NC0uOTEtMS40LTFhMy4zNCwzLjM0LDAsMCwwLC43NS0uNjNjLjUxLS40OS45MS0uODIsMS4zNS0uODJhLjMzLjMzLDAsMCwxLC4zLjEyLjUxLjUxLDAsMCwwLS40OS41LjMzLjMzLDAsMCwwLC4zNi4zMy41My41MywwLDAsMCwuNTEtLjU3LjYzLjYzLDAsMCwwLS42Ny0uNjQsMi40LDIuNCwwLDAsMC0xLjUyLjkyLDIuNjUsMi42NSwwLDAsMS0uOS42OFoiLz48cGF0aCBpZD0iZzAtMC0yIiBkYXRhLW5hbWU9ImcwLTAiIGNsYXNzPSJjbHMtMTAiIGQ9Ik01My4zMSwxMTUuMzNjLjE1LDAsLjM1LDAsLjM1LS4yMXMtLjItLjIxLS4zNS0uMjFINDguMWMtLjE1LDAtLjM1LDAtLjM1LjIxcy4yLjIxLjM1LjIxWiIvPjxwYXRoIGNsYXNzPSJjbHMtMTAiIGQ9Ik01Ny4zLDExMS42YzAtLjI1LDAtLjI2LS4yNi0uMjZhMi4yNCwyLjI0LDAsMCwxLTEuNzIuNTl2LjNhMi44NCwyLjg0LDAsMCwwLDEuMjYtLjI1djQuNjdjMCwuMzQsMCwuNDQtLjg5LjQ0aC0uMzJ2LjNjLjM3LDAsMS4xNiwwLDEuNTcsMHMxLjIsMCwxLjU3LDB2LS4zaC0uMzJjLS44NiwwLS44OS0uMS0uODktLjQ0WiIvPjwvZz48L2c+PC9zdmc+" width="60%"></center>
+&#x4EAE;&#x7EB9;&#x5904;&#x4EE3;&#x8868;&#x7684;&#x6DF1;&#x5EA6;&#x4E00;&#x81F4;, &#x53EF;&#x7C7B;&#x6BD4;&#x7B49;&#x9AD8;&#x7EBF;. &#x5982;&#x56FE;, &#x82E5;&#x6D4B;&#x8BD5;&#x8868;&#x9762;&#x6709;&#x51F9;&#x5751;, &#x6DF1;&#x5EA6;&#x4E3A; $ \delta $, &#x5C31;&#x4F1A;&#x5BFC;&#x81F4;&#x51F9;&#x5751;&#x5904;&#x6DF1;&#x5EA6;&#x589E;&#x52A0;, &#x4E0E;&#x53F3;&#x65B9;&#x67D0;&#x4E00;&#x6761;&#x4EAE;&#x7EB9;&#x5BF9;&#x5E94;&#x6DF1;&#x5EA6;&#x4E00;&#x6837;, &#x4EAE;&#x7EB9;&#x5C31;&#x4F1A;&#x5C40;&#x90E8;&#x5DE6;&#x79FB;. &#x540C;&#x7406;&#x51F8;&#x8D77;&#x5C31;&#x4F1A;&#x4F7F;&#x6761;&#x7EB9;&#x5411;&#x53F3;&#x504F;.
+<p>&#x5C06;&#x865A;&#x7EBF;&#x5708;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x653E;&#x5927;, &#x6709;&#x51E0;&#x4F55;&#x5173;&#x7CFB;:<br>
+</p><div class="mathjax-exps">\[\tan \theta \approx \theta = \dfrac{\delta}{b} \,.\]</div><p></p>
+<p>&#x56E0;&#x4E3A; <span class="mathjax-exps">$\Delta l = \dfrac{\lambda}{2 n e}$</span>, <span class="mathjax-exps">$\theta = \dfrac{\lambda}{2 n \Delta l}$</span>, &#x4EE3;&#x5165;&#x5373;&#x53EF;&#x6C42;&#x51FA;&#x51F9;&#x5751;&#x6DF1;&#x5EA6;:<br>
+</p><div class="mathjax-exps">\[\delta = b \theta = \dfrac{b\lambda}{2 n \Delta l} \,.\]</div><p></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x51FA;, &#x4ECE;&#x5E72;&#x6D89;&#x56FE;&#x6837;&#x4E2D;&#x53EF;&#x4EE5;&#x68C0;&#x67E5;&#x8868;&#x9762;&#x5E73;&#x6574;&#x5EA6;.</p>
+<h1 class="mume-header" id="%E7%8B%AD%E4%B9%89%E7%9B%B8%E5%AF%B9%E8%AE%BA">&#x72ED;&#x4E49;&#x76F8;&#x5BF9;&#x8BBA;</h1>
+
+<h2 class="mume-header" id="%E6%B4%9B%E4%BC%A6%E5%85%B9%E5%8F%98%E6%8D%A2">&#x6D1B;&#x4F26;&#x5179;&#x53D8;&#x6362;</h2>
+
+<p><span class="mathjax-exps">$S$</span> &#x7CFB;&#x4E2D;&#x70B9; <span class="mathjax-exps">$(x, y, z, t)$</span>, <span class="mathjax-exps">$S&apos;$</span> &#x7CFB;&#x4E2D;&#x70B9; <span class="mathjax-exps">$(x&apos;, y&apos;, z&apos;, t&apos;)$</span>. <span class="mathjax-exps">$S&apos;$</span> &#x7CFB;&#x76F8;&#x5BF9; <span class="mathjax-exps">$S$</span> &#x7684;&#x901F;&#x5EA6;&#x4E3A; <span class="mathjax-exps">$v$</span>.<br>
+</p><div class="mathjax-exps">\[\begin{cases}     x&apos; = \dfrac{x-vt}{\sqrt{ 1- \dfrac{v^2}{c^2}}} \\     y&apos; = y \\     z&apos; = z \\     t&apos; = \dfrac{t - \dfrac{v}{c^2} x}{\sqrt{1-\dfrac{v^2}{c^2}}  }   \end{cases}\]</div><p></p>
+<p>&#x8BB0; <span class="mathjax-exps">$\beta = \dfrac{v}{c}$</span>, &#x7531; <span class="mathjax-exps">$S&apos;$</span> &#x5230; <span class="mathjax-exps">$S$</span> &#x7684;&#x9006;&#x53D8;&#x6362;&#x4E3A;<br>
+</p><div class="mathjax-exps">\[\begin{cases}     x = \dfrac{x&apos;+vt}{\sqrt{ 1- \beta^2}} \\     y = y&apos; \\     z = z&apos; \\     t = \dfrac{t&apos; + \dfrac{\beta}{c} x}{\sqrt{1-\dfrac{v^2}{c^2}}  }   \end{cases}\]</div><p></p>
+<h2 class="mume-header" id="%E7%9B%B8%E5%AF%B9%E8%AE%BA%E6%95%88%E5%BA%94">&#x76F8;&#x5BF9;&#x8BBA;&#x6548;&#x5E94;</h2>
+
+<h3 class="mume-header" id="%E5%B0%BA%E7%BC%A9">&#x5C3A;&#x7F29;</h3>
+
+<p>&#x76F8;&#x5BF9;&#x4E0E;&#x7269;&#x4F53;&#x9759;&#x6B62;&#x7684;&#x7CFB;&#x4E2D;&#x89C2;&#x6D4B;&#x5230;&#x7684;&#x7269;&#x4F53;&#x957F;&#x5EA6;&#x79F0;&#x4E3A;&#x56FA;&#x6709;&#x957F;&#x5EA6;, &#x8BB0;&#x4F5C; <span class="mathjax-exps">$l_0$</span>. &#x5219;&#x76F8;&#x5BF9;&#x7269;&#x4F53;&#x901F;&#x5EA6;&#x4E3A; <span class="mathjax-exps">$v = \beta c$</span> &#x7684;&#x7CFB;&#x4E2D;, &#x89C2;&#x6D4B;&#x5230;&#x7684;&#x7269;&#x4F53;&#x957F;&#x5EA6;&#x4F1A;&#x53D8;&#x77ED;:<br>
+</p><div class="mathjax-exps">\[l = l_0 \sqrt{1-\beta^2}\]</div><p></p>
+<h3 class="mume-header" id="%E9%92%9F%E6%85%A2">&#x949F;&#x6162;</h3>
+
+<p>&#x76F8;&#x5BF9;&#x4E0E;&#x7269;&#x4F53;&#x9759;&#x6B62;&#x7684;&#x7CFB;&#x4E2D;&#x89C2;&#x6D4B;&#x5230;&#x7684;&#x4E8B;&#x4EF6;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#x4E3A;&#x56FA;&#x6709;&#x65F6;, &#x8BB0;&#x4F5C; <span class="mathjax-exps">$\Delta t_0$</span>. &#x5219;&#x76F8;&#x5BF9;&#x4E8E;&#x7269;&#x4F53;&#x901F;&#x5EA6;&#x4E3A; <span class="mathjax-exps">$v = \beta c$</span> &#x7684;&#x7CFB;&#x4E2D;, &#x89C2;&#x6D4B;&#x5230;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x4F1A;&#x53D8;&#x957F;:<br>
+</p><div class="mathjax-exps">\[\Delta t = \dfrac{\Delta t_0}{\sqrt{1 - \beta^2}}\]</div><p></p>
+<h2 class="mume-header" id="%E8%B4%A8%E9%87%8F-%E5%8A%A8%E9%87%8F-%E8%83%BD%E9%87%8F%E5%85%B3%E7%B3%BB">&#x8D28;&#x91CF;, &#x52A8;&#x91CF;, &#x80FD;&#x91CF;&#x5173;&#x7CFB;</h2>
+
+<h3 class="mume-header" id="%E8%B4%A8%E9%87%8F">&#x8D28;&#x91CF;</h3>
+
+<p>&#x76F8;&#x5BF9;&#x4E0E;&#x7269;&#x4F53;&#x9759;&#x6B62;&#x7684;&#x7CFB;&#x4E2D;&#x89C2;&#x6D4B;&#x5230;&#x7684;&#x7269;&#x4F53;&#x8D28;&#x91CF;&#x79F0;&#x4E3A;&#x9759;&#x8D28;&#x91CF;, &#x8BB0;&#x4F5C; <span class="mathjax-exps">$m_0$</span>. &#x5219;&#x76F8;&#x5BF9;&#x4E8E;&#x7269;&#x4F53;&#x901F;&#x5EA6;&#x4E3A; <span class="mathjax-exps">$v = \beta c$</span> &#x7684;&#x7CFB;&#x4E2D;, &#x89C2;&#x6D4B;&#x5230;&#x7684;&#x8D28;&#x91CF;&#x4F1A;&#x53D8;&#x8F7B;:<br>
+</p><div class="mathjax-exps">\[m = \dfrac{m_0}{\sqrt{1 - \beta^2}}\]</div><p></p>
+<h3 class="mume-header" id="%E5%8A%A8%E9%87%8F">&#x52A8;&#x91CF;</h3>
+
+<p></p><div class="mathjax-exps">\[\ve p = \dfrac{m_0}{\sqrt{1 - \beta^2}} \ve v\]</div><p></p>
+<h3 class="mume-header" id="%E8%83%BD%E9%87%8F">&#x80FD;&#x91CF;</h3>
+
+<p>&#x89C2;&#x6D4B;&#x5230;&#x901F;&#x5EA6;&#x4E3A; <span class="mathjax-exps">$v$</span> &#x7684;&#x7269;&#x4F53;, &#x5176;&#x8D28;&#x91CF;&#x4E3A; <span class="mathjax-exps">$m$</span>, &#x52A8;&#x80FD;<br>
+</p><div class="mathjax-exps">\[\begin{align*}       E_{\mathrm k} &amp;= m c^2 - m_0 c^2 \\     &amp;= \dfrac{m_0}{\sqrt{1 - \beta^2}}c^2 - m_0 c^2   \end{align*}\]</div><p></p>
+<p>&#x603B;&#x80FD;&#x91CF;<br>
+</p><div class="mathjax-exps">\[E = E_{\mathrm k} + m_0 c^2 = m c^2\]</div><p></p>
+<h3 class="mume-header" id="%E5%8A%A8%E8%B4%A8%E8%83%BD%E5%85%B3%E7%B3%BB">&#x52A8;&#x8D28;&#x80FD;&#x5173;&#x7CFB;</h3>
+
+<p></p><div class="mathjax-exps">\[E^2 = p^2 c^2 + m_0^2 c^{4}\]</div><p></p>
+<p>&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x5FAE;&#x89C2;&#x7C92;&#x5B50;, &#x5982;&#x5149;&#x5B50;&#x548C;&#x4E2D;&#x5FAE;&#x5B50;, &#x5176;&#x9759;&#x8D28;&#x91CF;&#x4E3A; <span class="mathjax-exps">$0$</span>. &#x4E8E;&#x662F;&#x6709;<br>
+</p><div class="mathjax-exps">\[E = p c\]</div><p></p>
+<h1 class="mume-header" id="%E9%87%8F%E5%AD%90%E7%89%A9%E7%90%86%E5%9F%BA%E7%A1%80">&#x91CF;&#x5B50;&#x7269;&#x7406;&#x57FA;&#x7840;</h1>
+
+<h2 class="mume-header" id="%E5%85%89%E5%AD%90">&#x5149;&#x5B50;</h2>
+
+<p>&#x6BCF;&#x4E00;&#x4E2A;&#x5149;&#x5B50;&#x7684;&#x80FD;&#x91CF;&#x4E3A; </p><div class="mathjax-exps">\[E = h \nu\]</div><p></p>
+<p>&#x7531;&#x4E8E; <span class="mathjax-exps">$c = \lambda \nu$</span>,<br>
+</p><div class="mathjax-exps">\[E = \dfrac{h c}{\lambda}\]</div><p></p>
+<p>&#x5149;&#x5B50;&#x9759;&#x8D28;&#x91CF;&#x4E3A; <span class="mathjax-exps">$0$</span>, &#x6545;&#x52A8;&#x91CF;<br>
+</p><div class="mathjax-exps">\[p = \dfrac{E}{c} = \dfrac{h \nu}{c} = \dfrac{h}{\lambda}\]</div><p></p>
+<h2 class="mume-header" id="%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94">&#x5149;&#x7535;&#x6548;&#x5E94;</h2>
+
+<h3 class="mume-header" id="%E7%94%B5%E5%AD%90%E7%9A%84%E6%9C%80%E5%A4%A7%E5%88%9D%E5%8A%A8%E8%83%BD%E4%B8%8E%E6%88%AA%E6%AD%A2%E7%94%B5%E5%8E%8B">&#x7535;&#x5B50;&#x7684;&#x6700;&#x5927;&#x521D;&#x52A8;&#x80FD;&#x4E0E;&#x622A;&#x6B62;&#x7535;&#x538B;</h3>
+
+<p></p><div class="mathjax-exps">\[e U_{\mathrm a} = \dfrac{1}{2} m v_{\mathrm m}^2\]</div><p></p>
+<h3 class="mume-header" id="%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94%E6%96%B9%E7%A8%8B">&#x7231;&#x56E0;&#x65AF;&#x5766;&#x5149;&#x7535;&#x6548;&#x5E94;&#x65B9;&#x7A0B;</h3>
+
+<p></p><div class="mathjax-exps">\[\dfrac{1}{2} m v_{\mathrm m}^2 = h \nu - W_0 = h \nu - h \nu_0\]</div><p></p>
+<p>&#x5176;&#x4E2D;, <span class="mathjax-exps">$\nu_0$</span> &#x88AB;&#x79F0;&#x4E3A;&#x622A;&#x6B62;&#x9891;&#x7387; (&#x7EA2;&#x9650;), <span class="mathjax-exps">$W_0$</span> &#x53EB;&#x505A;&#x9038;&#x51FA;&#x529F;.</p>
+<h2 class="mume-header" id="%E5%BA%B7%E6%99%AE%E9%A1%BF%E6%95%A3%E5%B0%84">&#x5EB7;&#x666E;&#x987F;&#x6563;&#x5C04;</h2>
+
+<h3 class="mume-header" id="%E6%95%A3%E5%B0%84%E5%85%AC%E5%BC%8F">&#x6563;&#x5C04;&#x516C;&#x5F0F;</h3>
+
+<p></p><div class="mathjax-exps">\[\lambda - \lambda_0 = \dfrac{h}{m_{\mathrm e} c} (1 - \cos \varphi) = \lambda_{\mathrm C} (1 - \cos \varphi)\]</div><p></p>
+<h2 class="mume-header" id="%E7%8E%BB%E5%B0%94%E6%B0%A2%E5%8E%9F%E5%AD%90%E6%A8%A1%E5%9E%8B">&#x73BB;&#x5C14;&#x6C22;&#x539F;&#x5B50;&#x6A21;&#x578B;</h2>
+
+<h3 class="mume-header" id="%E9%87%8C%E5%BE%B7%E4%BC%AF%E6%96%B9%E7%A8%8B">&#x91CC;&#x5FB7;&#x4F2F;&#x65B9;&#x7A0B;</h3>
+
+<p></p><div class="mathjax-exps">\[\dfrac{1}{\lambda} = R \left( \dfrac{1}{m^2} - \dfrac{1}{n^2} \right)\]</div><p></p>
+<p>&#x5F53; <span class="mathjax-exps">$m$</span> &#x53D6;&#x4E0D;&#x540C;&#x503C;&#x65F6;, &#x5F97;&#x5230;&#x4E0D;&#x540C;&#x8C31;&#x7EBF;&#x7CFB;.</p>
+<h3 class="mume-header" id="%E8%B7%83%E8%BF%81%E7%90%86%E8%AE%BA">&#x8DC3;&#x8FC1;&#x7406;&#x8BBA;</h3>
+
+<p>&#x6C22;&#x539F;&#x5B50;&#x57FA;&#x6001;&#x80FD;&#x91CF; <span class="mathjax-exps">$E_1 = -13.6 \ \mathrm{eV}$</span>, &#x7B2C; <span class="mathjax-exps">$n$</span> &#x80FD;&#x7EA7;&#x8F68;&#x9053;&#x80FD;&#x91CF;<br>
+</p><div class="mathjax-exps">\[E_n = \dfrac{E_1}{n^2} \,,\]</div><p></p>
+<p>&#x5982;&#x679C;&#x7B2C; <span class="mathjax-exps">$x$</span> &#x80FD;&#x7EA7;&#x7684;&#x80FD;&#x91CF;&#x4E3A; <span class="mathjax-exps">$E_x$</span>, &#x5219;&#x8BE5;&#x80FD;&#x7EA7;&#x4E3A;<br>
+</p><div class="mathjax-exps">\[x = \sqrt{\dfrac{E_1}{E_x}} \,.\]</div><p></p>
+<p>&#x7535;&#x5B50;&#x4ECE;&#x80FD;&#x7EA7;&#x95F4;&#x8DC3;&#x8FC1;, &#x653E;&#x51FA;&#x7684;&#x5149;&#x6CE2;&#x957F;&#x7531;&#x91CC;&#x5FB7;&#x4F2F;&#x65B9;&#x7A0B;&#x8BA1;&#x7B97;.</p>
+<h1 class="mume-header" id="%E6%B3%A2%E7%B2%92%E4%BA%8C%E8%B1%A1%E6%80%A7">&#x6CE2;&#x7C92;&#x4E8C;&#x8C61;&#x6027;</h1>
+
+<h2 class="mume-header" id="%E7%89%A9%E8%B4%A8%E6%B3%A2">&#x7269;&#x8D28;&#x6CE2;</h2>
+
+<h3 class="mume-header" id="%E5%BE%B7%E5%B8%83%E7%BD%97%E6%84%8F%E5%85%B3%E7%B3%BB">&#x5FB7;&#x5E03;&#x7F57;&#x610F;&#x5173;&#x7CFB;</h3>
+
+<p></p><div class="mathjax-exps">\[\nu = \dfrac{E}{h} = \dfrac{mc^2}{h}\]</div><p></p>
+<p></p><div class="mathjax-exps">\[\lambda = \dfrac{h}{p} = \dfrac{h}{m v}\]</div><p></p>
+<h2 class="mume-header" id="%E4%B8%8D%E7%A1%AE%E5%AE%9A%E5%8E%9F%E7%90%86">&#x4E0D;&#x786E;&#x5B9A;&#x539F;&#x7406;</h2>
+
+<p></p><div class="mathjax-exps">\[\Delta x \Delta p_x \geqslant h \geqslant \dfrac{\hbar}{2}\]</div><p></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

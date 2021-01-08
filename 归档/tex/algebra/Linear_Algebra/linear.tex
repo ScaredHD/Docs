@@ -1,0 +1,101 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+    \setlength{\parskip}{1em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=cyan,rulewidth=2pt,bgcolor=white}]{definition}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=orange,rulewidth=2pt, bgcolor=white}]{theorem}
+    \theoremstyle{remark}
+    \newtheorem*{remark}{Remark}
+\usepackage{caption} 	 % 标题
+\usepackage{xcolor} 	 % 颜色
+\usepackage{graphicx} 	 % 引用图片
+\usepackage{float}
+\usepackage{framed} 	 % 方框 \begin{framed}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows} 	 % 箭头宏包 \xLongrightarrow 
+\usepackage{esvect} 	 % 向量箭头 \vv{}
+\usepackage{siunitx} 	 % 国际单位 \si{unit} \SI{number}{unit} 
+\usepackage{esint} 	 % 积分符号
+\usepackage{mathrsfs}
+\usepackage{hyperref}  % 超链接 用于使目录可点击跳转
+    \hypersetup{
+        colorlinks=true, %set true if you want colored links
+        linktoc=all,     %set to all if you want both sections and subsections linked
+        linkcolor=blue,  %choose some color if you want links to stand out
+    }
+
+\pagestyle{empty}
+
+% font
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\renewcommand{\r}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+\newcommand{\scr}{\mathscr}
+% common symbol
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\renewcommand{\C}{\mathbb C}
+\newcommand{\F}{\mathbb F}
+% differentiation
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+\newcommand{\del}{\nabla}
+% other
+\newcommand{\transp}{^{\top}}
+\DeclareMathOperator{\tr}{tr}
+
+
+\begin{document}
+\tableofcontents
+\section{向量空间}
+\subsection{$ \R^n $ 和 $ \C^n $}
+因为实数集 $ \R $ 和复数集 $ \C $ 都是\textbf{域} (field) 的实例, 故约定记号 $ \F $ 表示 $ \R $ 或 $ \C $. 本文档所有的 $ \F $ 都可以替换为 $ \R $ 或 $ \C $. 如 $ \F^n $ 可以代表 $ \R^n $ 或 $ \C^n $.
+
+\begin{definition}[\text{加法和数乘}]
+    对于集合 $ V $, 定义 $ V $ 上加法为一个函数, 其将每一对 $ u, v \in V $ 都映射到 $ V $ 的一个元素 $ u + v $.  $ V $ 上的数乘也是一个函数, 将任意 $ \lambda \in \F $ 和 $ v \in V $ 都映射到一个元素 $ \lambda v \in V $.
+\end{definition}
+
+$ \F $ 中的元素为标量, 一般 $ V $ 中的元素为向量.
+
+\vskip 1em
+\begin{remark}
+    注意集合上定义的加法必须具有封闭性, 即运算结果仍在集合中.
+\end{remark}
+
+\begin{definition}[\text{向量空间}]
+    向量空间是定义了加法和数乘的集合 $ V $, 满足八条公理：
+    \begin{enumerate}
+        \item 加法交换律: $ \ve u + \ve v = \ve v + \ve u $
+        \item 加法结合律: $ \ve u + (\ve v + \ve w) = (\ve u + \ve v) + \ve w $
+        \item 加法单位元: $ \exists \ve 0 \in V $, $ \ve 0 + \ve v = \ve v $
+        \item 加法逆元: $ \forall \ve v \in V $, $ \exists -\ve v \in V $, $ \ve v + (-\ve v) = \ve 0 $
+        \item 相容: $ a(b\ve v) = (ab) \ve v $
+        \item 数乘单位元: $ 1\ve v = \ve v $, $ 1 $ 是数乘单位元
+        \item 数乘对向量加法的分配律: $ a(\ve u + \ve v) = a\ve u + a \ve v $
+        \item 数乘对域加法的分配律: $ (a + b)\ve v = a\ve v + b\ve v $
+    \end{enumerate}
+\end{definition}
+
+尽管 $ \R $ 中都是标量, 但是其上定义了加法和数乘, 且具有封闭性, 故也是向量空间. 同理按照定义还可以证明 $ \R_0^+ = \{ x \in \R \mid x \geqslant 0 \} $ 也是向量空间.
+
+$ \R $ 上的向量空间是实向量空间, $ \C $ 上的有复向量空间. 同理有 $ \R^n $ 和 $ \C^n $. 还可以拓广到无穷维, 定义 \[ \F^{\infty} = \{ (x_1, x_2, \dots) \mid x_j \in \F, j \in \N^+ \} \,.\]
+
+\begin{definition}[\text{函数集合}]
+    $ \F^S $ 表示所有 $ S $ 到 $ F $ 的函数的集合.
+\end{definition}
+
+
+
+\end{document}

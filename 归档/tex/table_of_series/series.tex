@@ -1,0 +1,81 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{anyfontsize}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm}
+    \newtheorem{definition}{Definition}
+\usepackage{caption} 	 % 标题
+\usepackage{xcolor} 	 % 颜色
+\usepackage{graphicx} 	 % 引用图片
+\usepackage{float}
+\usepackage{framed} 	 % 方框 \begin{framed}
+\usepackage{tcolorbox}
+    \newtcolorbox{defbox}{colback = blue!20!green!10!white}
+    \newtcolorbox{thmbox}{colback = black!5!white}
+\usepackage{indentfirst} 	 % 首行缩进 
+    \setlength{\parindent}{0em}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows} 	 % 箭头宏包 \xLongrightarrow 
+\usepackage{esvect} 	 % 向量箭头 \vv{}
+\usepackage{siunitx} 	 % 国际单位 \si{unit} \SI{number}{unit} 
+\usepackage{esint} 	 % 积分符号
+\usepackage{mathrsfs}
+
+% font
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\newcommand{\mr}{\mathrm}
+\newcommand{\mcal}{\mathcal}
+\newcommand{\mscr}{\mathscr}
+% common symbol
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+% differentiation
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+\newcommand{\del}{\nabla}
+% other
+\newcommand{\transp}{^{\top}}
+\DeclareMathOperator{\tr}{tr}
+
+\pagestyle{empty}
+
+\begin{document}
+\[ f(x) = \sum_{n = 0}^{\infty} \dfrac{f^{(n)}(x - a)}{n!} (x - a)^n  \]
+\[ f(x) = \sum_{n = 0}^{\infty} \dfrac{f^{(n)}(x)}{n!} x^n  \]
+
+\subsection*{常用麦克劳林级数}
+\[ e^x = \sum_{n = 0}^{\infty} \dfrac{x^n}{n!}\]
+\[ \ln(1 - x) = - \sum_{n = 0}^{\infty} \dfrac{x^{n+1}}{n + 1} \] 
+\[ \ln(1 + x) = \sum_{n = 0}^{\infty} (-1)^n \dfrac{x^{n+1}}{n + 1} \] 
+\[ \dfrac{1}{1 - x} = \sum_{n = 0}^{\infty} x^n \] 
+\[ \dfrac{1}{1 + x} = \sum_{n = 0}^{\infty} (-1)^n x^n \] 
+\[ \dfrac{1}{(1 - x)^2} = \sum_{n = 0}^{\infty} (n + 1)x^n \]
+\[ (1 + x)^\alpha = \sum_{n = 0}^{\infty} \binom\alpha n x^n \] 
+\[ \sin x = \sum_{n = 0}^{\infty}(-1)^n\dfrac{x^{2n + 1}}{(2n+1)!} \] 
+\[ \cos x = \sum_{n = 0}^{\infty} (-1)^n \dfrac{x^{2n}}{(2n)!} \] 
+
+\subsection*{常用泰勒展开式}
+红色部分为常见等价无穷小.
+\[ e^x = {\color{red} 1 + x} + \dfrac{x^2}{2!} + \dfrac{x^3}{3!} + o(x^3) \]
+\[ \ln (1 - x) = - x - \dfrac{x^2}{2} - \dfrac{x^3}{3} - o(x^3) \]             
+\[ \ln (1 + x) = {\color{red} x} - \dfrac{x^2}{2} + \dfrac{x^3}{3} - o(x^3) \]
+\[ \dfrac{1}{1 - x} = 1 + x + x^2 + x^3 + o(x^3) \]
+\[ \dfrac{1}{(1 - x)^2} = 1 + 2 x + 3 x^2 + 4 x^3 + o(x^3) \]
+\[ (1 + x)^\alpha = 1 + \alpha x + \dfrac{\alpha(1 - \alpha)}{2}x^2 + o(x^2) \]
+\[ \sin x = {\color{red} x} - \dfrac{x^3}{3!} + \dfrac{x^5}{5!} - o(x^5) \]
+\[ \cos x = {\color{red} 1 - \dfrac{x^2}{2!}} + \dfrac{x^4}{4!} - o(x^4) \]
+\[ \tan x = {\color{red} x} + \dfrac{x^3}{3} + \dfrac{2 x^5}{15} + o(x^5) \]
+\[ \arcsin x = {\color{red} x} + \dfrac{x^3}{6} + o(x^3) \]
+\[ \arccos x = \dfrac{\pi}{2} - \arcsin x = \dfrac{\pi}{2} - x - \dfrac{x^3}{6} - o(x^3) \]
+\[ \arctan x = {\color{red} x} - \dfrac{x^3}{3} + \dfrac{x^5}{5} + o(x^5) \]
+
+\end{document}

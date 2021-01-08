@@ -1,0 +1,31 @@
+\contentsline {section}{\numberline {1}预备知识}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}点与向量}{2}{subsection.1.1}
+\contentsline {paragraph}{区分点和向量}{2}{paragraph*.2}
+\contentsline {paragraph}{空间与点}{2}{paragraph*.3}
+\contentsline {paragraph}{向量}{2}{paragraph*.4}
+\contentsline {paragraph}{点和向量的运算}{3}{paragraph*.5}
+\contentsline {subsection}{\numberline {1.2}集合}{3}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}集合的开闭}{3}{subsubsection.1.2.1}
+\contentsline {paragraph}{例}{4}{paragraph*.7}
+\contentsline {subsubsection}{\numberline {1.2.2}上确界和下确界}{4}{subsubsection.1.2.2}
+\contentsline {paragraph}{例}{5}{paragraph*.8}
+\contentsline {subsubsection}{\numberline {1.2.3}最大/最小值}{5}{subsubsection.1.2.3}
+\contentsline {paragraph}{例}{5}{paragraph*.9}
+\contentsline {subsection}{\numberline {1.3}序列, 函数与极限}{5}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}四大定理}{6}{subsection.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1}紧致集}{6}{subsubsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.2}紧致集上的函数}{6}{subsubsection.1.4.2}
+\contentsline {subsubsection}{\numberline {1.4.3}中值定理}{6}{subsubsection.1.4.3}
+\contentsline {subsubsection}{\numberline {1.4.4}代数基本定理}{7}{subsubsection.1.4.4}
+\contentsline {section}{\numberline {2}微分学}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}导数与偏导数}{7}{subsection.2.1}
+\contentsline {paragraph}{例}{9}{paragraph*.10}
+\contentsline {subsection}{\numberline {2.2}连续, 可导及可微}{10}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}多元函数的导数等价定义}{11}{subsection.2.3}
+\contentsline {section}{\numberline {A}补充知识}{13}{appendix.A}
+\contentsline {subsection}{\numberline {A.1}扩展实数域}{13}{subsection.A.1}
+\contentsline {subsection}{\numberline {A.2}函数空间}{13}{subsection.A.2}
+\contentsline {section}{\numberline {B}部分定理证明}{14}{appendix.B}
+\contentsline {paragraph}{逐位筛选出最大数}{14}{paragraph*.14}
+\contentsline {paragraph}{证明 $ \beta $ 是上界}{15}{paragraph*.16}
+\contentsline {paragraph}{证明 $ \beta $ 是最小上界}{15}{paragraph*.17}

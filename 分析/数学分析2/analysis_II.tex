@@ -131,6 +131,12 @@
     $ \cl(X \cap Y) \subseteq \cl(X) \cap \cl(Y) $, 这个式子不能像并 $ \cup $ 情形的式子一样取等于. 因为可以找到反例: $ \cl \big( (0, 1) \cap (1, 2) \big) = \varnothing \neq \set{1} = \cl(0, 1) \cap \cl(1, 2) $.
 \end{remark}
 
+使用闭包的记号, 就可以将 $ x $ 附着于 $ X $ 记作: $ x \in \cl(X) $, 其满足的性质也可以记作:
+\begin{itemize}
+    \item $ x \in \cl(X) \implies x \in \cl(X \cup Y) $
+    \item $ x \in \cl(X \cap Y) \implies x \in \cl(X) \land x \in \cl(Y) $
+\end{itemize}
+
 \begin{proposition}[\text{区间的闭包}]
     若 $ I $ 为 $ (a, b) $, $ (a, b] $, $ [a, b) $, $ [a, b] $ 中的一个, 那么 $ \cl (I) = [a, b] $.
 \end{proposition}
@@ -233,7 +239,11 @@
 \end{proof}
 
 \subsection{函数的极限}
+\begin{definition}[\text{函数极限-I}]
+    设 $ E \subseteq X \subseteq \R $, 定义函数 $ f \colon X \to \R $ 在 $ x_0 $ 处沿着 $ E $ 收敛到 $ L $, 当且仅当对任意实数 $ \epsilon > 0 $, 都存在 $ \delta > 0 $, 对于一切满足 $ |x - x_0| \leqslant \delta $ 的 $ x \in E $, 都有: \[ |f(x) - L| \leqslant \delta \,.\] 记作: \[ \lim_{x \to x_0; x \in E} f(x) = L \,.\]
+\end{definition}
 
+注意这里和一般极限定义的区别. $  $
 
 
 \end{document}

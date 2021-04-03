@@ -1,0 +1,104 @@
+\documentclass[UTF8]{ctexart}
+\hfuzz=4pt
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+\usepackage{verbatim}
+
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\renewcommand{\C}{\mathbb C}
+\DeclarePairedDelimiter\set{\{}{\}}
+\DeclarePairedDelimiter\Floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\Ceil{\lceil}{\rceil}
+\DeclareMathOperator{\truncate}{truncate}
+\DeclareMathOperator{\floor}{floor}
+\DeclareMathOperator{\ceil}{ceil}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Frac}{frac}
+
+\title{取整函数}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{取整函数}
+\subsection{定义}
+对于 $ x \in \R $, 常见有三种取整方式:
+\begin{itemize}
+    \item 向上取整 (round up, ceil): 取大于等于 $ x $ 的整数中最靠近 $ x $ 的, 也可以看作是朝 $ +\infty $ 的方向取整
+    \[ \ceil(x) \equiv \lceil x \rceil \coloneqq \min \set{n \in \Z \colon n \geqslant x} \]
+    \item 向下取整 (round down, floor): 取小于等于 $ x $ 的整数中最靠近 $ x $ 的, 也可以看作是朝 $ -\infty $ 的方向取整
+    \[ \floor(x) \equiv \lfloor x \rfloor \coloneqq \max\set{n \in \Z \colon n \leqslant x} \]
+    \item 向零取整 (truncate): 朝 $ 0 $ 的方向取离 $ x $ 最近的整数
+    \[ \truncate(x) \coloneqq \sgn (x) \lfloor |x| \rfloor \]
+\end{itemize}
+
+\subsection{性质}
+\subsubsection{不等式}
+根据定义, 可以得到最基本的不等式:
+\[ 
+    x - 1 < \Floor{x} \leqslant x \leqslant \Ceil{x} < x + 1 \,.
+\]
+从上式也可以看到
+\[ 
+    \Floor{x} \leqslant \Ceil{x} \,.
+\]
+以及下面的事实:
+\[ 
+    \Ceil{x} - \Floor{x} = \begin{cases}
+        0 & \text{if } x \in \Z \\
+        1 & \text{if } x \notin \Z
+    \end{cases}  \,.
+\]
+也就是说, 当 $ x \notin \Z $ 时, $ \Floor{x} + 1 = \Ceil{x} $, 此时 $ \Floor{x} < x < \Ceil{x} $; 而当 $ x \in \Z $ 时, $ \Floor{x} = x = \Ceil{x} $.
+
+\subsection{加法}
+设 $ x \in \R $, $ x \in \Z $, 则有:
+\[ 
+    \Floor{x + n} = \Floor{x} + n \,,
+\]
+\[ 
+    \Ceil{x + n} = \Ceil{x} + n \,.
+\]
+\begin{proof} 
+    下面以 $ \Floor{x + n} = \Floor{x} + n $ 为例, 其余同理.
+    
+    记 $ \Frac(x) $ 为 $ x $ 的小数部分. 显然对于任意正实数 $ x $, 都有 $ x = \Floor{x} + \Frac(x) $; 而对于负实数 $ x = \Ceil{x} + \Frac(x) $. 当 $ x \in \Z $ 时, $ \Frac(x) = 0 $, 而当 $ x \in \Z $ 时, $ 0 < \Frac(x) < 1 $.
+
+    下面分两种情况讨论: (1) 当 $ x \in \Z $ 时, $ x + n \in \Z $, 此时根据基本不等式: $ \Floor{x + n} = x + n $, $ \Floor{x} = x $, 等式成立. (2) 当 $ x \notin \Z $ 时: 若 $ x > 0 $, $ \Floor{x + n} = \Floor{\Floor{x} + \Frac(x) + n} = \Floor{\Floor{x} + n + \Frac(x)} $. 此时 $ \Floor{x} + n $ 为整数且 $ \Floor{x} + n < \Floor{x} + n + \Frac(x) $. 通过反证法可以得到, $ (\Floor{x} + n , \Floor{x} + n + \Frac(x)] $ 间不存在整数, 故 $ \Floor{x} + n $ 为小于等于 $ x + n $ 的最大整数, 这就证明了等式. $ x < 0 $ 的情况可同理证明.
+\end{proof}
+
+\subsection{和不等式}
+对于任意 $ x, y \in \R $, 有:
+\[ 
+    \Floor{x} + \Floor{y} \leqslant \Floor{x + y} \leqslant \Floor{x} + \Floor{y} + 1 \,,
+\]
+\[ 
+    \Ceil{x} + \Ceil{y} - 1 \leqslant \Ceil{x + y} \leqslant \Ceil{x} + \Ceil{y} \,.
+\]
+
+
+
+\section{代码实现}
+C++ 的整数除法默认情况会截断小数部分, 效果等同于朝零取整.
+\begin{verbatim}
+    int i = 5 / 2;  // i = 2
+    int j = -5 / 2;  // j = -2
+\end{verbatim}
+
+
+\end{document}

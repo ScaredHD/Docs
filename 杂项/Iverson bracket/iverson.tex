@@ -1,0 +1,114 @@
+\documentclass[UTF8]{ctexart}
+\hfuzz=4pt
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=cyan,rulewidth=2pt,bgcolor=white}]{definition}
+    \declaretheorem[numberwithin=section,shaded={rulecolor=orange,rulewidth=2pt, bgcolor=white}]{theorem}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows}
+\usepackage{esint}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+
+\pagestyle{empty}
+
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\renewcommand{\r}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+\newcommand{\scr}{\mathscr}
+
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\renewcommand{\C}{\mathbb C}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+\newcommand{\del}{\nabla}
+
+\title{Iverson 括号}
+\begin{document}
+\maketitle
+\subsection*{定义与性质}
+Iverson 括号定义如下:
+\[ 
+    [P] \coloneqq 
+    \begin{cases}
+        1 & \text{$ P $ 为真} \\
+        0 & \text{$ P $ 为假}
+    \end{cases}\,. 
+\]
+故容易推出下面的基本性质:
+\begin{enumerate}
+    \item 与: $ [P \land Q] = [P][Q] $
+    \item 或: $ [P \lor Q] = [P] + [Q] - [P][Q] $
+    \item 非: $ [\neg P] = 1 - [P] $
+\end{enumerate}
+Iverson 括号继承了布尔逻辑中的幂等律, 对于任意 $ n \in \Z^+ $:
+\[ 
+    [P]^n = [P] \,.
+\]
+这点可以从两个方面说明: (1) $ [P] $ 只有两个取值, $ 1 $ 或 $ 0 $, 无论哪个值, 都有幂等律 $ 1^n = 1 $ 和 $ 0^n = 0 $; (2) $ [P]^n = [P][P] \cdots [P] = [P \land P \land \cdots \land P] = [P] $, 这是根据布尔逻辑的幂等律.
+
+由这 4 条基本性质, 可以推出其它恒等式.
+\begin{align*}
+    [P \oplus Q] &= [(P \land \neg Q) \lor (\neg P \land Q)] \\
+    &= [P \land \neg Q] + [\neg P \land Q] - [P \land \neg Q][\neg P \land Q] \\
+    &= [P \land \neg Q] + [\neg P \land Q] - [P \land \neg Q \land \neg P \land Q] \\
+    &= [P \land \neg Q] + [\neg P \land Q] \\
+    &= [P](1 - [Q]) + (1 - [P])[Q] \\
+    &= [P] + [Q] - 2[P][Q] \\
+    &= [P]^2 + [Q]^2 - 2[P][Q] \\
+    &= ([P] - [Q])^2
+\end{align*}
+这也可以通过真值表验证:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc|c|c}
+    \hline
+    $ P $ & $ Q $ & $ [P \oplus Q] $ & $ ([P] - [Q])^2 $ \\ \hline
+    $ 0 $ & $ 0 $ & $ 0 $            & $ (0 - 0)^2 $     \\
+    $ 0 $ & $ 1 $ & $ 1 $            & $ (0 - 1)^2 $     \\
+    $ 1 $ & $ 0 $ & $ 1 $            & $ (1 - 0)^2 $     \\
+    $ 1 $ & $ 1 $ & $ 0 $            & $ (1 - 1)^2 $     \\ \hline
+    \end{tabular}
+\end{table}
+
+同理, 等价地还有 $ [P \oplus Q] = \big| [P] - [Q] \big| $.
+
+\subsection*{应用}
+常用于求和符号中, 设 $ P(k) $ 为关于 $ k $ 的性质(谓词), 则有:
+\[ 
+    \sum_{P(k)} f(k) = \sum_{k} f(k)[P(k)] \,.
+\]
+将求和符号下的条件移到了求和体内部, 使其代数化, 有时可以简化计算. 同理对于求积也有类似的公式:
+\[ 
+    \prod_{P(k)} f(k) = \prod_{k} f(k)^{[P(k)]} \,.
+\]
+\paragraph{例}
+\begin{align*}
+    \sum_{1 \leqslant i, j \leqslant 3} a_{ij} &= \sum_{i, j} a_{ij} [1 \leqslant i, j \leqslant 3] \\
+    &= \sum_{i, j} a_{ij} [1 \leqslant i \leqslant 3 \land 1 \leqslant j \leqslant 3] \\
+    &= \sum_i \sum_j a_{ij} [1 \leqslant i \leqslant 3] [1 \leqslant j \leqslant 3] \\
+    &= \sum_i \Big( \sum_j a_{ij} [1 \leqslant j \leqslant 3] \Big) [1 \leqslant i \leqslant 3] \\
+    &= \sum_i \Big( \sum_{1 \leqslant j \leqslant 3} a_ij \Big) [1 \leqslant i \leqslant 3] \\
+    &= \sum_{1 \leqslant i \leqslant 3} \sum_{1 \leqslant j \leqslant 3} a_ij
+\end{align*}
+
+\end{document}

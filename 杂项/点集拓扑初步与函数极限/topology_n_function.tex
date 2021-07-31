@@ -1,0 +1,133 @@
+\documentclass[UTF8]{ctexart}
+\hfuzz=4pt
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \newtheoremstyle{mystyle}{1em plus .2 em minus .2em}{1em plus .2 em minus .2em}{}{}{\bfseries}{.}{.5em}{}
+    \theoremstyle{mystyle}
+    \declaretheorem[numberwithin=section]{definition}
+    \declaretheorem[numberwithin=section]{theorem}
+    \declaretheorem[numberwithin=section]{proposition}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows}
+\usepackage{esint}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+
+\newcommand{\ve}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\renewcommand{\r}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+\newcommand{\scr}{\mathscr}
+\newcommand{\E}{\mathrm e}
+\renewcommand{\I}{\mathrm i}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\renewcommand{\C}{\mathbb C}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
+\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
+\def \dd #1.#2 {\dfrac{d #1}{d #2}}
+\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
+\newcommand{\del}{\nabla}
+
+\pagestyle{empty}
+
+\begin{document}
+\section{极限与连续性}
+\subsection{点列的极限}
+\begin{definition}
+    度量空间 $ (S, d) $ 中的点列 $ (x_n) $ 收敛于 $ p $, 当且仅当对于任意 $ \epsilon > 0 $, 可以找到 $ N > 0 $, 使得所有 $ n \geqslant N $ 时有 $ d(x_n, p) < \epsilon $. 记作: \[ \lim x_n = p \,.\]也可以写作: 当 $ n \to \infty $ 时, $ x_n \to p $.
+\end{definition}
+
+\paragraph{注意}
+$ d_S (x_n, p) < \epsilon $ 等价于 $ d_\R \big( d_S(x_n, p), 0 \big) = |d_S(x_n, p)- 0| < \epsilon $, 此处 $ d_S(x_n, p) \in \R $. 也就是说 $ (S, d_S) $ 中的点列 $ x_n \to p $, 等价于其距离 $ d_S(x_n, p) $ 在 $ \R $ 中 $ d_S(x_n p) \to 0 $.
+
+\subsection{附着点/聚点与点列的联系}
+考虑度量空间 $ (M, d) $ 中的子集 $ S $ 和点 $ p $. 如果 $ p $ 是 $ S $ 的附着点, 意味着每一个邻域 $ B(p) $ 都包含 $ S $ 中的点. 那么对于每一个正整数 $ n = 1, 2, \dots $, 都能找到 $ S $ 中的点 $ x_n $ 满足 $ d(x_n, p) < 1 / n $. 当 $ n \to \infty $ 时, $ 1/n \to 0 $, 所以 $ d(x_n, p) \to 0 $, 意味着 $ x_n \to p $. 这样就找到了 $ S $ 中收敛于 $ p $ 的点列.
+
+反过来, 如果 $ S $ 中存在序列 $ (x_n) $ 收敛于 $ p $, 按照定义, 对于任意 $ \epsilon > 0 $ , 取充分大的 $ n $ 总有 $ d(x_n, p) < \epsilon $. 即任意 $ B(p; \epsilon) $ 都包含 $ S $ 中的点. 于是 $ p $ 为 $ S $ 的附着点.
+
+所以有下面的命题:
+\begin{proposition}
+    $ p $ 是 $ S $ 的附着点, 当且仅当 $ S $ 中存在收敛到 $ p $ 的点列. 
+\end{proposition}
+
+同时按照聚点的定义, 也有:
+\begin{proposition}
+    $ p $ 是 $ S $ 的聚点, 当且仅当 $ S - \set{p} $ 中存在收敛到 $ p $ 的点列.
+\end{proposition}
+
+由于附着点可以分为聚点和孤点两类. 下面分别讨论其性质.
+
+如果 $ p $ 是 $ S $ 的孤点, $ S $ 中一定存在点列 $ (x_n) $ 收敛到 $ p $, 记其值域 $ T = \set{x_1, x_2, \dots} $. 按照孤点的定义: 存在 $ r > 0 $, $ B(p; r) $ 中只有 $ p $ 一个 $ S $ 中的点. 而序列收敛到 $ p $, 对于任意 $ \epsilon > 0 $, 都能找到 $ N > 0 $, 对 $ n \geqslant N $ 有 $ d(x_n, p) < \epsilon $, 即 $ x_n \in B(p; \epsilon) $. 那么取 $ \epsilon = r $, 意味着所有 $ n \geqslant N $, $ x_n = p $. 这说明 $ T $ 是一个有限集. 
+
+收敛到孤点的序列值域有限, 但反过来, 收敛到 $ p $ 的序列 $ (x_n) $ 值域有限, 并不代表着 $ p $ 为孤点. 因为对于任意 $ p \in S $, 都存在常序列 $ p, p, p, \dots $ 收敛到 $ p $, 而 $ p $ 显然不一定为孤点.
+
+所以, 如果一个收敛到 $ p $ 的序列值域为无穷集, 则 $ p $ 不可能为孤点, 于是只可能为聚点.
+
+综上所述: 收敛序列值域无穷 $ \Longrightarrow $ 收敛到聚点; 收敛到孤点 $ \Longrightarrow $ 收敛序列值域有限.
+
+\subsection{函数的极限}
+考虑两个度量空间 $ (S, d_S) $ 和 $ (T, d_T) $, $ A $ 为 $ S $ 的子集, 设函数 $ f \colon A \to T $ 为函数.
+
+\begin{definition}
+    设 $ p $ 为 $ A $ 的聚点, $ b \in T $, 当对于任意 $ \epsilon > 0 $ 都存在 $ \delta > 0 $, 使得
+    \[ 
+        \text{当 } x \in A , 0 < d_S(x, p) < \delta \text{ 时: }
+        d_T \big( f(x), b \big) < \epsilon \,,
+    \] 
+    则称 $ f(x) $ 在 $ p $ 处的极限为 $ b $, 记作:
+    \[ 
+        \lim_{x \to p} f(x) = b \,.
+    \]
+    或记作: $ x \to p $, $ f(x) \to b $.
+\end{definition}
+
+从邻域的角度阐述: 无论 $ B_T(b; \epsilon) $ 多么小, 总能找到 $ A $ 中的去心邻域 $ B_S(p; \delta) - \set{p} $, 使得其中 $ x $ 被映射到 $ B_T(b; \epsilon) $ 中.
+
+另一种阐述方式: 无论 $ B_T(b; \epsilon) $ 多么小, 总能找到 $ A $ 中的去心邻域 $ B_A^0(p; \delta) = B_S(p; \delta) \cap A - \set{p} $, 使得其像 $ f(B_A^0(p; \delta)) \subseteq B_T(b; \epsilon) $.
+
+需要注意的条件: 我们要求 $ A - \set{p} $ 中有点充分接近 $ p $, 所以 $ p $ 一定是定义域 $ A $ 的聚点. 如果为孤点的话, $ p $ 的去心 $ \delta $-邻域 $ B(p; \delta) - \set{p} $ 很有可能为空集. 那么将这个集合内的点映射到任何一个 $ B(b; \epsilon) $ 邻域都是空真的, 也就是说此时可以称 $ p $ 点的极限为任意 $ b $, 显然没有意义.
+
+函数的极限和序列的极限关系如下:
+\begin{proposition}
+    $ \lim\limits_{x \to p} f(x) = b $ 当且仅当 $ A - \set{p} $ 内每一个收敛于 $ p $ 的点列 $ (x_n) $ 都有 $ \lim\limits_{n \to \infty} f(x_n) = b $.
+\end{proposition}
+
+\begin{proof} \ 
+
+    正推: 如果 $ \lim\limits_{x \to p} f(x) = b $, 对于任意 $ \epsilon > 0 $, 都能找到 $ \delta > 0 $, 当 $ 0 < d(x, p) < \delta $ 时, $ d(f(x), b) < \epsilon $. 设 $ A - \set{p} $ 有点列 $ (x_n) $ 收敛于 $ p $, 可以找到 $ N $, 当 $ n \geqslant N $ 时, $ d(x_n, p) < \delta $, 此时有 $ d(f(x_n), b) < \epsilon $. 所以序列 $ f(x_n) \to b $.
+
+    反推: 假设任意收敛于 $ p $ 的点列 $ (x_n) $ 都有 $ f(x_n) \to b $, 但 $ f(x) $ 不收敛到 $ b $. 说明存在 $ \epsilon > 0 $, 此时任意 $ \delta > 0 $, $ 0 < d(x, p) < \delta $ 内的 $ x $ 都有 $ d(f(x), b) \geqslant \epsilon $. 那么取 $ \delta = 1, 1/2, 1/3, \dots $ 可以得到对应的点列 $ x_1, x_2, \dots $ 此时 $ d(f(x_i), b) \geqslant \epsilon $. 点列 $ (x_i)_{i = 1}^{\infty} $ 收敛到 $ p $, 但 $ d(f(x_i), b) \geqslant \epsilon $, 所以 $ f(x_i) $ 不收敛到 $ b $, 这就产生了矛盾.
+\end{proof}
+
+\subsection{连续性}
+\begin{definition}
+    设 $ f \colon S \to T $ 为函数, $ p $ 为 $ S $ 内一点. 称 $ f $ 在 $ p $ 点连续, 当且仅当对于任意 $ \epsilon > 0 $, 都有 $ \delta > 0 $ 使得当 $ d_S(x, p) < \delta $ 时 $ d_T(f(x), f(p)) < \epsilon $.
+\end{definition}
+
+如果 $ p $ 为孤点, 很明显 $ f $ 在 $ p $ 处连续. 当 $ p $ 为 $ S $ 的聚点, 则当 $ x \to p $ 时 $ f(x) \to f(p) $.
+
+\begin{proposition}
+    设 $ f \colon S \to T $ 为函数, $ p \in S $, 则 $ f $ 在 $ p $ 处连续当且仅当 $ S $ 内每一个收敛到 $ p $ 的序列 $ (x_n) $ 都有 $ T $ 中的序列 $ (f(x_n)) $ 收敛到 $ f(p) $, 即:
+    \[ 
+        \lim_{n \to \infty} f(x_n) = f \big( \lim_{n \to \infty} x_n \big) \,.
+    \]
+\end{proposition}
+
+
+
+\end{document}

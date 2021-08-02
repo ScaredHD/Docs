@@ -128,6 +128,27 @@ $ d_S (x_n, p) < \epsilon $ 等价于 $ d_\R \big( d_S(x_n, p), 0 \big) = |d_S(x
     \]
 \end{proposition}
 
+\subsection{连续映射}
+\subsubsection{映射}
+\begin{definition}[\text{逆象}]
+    函数 $ f \colon S \to T $, $ Y \subseteq T $, $ Y $ 的逆象定义如下: \[ f^{-1}(Y) \coloneqq \set{x \in S \colon f(x) \in Y} \,.\] 即定义域中所有映射到 $ Y $ 的元素集合.
+\end{definition}
+
+像和逆像的常用性质:
+\begin{proposition}
+    $ f \colon S \to T $ 为函数
+    \begin{itemize}
+        \item 若 $ A \subseteq B $, $ f(A) \subseteq f(B) $, $ f^{-1}(A) \subseteq f^{-1}(B) $
+        \item $ f(f^{-1}(Y)) \subseteq Y $, $ X \subseteq f^{-1}(f(X)) $
+        \item $ f(A \cup B) = f(A) \cup f(B) $, $ f(A \cap B) \subseteq f(A) \cap f(B) $
+        \item $ f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B) $, $ f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B) $
+    \end{itemize}
+\end{proposition}
+
+\subsubsection{连续映射}
+连续映射满足一定性质: 陪域中开集的逆像仍为开集, 闭集的逆像仍为闭集.
+
+但是正向地看, 定义域里面的开集, 经过连续映射不一定为开集, 反例可以举常值函数. 定义域里的闭集, 经过连续映射不一定为闭集, 反例为 $ \arctan(\R) = (-\pi/2, \pi/2) $.
 
 
 \end{document}

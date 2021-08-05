@@ -137,18 +137,73 @@ $ d_S (x_n, p) < \epsilon $ 等价于 $ d_\R \big( d_S(x_n, p), 0 \big) = |d_S(x
 像和逆像的常用性质:
 \begin{proposition}
     $ f \colon S \to T $ 为函数
-    \begin{itemize}
+    \begin{enumerate}
         \item 若 $ A \subseteq B $, $ f(A) \subseteq f(B) $, $ f^{-1}(A) \subseteq f^{-1}(B) $
-        \item $ f(f^{-1}(Y)) \subseteq Y $, $ X \subseteq f^{-1}(f(X)) $
         \item $ f(A \cup B) = f(A) \cup f(B) $, $ f(A \cap B) \subseteq f(A) \cap f(B) $
         \item $ f^{-1}(A \cup B) = f^{-1}(A) \cup f^{-1}(B) $, $ f^{-1}(A \cap B) = f^{-1}(A) \cap f^{-1}(B) $
+    \end{enumerate}
+\end{proposition}
+
+注意, $ f(A \cap B) \subseteq f(A) \cap f(B) $, 此处不一定取等. 不妨取两个互斥的集合 $ A \cap B = \varnothing $, 此时 $ f(A \cap B) = \varnothing $, 而令一侧 $ f(A) \cap f(B) $ 可以非空, 只要 $ f $ 不是单射.
+
+\begin{proposition}
+    对于 $ f \colon S \to T $ 和 $ f^{-1} $. 设 $ Y \subseteq T $, 则有 $ f \big( f^{-1}(Y) \big) \subseteq Y $. 当且仅当 $ f $ 为满射时取得等号.
+\end{proposition}
+
+\begin{proof}
+    按照定义即可. 考虑任意 $ y \in f( f^{-1}(Y) ) $, 一定存在 $ x \in f^{-1}(Y) $, $ y = f(x) $. 而 $ x \in f^{-1}(Y) $ 意味着 $ f(x) \in Y $, 所以 $ y \in Y $.
+\end{proof}
+
+\begin{proposition}
+    对于 $ f \colon S \to T $ 和 $ f^{-1} $. 设 $ X \subseteq S $, 则有 $ X \subseteq f^{-1} \big( f (X) \big) $. 上式取等当且仅当其对所有 $ X \subseteq S $
+\end{proposition}
+
+\begin{proof}
+    对于任意 $ x \in X $, $ f(x) \in f(X) $. 也就是说 $ x $ 映射到 $ f(X) $ 中, 也就一定在 $ f^{-1}(f(X)) = \set{z \in X \colon f(z) \in f(X)} $ 中.
+\end{proof}
+
+另一个有趣的等式可以由此导出:
+\begin{proposition} \
+
+    \begin{itemize}
+        \item $ f^{-1}(f(f^{-1}(Y))) = f^{-1}(Y) $
+        \item $ f(f^{-1}(f(X))) = f(X) $
     \end{itemize}
 \end{proposition}
+
+\begin{proof}
+    对于第一个等式, 把最内层括号里 $ f^{-1}(Y) $ 看成整体, 可以得到 \[ f^{-1}(Y) \subseteq f^{-1}(f(f^{-1}(Y))) \,;\] 而对于 $ f(f^{-1}(Y)) $, 已知 $ f(f^{-1}(Y)) \subseteq Y $, 两边应用 $ f^{-1} $, 有 \[ f^{-1}(f(f^{-1}(Y))) \subseteq f^{-1}(Y) \,.\] 综上所述: $ f^{-1}(f(f^{-1}(Y))) = f^{-1}(Y) $.
+
+    对于第二个等式, 同理.
+\end{proof}
+
 
 \subsubsection{连续映射}
 连续映射满足一定性质: 陪域中开集的逆像仍为开集, 闭集的逆像仍为闭集.
 
+\begin{proposition}
+    函数 $ f \colon S \to T $ 是函数, 如果 $ f $ 在开集 $ U \subseteq T $ 上连续, 则其逆像 $ f^{-1}(U) $ 也是开集. 如果 $ f $ 在闭集 $ V \subseteq T $ 上连续, 则其逆像 $ f^{-1}(V) $ 也是闭集.
+\end{proposition}
+
 但是正向地看, 定义域里面的开集, 经过连续映射不一定为开集, 反例可以举常值函数. 定义域里的闭集, 经过连续映射不一定为闭集, 反例为 $ \arctan(\R) = (-\pi/2, \pi/2) $.
+
+但是对于紧集 (闭且有界), 却能在正向映射时保持紧性.
+
+\begin{proposition}
+    如果函数 $ f \colon S \to T $ 在 $ X \subseteq S $ 上连续, 且 $ X $ 为 $ S $ 中的紧集, 则 $ f(X) $ 是 $ T $ 中的紧集.
+\end{proposition}
+
+证明需要用到 Heine-Borel 定理.
+
+\begin{definition}
+    对于欧氏空间中的函数 $ f \colon S \to \R^n $, 称 $ f $ 在 $ S $ 上有界, 当且仅当存在正数 $ M $, 使得所有 $ x \in S $ 都有 $ \norm{\ve f(x)} \leqslant M $.
+\end{definition}
+
+\begin{theorem}
+    设 $ \ve f \colon S \to \R^n $ 在紧集 $ X \subseteq S $ 上连续, 则 $ \ve f $ 在 $ X $ 上有界.
+\end{theorem}
+
+上述定理反应了欧氏空间中函数和紧集的关系: 紧集经过连续映射一定是有界的.
 
 
 \end{document}

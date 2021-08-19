@@ -42,10 +42,134 @@
 \def \dd #1.#2 {\dfrac{d #1}{d #2}}
 \def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
 \newcommand{\del}{\nabla}
+\renewcommand{\epsilon}{\varepsilon}
+\DeclareMathOperator{\interior}{int}
 
 \pagestyle{empty}
 
 \begin{document}
+\section{集合的确界}
+\begin{definition}[\text{上确界/最小上界}]
+    对于集合 $ S \subseteq \R $ 和 $ \beta \in \R $, 称 $ \beta $ 为 $ S $ 的上确界, 记作 $ \sup S = \beta $, 当且仅当:
+    \begin{enumerate}
+        \item $ \forall x \in S $, $ x \leqslant \beta $
+        \item $ \forall \epsilon > 0 $, 能够找到 $ x \in S $, $ \beta - \epsilon < x $
+    \end{enumerate}
+    第一条说明 $ \beta $ 为上界, 第二条说明 $ \beta $ 是最小的上界.
+\end{definition}
+
+根据上确界的定义, 容易导出下面的常用性质:
+\begin{enumerate}
+    \item (确界的最小性) 若 $ M $ 为 $ S $ 的上界, 则 $ \sup S \leqslant M $
+    \item (逼近性质) 对任意 $ a < \beta $, 存在 $ x \in S $, $ a < x \leqslant \beta $
+    \item 若 $ S $ 存在最大值 $ m $, 则 $ S $ 的上确界 $ \sup S = m $.
+\end{enumerate}
+
+同理可以定义下确界/最大下界, 记作 $ \inf S $.
+
+\subsection{确界的性质}
+对于集合 $ A $ 和 $ B $, 定义两种运算 $ A + B $ 和 $ A \cdot B $:
+\[ A + B \coloneqq \set{a + b \mid a \in A, b \in B} \,,\]
+\[ A \cdot B \coloneqq \set{ab \mid a \in A, b \in B} \,.\]
+
+\paragraph{例}
+$ \set{1, 3} + \set{5, 9} = \set{6, 10, 8, 12} $, \\
+$ \set{2, -2} + (-1, 1) = (-3, -1) \cup (1, 3) $; \\
+$ \set{1, 3} \cdot \set{5, 9} = \set{5, 9, 15, 27} $, \\
+$ (1, 2) \cdot (3, 4) = (3, 8) $.
+
+\begin{proposition}
+    对于非空集合 $ A $, $ B $:
+    \[ \sup(A + B) = \sup A + \sup B \,,\]
+    若 $ A $, $ B $ 是正实数的集合:
+    \[ \sup(A \cdot B) = \sup A \cdot \sup B \,. \]
+\end{proposition}
+
+\begin{proof}[\text{证明可加性}]
+    记 $ \sup A = \alpha $, $ \sup B = \beta $, $ A \cdot B = C $. 显然, $ \alpha + \beta $ 是 $ C $ 的上界. 只需证明对于任意正实数 $ \epsilon $, $ \alpha + \beta - \epsilon < a_0 + b_0 $, 其中 $ a_0 $, $ b_0 $ 是 $ A $, $ B $ 中的元素, $ a_0 + b_0 $ 是 $ C $ 的元素. 由于 $ \alpha $, $ \beta $ 分别为 $ A $, $ B $ 的上确界, 按照定义, 对于任意正整数 $ \epsilon' $ 有:
+    \[ \alpha - \epsilon' < a_0 \,,\]
+    \[ \beta - \epsilon' < b_0 \,.\]
+    两边同时相加:
+    \[ \alpha + \beta - 2\epsilon' < a_0 + b_0 \,.\]
+    而 $ 2\epsilon' $ 为任意正实数, 命题得证.
+\end{proof}
+
+\begin{proof}[\text{证明可乘性}]
+    记 $ \sup A = \alpha $, $ \sup B = \beta $, $ A \cdot B = C $. 显然, $ \alpha \beta $ 是 $ C $ 的上界, 只需证明对于任意正实数 $ \epsilon $, $ \alpha \beta - \epsilon < a_0 b_0 $, 其中 $ a_0 $, $ b_0 $ 是 $ A $, $ B $ 中的元素, $ a_0 b_0 $ 是 $ C $ 的元素. 由于 $ \alpha $, $ \beta $ 分别为 $ A $, $ B $ 的上确界, 按照定义, 对于任意正实数 $ \epsilon' $ 和充分大的 $ n $, 有:
+    \[ 0 < \alpha - \dfrac{\epsilon'}{n} < a_0 \,,\]
+    \[ 0 < \beta - \dfrac{\epsilon'}{n} < b_0 \,.\]
+    将不等式相乘:
+    \begin{align*}
+        \left( \alpha - \dfrac{\epsilon'}{n} \right) \left( \beta - \dfrac{\epsilon'}{n} \right) &< a_0 b_0 \\
+        \alpha \beta - \dfrac{\epsilon'}{n}(\alpha + \beta) + \left( \dfrac{\epsilon'}{n} \right)^2 &< a_0 b_0 \\
+        \alpha \beta - \dfrac{\epsilon'}{n} (\alpha + \beta) &< a_0 b_0
+    \end{align*}
+    由于 $ n $ 充分大, 可以取 $ n > \alpha + \beta $, 所以有:
+    \[ \alpha \beta - \epsilon' < a_0 b_0 \,.\]
+    这便证明了 $ \alpha \beta = \sup C $.
+\end{proof}
+
+
+\section{集合的拓扑性质}
+几个定义 ($ S \subseteq \R^n $, $ \ve x \in \R^n $):
+
+\paragraph{附着点 (Adherent point)}
+$ \forall B(\ve x) \cap S \neq \varnothing $
+
+$ S $ 所有的附着点称为 $ S $ 的闭包, 记作 $ \overline S $.
+
+\paragraph{聚点 (Accumulation point)}
+$ \forall B(\ve x) \cap (S \setminus \set{\ve x}) \neq \varnothing $
+
+(1) $ A \cap (B \setminus C) = (A \setminus C) \cap B $; 
+
+(2) $ S $ 的所有聚点的集合称为 $ S $ 的导集, 记作 $ S' $.
+
+\paragraph{孤点 (Isolated point)}
+$ \ve x $ 是附着点但不是聚点 
+
+
+
+\subsection{开集与闭集}
+$ \R^n $ 中的集合 $ S $ 为开集的充要条件有两个:
+\begin{enumerate}
+    \item $ \R^n \setminus S $ 为闭集
+    \item $ \interior S = S $
+\end{enumerate}
+
+对于 $ \R^n $ 中的集合 $ S $, 若 $ S $ 是闭集, 则其和下面的命题是等价的:
+\begin{enumerate}
+    \item $ \R^n \setminus S $ 为开集
+    \item $ S $ 包含所有附着点: $ \overline S \subseteq S $
+    \item $ S $ 包含所有的聚点: $ S' \subseteq S $
+    \item $ \overline S = S $
+\end{enumerate}
+
+上面的概念, 以及下面的性质, 可以从 $ \R^n $ 拓广到度量空间.
+
+注意下面几个事实:
+\begin{itemize}
+    \item 集合开闭是独立的概念, 一个集合可以同时为开集和闭集, 也可以同时非开非闭
+    \item $ \R^n $ 和 $ \varnothing $ 同时为开集和闭集
+    \item $ S $ 的附着点可以被划分为聚点和孤点. 而孤点必然是在 $ S $ 中的, 也即如果 $ x \in \overline S $ 但 $ x \notin S $, $ x $ 只能为聚点
+    \item $ S $ 内的点天然附着于 $ S $, 所以任何孤点都是该集合的附着点. 综合上一条, 此时 $ S $ 包含所有附着点和 $ S $ 包含所有聚点就是等价的描述
+\end{itemize}
+
+\subsection{几个实例}
+(1) 对于区间 $ (a, b) $, $ (a, b] $, $ [a, b) $ 和 $ [a, b] $: 其区间端点 $ a $, $ b $ 为区间的聚点. 这四个区间的导集为 $ [a, b] $.
+
+(2) $ S $ 的上确界是 $ S $ 的附着点: 设 $ \sup S = \beta $, 于是存在 $ x \in S $, $ \beta - \epsilon < x $, 另有 $ x \leqslant \beta < \beta + \epsilon $. 故 $ \beta - \epsilon < x < \beta + \epsilon $, 即 $ x \in B(\beta; \epsilon) $, 而 $ \epsilon $ 是任意正实数. 这说明 $ \beta $ 的任意领域 $ B(\beta) $ 里都包含 $ x $, 所以为附着点.
+
+(3) 对于集合 $ S = \set*{\dfrac{1}{n} \colon n \in \Z^+} $. $ 1 $ 为 $ S $ 的最大值, 所以 $ \sup S = 1 $. 容易证明, $ \inf S = 0 $. 故 $ 0 $ 为附着点, 还可以证明 $ 0 $ 为 $ S $ 唯一的聚点, 然而 $ 0 \notin S $, 所以 $ S $ 不是闭集. 下面考虑是否为开集. 注意到点 $ 1 $ 的任意邻域 $ B(1; r) $ 都不包含于 $ S $, 所以 $ 1 $ 不是内点, $ S \neq \interior S $, $ S $ 也不是开集.
+
+(4) $ S = \set*{\dfrac{1}{n} + \dfrac{1}{m} \colon m, n \in \Z^+} $. 下面的性质十分有用: $ (A \cup B)' = A' \cup B' $.
+
+可以将 $ S $ 写作下面的形式:
+\[ \set*{1 + \dfrac{1}{m}}_{m = 1}^\infty \cup \set*{\dfrac{1}{2} + \dfrac{1}{m}}_{m = 1}^\infty \cup \set*{\dfrac{1}{3} + \dfrac{1}{m}}_{m = 1}^\infty \cup \cdots \,.\]
+
+所以可以得到: $ S' = \set*{1, \dfrac{1}{2}, \dfrac{1}{3}, \dots} \cup \set{0} $. 所以 $ S' \not\subseteq S $, $ S $ 不是闭集. 注意到所有的 $ B(2) $ 都不包含在 $ S $ 中, 所以 $ 2 $ 不是内点, $ S $ 也不是开集.
+
+
 \section{极限与连续性}
 \subsection{点列的极限}
 \begin{definition}

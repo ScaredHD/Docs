@@ -32,20 +32,15 @@
 \newcommand{\R}{\mathbb R}
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\N}{\mathbb N}
-\newcommand{\Q}{\mathbb Q}
-\renewcommand{\C}{\mathbb C}
 \DeclarePairedDelimiter\set{\lbrace}{\rbrace}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
-\def \DD #1.#2.#3 {\dfrac{d^{#1} #2}{d #3^{#1}}}
-\def \PP #1.#2.#3 {\dfrac{\partial^{#1} #2}{\partial #3^{#1}}}
-\def \dd #1.#2 {\dfrac{d #1}{d #2}}
-\def \pp #1.#2 {\dfrac{\partial #1}{\partial #2}} 
-\newcommand{\del}{\nabla}
 
 \title{复合函数极限}
+\date{}
 
 \begin{document}
 \maketitle
+\vspace{-4em}
 
 考虑 $ g \colon A \to B $, $ f \colon B \to C $, $ \operatorname{range}(g) \subseteq B = \operatorname{dom}(f) $, 意味着 $ f \circ g $ 是有意义的. 若 $ \lim\limits_{x \to a} g(x) = b $, $ \lim\limits_{y \to b} f(y) = L $, 在满足下列任一条件时:
 \begin{enumerate}
@@ -60,26 +55,28 @@
 \]
 
 \paragraph{注}
-从证明过程中可看出, 除了两极限都取最弱时 $ \lim g(x) = \infty $, $ \lim\limits_{y \to \pm \infty} f(y) = L $ 无法进行复合, 其余三种情况均可按照上述方式复合: 
+从证明过程中可看出, 除了两极限都取最弱条件时 $ \lim g(x) = \pm\infty $, $ \lim\limits_{y \to + \infty} f(y) = L $ 无法进行复合, 其余三种情况均可按照上述方式复合: 
 \begin{itemize}
-	\item (弱, 强) $ \lim g(x) = \infty $, $ \lim\limits_{y \to \infty} f(y) = L $
-	\item (强, 弱) $ \lim g(x) = \pm \infty $, $ \lim\limits_{y \to \pm \infty} f(y) = L $
-	\item (强, 强) $ \lim g(x) = \pm \infty $, $ \lim\limits_{y \to \infty} f(y) = L $
+	\item (弱, 强) $ \lim g(x) = \pm \infty $, $ \lim\limits_{y \to \pm \infty} f(y) = L $
+	\item (强, 弱) $ \lim g(x) = + \infty $, $ \lim\limits_{y \to + \infty} f(y) = L $
+	\item (强, 强) $ \lim g(x) = + \infty $, $ \lim\limits_{y \to \pm \infty} f(y) = L $
 \end{itemize}
 
 \begin{proof}
-	(1) $ \lim\limits_{y \to b} f(x) = L $ 意味着 $ \forall \varepsilon $ $ \exists \delta $, $ (\forall y \in B \colon 0 < |y - b| < \delta) $, 有 $ |f(x) - L| < \varepsilon $.
+	(1) $ \lim\limits_{y \to b} f(x) = L $ 意味着 $ \forall \varepsilon $ $ \exists \delta $, $ (\forall y \in B \colon 0 < d(y, b) < \delta) $, 有 $ d \big( f(x), L \big) < \varepsilon $.
 
-	(2) $ \lim\limits_{x \to a} g(x) = b $ 则对于 (1) 中的 $ \delta $, $ \exists \delta' $, $ ( \forall x \in A \colon 0 < |x - a| < \delta' $, 有 $ |g(x) - b| < \delta $.
+	(2) $ \lim\limits_{x \to a} g(x) = b $ 则对于 (1) 中的 $ \delta $, $ \exists \delta' $, $ ( \forall x \in A \colon 0 < d(x, a) < \delta' $, 有 $ d \big( g(x), b \big) < \delta $.
 
-	要将 (2) 和 (1) 连接起来, 矛盾在于 (2) 中 $ |g(x) - b| < \delta $ 不是去心邻域, 而 (1) 中 $ 0 < |y - b| < \delta $ 要求去心邻域.
+	要将 (2) 和 (1) 连接起来, 矛盾在于 (2) 中 $ d \big( g(x), b \big) < \delta $ 不是去心邻域, 而 (1) 中 $ 0 < d(y, b) < \delta $ 要求去心邻域.
 
-	若 $ f $ 在 $ b $ 连续, $ \lim\limits_{y \to b} f(y) = f(b) = L $, 意味着 (1) 中 $ 0 < |y - b| < \delta $ 的条件可以改写为 $ |y - b| < \delta $, 而已经有 $ |g(x) - b| < \delta $, 于是 $ |f \big( g(x) \big) - L| < \varepsilon $.
+	(第一种条件) 若 $ f $ 在 $ b $ 连续, $ \lim\limits_{y \to b} f(y) = f(b) = L $, 意味着 (1) 中 $ 0 < d(y, b) < \delta $ 的条件可以改写为 $ d(y, b) < \delta $, 而已经有 $ d \big( g(x), b \big) < \delta $, 于是 $ d \Big( f \big( g(x) \big), L \Big) < \varepsilon $.
 
-	若 $ g $ 在 $ a $ 的一个去心邻域内取不到 $ b $, 故 (2) 中的 $ |g(x) - b| < \delta $ 可以变为 $ 0 < |g(x) - b| < \delta $, 由 $ (1) $, $ |f \big( g(x) \big) - L| < \epsilon $.
+	(第二种条件) 若 $ g $ 在 $ a $ 的一个去心邻域内取不到 $ b $, 故 (2) 中的 $ d \big( g(x), b \big) < \delta $ 可以变为 $ 0 < d \big( g(x), b \big) < \delta $, 由 $ (1) $, $ d \Big( f \big( g(x) \big), L \Big) < \epsilon $.
 
-	若 $ b = \infty $, 根据定义, (2) 中最后为 $ |g(x)| > \delta $, (1) 中有对应的条件 $ |y| > \delta $. 故无需其它条件.
+	(第三种条件) 若 $ b = \infty $, 根据定义, (2) 中最后为 $ |g(x)| > \delta $, (1) 中有对应的条件 $ |y| > \delta $. 故无需其它条件.
 \end{proof}
+
+前两种条件下的证明可以直接推广到任意度量空间, 而第三个条件 ($ b $ 为无穷大) 只适用于 $ \R $.
 
 
 

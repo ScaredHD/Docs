@@ -1,0 +1,112 @@
+\documentclass[UTF8]{ctexart}
+\hfuzz=4pt
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    % \declaretheorem[numberwithin=section]{definition}
+    % \declaretheorem[numberwithin=section]{theorem}
+    \newtheorem{theorem}{定理}[section]
+    \newtheorem{definition}{定义}[section]
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows}
+\usepackage{esint}
+\usepackage{multirow}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+\usepackage[italic=true]{derivative}
+
+\pagestyle{empty}
+
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\DeclareMathOperator*{\sgn}{sgn}
+
+\begin{document}
+对于一般的行列式
+\[ 
+    A = \begin{vmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdot & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n2} & \cdot & a_{nn}
+    \end{vmatrix} \,,
+\]
+按第 $ i $ 行展开 (按一列展开同理) 有:
+\[ 
+    D = \sum_{j=1}^{n} (-1)^{i+j} a_{ij} M_{ij} = \sum_{j=1}^{n} a_{ij} C_{ij} \,.
+\]
+其中 $ C_{ij} $ 为 $ a_{ij} $ 的余子式, $ M_{ij} = (-1)^{i+j} C_{ij} $ 为代数余子式.
+
+\begin{proof}
+    记 $ \sigma $ 表示 $ \set{1, 2, \dots, n} \setminus \set{j} $ (即去掉 $ j $ 列后的列下标)的排列. 从行列式的定义出发, 将展开那行的元素置于最前, 得:
+    \[ 
+        D = \sum_{(j, \sigma_1, \dots, \sigma_{n-1})} (-1)^{\tau_1 + \tau_2} a_{ij} a_{1 \sigma_1} \cdots a_{i-1, \sigma_{i-1}} a_{i+1, \sigma_i} \cdots a_{n \sigma_{n-1}} \,,
+    \]
+    其中, $ \tau_1 = \tau(i, 1, \dots, i-1, i+1, \dots, n) = i - 1 $, 而 $ \tau_2 = \tau(j, \sigma_1, \dots, \sigma_{n-1}) = j - 1 + \tau(\sigma) $. 将其代回 (相加得到的 $ -2 $ 不影响符号) 得到
+    \[ 
+        D = \sum_{(j, \sigma_1, \dots, \sigma_{n-1})} (-1)^{i + j + \tau(\sigma)} a_{ij} a_{1 \sigma_1} \cdots a_{i-1, \sigma_{i-1}} a_{i+1, \sigma_i} \cdots a_{n \sigma_{n-1}} \,.
+    \]
+    令 $ j $ 取遍 $ 1, 2, \dots, n $, 随后在去掉 $ j $ 的列下标中取其余的下标 $ \sigma $, 等价于 $ (j, \sigma_1, \dots, \sigma_{n-1}) $ 的排列. 于是将求和号拆分为两个, 并将无关的部分移出内层的求和号:
+    \begin{align*}
+        D &= \sum_{j=1}^{n} \sum_{\sigma} (-1)^{i+j} a_{ij} (-1)^{\tau(\sigma)} a_{1 \sigma_1} \cdots a_{i-1, \sigma_{i-1}} a_{i+1, \sigma_i} \cdots a_{n \sigma_{n-1}} \\
+        &= \sum_{j=1}^{n} (-1)^{i+j} a_{ij} \sum_{\sigma}  (-1)^{\tau(\sigma)} a_{1 \sigma_1} \cdots a_{i-1, \sigma_{i-1}} a_{i+1, \sigma_i} \cdots a_{n \sigma_{n-1}}
+    \end{align*}
+    内层的求和结构, 其元素行下标自然升序且不包括 $ i $, 列下标不包括 $ j $, 这就是 $ a_{ij} $ 元素的余子式. 故 $ D = \sum_{j=1}^{n} (-1)^{i+j} a_{ij} M_{ij} = \sum_{j=1}^{n} a_{ij} C_{ij} $, 这就完成了证明.
+\end{proof}
+
+Laplace 定理也可以用于对 $ k $ 行展开. 对于严格递增的 $ k $ 个下标 $ I = (i_1, i_2, \dots, i_k) $, $ J = (j_1, j_2, \dots, j_k) $, 其和分别为 $ \sum I $ 和 $ \sum J $. 记这些下标构成的子式为 $ A_{IJ} $, 余子式和代数余子式分别为 $ M_{IJ} $ 和 $ C_{IJ} $. 则
+\[ 
+    D = \sum_{J} (-1)^{\sum I + \sum J} A_{IJ} M_{IJ} = \sum_{J} A_{IJ} C_{IJ} \,.
+\]
+
+$ \sum_J $ 表示从 $ 1, 2, \dots, n $ 中取 $ k $ 个列下标 (严格递增), 对所有下标情况 $ J $ 求和.
+\vskip 2em
+
+\begin{proof}
+    考虑按 $ i_1 < i_2 < \cdots < i_k $ 行展开, 设剩下的 $ n - k $ 行为 $ i_1' < i_2' < \cdots < i_{n-k}' $. 那么按照定义
+    \[ 
+        D = \sum_{(j_1, \dots, j_k, j_1', \dots, j_{n-k}')}  (-1)^{\tau_1 + \tau(j_1, \dots, j_k, j_1', \dots, j_{n-k}')}  a_{i_1 j_1} \cdots a_{i_k j_k} a_{i_1' j_1'} \cdots a_{i_{n-k}', j_{n-k}'} \,,
+    \]
+    其中 $ (j_1, \dots, j_k, j_1', \dots, j_{n-k}') $ 为 $ 1, 2, \dots, n $ 的任意排列. 按照约定, $ i_1', \dots, i_{n-k}' $ 单调递增, 于是
+    \begin{align*}
+        \tau_1 &= \tau(i_1, \dots, i_k, i_1', \dots, i_{n-k}') \\
+                &= (i_1 - 1) + \cdots + (i_k - k) + \tau(i_1', \dots, i_{n-k}')
+                = \sum I - \dfrac{k (k + 1)}{2} \,.
+    \end{align*}
+    首先从 $ n $ 个列下标中选取 $ k $ 个 $ J = \set{j_1, j_2, \dots, j_k} $, $ j_1 < j_2 < \cdots < j_k $, 然后对选出的 $ k $ 个下标进行排列, 记为 $ \pi = (\pi_1, \dots, \pi_k) $, 最后对剩下的 $ n - k $ 个列下标进行排列, 记为 $ \sigma = (\sigma_1, \dots, \sigma_{n-k}) $. 这和原本的 $ n $ 个列下标的任意排列是等价的, 求和号于是被拆分成三个 (从左到右三个求和分别有 $ \binom{n}{k} $, $ k! $ 和 $ (n-k)! $ 种情况, 故总求和元素为三者乘积 $ n! $, 覆盖了原有求和的所有元素):
+    \[ 
+        D = \sum_{J} \sum_{\pi} \sum_{\sigma} (-1)^{\tau_1 + \tau(\pi_1, \dots, \pi_k, \sigma_1, \dots, \sigma_{n-k})}  a_{i_1 \pi_1} \cdots a_{i_k \pi_k} a_{i_1' \sigma_1} \cdots a_{i_{n-k}', \sigma_{n-k}} \,.
+    \]
+    注意到, 将 $ (\pi_1, \dots, \pi_k, \sigma_1, \dots, \sigma_{n-k}) $ 变为 $ (j_1, \dots, j_k, \sigma_1, \dots, \sigma_{n-k}) $ 需要的对换次数和 $ \pi $ 具有相同的奇偶性, 于是
+    \begin{align*}
+        (-1)^{\tau(\pi_1, \dots, \pi_k, \sigma_1, \dots, \sigma_{n-k})} 
+        = (-1)^{\tau(\pi)} (-1)^{\tau(j_1, \dots, j_k, \sigma_1, \dots, \sigma_{n-k})}
+    \end{align*}
+    而 $ \tau(j_1, \dots, j_k, \sigma_1, \dots, \sigma_{n-k}) = \sum J - \dfrac{k(k+1)}{2} + \tau(\sigma) $, 所以行列式变形为
+    \begin{align*}
+        D &= \sum_{J} \sum_{\pi} \sum_{\sigma} (-1)^{\sum I + \sum J + \tau(\pi) + \tau(\sigma)}  a_{i_1 \pi_1} \cdots a_{i_k \pi_k} a_{i_1' \sigma_1} \cdots a_{i_{n-k}', \sigma_{n-k}} \\
+        &= \sum_{J} (-1)^{\sum I + \sum J}
+        \sum_{\pi} (-1)^{\tau(\pi)} a_{i_1 \pi_1} \cdots a_{i_k \pi_k}
+        \sum_{\sigma} (-1)^{\tau(\sigma)}   a_{i_1' \sigma_1} \cdots a_{i_{n-k}', \sigma_{n-k}} \,.
+    \end{align*}
+    当外层 $ j_1, \dots, j_k $ 取定后, 内层的两个求和就是无关的, 即
+    \begin{align*}
+        D &= \sum_{J} (-1)^{\sum I + \sum J}
+        \left[ \sum_{\pi} (-1)^{\tau(\pi)} a_{i_1 \pi_1} \cdots a_{i_k \pi_k} \right]
+        \left[ \sum_{\sigma} (-1)^{\tau(\sigma)} a_{i_1' \sigma_1} \cdots a_{i_{n-k}', \sigma_{n-k}} \right] \\
+        &= \sum_{J} (-1)^{\sum I + \sum J} A_{IJ} M_{IJ} \\
+        &= \sum_{J} A_{IJ} C_{IJ} \,.
+    \end{align*}
+\end{proof}
+
+
+
+\end{document}

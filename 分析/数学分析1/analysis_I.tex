@@ -45,7 +45,7 @@
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\N}{\mathbb N}
 \newcommand{\Q}{\mathbb Q}
-\renewcommand{\C}{\mathbb C}
+\newcommand{\C}{\mathbb C}
 \DeclarePairedDelimiter\set{\{}{\}}
 \DeclareMathOperator{\vsubseteq}{\rotatebox[origin=c]{270}{$\subseteq$}}
 
@@ -727,11 +727,11 @@ $ f \colon \N \to \N $, $ f(x) = 2x $. 那么对于集合 $ \set{1, 2, 3} $ 有 
 \end{proof}
 
 \begin{proposition}
-    对于 $ f \colon X \to Y $ 和 $ f^{-1} $. 设 $ S \subseteq X $, 则有 $ f^{-1} \big( f (S) \big) \subseteq S $.
+    对于 $ f \colon X \to Y $ 和 $ f^{-1} $. 设 $ S \subseteq X $, 则有 $ f^{-1} \big( f (S) \big) \supseteq S $.
 \end{proposition}
 
 \begin{proof}
-    设 $ U = f(S) $, 要证 $ f^{-1} (U) \subseteq S $. $ \forall x \in f^{-1} (U) $, $ f(x) \in U $, 即 $ f(x) \in f(S) $. 故 $ x \in S $, $ f^{-1} (U) \subseteq S $.
+    对任意 $ x \in S $, $ f(x) \in f(S) $, 所以 $ f $ 将 $ x $ 映入 $ f(S) $, 按照逆象的定义 $ x \in f^{-1} \big( f(S) \big) $.
 \end{proof}
 
 

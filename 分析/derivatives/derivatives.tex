@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=section]{proposition}
+    \declaretheorem[numberwithin=section]{theorem}
+    \declaretheorem[numberwithin=section]{definition}
+    \declaretheorem[numbered=no]{example}
+    \renewcommand*{\proofname}{Proof}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows}
+\usepackage{esint}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+\usepackage[italic=true]{derivative}
+
+\renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
+\newcommand{\unit}[1]{\boldsymbol{\mathbf{\hat{#1}}}}
+\renewcommand{\rm}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+\newcommand{\scr}{\mathscr}
+\newcommand{\E}{\mathrm e}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\newcommand{\del}{\nabla}
+
+\pagestyle{empty}
+
+\begin{document}
+\section{Derivatives}
+Fermat's theorem gives us relation between interior extrema and zero derivatives.
+\begin{theorem}[Fermat's theorem]
+    If $ f : (a, b) \to \R $ attains local extremum at some interior point $ c \in (a, b) $ and $ f $ has derivative at $ c $, then $ f'(c) $ must be zero.
+\end{theorem}
+
+\begin{proof}
+    Assume $ c $ is maximum. If $ f'(c) > 0 \text{ or } \infty $, for every $ x $ in some $ (c, c + \delta) $ we have $ f(x) > f(c) $ [contradiction!]. If $ f'(c) < 0 \text{ or } -\infty $, for every $ x $ in some $ (c - \delta, c) $ we have $ f(x) > f(c) $ [contradiction!]. So $ f'(c) = 0 $. Proof is similar when $ c $ is minimum.
+\end{proof}
+
+\subsection{Mean value theorem}
+\begin{theorem}[Rolle's theorem]
+    Assume real-valued function $ f \in C[a, b] \cap D(a, b) $, and $ f(a) = f(b) $, then there is $ c \in (a, b) $ such that $ f'(c) = 0 $.
+\end{theorem}
+
+\begin{proof}
+    Since $ f $ is continuous on compact interval $ [a, b] $, we know $ f $ attains maximum and minimum values on $ [a, b] $. If either of them is interior point of $ [a, b] $, then by Fermat's theorem the proof is done. If both of them are end points, then $ f $ is constant since $ f(a) = f(b) $.
+\end{proof}
+
+We use Rolle's theorem to prove mean value theorem (MVT).
+\begin{theorem}[Cauchy's mean value theorem]
+    Given $ f, g \in C[a, b] \cap D(a, b) $, there is $ c \in (a, b) $ such that
+    \begin{align} \label{eq:cmvt}
+        \big[ f(b) - f(a) \big] g'(c) = \big[ g(b) - g(a) \big] f'(c)  \,.
+    \end{align}
+\end{theorem}
+\begin{proof}
+    Let $ h(x) = \big[ f(b) - f(a) \big] g(x) - \big[ g(b) - g(a) \big] f(x) $, then \eqref{eq:cmvt} is equivalent to $ h'(c) = 0 $. The idea is to use Rolle's theorem on $ h $. Note that $ h(b) - h(a) = 0 $, and indeed $ h \in C[a, b] \cap D(a, b) $ since $ f $ and $ g $ do.
+\end{proof}
+
+Let $ g $ to be $ g(x) = x $ and we obtain the usual MVT. MVT and CMVT can be considered as extensions of Rolle's theorem.
+
+\subsection{Taylor's theorem}
+\begin{theorem}[Taylor's theorem] \label{thm:taylor}
+    Assume $ f \in D^{n} (\alpha, \beta) \cap C^{n - 1} [\alpha, \beta] $ and $ a \in [\alpha, \beta] $. For $ x \in [\alpha, \beta] $ and $ x \neq a $, there is $ c \in (a, x) \text { or } (x, a) $ such that
+    \[
+        f(x) = \sum_{k = 0}^{n-1} \dfrac{f^{(k)} (a)}{k!} (x - a)^k + \dfrac{f^{(n)}(c)}{n!} (x - a)^n \,.
+    \]
+\end{theorem}
+
+We prove Taylor's theorem by the following extended theorem.
+
+\begin{theorem}[Taylor's theorem extended]
+    Assume $ f, g \in D^{n} (\alpha, \beta) \cap C^{n - 1} [\alpha, \beta] $ and $ a \in [\alpha, \beta] $. For $ x \in [\alpha, \beta] $ and $ x \neq a $, there is $ c \in (a, x) \text { or } (x, a) $ such that
+    \begin{align} \label{eq:taylor-extended}
+        \left[ f(x) - \sum_{k=0}^{n-1} \dfrac{f^{(k)} (a)}{k!} (x - a)^k \right] g^{(n)}(c) = \left[ g(x) - \sum_{k=0}^{n-1} \dfrac{g^{(k)} (a)}{k!} (x - a)^k \right] f^{(n)}(c) \,. 
+    \end{align}
+\end{theorem}
+The key idea is to use CMVT. In order to do so, we have to make \eqref{eq:taylor-extended} to match the form $ [F(*) - F(*)] G'(\cdot) = [G(*) - G(*)] F'(\cdot) $. Consider the Taylor polynomial:
+\[
+    f(a) + f'(a) (x - a) + \dfrac{f^{(2)}(a)}{2!} (x - a)^2 + \cdots + \dfrac{f^{(n-1)}(a)}{(n-1)!} (x - a)^{n-1} \,.
+\]
+If we keep to think $ x $ as the variable, this polynomial will never produce $ f(x) $. Instead if we consider the expansion point $ a $ as variable, then expansion at $ x $ will give us $ f(x) $, and expansion at $ a $ will give us the summation part in the square bracket.
+
+\begin{proof}
+    Without loss of generality, assume $ x > a $. Let $ \displaystyle F(t) = \sum_{k=0}^{n-1} \dfrac{f^{(k)} (t)}{k!} (x - t)^{k} $ and $ \displaystyle G(t) = \sum_{k=0}^{n-1} \dfrac{g^{(k)} (t)}{k!} (x - t)^{k} $. Since $ f, g \in D^{n} (\alpha, \beta) \cap C^{n - 1} [\alpha, \beta] $, we have $ F, G \in C^{n - 1} [a, x] \cap D^{n} (a, x) $. So apply CMVT to $ F $ and $ G $, there is some $ c \in (a, x) $ such that
+    \begin{align} \label{eq:etaylor1}
+        [F(x) - F(a)] G'(c) = [G(x) - G(a)] F'(c) \,. 
+    \end{align}
+    Now $ F(x) = f(x) $, $ G(x) = g(x) $, and we have
+    \[ 
+        \begin{array}{ll} \displaystyle
+            F(a) = \sum_{k = 0}^{n-1} \dfrac{f^{(k)} (a)}{k!} (x - a)^k \,, &
+            G(a) = \sum_{k = 0}^{n-1} \dfrac{g^{(k)} (a)}{k!} (x - a)^k \,,  \\[1.5em]
+            F'(a) = \dfrac{f^{(n)}(a)}{(n - 1)!} (x - a)^{n - 1} \,,       &
+            G'(a) = \dfrac{g^{(n)}(a)}{(n - 1)!} (x - a)^{n - 1} \,.
+        \end{array}
+    \]
+    Substitute into \eqref{eq:etaylor1}, we obtain \eqref{eq:taylor-extended}.
+\end{proof}
+
+By taking $ g(x) = (x - a)^n $, we get the usual Taylor's theorem (\ref{thm:taylor}) with Lagrange form of remainder.
+
+
+\end{document}

@@ -38,11 +38,12 @@
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \newcommand{\del}{\nabla}
 
-\pagestyle{empty}
+\title{Derivatives}
 
 \begin{document}
-\section{Derivatives}
-\subsection{Zero and non-zero derivatives}
+\maketitle
+\tableofcontents
+\section{Zero and non-zero derivatives}
 \begin{theorem}[non-zero derivatives]
     Let $ f \colon (a, b) \to \R $ and $ c $ an interior point of $ (a, b) $. If $ f'(c) > 0 $ or $ f'(c) = \infty $, then there is some $ \delta > 0 $ such that $ (c - \delta, c + \delta) \subseteq (a, b) $. For all $ x \in (c, c + \delta) $ we have $ f(x) > f(c) $ and for all $ x \in (c - \delta, c) $ we have $ f(x) < f(c) $. Similar statement holds for $ f'(c) < 0 $ or $ f'(c) = -\infty $, with relation between $ f(x) $ and $ f(c) $ reversed.
 \end{theorem}
@@ -60,7 +61,7 @@ Fermat's theorem gives us relation between interior extrema and zero derivatives
     Assume $ c $ is maximum. If $ f'(c) > 0 \text{ or } \infty $, for every $ x $ in some $ (c, c + \delta) $ we have $ f(x) > f(c) $ [contradiction!]. If $ f'(c) < 0 \text{ or } -\infty $, for every $ x $ in some $ (c - \delta, c) $ we have $ f(x) > f(c) $ [contradiction!]. So $ f'(c) = 0 $. Proof is similar when $ c $ is minimum.
 \end{proof}
 
-\subsection{Mean value theorem}
+\section{Mean value theorem}
 \begin{theorem}[Rolle's theorem]
     Assume real-valued function $ f \in C[a, b] \cap D(a, b) $, and $ f(a) = f(b) $, then there is $ c \in (a, b) $ such that $ f'(c) = 0 $.
 \end{theorem}
@@ -82,7 +83,7 @@ We use Rolle's theorem to prove mean value theorem (MVT).
 
 Let $ g $ to be $ g(x) = x $ and we obtain the usual MVT. MVT and CMVT can be considered as extensions of Rolle's theorem.
 
-\subsection{Taylor's theorem}
+\section{Taylor's theorem}
 \begin{theorem}[Taylor's theorem] \label{thm:taylor}
     Assume $ f \in D^{n} (\alpha, \beta) \cap C^{n - 1} [\alpha, \beta] $ and $ a \in [\alpha, \beta] $. For $ x \in [\alpha, \beta] $ and $ x \neq a $, there is $ c \in (a, x) \text { or } (x, a) $ such that
     \[
@@ -126,7 +127,7 @@ By taking $ g(x) = (x - a)^n $, we get the usual Taylor's theorem (\ref{thm:tayl
     f(x) = \sum_{k = 0}^{n-1} \dfrac{f^{(k)} (a)}{k!} (x - a)^k + \dfrac{f^{(n)}(c)}{(n-1)!} (x - c)^{n - 1} (x - a) \,.
 \]
 
-\subsection{Limit of derivative}
+\section{Limit of derivative}
 \begin{theorem}[Limit of derivative (one-sided)]
     Let $ f \colon (a, b) \to \R $ and $ c \in (a, b) $. If $ f \in C[c, c + h] \cap D(c, c + h) $ for some $ h > 0 $, and $ \lim_{x \to c+} f'(x) $ exists, then $ f'_+(c) $ exists and equals this limit. Similar statement holds for left limit and left derivative.
 \end{theorem}

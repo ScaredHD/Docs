@@ -1,0 +1,1139 @@
+\documentclass{article}
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand*{\proofname}{Proof}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=section]{theorem}
+    \declaretheorem[numberwithin=section]{proposition}
+    \declaretheorem[numberwithin=section]{definition}
+    \declaretheorem[numbered=no]{example}
+    \declaretheorem[numbered=no]{remark}
+\usepackage{esint}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+\usepackage[italic=true]{derivative}
+
+\usepackage{esvect}
+
+\newcommand{\upI}{\overline{I}}
+\newcommand{\lowI}{\underline{I}}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Riemann}{\mathcal R}
+\newcommand{\Partition}{\mathcal P}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\finer}{\supseteq}
+\newcommand{\dd}{\mathop{}\!d}
+\newcommand{\increasing}{\uparrow}
+\newcommand{\decreasing}{\downarrow}
+
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+\DeclareMathOperator{\BV}{BV}
+
+\title{Riemann-Stieltjes integral}
+\author{ljp}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newpage
+\section{Basic properties}
+
+\begin{theorem}[Linearity on integrand]
+    If $ f, g \in \Riemann(\alpha, [a, b]) $, then $ c_1 f + c_2 g \in \Riemann(\alpha, [a, b]) $, and 
+    \[ 
+        \int_a^b (c_1 f + c_2 g) \dd \alpha = c_1 \int_a^b f \dd \alpha + c_2 \int_a^b g \dd \alpha \,.    
+    \]
+\end{theorem}
+
+\begin{theorem}[Linearity on integrator]
+    If $ f \in \Riemann(\alpha, [a, b]) \cap \Riemann(\beta, [a, b]) $, then $ f \in \Riemann(c_1 \alpha + c_2 \beta, [a, b]) $, and
+    \[ 
+        \int_a^b f \dd (c_1 \alpha + c_2 \beta) = c_1 \int_a^b f \dd \alpha + c_2 \int_a^b f \dd \beta \,.
+    \]
+\end{theorem}
+
+
+\section{Integration by parts}
+\begin{theorem}[Integration by parts] \label{thm:int-by-part}
+    If on $ [a, b] $ we have $ f \in \Riemann (\alpha) $ and $ \alpha \in \Riemann(f) $, then
+    \begin{align} \label{eq:int-by-part}
+        \int_a^b f \dd \alpha + \int_a^b \alpha \dd f = [f(x) \alpha(x)]_a^b \,.
+    \end{align}
+\end{theorem}
+
+The key idea is that $ [f a]_a^b = \sum_{k=1}^{n} [f(x_n) \alpha(x_n) - f(x_{n-1}) \alpha(x_{n-1})] $.
+
+\begin{proof}
+    Since $ f \in \Riemann(\alpha) $, there is a partition $ P_\varepsilon \in \Partition[a, b] $, every $ P $ finer than $ P_\varepsilon $ will satisfies
+    \[ 
+        \abs{ S(P, f, \alpha) - \int_a^b f \dd \alpha } < \varepsilon \,.
+    \]
+    For such $ P $,
+    \begin{align*}
+        S(P, \alpha, f) - [f\alpha]_a^b & = \sum_{k=1}^{n} \alpha(t_k) \big[ f(x_k) - f(x_{k-1}) \big] - \sum_{k=1}^{n} \big[ f(x_k) \alpha(x_k) - f(x_{k-1}) \alpha(x_{k-1}) \big] \\
+        &= - \sum_{k=1}^{n} f(x_k) \big[ \alpha(x_k) - \alpha(t_k) \big] - \sum_{k=1}^{n} f(x_{k-1}) \big[ \alpha(t_k) - \alpha(x_{k-1}) \big] \,.
+    \end{align*}
+    If we consider $ P' $ formed both partition points $ x_k $ of $ P $ and sample points $ t_k $ of $ P $, then
+    \[ 
+        \sum_{k=1}^{n} f(x_k) \big[ \alpha(x_k) - \alpha(t_k) \big] + \sum_{k=1}^{n} f(x_{k-1}) \big[ \alpha(t_k) - \alpha(x_{k-1}) \big] = S(P', f, \alpha) \,.
+    \]
+    And since $ P' $ is finer than $ P $, we have
+    \[ 
+        \abs*{ -S(P, \alpha, f) + [f\alpha]_a^b - \int_a^b f \dd \alpha } < \varepsilon \,.
+    \]
+\end{proof}
+
+\section{Change of variable}
+\begin{theorem}[Change of variable] \label{thm:change-of-variable-general}
+    If $ f \in \Riemann(\alpha) $ on $ [a, b] $. Let $ g $ be a strictly monotonic continuous function (this implies that $ g $ is injective), and $ g $ maps endpoints of $ [c, d] $ to endpoints $ [a, b] $ (this implies that $ g $ is surjective). Then we have
+    \[
+        \int_a^b f \dd \alpha = \int_c^d (f \circ g) \dd (\alpha \circ g) \,,
+    \]
+    or more specifically, suppose $ g(c) = a $, $ g(d) = b $, then
+    \[ 
+        \int_{g(c)}^{g(d)} f(x) \dd \alpha(x) = \int_{c}^{d} f \big( g(x) \big) \dd \alpha \big( g(x) \big) \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    
+    Without loss of generality, assume $ g $ is strictly increasing, so $ g(c) = a $ and $ g(d) = b $. Let $ \int_a^b f \dd \alpha = I $. By definition, for every $ \varepsilon > 0 $, there is a partition $ P_\varepsilon \in \Partition[a, b] $, such that every finer partition $ P \finer P_\varepsilon $ will satisfy
+    \[ 
+        \abs{ S(P, f, \alpha) - I } < \varepsilon \,.
+    \]
+    Function $ g $ in the condition above is bijective, so inverse function $ g^{-1} $ exists. Apply $ g^{-1} $ on $ P_\varepsilon $, we get a partition on $ [c, d] $, denote it with $ Q_\varepsilon = g^{-1}(P_\varepsilon) $. Now for every partition $ Q $ which is finer than $ Q_\varepsilon $, we have $ g(Q) \supseteq g(Q_\varepsilon) = g \big( g^{-1} (P_\varepsilon) \big) = P_\varepsilon $ (last equal sign holds since $ g $ is surjective). 
+    
+    Let sample point $ t'_k $ and partition point $ x'_k $ be $ g(t_k) $ and $ g(x_k) $ respectively, then
+    \begin{align*}
+        S(Q, f \circ g, \alpha \circ g) &= \sum_k f \big( g(t_k) \big) \big[ \alpha \big( g(x_k) \big) - \alpha \big( g(x_{k-1}) \big) \big] \\
+        &= \sum_k f(t'_k) \big[ \alpha(x'_k) - \alpha (x'_{k-1}) \big] \\
+        &= S(g(Q), f, \alpha) \,.
+    \end{align*}
+    
+    Since $ g(Q) $ is a partition of $ [a, b] $ finer than $ P_\varepsilon $,
+    \[ 
+        \abs{ S(Q, f \circ g, \alpha \circ g) - I } = \abs{ S(g(Q), f, \alpha) - I } < \varepsilon \,.
+    \]
+\end{proof}
+
+\section{Reduction to Riemann integral}
+\begin{theorem} \label{thm:reduction-1}
+    If $ \alpha \in C^1[a, b] $, then Riemann-Stieltjes integral can be reduced to Riemann integral:
+    \[ 
+        \int_a^b f(x) \dd \alpha(x) = \int_a^b f(x) \alpha'(x) \dd x \,.
+    \]
+\end{theorem}
+
+Let $ I = \int_a^b f \dd \alpha $ and $ g(x) = f(x) \alpha'(x) $. The idea is to prove that the Riemann sum approaches $ I $ as partition goes finer. By definition we want to estimate $ \abs{ S(P, g) - I } $ and show that $ \abs{ S - I } < \varepsilon $ for all partition finer than some partition depending on $ \varepsilon $. We'll utilize the Riemann-Stieltjes sum $ S(P, f, \alpha) $ of the known integral to connect the Riemann sum $ S(P, g) $ and $ I $. This is done by using triangle inequality 
+\[ 
+    \abs{ S(P, g) - I } \leqslant \abs{ S(P, g) - S(P, f, \alpha)} + \abs{ S(P, f, \alpha) - I } < \varepsilon \,. 
+\]
+So the key part is to show that $ S(P, f, \alpha) $ and $ S(P, g) $ will get arbitrarily closer as $ P $ goes finer.
+
+\begin{proof}
+    For every $ \varepsilon > 0 $, there is a partition $ P_\varepsilon' \in \Partition[a, b] $ such that for every finer partition $ P \finer P_\varepsilon' $, we have
+    \begin{align} \label{eq:reduction-1}
+        \abs{ S(P, f, \alpha) - I } < \varepsilon / 2 \,.
+    \end{align}
+    Since $ \alpha \in C^1 $, by MVT we have
+    \[ 
+        S(P, f, \alpha) = \sum_{k} f(t_k) \big[ \alpha(x_k) - \alpha(x_{k-1}) \big] = \sum_{k} f(t_k) \alpha'(\xi_k) \Delta x_k \,.
+    \]
+    Where $ \xi_k \in (x_{k-1}, x_k) $ and $ t_k \in [x_{k-1}, x_k] $. For the same partition and the same choice of inner points $ t_k $, we have the Riemann sum
+    \[ 
+        S(P, g) = \sum_{k} f(t_k) \alpha'(t_k) \Delta x_k \,.
+    \]
+    Therefore the difference
+    \[ 
+        S(P, g) - S(P, f, \alpha) = \sum_{k} f(t_k) \big[ \alpha'(\xi_k) - \alpha'(t_k) \big] \Delta x_k \,.
+    \]
+    To estimate this difference, note that $ f $ is bounded, so $ \abs{ f } \leqslant M $ for some $ M > 0 $. $ \alpha' $ is continuous on compact interval $ [a, b] $, hence is uniformly continuous. So there is $ \delta > 0 $ such that $ \abs{ x - y } < \delta $ implies $ \abs{ \alpha'(x) - \alpha'(y) } < \varepsilon / (2 M (b - a)) $. We can find $ P' $ such that $ \norm{ P' } < \delta $, therefore for every partition $ P $ finer than $ P' $, we have $ \abs{ \xi_k - x_k } < \delta $, causing $ \abs{ \alpha'(\xi_k) - \alpha'(x_k) } < \varepsilon / (2 M (b - a)) $. For such $ P $,
+    \begin{align} \label{eq:reduction-2}
+        \abs{ S(P, g) - S(P, f, \alpha) } \leqslant \sum_{k} \abs{ f(t_k) } \abs{ \alpha'(\xi_k) - \alpha'(t_k) } \Delta x_k < \varepsilon / 2 \,.
+    \end{align}
+    Let $ P_\varepsilon = P_\varepsilon' \cup P' $, every $ P $ finer than $ P_\varepsilon $ will be finer than both $ P_\varepsilon' $ and $ P' $, therefore we have both \eqref{eq:reduction-1} and \eqref{eq:reduction-2}, that completes the proof.
+\end{proof}
+
+\section{Step function integrator}
+\subsection{Simple step function}
+First consider the simple case where the step function has only two ``steps''.  Suppose $ \alpha $ is defined on $ [a, b] $, the point $ c \in (a, b) $, and $ \alpha $ has value
+\[ 
+    \alpha(x) =
+    \begin{cases}
+        \alpha(a) & x \in [a, c) \\
+        \alpha(b) & x \in (c, b]
+    \end{cases} \,.
+\]
+
+\begin{theorem} \label{thm:step-integrator}
+    Suppose $ \alpha $ is the step function defined above. At least one of $ f $ and $ \alpha $ are left-continuous at $ c $, and at least one of them is right-continuous at $ c $. Then $ f \in \Riemann(\alpha, [a, b]) $ and we have
+    \[ 
+        \int_a^b f \dd \alpha = f(c) \big[ \alpha(c+) - \alpha(c-) \big] \,.
+    \]
+\end{theorem}
+
+In Apostol's textbook, the proof was done with the whole interval $ [a, b] $, so the left subinterval $ [a, c] $ and right subinterval $ [c, b] $ are considered at the same time. We consider instead to break the integral into two parts and use the additive property, so that we can deal with left and right subinterval separately and analogously. Nevertheless ideas behind the proofs are the same.
+
+\begin{proof}
+    To prove the theorem, we only need to show two things:
+    \begin{enumerate}
+        \item $ \int_a^c f \dd \alpha = f(c) \big[ \alpha(c) - \alpha(c-) \big] $
+        \item $ \int_c^b f \dd \alpha = f(c) \big[ \alpha(c+) - \alpha(c) \big] $
+    \end{enumerate}
+    Then $ \int_a^b = \int_a^c + \int_c^b $ and the proof will be completed.
+
+    Consider the left subinterval $ [a, c] $. The condition requires at least one of $ \alpha $ and $ f $ is left-continuous at $ c $. 
+
+    (1) If $ \alpha $ is left-continuous, then for arbitrary partition of $ [a, c] $ we have $ \Delta \alpha_k = 0 $, and the Riemann-Stieltjes sum is $ 0 $. So $ \int_a^c f \dd \alpha $ is indeed $ f(c) \big[ \alpha(c) - \alpha(c-) \big] = 0 $.
+
+    (2) If $ f $ is left-continuous at $ c $, that is $ f(c-) = f(c) $. Let $ J = \alpha(c) - \alpha(c-) $. For every $ \varepsilon > 0 $, there is $ \delta > 0 $, such that $ x \in (c - \delta, c) $ implies $ \abs{ f(x) - f(c) } < \varepsilon / \abs{ J } $. Now we can find a partition $ P_\varepsilon $ with $ \norm{P_\varepsilon} < \delta $. For all partition $ P $ finer than $ P_\varepsilon $, the Riemann-Stieltjes sum is
+    \[ 
+        S(P, f, \alpha) = \sum_{k} f(t_k) \big[ \alpha(x_k) - \alpha(x_{k-1}) \big] = f(t_n) \big[ \alpha(c) - \alpha(c-) \big] = f(t_n) J \,.
+    \]
+    Since $ t_n \in [x_{n-1}, c] $, so $ \abs{ t_n - c } \leqslant \norm{P} \leqslant \norm{P_\varepsilon} < \delta $. Therefore $ \abs{ f(t_n) - f(c) } < \varepsilon / \abs{ J } $, and we have
+    \[ 
+        \abs{ S(P, f, \alpha) - f(c) J } = \abs{ f(t_n) - f(c) } \abs{ J } < \varepsilon \,.
+    \]
+    This means that $ \int_a^c f \dd \alpha = f(c) J = f(c) \big[ \alpha(c) - \alpha(c-) \big] $.
+
+    For right subinterval $ [c, b] $, the proof is analogous.
+\end{proof}
+
+This theorem tells us that the existence and the value Riemann-Stieltjes integral $ \int_a^b f \dd \alpha $ may be affected if we change the value of $ f $ at a single point. However for Riemann integral $ \int_a^b f(x) \dd x $, changing the value of $ f $ at finite points will not affect the existence and the value of this integral. To prove this, consider changing the value of $ f $ at a single point, denote this new function $ g $, now show that $ \int_a^b (g(x) - f(x)) \dd x = 0 $, this is easy because $ g - f $ is zero except at single point. Therefore $ \int_a^b g(x) \dd x =  \int_a^b f(x) \dd x $. 
+
+\begin{example}
+    Let $ \alpha(x) = 0 $ for $ x \neq 0 $ and $ \alpha(x) = -1 $. Let $ f(x) = 1 $ for $ x \in [-1, 1] $. Then by theorem \ref{thm:step-integrator}, the integral $ \int_{-1}^1 f \dd \alpha = f(0) \big[ \alpha(0+) - \alpha(0-) \big] = 0 $. If we change the value of $ f $ at $ 0 $ to $ f(0) = 2 $, now the integral doesn't exists.
+\end{example}
+
+\subsection{General step function}
+
+Now we consider the general case. The function $ \alpha $ defined on $ [a, b] $ is called the step function if there is a partition $ P = \set{x_0 < x_1 < \cdots < x_n} \in \Partition[a, b] $ such that $ \alpha $ is constant on each subinterval $ (x_{k-1}, x_k) $, $ k = 1, \dots, n-1 $. The number $ \alpha(x_k+) - \alpha(x_k-) $ is called the jump at $ x_k $.
+
+Using step functions, Riemann-Stieltjes integral can be reduced to a finite sum.
+\begin{theorem}[Reduction to finite sum]
+    Suppose $ \alpha $ is a step function with jumps at $ x_k $, $ k = 1, \dots, n $. If at each $ x_k $, at least one of $ f $ and $ \alpha $ is left-continuous and at least one of them is right-continuous, then
+    \[ 
+        \int_a^b f(x) \dd \alpha(x) = \sum_{k=1}^{n} f(x_k) \big[ \alpha(x_k+) - \alpha(x_k-) \big] \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Divide interval $ [a, b] $ into $ n $ subintervals such that each contains only one jump. Apply theorem \ref{thm:step-integrator} and then add those integrals on subintervals.
+\end{proof}
+
+\begin{theorem}[Floor function integrator]
+    Every finite sum can be written as Riemann-Stieltjes integral with floor function as integrator. Define $ f $ on $ [0, n] $ with $ f(0) = 0 $ and $ f(x) = a_k $ for $ x \in (k - 1, k] $, $ k = 1, \dots, n $, then
+    \[ 
+        \sum_{k=1}^{n} a_k = \int_0^n f(x) \dd \floor{x} \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    $ \int_0^n f(x) \dd \floor{x} = \sum_{k=1}^{n} f(k) \big( \floor{k+} - \floor{k-} \big) = \sum_{k=1}^{n} a_k \big( k - (k - 1) \big) = \sum_{k=1}^{n} a_k $.
+\end{proof}
+
+\section{Lower and upper integrals for increasing integrators}
+When integrator is increasing, we have definitions of lower and upper sums, also lower and upper integrals. Therefore, Riemann integral (integrator $ \alpha(x) = x $) is such type of integral and satisfies all statements in this subsection.
+
+\subsection{Lower and upper sums}
+Refinement of a partition increases the lower sum and decreases the upper sum. And lower sums are never greater than upper sums, no matter what partitions are choosed.
+
+\begin{theorem}[Lower sum, upper sum and refinement]    \label{thm:lower-upper-sum}
+    Assume $ \alpha \increasing [a, b] $, then:
+    \begin{enumerate}
+        \item If $ P' \finer P $, then $ U(P', f, \alpha) \leqslant U(P, f, \alpha) $ and $ L(P', f, \alpha) \geqslant L(P, f, \alpha) $
+        \item For arbitrary $ P $ and $ Q $, we have $ L(P, f, \alpha) \leqslant U(Q, f, \alpha) $
+    \end{enumerate}
+\end{theorem}
+
+As a consequence, for $ P' \finer P $ implies $ U(P') - L(P') \leqslant U(P) - L(P) $.
+
+\subsection{Lower and upper integrals}
+\begin{definition}[Lower and upper integral]
+    Assume $ \alpha \increasing [a, b] $. The upper Stieltjes integral is the infimum of all upper sums, and the lower Stieltjes integral is the supremum of all lower sums.
+    \begin{align*}
+        \upint_a^b f \dd \alpha = \upI (f, \alpha) &= \inf_{P \in \Partition[a, b]} U(P, f, \alpha) \, \\
+        \lowint_a^b \dd \alpha = \lowI (f, \alpha) &= \sup_{P \in \Partition[a, b]} L(P, f, \alpha) \,.
+    \end{align*}
+\end{definition}
+
+\begin{theorem}
+    Assume $ \alpha \increasing [a, b] $, then $ \lowI (f, \alpha) \leqslant \upI (f, \alpha) $.
+\end{theorem}
+
+\begin{proof}
+    Let $ L $ and $ U $ be the set of all lower sums and all upper sums respectively, then $ L \leqslant U $ by theorem \ref{thm:lower-upper-sum}, therefore $ \sup L \leqslant \inf U $.
+\end{proof}
+
+\begin{example}[$ \upI \neq \lowI $]
+    Consider Dirichlet function $ f $, where $ f(x) = 1 $ for $ x \in \mathbb Q $ and $ f(x) = 0 $ for $ x \not\in \mathbb Q $. Apparently, for every partition the Riemann sum $ U(P, f) = 1 $ and $ L(P, f) = 0 $. Therefore for Riemann integral ($ \alpha(x) = x $) we have $ \upI(f) = 1 $ and $ \lowI(f) = 0 $.
+\end{example}
+
+\begin{theorem} Assume $ \alpha \increasing [a, b] $.
+    \begin{enumerate}
+        \item $ \upint_a^b = \upint_a^c + \upint_c^b $, $ \lowint_a^b = \lowint_a^c + \lowint_c^b $
+        \item $ \upint_a^b f + g \dd \alpha \leqslant \upint_a^b f \dd \alpha + \upint_a^b g \dd \alpha $
+        \item $ \lowint_a^b f + g \dd \alpha \geqslant \lowint_a^b f \dd \alpha + \lowint_a^b g \dd \alpha $
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (1) Consider arbitrary $ P \in \Partition[a, b] $, let $ P' = P \cup \set{c} $ and divide it into two subpartition $ P'_1 = P' \cap [a, c] $ and $ P'_2 = P' \cap [c, b] $, so $ P'_1 \in \Partition[a, c] $ and $ P'_2 \in \Partition[c, b] $. Note that $ P' \finer P $ and we have
+    \[ 
+        U(P, f, \alpha) \geqslant U(P', f, \alpha) = U(P'_1, f, \alpha) + U(P'_2, f, \alpha) \geqslant \upint_a^c f \dd \alpha + \upint_c^b f \dd \alpha \,.
+    \]
+    So $ \upint_a^c + \upint_c^b $ is a lower bound of $ U(P, f, \alpha) $ for all $ P \in \Partition[a, b] $, this implies that 
+    \[ 
+        \inf_{P \in \Partition[a, b]} U(P, f, \alpha) = \upint_a^b \geqslant \upint_a^c + \upint_c^b \,.
+    \]
+    To prove the other direction, consider arbitrary $ P_1 \in \Partition[a, c] $ and $ P_2 \in \Partition[c, b] $. Then $ P_1 \cup P_2 \in \Partition[a, b] $ and
+    \[ 
+        U(P_1, f, \alpha) + U(P_2, f, \alpha) = U(P_1 \cup P_2, f, \alpha) \geqslant \upint_a^b f \dd \alpha \,.
+    \]
+    So we have
+    \begin{align*}
+        \upint_a^b f \dd \alpha &\leqslant \inf \set{U(P_1, f, \alpha) + U(P_2, f, \alpha) \colon P_1 \in \Partition[a, c], P_2 \in \Partition[c, b]} \\
+        &= \inf \set{U(P_1, f, \alpha) \colon P_1 \in \Partition[a, c]} + \inf \set{U(P_2, f, \alpha) \colon P_2 \in \Partition[c, b]} \\
+        &= \upint_a^c f \dd \alpha + \upint_c^b f \dd \alpha \,.
+    \end{align*}
+
+    (2) For arbitrary $ P \in \Partition[a, b] $, we have
+    \begin{align*}
+        U(P, f + g, \alpha) &= \sum_{k} M_k (f + g) \Delta \alpha_k \\
+        &\leqslant \sum_{k} M_k (f) \Delta \alpha_k + \sum_{k} M_k (g) \Delta \alpha_k \\
+        &= U(P, f, \alpha) + U(P, g, \alpha) \\
+        &\leqslant \upI (f) + \upI (g) \,.
+    \end{align*}
+    Take inf of both sides,
+    \[ 
+        \upI (f + g) = \inf_{P \in \Partition[a, b]} U(P, f + g, \alpha) \leqslant \upI (f) + \upI (g) \,.
+    \]
+
+    (3) Similar to (2).
+\end{proof}
+
+\subsection{Riemann's condition}
+Again we consider integrator $ \alpha \increasing [a, b] $. For a bounded function $ f $, suppose $ m \leqslant f \leqslant M $ on $ [a, b] $. It is immediate that for every partition $ P \in \Partition[a, b] $,
+\[ 
+    m (b - a) \leqslant L(P, f, \alpha) \leqslant U(P, f, \alpha) \leqslant M(b - a) \,.
+\]
+This means that lower and upper sums for bounded functions are always bounded. Therefore for a bounded function $ f $, we can always find the lower and upper integrals ($ \lowI $ and $ \upI $) for it. 
+
+When $ \lowI = \upI $, the integral exists and from the inequality above we can conclude that $ U(P, f, \alpha) - L(P, f, \alpha) $ must be able to get arbitrarily small. This fact is shown in the next theorem.
+
+
+\begin{definition}[Riemann's condition]
+    Function $ f $ is said to satisfy Riemann's condition with respect to $ \alpha $ on $ [a, b] $, if for every $ \varepsilon > 0 $, there is a partition $ P_\varepsilon \in \Partition[a, b] $, such that $ P \finer P_\varepsilon $ implies \[ U(P, f, \alpha) - L(P, f, \alpha) < \varepsilon \,. \]
+\end{definition}
+
+Note that if $ P' \finer P $, then $ U(P') - L(P') \leqslant U(P) - L(P) $. So if we can find one partition $ P $ such that $ U(P) - L(P) < \varepsilon $, every finer partition will also satisfy the inequality, bringing the Riemann's condition.
+
+\begin{theorem}
+    Assume $ \alpha \increasing [a, b] $. The following statements are equivalent:
+    \begin{enumerate}
+        \item $ f \in \Riemann(\alpha, [a, b]) $
+        \item $ f $ satisfies Riemann's condition with respect to $ \alpha $ on $ [a, b] $
+        \item $ \upint_a^b f \dd \alpha = \lowint_a^b f \dd \alpha $
+    \end{enumerate}
+\end{theorem}
+
+(1 $ \Rightarrow 2 $) The idea is to bound $ U(P, f, \alpha) - L(P, f, \alpha) $ from above with the difference $ S(P, f, \alpha) - S'(P, f, \alpha) $, here $ S $ and $ S' $ have different choices of $ t_k \in [x_{k - 1}, x_k] $ and $ t_k' \in [x_{k-1}, x_k] $. This leads to bounding $ M_k - m_k $ with $ f(t_k) - f(t_k') $ from above, which can be done using approximation property of sup. Using $ M_k $ and $ m_k $ only as upper and lower bounds will lead to $ M_k - m_k > f(t_k) - f(t_k') $, not the direction we want. But using approximation property will give us less-than symbol: $ M_k - m_k - \varepsilon < f(t_k) - f(t_k') $, the arbitrary small $ \varepsilon $ can be easily ignored in the end be cause $ x \leqslant y + \varepsilon $ or $ x - \varepsilon \leqslant y $ both imply $ x \leqslant y $.
+
+This ``$ \varepsilon $-trick'' can be handy when we want to prove some inequalities between a variable and its limit-type value (for example sup or integral), in a direction that is hard to be obtained directly. We manually vary from the limit by small amount $ \varepsilon $, and it won't affect the direction in the end, but can reverse the relation between the variable and the limit.
+
+This trick works because the nature of limit involves some ``error'' ($ \varepsilon $). To prove $ x = y $, one can simply show $ \abs{ x - y } < \varepsilon $. And to prove $ x \leqslant y $, one can show $ x - y \leqslant \varepsilon $.
+
+\begin{proof}
+    (1 $ \Rightarrow $ 2) 
+    Let 
+    \[ 
+        S(P, f, \alpha) = \sum_{k} f(t_k) \Delta \alpha_k \,, \quad S'(P, f, \alpha) = \sum_{k} f(t_k') \Delta \alpha_k \,,
+    \]
+    \[ 
+        U(P, f, \alpha) = \sum_{k} M_k \Delta \alpha_k \,, \quad L(P, f, \alpha) = \sum_{k} m_k \Delta \alpha_k \,.
+    \]
+    Here $ M_k = \sup f([x_{k-1}, x_k]) $ and $ m_k = \inf f([x_{k-1}, x_k]) $. For every subinterval, we have $ M_k - m_k = \sup \set{f(x) - f(y) \colon x, y \in [x_{k-1}, x_k]} $, hence for every $ h > 0 $, we can find $ t_k, t_k' \in [x_{k-1}, x_k] $, such that
+    \[ 
+        M_k - m_k - h < f(t_k) - f(t_k') \,.
+    \]
+    Then for sums we have
+    \[ 
+        \sum_{k} (M_k - m_k - h) \Delta \alpha_k  < \sum_{k} \big[ f(t_k) - f(t_k') \big] \Delta \alpha_k \,.
+    \]
+    that is
+    \[ 
+        U(P, f, \alpha) - L(P, f, \alpha) < h \big[ \alpha(b) - \alpha(a) \big] + S(P, f, \alpha) - S'(P, f, \alpha) \,.
+    \]
+
+    
+    
+    Since $ f \in \Riemann $, for every $ \varepsilon > 0 $, there is partition $ P_\varepsilon $, such that for every finer $ P $, we have
+    \[ 
+        \abs*{ S(P, f, \alpha) - \int_a^b f \dd \alpha } < \varepsilon / 3 \,, \quad \abs*{ S'(P, f, \alpha) - \int_a^b f \dd \alpha } < \varepsilon / 3 \,.
+    \]
+    So $ \abs{ S(P, f, \alpha) - S'(P, f, \alpha) } < 2 \varepsilon / 3 $. If $ \alpha(b) - \alpha(a) = 0 $, the proof is done. If $ \alpha(b) - \alpha(a) > 0 $, in order to control $ h \big[ \alpha(b) - \alpha(a) \big] $, choose $ h = \varepsilon / 3\big[ \alpha(b) - \alpha(a) \big] $. After that we have $ U(P, f, \alpha) - L(P, f, \alpha) < \varepsilon $ for all $ P $ finer than $ P_\varepsilon $.
+
+    
+    (2 $ \Rightarrow $ 3) By Riemann's condition, we have, for every $ \varepsilon > 0 $, a corresponding $ P_\varepsilon \in \Partition[a, b] $, such that $ P \finer P_\varepsilon $ implies $ U(P, f, \alpha) - L(P, f, \alpha) < \varepsilon $. That means $ U(P, f, \alpha) < L(P, f, \alpha) + \varepsilon $. So $ \upI \leqslant U(P, f, \alpha) < L(P, f, \alpha) + \varepsilon \leqslant \lowI + \varepsilon $. Since $ \varepsilon $ is arbitrary, we have $ \upI \leqslant \lowI $. We already proved that $ \lowI \leqslant \upI $, hence $ \lowI = \upI $.
+    
+    (3 $ \Rightarrow $ 1) Let $ I = \upI = \lowI $. For every $ \varepsilon > 0 $, there is $ P' $ and $ P'' $ such that
+    \[ 
+        L(P', f, \alpha) > \lowI - \varepsilon \,, \quad U(P'', f, \alpha) < \upI + \varepsilon \,.
+    \]
+    Let $ P_\varepsilon = P' \cup P'' $, for every $ P $ finer than $ P_\varepsilon $, we have $ P \finer P', P'' $, therefore
+    \[ 
+        I - \varepsilon < L(P', f, \alpha) \leqslant L(P, f, \alpha) \leqslant S(P, f, \alpha) \leqslant U(P, f, \alpha) \leqslant U(P'', f, \alpha) < I + \varepsilon \,.
+    \]
+    That is $ \abs{ S(P, f, \alpha) - I } < \varepsilon $.
+\end{proof}
+
+\subsection{Other properties when integrator is increasing}
+\begin{theorem}[Comparison theorem]
+    Assume $ \alpha \increasing [a, b] $. If $ f, g \in \Riemann(\alpha, [a, b]) $ and $ f \leqslant g $ on $ [a, b] $, then
+    \[ 
+        \int_a^b f \dd \alpha \leqslant \int_a^b g \dd \alpha \,.    
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Assume $ \alpha \increasing [a, b] $. If $ f \in \Riemann $ then $ \abs{ f } \in \Riemann $ and
+    \[ 
+        \abs*{ \int_a^b f \dd \alpha } \leqslant \int_a^b \abs{ f } \dd \alpha \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    On  $ k $-th subinterval $ [x_{k-1}, x_k] $, we can find $ t_k $ and $ t_k' $ such that for every $ h > 0 $
+    \[ 
+        \sup \abs{ f } - \inf \abs{ f } - h < \abs{ f(t_k) } - \abs{ f(t_k') } \leqslant \abs{ f(t_k) - f(t_k') } \leqslant \sup f - \inf g \,.
+    \]
+    This implies
+    \[ 
+        U(P, \abs{ f }, \alpha) - L(P, \abs{ f }, \alpha) \leqslant U(P, f, \alpha) - L(P, f, \alpha) \,.
+    \]
+    Given arbitrary $ \varepsilon > 0 $, we can find $ P_\varepsilon $ such that every finer $ P $ will satisfies
+    \[ 
+        U(P, \abs{ f }, \alpha) - L(P, \abs{ f }, \alpha) < \varepsilon \,.
+    \]
+    That is $ \abs{ f } $ satisfies Riemann's condition, and therefore $ \abs{ f } \in \Riemann $. Since $ -\abs{ f } \leqslant f \leqslant \abs{ f } $, applying comparison theorem, we have
+    \[ 
+        - \int_a^b \abs{ f } \dd \alpha \leqslant \int_a^b f \dd \alpha \leqslant \int_a^b \abs{ f } \dd \alpha \,.
+    \]
+    This is the inequality we want.
+\end{proof}
+
+\begin{theorem}
+    Assume $ \alpha \increasing [a, b] $. If $ f, g \in \Riemann(\alpha, [a, b]) $ then the product $ f g \in \Riemann(\alpha, [a, b]) $.
+\end{theorem}  
+
+
+\begin{proof}
+    Condiser a partition $ P \in \Partition $, on the $ k $-th subinterval $ [x_{k-1}, x_k] $, for every $ h > 0 $, we can find some $ t_k, t_k' \in [x_{k-1}, x_k] $ such that
+    \[ 
+        \sup fg - \inf fg - h < (fg)(t_k) - (fg)(t_k') \,.
+    \]
+    Since $ f, g \in \Riemann(\alpha, [a, b]) $ as a normal Riemann-Stieltjes integral, they must be bounded, say $ \abs{ f }, \abs{ g } \leqslant M $ without loss of generality. Now
+    \begin{align*}
+        (fg)(t_k) - (fg)(t_k') &= \big[ f(t_k) - f(t_k') \big] g(t_k) + f(t_k') \big[ g(t_k) - g(t_k') \big] \\
+        &\leqslant \big[ \sup f - \inf f \big] M + M \big[ \sup g - \inf g \big] \,.
+    \end{align*}
+    Since $ h $ is arbitrary, for every subinterval $ [x_{k-1}, x_k] $ we have
+    \[ 
+        \sup fg - \inf fg \leqslant M (\sup f - \inf f) + M (\sup g - \inf g) \,.
+    \]
+    Therefore
+    \[ 
+        U(P, fg, \alpha) - L(P, fg, \alpha) \leqslant M \big[ U(P, f, \alpha) - L(P, f, \alpha) \big] + M \big[ U(P, g, \alpha) - L(P, g, \alpha) \big] \,.
+    \]
+    For every $ \varepsilon > 0 $, we can find $ P_\varepsilon' $ and $ P_\varepsilon'' $ such that every $ P' \finer P_\varepsilon' $ and every $ P'' \finer P_\varepsilon'' $ will satisfy
+    \[ 
+        U(P', f, \alpha) - L(P', f, \alpha) < \varepsilon/2M \,,\quad U(P'', g, \alpha) - L(P'', g, \alpha) < \varepsilon/2M \,.
+    \]
+    Let $ P_\varepsilon = P_\varepsilon' \cup P_\varepsilon'' $, then for every $ P $ finer than $ P_\varepsilon $, we have $ P \finer P_\varepsilon' $ and $ P \finer P_\varepsilon'' $, so
+    \[ 
+        U(P, fg, \alpha) - L(P, fg, \alpha) < M \dfrac{\varepsilon}{2M} + M \dfrac{\varepsilon}{2M} = \varepsilon \,.
+    \]
+    This means that $ fg $ satisfies Riemann's condition. Hence $ fg \in \Riemann(\alpha, [a, b]) $.
+\end{proof}
+
+As a direct corollary, $ f \in \Riemann $ implies $ f^2 \in \Riemann $.
+
+
+
+\section{Integrators of bounded variation}
+Given $ \alpha $ as integrator on $ [a, b] $. Define the function of total variation with respect to right endpoint $ V(x) = V_a^x (\alpha) $ and $ V(a) = 0 $. Recall that $ V \increasing [a, b] $. Also for a partition $ P = \set{x_0, \dots, x_n} $ if we use $ \sum_{P} \abs{ \Delta f } $ to denote the sum $ \sum_{k=1}^n \abs{ \Delta f_k } $ for this partition, then adding a point to $ P $ will only increase this sum. This implies that for $ Q \finer P $, we have $ \sum_{Q} \abs{ \Delta f } \geqslant \sum_{P} \abs{ \Delta f } $.
+
+If $ \alpha \in \BV $, then there is a decomposition $ \alpha = \alpha_1 - \alpha_2 $ where $ \alpha_1, \alpha_2 $ are increasing. So if $ f \in \Riemann(\alpha_1) \cap \Riemann(\alpha_2) $, then by linearity $ f \in \Riemann(\alpha) $. Conversely, if $ f \in \Riemann(\alpha) $ and we have decomposition $ \alpha = \alpha_1 - \alpha_2 $, then there is a chance that both $ f \not\in\Riemann(\alpha_1) $ and $ f \not\in \Riemann(\alpha_2) $. But as the following theorem tells us, $ f \in \Riemann(\alpha) $ always implies $ f \in \Riemann(V) $. So at least there is a decomposition $ \alpha = V - (V - \alpha) $, such that $ f \in \Riemann(V) $ and $ f \in \Riemann(V - \alpha) $. Moreover $ V $ and $ V - \alpha $ are increasing, so the original Riemann-Stieltjes integral with BV integrator is now decomposed to two integrals with increasing integrators, and Riemann's condition can now be applied to the decomposed integrals.
+
+\begin{theorem}
+    If $ f $ is bounded, $ f \in \Riemann(\alpha, [a, b]) $ and $ \alpha \in \BV[a, b] $, then $ f \in \Riemann(V, [a, b]) $.
+\end{theorem}
+
+\begin{proof}
+    If $ V(b) = 0 $, then the proof is trivial. Suppose $ V(b) > 0 $ and $ \abs{ f } \leqslant M $ on $ [a, b] $. Since $ V \increasing $, the idea is to utilize Riemann's condition to prove $ f \in \Riemann(V) $. This involves estimating $ U(P, f, V) - L(P, f, V) $ of partition $ P $ which can be split into two parts
+    \begin{align*}
+        \sum_k \big[ M_k(f) - m_k(f) \big] \Delta V_k &= \sum_k \big[ M_k(f) - m_k(f) \big] \big[ \Delta V_k - \abs{ \Delta \alpha_k } \big] \\  
+        &+ \sum_k \big[ M_k(f) - m_k(f) \big] \abs{ \Delta \alpha_k } \,.
+    \end{align*}
+    The idea to bring in the $ \abs{ \Delta \alpha_k } $ term is that the definition of BV function and total variation involves the sum $ \sum_{P} \abs{ \Delta \alpha } $.
+
+    To estimate the first sum, we have
+    \begin{align*}
+        \sum_k \big[ M_k(f) - m_k(f) \big] \big[ \Delta V_k - \abs{ \Delta \alpha_k } \big] &\leqslant 2 M \sum_k \big[ \Delta V_k - \abs{ \Delta \alpha_k } \big] \\
+        &= 2 M \Big( V(b) - \sum_k \abs{ \Delta \alpha_k } \Big) \,.
+    \end{align*}
+    For every $ h > 0 $, we can find $ P_\varepsilon $ such that $ V(b) - h < \sum\limits_{P_\varepsilon} \abs{ \Delta \alpha } $. Refinement of $ P_\varepsilon $ will only increase the sum on the right, thus for every finer $ P $, we have
+    \[ 
+        V(b) < \sum_{P} \abs{ \Delta \alpha } + h \,.
+    \]
+    So the first sum can be controlled by $ h $ chosen by us, and can be made arbitrarily small. This is what we intended.
+    \begin{align} \label{eq:V-as-integrator-1}
+        \sum_k \big[ M_k(f) - m_k(f) \big] \big[ \Delta V_k - \abs{ \Delta \alpha_k } \big] \leqslant 2 M h \,.
+    \end{align}
+    Now to estimate the second sum, let $ A(P) = \set{k \colon \Delta \alpha_k \geqslant 0} $ and $ B(P) = \set{k \colon \Delta \alpha_k < 0} $. If we choose $ t_k $ and $ t_k' $ so that
+    \[ 
+        M_k(f) - m_k(f) - h' < f(t_k) - f(t_k') \,, \quad \text{if } k \in A(P) \,,
+    \]
+    \[ 
+        M_k(f) - m_k(f) - h' < f(t_k') - f(t_k) \,, \quad \text{if } k \in B(P) \,.
+    \]
+    The second sum is now bounded by
+    \begin{align*}
+        \sum_k \big[ M_k(f) - m_k(f) \big] \abs{ \Delta \alpha_k } &\leqslant \bigg( \sum_{k \in A(P)} + \sum_{k \in B(P)} \bigg) \big[ M_k(f) - m_k(f) \big] \abs{ \Delta \alpha_k } \\
+        &=  \sum_{k \in A(P)} \big[ f(t_k) - f(t_k') \big] \Delta \alpha_k + h' \sum_{k \in A(P)} \Delta \alpha_k \\
+        &\quad - \sum_{k \in B(P)} \big[ f(t_k') - f(t_k) \big] \Delta \alpha_k - h' \sum_{k \in P(B)} \Delta \alpha_k \,.
+    \end{align*}
+    After combining terms on the right, we have
+    \begin{align} \label{eq:V-as-integrator-2}
+        \sum_k \big[ M_k(f) - m_k(f) \big] \abs{ \Delta \alpha_k } &\leqslant  \sum_{k} \big[ f(t_k) - f(t_k') \big] \Delta \alpha_k + h' \sum_k \abs{ \Delta \alpha_k } \,.
+    \end{align}
+    Now given arbitrary $ \varepsilon > 0 $, first choose $ h = \varepsilon / 2 M $, and find $ P_\varepsilon $ so that \eqref{eq:V-as-integrator-1} holds for every finer partition. 
+    
+    Since $ \alpha \in \BV[a, b] $, $ \sum_{k} \abs{ \Delta \alpha_k } \leqslant V(b) $. And since $ f \in \Riemann(\alpha, [a, b]) $ we can find $ P_\varepsilon' $ so that for finer $ P $ and every choice of $ t_k, t_k' $ will satisfy
+    \[ 
+        \abs*{ \sum_{k} \big[ f(t_k) - f(t_k') \big] \Delta \alpha_k } < \varepsilon / 4 \,.
+    \]
+     Now choose $ h' = \varepsilon / 2V(b) $. Find $ P_\varepsilon' $ and corresponding choice of $ t_k, t_k' $ so that \eqref{eq:V-as-integrator-2} holds. Therefore for every $ P $ that is finer than both $ P_\varepsilon $ and $ P_\varepsilon' $, inequalities \eqref{eq:V-as-integrator-1} and \eqref{eq:V-as-integrator-2} both hold. For such $ P $
+    \begin{align*}
+        \sum_k \big[ M_k(f) - m_k(f) \big] \Delta V_k &\leqslant 2 M h + \sum_{k} \big[ f(t_k) - f(t_k') \big] \Delta \alpha_k + h' V(b) \\
+        &< 2 M \dfrac{\varepsilon}{2M} + \dfrac{\varepsilon}{4} + \dfrac{\varepsilon}{2 V(b)} V(b) = \varepsilon \,.
+    \end{align*}
+    This means that $ \int_a^b f \dd V $ satisfies Riemann's condition.
+\end{proof}
+
+\begin{theorem} \label{thm:BV-integrator-subinterval}
+    Assume $ \alpha \in \BV[a, b] $ and $ f \in \Riemann(\alpha) $ on $ [a, b] $, then $ f \in \Riemann(\alpha) $ on every subinterval $ [c, d] $.
+\end{theorem}
+
+\begin{proof}
+    We can decompose the integral with BV integrator $ \alpha $ to two integrals with increasing integrators $ V $ and $ V - \alpha $:
+    \[ 
+        \int_a^b f \dd \alpha = \int_a^b f \dd V - \int_a^b f \dd (V - \alpha) \,.
+    \]
+    Therefore it suffices to prove that: given $ \alpha \increasing [a, b] $, if $ f \in \Riemann(\alpha, [a, b]) $, then $ f \in \Riemann(\alpha, [c, d]) $. By additivity, we only need to show that $ f \in \Riemann(\alpha) $ on both $ [a, c] $ and $ [a, d] $.
+
+    Consider arbitrary $ x \in [a, b] $. Since $ f \in \Riemann(\alpha, [a, b]) $, there is a partition $ P_\varepsilon' \in \Partition[a, b] $, such that every finer partition $ P $ will satisfy
+    \[ 
+        U(P, [a, b]) - L(P, [a, b]) < \varepsilon \,.
+    \]
+    Here we explicitly include the interval which the partition applies to.
+    Let $ P_\varepsilon = P_\varepsilon' \cup \set{x} $, $ P_1 = P_\varepsilon \cap [a, x] $ and $ P_2 = P_\varepsilon \cap [x, b] $. For every $ P \in \Partition[a, x] $ finer than $ P_1 $, we have $ P \cup P_2 \finer P_1 \cup P_2 = P_\varepsilon $. We choose the same $ t_k $ in the subintervals of $ P $ for $ U(P, [a, x]) - L(P, [a, x]) $ and $ U(P \cup P_2, [a, b]) - L(P \cup P_2, [a, b]) $, then
+    \[ 
+        U(P, [a, x]) - L(P, [a, x]) \leqslant U(P \cup P_2, [a, b]) - L(P \cup P_2, [a, b])
+    \]
+    since the righthand side contains all terms of $ U(P, [a, x]) - L(P, [a, x]) $ and more terms corresponding to $ P_2 $. And furthermore,
+    \[ 
+        U(P \cup P_2, [a, b]) - L(P \cup P_2, [a, b]) \leqslant U(P_\varepsilon, [a, b]) - L(P_\varepsilon, [a, b]) < \varepsilon \,.
+    \]
+    This implies that for every $ P \in \Partition[a, x] $ finer than $ P_1 $,
+    \[ 
+        U(P, [a, x]) - L(P, [a, x]) < \varepsilon \,.
+    \]
+    So $ f $ satisfies Riemann's condition on $ [a, x] $ and therefore is integrable. Hence $ f \in \Riemann(\alpha, [c, d]) $ for arbitrary $ [c, d] \subseteq [a, b] $.
+\end{proof}
+
+\section{Existence of Riemann-Stieltjes integrals}
+\subsection{Sufficient conditions}
+\begin{theorem}[Riemann-Stieltjes]
+    If $ f \in C $ and $ \alpha \in \BV $, then $ f \in \Riemann(\alpha) $.
+\end{theorem}
+
+\begin{proof}
+    Since $ \alpha \in \BV $, we can decompose $ \int_a^b f \dd \alpha $ into two integrals with increasing integrators. It suffices to prove this theorem under conditions $ f \in C[a, b] $ and $ \alpha \increasing [a, b] $. Also when $ \alpha(a) = \alpha(b) $ the proof is trivial. So suppose $ \alpha(a) < \alpha(b) $.
+
+    Since $ f \in C[a, b] $, then $ f $ must be uniformly continuous on every subinterval $ [x_{k-1}, x_k] $ of arbitrary partition. Given $ \varepsilon > 0 $, we can find $ \delta > 0 $ such that $ \abs{ x - y } < \delta $ implies $ \abs{ f(x) - f(y) } < \varepsilon / 2\big[ \alpha(b) - \alpha(a) \big] $.
+
+    There is $ P_\varepsilon \in \Partition[a, b] $ with $ \norm{P_\varepsilon} < \delta $, for every $ P $ finer than $ P_\varepsilon $, we have $ \norm{P} \leqslant \norm{P_\varepsilon} < \delta $. Therefore for every subinterval $ [x_{k-1}, x_k] $, every $ x, y \in [x_{k-1}, x_k] $ will satisfies
+    \[ 
+        f(x) - f(y) \leqslant \abs{ f(x) - f(y) } < \dfrac{\varepsilon}{2 \big[ \alpha(b) - \alpha(a) \big]} \,.
+    \]
+    Take sup of both sides. For every subinterval, we have
+    \[ 
+        M_k(f) - m_k(f) = \sup \big[ f(x) - f(y) \big] \leqslant \dfrac{\varepsilon}{2 \big[ \alpha(b) - \alpha(a) \big]} \,.
+    \]
+    Then for every $ P \finer P_\varepsilon $,
+    \[ 
+        U(P, f, \alpha) - L(P, f, \alpha) = \sum_{k} \big[ M_k(f) - m_k(f) \big] \Delta \alpha_k \leqslant \dfrac{\varepsilon}{2} < \varepsilon \,.
+    \]
+    That is $ f $ satisfies Riemann's condition, and therefore $ f \in \Riemann(\alpha, [a, b]) $.
+\end{proof}
+
+Riemann integral is a special type of Riemann-Stieltjes integral where $ \alpha(x) = x $, so 
+\begin{theorem}[Riemann]
+    Sufficient conditions for existence of $ \int_a^b f(x) \dd x $:
+    \begin{enumerate}
+        \item $ f \in C[a, b] $
+        \item $ f \in BV[a, b] $
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    (1) Since $ \alpha(x) = x $ is of bounded variation.
+
+    (2) Integration by parts: $ \int_a^b f \dd \alpha = [f\alpha]_a^b - \int_a^b \alpha \dd f $.
+\end{proof}
+
+\subsection{Necessary conditions}
+When $ \alpha \in \BV $, the continuity of $ f $ is sufficient for existence of the integral. But for the integral to exists, continuity of $ f $ is not necessary.
+
+\begin{example}[Integral exists, but $ f $ is not continuous]
+    Consider a simple 2-step function $ \alpha $ which has jump discontinuity at single point $ c \in (a, b) $. As long as $ f $ is continuous at $ c $, then by theorem \ref{thm:step-integrator} the integral must exists:
+    \[ 
+        \int_a^b f \dd \alpha = f(c) \big[ f(c+) - f(c-) \big] \,,
+    \]
+    even if $ f $ is discontinuous elsewhere.
+\end{example}
+
+At least one of $ f $ and $ \alpha $ is left-continuous and at least one of them is right-continuous on $ [a, b] $ is the necessary condition for the integral to exist.
+
+\begin{theorem}
+    Assume $ \alpha \increasing [a, b] $ and $ c \in (a, b) $. If $ f $ and $ \alpha $ are both right-discontinuous at $ c $ or both left-discontinuous, then $ \int_a^b f \dd \alpha $ does not exist.
+\end{theorem}
+
+\begin{proof} 
+    Suppose both $ f $ and $ \alpha $ are right-discontinuous at $ c \in (a, b) $. Proof for left-discontinuous case is similar.
+    
+    Let $ P $ be arbitrary partition of $ [a, b] $, and $ P' = P \cup \set{c} = \set{x_0', x_1', \dots, x_n'} $. Suppose $ c = x_{i-1}' $ in $ P' $. Fix some $ \varepsilon > 0 $, since $ \alpha $ is right-discontinuous at $ c $, then let $ \delta' < x_i' - x_{i - 1}' $, we can find $ y \in (c, c + \delta') $ such that
+    \[ 
+        \abs{ \alpha(y) - \alpha(c) } \geqslant \varepsilon \,.
+    \]
+    Adding $ y $ into $ P' $, we get a new partition $ P'' = P' \cup {y} = \set{x_0, x_1, \dots, x_{n+1}} $, and now $ c = x_{i-1} = x_{i-1}' $, $ y = x_i $. For $ P'' $, we have
+    \[ 
+        U(P'', f, \alpha) - L(P'', f, \alpha) \geqslant \big[ M_i(f) - m_i(f) \big] \big[ \alpha(y) - \alpha(c) \big] \,.
+    \]
+    Here $ M_i(f) = \sup f([c, y]) $ and $ m_i(f) = \inf f([c, y]) $. Since $ f $ is right-discontinuous at $ c $, we can find $ x \in (c, y) $ such that
+    \[ 
+        \abs{ f(x) - f(c) } \geqslant \varepsilon \,.
+    \]
+    This implies $ M_i(f) - m_i(f) \geqslant \varepsilon $. Because $ P \finer P'' $,
+    \[ 
+        U(P, f, \alpha) - L(P, f, \alpha) \geqslant U(P'', f, \alpha) - L(P'', f, \alpha) \geqslant \varepsilon^2 \,.
+    \]
+    So $ f $ does not satisfies Riemann's condition, hence $ \int_a^b f \dd \alpha $ does not exist.
+\end{proof}
+
+
+\section{Mean value theorems for integrals}
+\begin{theorem}[First MVT]
+    Assume $ \alpha \increasing [a, b] $ and $ f \in \Riemann(\alpha, [a, b]) $. Then there exists a real number $ c \in [\inf f, \sup f] $ such that
+    \[ 
+        \int_a^b f \dd \alpha = c \int_a^b \dd \alpha = c \big[ \alpha(b) - \alpha(a) \big]  \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    If $ \alpha(b) = \alpha(a) $ then the proof is done. Assume $ \alpha(b) > \alpha(a) $. For every partition $ P $, we have
+    \[ 
+        \inf f \cdot \big[ \alpha(b) - \alpha(a) \big] \leqslant L(P, f, \alpha) \leqslant \lowI \leqslant \upI \leqslant U(P, f, \alpha) \leqslant \sup f \cdot \big[ \alpha(b) - \alpha(a) \big] \,.
+    \]
+    Since $ f \in \Riemann $, then $ \int_a^b f \dd \alpha = \lowI = \upI $. Therefore
+    \[ 
+        \inf f \leqslant \int_a^b f \dd \alpha / \big[ \alpha(b) - \alpha(a) \big] \leqslant \sup f \,.
+    \]
+    So we have found $ c = \int_a^b f \dd \alpha / \int_a^b \dd \alpha \in [\inf f, \sup f] $.
+\end{proof}
+
+Using integration by parts, we can obtain the extended second MVT.
+\begin{theorem}[Second MVT]
+    Assume $ \alpha \in C[a, b] $ and $ f \increasing [a, b] $. Then there exists $ \xi \in [a, b] $ such that
+    \[ 
+        \int_a^b f \dd \alpha = f(a) \int_a^\xi \dd \alpha + f(b) \int_\xi^b \dd \alpha \,.
+    \]
+\end{theorem}
+
+\begin{proof} 
+    Note that $ \alpha $ is continuous, therefore the number $ c \in [\inf f, \sup f] $ is attained by $ f $, so $ c $ can be written as $ f(\xi) $.
+    \begin{align*}
+        \int_a^b f \dd \alpha &= [\alpha f]_a^b - \int_a^b \alpha \dd f \\
+        &= [\alpha f]_a^b - \alpha(\xi) \int_a^b \dd f \\
+        &= f(a) \big[ \alpha(\xi) - \alpha(a) \big] + f(b) \big[ \alpha(b) - \alpha(\xi) \big] \\
+        &= f(a) \int_a^\xi \dd \alpha + f(b) \int_\xi^b \dd \alpha \,.
+    \end{align*}
+\end{proof}
+
+Note the difference between two MVT theorems:
+\begin{itemize}
+    \item First MVT: $ \alpha \increasing $, mean value taken between $ [\inf f, \sup f] $
+    \item Second MVT: $ f \increasing $ and $ \alpha \in C $, mean value taken between interval $ [a, b] $
+\end{itemize}
+
+\section{Integral with variable upper limit}
+Suppose $ f \in \Riemann(\alpha, [a, b]) $ and $ \alpha \in \BV $, then theorem \ref{thm:BV-integrator-subinterval} told us $ f $ is integrable on arbitrary subinterval $ [c, d] \subseteq [a, b] $. Therefore for every $ x \in [a, b] $, the integral $ \int_a^x f \dd \alpha $ exists and can be seen as a function of $ x $. Define
+\[ 
+    F(x) = \int_a^x f \dd \alpha \,.
+\]
+
+$ F $ is closely related to $ f $ and $ \alpha $.
+\begin{theorem}
+    Assume $ f \in \Riemann(\alpha, [a, b]) $ and $ \alpha \in \BV[a, b] $. Then for $ F $ defined above, we have:
+    \begin{enumerate}
+        \item $ F \in \BV[a, b] $
+        \item $ \alpha $ continuous at a point implies $ F $ continuous at this point
+        \item Suppse $ \alpha \increasing [a, b] $. At $ x \in (a, b) $ where $ f $ is continuous and $ \alpha $ is differentiable, $ F' $ exists and
+        \[ 
+            F'(x) = f(x) \alpha'(x)
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    It suffice to assume $ \alpha \increasing [a, b] $. Let $ M = \sup f([a, b]) $, by MVT, 
+    \[ 
+        F(y) - F(x) = \int_x^y f \dd \alpha = c \big[ \alpha(y) - \alpha(x) \big] \leqslant M \big[ \alpha(y) - \alpha(x) \big] \,.
+    \]
+    This proves (1) and (2). Divided by $ y - x $, we have
+    \[ 
+        \dfrac{F(y) - F(x)}{y - x} = c \cdot \dfrac{\alpha(y) - \alpha(x)}{y - x} \,.
+    \]
+    Now let $ y \to x $, note $ c \to f(x) $.
+\end{proof}
+
+For Riemann integral, we have $ \alpha(x) = x $. This theorem gives us the first fundamental theorem of calculus:
+\begin{enumerate}
+    \item $ F $ is continuous on $ [a, b] $
+    \item $ F $ is differentiable on $ (a, b) $ and $ F'(x) = f(x) $
+\end{enumerate}
+
+\begin{theorem} \label{thm:move-right}
+    Assume $ f, g \in \Riemann(\alpha, [a, b]) $, and $ \alpha \increasing [a, b] $. Define $ F $ and $ G $ like above. Then $ f \in \Riemann(F) $ and $ g \in \Riemann(G) $ on $ [a, b] $, also $ fg \in \Riemann(\alpha) $ on $ [a, b] $, they satisfy
+    \[ 
+        \int_a^b fg \dd \alpha = \int_a^b f \dd G = \int_a^b g \dd F \,.    
+    \]
+\end{theorem}
+
+\begin{proof} We only prove $ f \in \Riemann(G) $ on $ [a, b] $. Proof of $ g \in \Riemann(F) $ is analogous. Since $ \alpha $ is monotonic, it is of bounded variation. Then $ f $ is integrable on every subinterval $ [c, d] \subseteq [a, b] $. We have
+    \[ 
+        S(P, f, G) = \sum_{k} f(t_k) \big[ G(x_k) - G(x_{k-1}) \big] = \sum_{k} \int_{x_{k-1}}^{x_k} f(t_k) g(t) \dd \alpha(t) \,,
+    \]
+    and
+    \[ 
+        \int_a^b f g \dd \alpha = \sum_{k} \int_{x_{k-1}}^{x_k} f(t) g(t) \dd \alpha(t) \,.
+    \]
+    Let $ M $ be an upper bound of $ g $, that is $ \abs{ g } \leqslant M $ on $ [a, b] $, then
+    \begin{align*}
+        \abs*{ S(P, f, G) - \int_a^b fg \dd \alpha } &= \abs*{ \sum_{k} \int_{x_{k-1}}^{x_k} \big[ f(t_k) - f(t) \big] g(t) \dd \alpha(t) } \\
+        &\leqslant \sum_{k} \int_{x_{k-1}}^{x_k} \abs{f(t_k) - f(t)} \abs{g(t)} \dd \alpha(t) \\
+        &\leqslant M \cdot \sum_{k} \int_{x_{k-1}}^{x_k} \big[ M_k(f) - m_k(f) \big] \dd \alpha(t) \,.
+    \end{align*}
+    Note that $ M_k(f) - m_k(f) $ is a constant on $ [x_{k-1}, x_k] $, therefore
+    \[ 
+        \int_{x_{k-1}}^{x_k} \big[ M_k(f) - m_k(f) \big] \dd \alpha(t) = \big[ M_k(f) - m_k(f) \big] \Delta \alpha_k \,.
+    \]
+    Finally,
+    \[ 
+        \abs*{ S(P, f, G) - \int_a^b fg \dd \alpha } \leqslant M \sum_{k} \big[ M_k(f) - m_k(f) \big] \Delta \alpha_k = M \big[ U(P, f, \alpha) - L(P, f, \alpha) \big] \,.
+    \]
+    Since $ f \in \Riemann(\alpha) $, by Riemann's condition $ U - L $ can be made arbitrarily small. This implies that $ f \in \Riemann(G) $ on $ [a, b] $.
+\end{proof}
+
+\section{Second fundamental theorem of calculus}
+\begin{theorem}[Second fundamental theorem of calculus]
+    Assume $ f \in \Riemann[a, b] $. Let $ F $ be a function such that $ F \in D(a, b) \cap C[a, b] $ and $ F'(x) = f(x) $ then
+    \[ 
+        \int_a^b f(x) \dd x = F(b) - F(a) \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Since $ f \in \Riemann[a, b] $, by Riemann's condition for partition $ P $ sufficiently fine, we have
+    \[ 
+        U(P, f) - L(P, f) < \varepsilon \,.
+    \]
+    Therefore, using MVT, we have $ F(x_k) - F(x_{k-1}) = f(\xi_k) \Delta x_k $ with $ \xi_k \in (x_{k-1}, x_k) $, then
+    \begin{align*}
+        \abs*{ S(P, f) - \big[ F(b) - F(a) \big] } &= \abs*{ \sum_{k} f(t_k) \Delta x_k - \sum_{k} \big[ F(x_k) - F(x_{k-1}) \big] }  \\
+        &= \abs*{ \sum_{k} \big[ f(t_k) - f(\xi_k) \big] \Delta x_k } \\
+        &\leqslant U(P, f) - L(P, f) < \varepsilon \,.
+    \end{align*}
+    By definition of Riemann integral, $ \int_a^b f(x) \dd x = F(b) - F(a) $.
+\end{proof}
+
+In theorem \ref{thm:reduction-1} that reduces Riemann-Stieltjes integrals to Riemann integrals, $ \alpha' $ is required to be continuous on $ [a, b] $. Now we can relax this condition by only requiring $ \alpha' $ to be integrable on $ [a, b] $.
+
+\begin{theorem} \label{thm:move-left}
+    If $ f \in \Riemann(\alpha, [a, b]) $, $ \alpha \in C[a, b] $ and $ \alpha' \in \Riemann[a, b] $, then
+    \[ 
+        \int_a^b f \dd \alpha = \int_a^b f(x) \alpha'(x) \dd x \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Let $ g = \alpha' $ and $ G(x) = \int_a^x g(x) \dd x = \alpha(x) - \alpha(a) $. Then
+    \begin{align*}
+        \int_a^b f(x) \alpha'(x) \dd x &= \int_a^b f(x) \dd G(x) = \int_a^b f(x) \dd (\alpha(x) - \alpha(a)) \\
+        &= \int_a^b f(x) \dd \alpha(x) - \int_a^b f(x) \dd (\alpha(a)) \\
+        &= \int_a^b f \dd \alpha \,.
+    \end{align*}
+\end{proof}
+
+Theorem \ref{thm:move-left} says that we can differentiate the integrator and move it to integrand. While theorem \ref{thm:move-right} says that we can integrate part of integrand and move it to integrator.
+
+\section{More on Riemann integral}
+\subsection{Change of variable}
+If we want to apply theorem \ref{thm:change-of-variable-general} to Riemann integrals to get change of variable theorem for this type, we assume that $ g' $ is continuous on $ [c, d] $. Also theorem \ref{thm:change-of-variable-general} requires $ g $ to be strictly monotonic. We can remove this condition, so $ g $ need not to be monotonic (injective).
+
+\begin{theorem}[Change of variable for Riemann integrals]
+    Assume $ g $ is continuously differentiable on $ [c, d] $. Let $ f $ be continuous on $ g([c, d]) $. 
+    \[ 
+        \int_{g(c)}^{g(d)} f(x) \dd x = \int_c^d f(g(t)) g'(t) \dd t \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Since $ f \circ g $ and $ g' $ are continuous, $ (f \circ g) \cdot g' $ is also continuous, the integral $ \int_c^d f(g(t)) g'(t) \dd t $ exists. For every $ x \in [c, d] $, the same integral on subinterval $ [c, x] $ still exists since integrator ($ t $) is of bounded variation.
+
+    Define $ F $ on $ g([c, d]) $ by
+    \[ 
+        F(x) = \int_{g(c)}^{x} f(t) \dd t \,.
+    \]
+    We have $ F'(x) = f(x) $ for $ x \in g([c, d]) $, thus by first fundamental theorem of calculus
+    \[ 
+        \int_c^x f(g(t)) g'(t) \dd t = \int_c^x \big[ F(g(t)) \big]' \dd t = F(g(x)) \,.
+    \]
+    Take $ x = d $ and done.
+\end{proof}
+
+Two sets of conditions for change of variable:
+\begin{enumerate}
+    \item $ g \in C^1[c, d] $ and strictly monotonic
+    \item $ g \in C^1[c, d] $ and $ f \in C^0(g([c, d])) $
+\end{enumerate}
+
+
+\subsection{Second MVT}
+\begin{theorem}
+    Suppose $ f \increasing [a, b] $ and $ g \in C[a, b] $. If $ A, B \in \R $ satisfies $ A \leqslant f(a+) $ and $ B \geqslant f(b-) $, then 
+    \begin{enumerate}
+        \item there is $ \xi \in [a, b] $ such that
+        \[ 
+            \int_a^b f(x) g(x) \dd x = A \int_a^\xi g(x) \dd x + B \int_\xi^b g(x) \dd x \,.
+        \]
+        \item (Bonnet's theorem) If $ f \geqslant 0 $, choose $ A = 0 $ and we have
+        \[ 
+            \int_a^b f(x) g(x) \dd x = B \int_\xi^b g(x) \dd x \,.
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Let $ G(x) = \int_a^x g(x) \dd x $, by first fundamental theorem of calculus, $ G \in C[a, b] $. If we redefine $ f $ so that $ f(a) = A $ and $ f(b) = B $, then $ f $ is still increasing, and the integral $ \int_a^b f(x) g(x) \dd x $ will not change since we only changed the value of $ f g $ at two points. So if we now use second MVT for Riemann-Stieltjes integral:
+    \begin{align*}
+        \int_a^b f(x) g(x) \dd x = \int_a^b f(x) \dd G(x) &= f(a) \int_a^\xi \dd G(x) + f(b) \int_\xi^b \dd G(x) \\
+        &= A \int_a^\xi g(x) \dd x + B \int_\xi^b g(x) \dd x \,.
+    \end{align*}
+\end{proof}
+
+\section{Riemann-Stieltjes integral with parameter}
+\begin{theorem}[Continuity of integral]
+    Let $ f $ be continuous on $ [a, b] \times [c, d] $. Assume $ \alpha \in \BV[a, b] $. Define $ F $ on $ [c, d] $ by
+    \[ 
+        F(y) = \int_a^b f(x, y) \dd \alpha(x) \,.
+    \]
+    Then $ F \in C[a, b] $. Suppose $ y_0 \in [c, d] $ then we can exchange limit and integral:
+    \[ 
+        \lim_{y \to y_0} \int_a^b f(x, y) \dd \alpha(x) = \int_a^b \lim_{y \to y_0} f(x, y) \dd \alpha(x) = \int_a^b f(x, y_0) \dd \alpha(x) \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Assume $ \alpha \increasing $. Since $ f $ is continuous on $ [a, b] \times [c, d] $, a closed set, $ f $ is also uniformly continuous on $ [a, b] \times [c, d] $. Given arbitrary $ \varepsilon > 0 $, we can find $ \delta > 0 $ such that $ \norm{(x, y) - (x', y')} < \delta $ implies $ \abs{ f(x, y) - f(x', y') } < \varepsilon / \big[ \alpha(b) - \alpha(a) \big] $. Therefore for every $ y $ such that $ \abs{ y - y_0 } < \delta $, we have $ \norm{(x, y) - (x, y_0)} < \delta $, and $ \abs{ f(x, y) - f(x, y_0) } < \varepsilon / \big[ \alpha(b) - \alpha(a) \big] $. Now we have
+    \begin{align*}
+        \abs{ F(y) - F(y_0) } = \abs*{ \int_a^b f(x, y) - f(x, y_0) \dd \alpha(x) } &\leqslant \int_a^b \abs{ f(x, y) - f(x, y_0) } \dd \alpha(x) \\
+        &< \dfrac{\varepsilon}{\alpha(b) - \alpha(a)} \int_a^b \dd \alpha(x) = \varepsilon \,.
+    \end{align*}
+    This shows that $ F $ is continuous at arbitrary $ y_0 \in [c, d] $. Hence $ f \in C[c, d] $.
+\end{proof}
+
+\subsection{Differentiation under the integral sign}
+\begin{theorem}[Differentiation of integral]
+    Let $ f $ be defined on $ [a, b] \times [c, d] $. Suppose $ \alpha \in \BV[a, b] $, define $ F $ on $ [c, d] $ by $ F(y) = \int_a^b f(x, y) \dd x $. If $ D_2 f $ is continuous on $ [a, b] \times [c, d] $, then $ F $ is differentiable on $ (c, d) $ with
+    \[ 
+        F'(y) = \int_a^b D_2 f(x, y) \dd \alpha(x) \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    Consider $ y_0 \in (c, d) $,
+    \begin{align*}
+        F'(y) = \lim_{y \to y_0} \dfrac{F(y) - F(y_0)}{y - y_0} &= \lim_{y \to y_0} \int_a^b \dfrac{f(x, y) - f(x, y_0)}{y - y_0} \dd \alpha(x) \\
+        &= \lim_{y \to y_0} \int_a^b D_2 f(x, \xi) \dd \alpha(x) \\
+        &= \int_a^b \lim_{y \to y_0} D_2 f(x, \xi) \dd \alpha(x) \\
+        &= \int_a^b D_2 f(x, y_0) \dd \alpha(x) \,.
+    \end{align*}
+\end{proof}
+
+A more rigorous proof is similar to the previous theorem about continuity.
+
+After using MVT we want to prove $ \lim_{y\to y_0} \int_a^b D_2 f(x, \xi) \dd \alpha(x) $ is $ \int_a^b D_2 f(x, y_0) \dd \alpha(x) $. Since $ D_2 f $ is continuous on $ [a, b] \times [c, d] $, it is also uniformly continuous. For every $ \varepsilon > 0 $, we can find $ \delta > 0 $, such that for every $ (x', y') $ and $ (x'', y'') $ in $ [a, b] \times [c, d] $ with $ \norm{(x', y') - (x'', y'')} < \delta $ we have:
+\[ 
+    \abs{ D_2 f(x', y') - D_2 f(x'', y'') } < \varepsilon / [\alpha(b) - \alpha(a)] \,.
+\]
+Therefore if $ \abs{ y - y_0 } < \delta $, then we also have $ \norm{(x, \xi) - (x, y_0)} < \delta $ , hence
+\[ 
+    \abs{ D_2 f(x, \xi) - D_2 f(x, y_0) } < \dfrac{\varepsilon}{\alpha(b) - \alpha(a)} \,.
+\]
+And
+\begin{align*}
+    \abs*{ \int_a^b D_2 f(x, \xi) \dd \alpha(x) - \int_a^b D_2 f(x, y_0) \dd \alpha(x) } &\leqslant \int_a^b \abs{ D_2 f(x, \xi) - D_2 f(x, y_0) } \dd \alpha(x) \\ 
+    &< \dfrac{\varepsilon}{\alpha(b) - \alpha(a)} \int_a^b \dd \alpha(x) = \varepsilon \,.
+\end{align*}
+
+\subsection{Interchanging the order of integration}
+\begin{theorem}
+    Let $ f \in C([a, b] \times [c, d]) $, $ \alpha \in \BV[a, b] $, $ \beta \in \BV[c, d] $. Define
+    \[ 
+        F(y) = \int_a^b f(x, y) \dd \alpha(x) \,, \qquad G(x) = \int_a^b f(x, y) \dd \beta(y) \,.
+    \]
+    Then
+    \[ 
+        \int_c^d F(y) \dd \beta(y) = \int_a^b G(x) \dd \alpha(x) \,.
+    \]
+    In other words, we can change the order of integration:
+    \[ 
+        \int_a^b \int_c^d f(x, y) \dd \beta(y) \dd \alpha(x) = \int_c^d \int_a^b f(x, y) \dd \alpha(x) \dd \beta(y) \,.
+    \]
+\end{theorem}
+
+Let $ Q = [a, b] \times [c, d] $. The idea is to subdivide $ [a, b] $ and $ [c, d] $ both into $ n $ subintervals, getting $ n^2 $ subrectangles $ Q_{ij} $. The integral can be split into $ n^2 $ integrals on $ Q_{ij} $, which can be estimated by $ f $ at some point in $ Q_{ij} $ using MVT for integrals.  Since $ f $ is continuous on each compact $ Q_{ij} $, it must be uniformly continuous. The distance between $ f(x', y') $ and $ f(x'', y'') $ can be made arbitrarily small, if we subdivide $ [a, b] \times [c, d] $ fine enough. That's how we control the difference $ \int_a^b \int_c^d - \int_c^d \int_a^b $.
+
+\begin{proof}
+    It suffices to assume $ \alpha, \beta \increasing $. Let $ Q = [a, b] \times [c, d] $. Given arbitrary $ \varepsilon > 0 $, continuity of $ f $ on $ Q $ implies uniformly continuity, hence there is $ \delta > 0 $ such that $ \abs{ f(x', y') - f(x'', y'') } < \varepsilon $ as long as $ \norm{(x', y') - (x'', y'')} < \delta $.
+    
+    Subdivide $ [a, b] $ and $ [c, d] $ both into $ n $ subintervals such that each subinterval has length less than $ \delta / 2 $. Suppose partition of $ [a, b] $ is $ \set{x_0, \dots, x_n} $ and partition of $ [c, d] $ is $ \set{y_0, \dots, y_n} $. Let the $ Q_{ij} $ be the subrectangle $ [x_{i-1}, x_i] \times [y_{j-1}, y_j] $, $ i = 1, \dots, n $ and $ j = 1, \dots, n $.
+
+    The integral $ \int_a^b G(x) \dd \alpha(x) $ can be split into $ n^2 $ integrals on each $ Q_{ij} $:
+    \[ 
+        \int_a^b \int_c^d f(x, y) \dd \beta(y) \dd \alpha(x) = \sum_{i=1}^{n} \sum_{j=1}^{n} \int_{x_{i-1}}^{x_i} \int_{y_{j-1}}^{y_j} f(x, y) \dd \beta(y) \dd \alpha(x) \,.
+    \]
+    Using first MVT for integral twice:
+    \begin{align*}
+        \int_a^b G(x) \dd \alpha(x) &= \sum_{i=1}^{n} \sum_{j=1}^{n} \int_{x_{i-1}}^{x_i}  f(x, y_j') \Delta \beta_j \dd \alpha(x) \\
+        &= \sum_{i=1}^{n} \sum_{j=1}^{n} f(x_i', y_j') \Delta \alpha_i \Delta \beta_j \,.
+    \end{align*}
+    Here $ (x_i', y_j') \in Q_{ij} $. Similarly we have
+    \[ 
+        \int_c^d F(y) \dd \beta(y) = \sum_{i=1}^{n} \sum_{j=1}^{n} f(x_i'', y_j'') \Delta \alpha_i \Delta \beta_j \quad (x_i'', y_j'') \in Q_{ij} \,.
+    \]
+    For every $ i \in [1 .. n] $ and every $ j \in [1 .. n] $, we have $ \norm{(x_i', y_j') - (x_i'', y_j'')} < \delta $, hence $ \abs{ f(x_i', y_j') - f(x_i'', y_j'') } < \varepsilon $. Therefore
+    \begin{align*}
+        \abs*{ \int_a^b G(x) \dd \alpha(x) - \int_c^d F(y) \dd \beta(y) } &\leqslant \sum_{i=1}^{n} \sum_{j=1}^{n} \abs{ f(x_i', y_j') - f(x_i'', y_j'') } \Delta \alpha_i \Delta \beta_j \\
+        &< \varepsilon \big[ \alpha(b) - \alpha(a) \big] \big[ \beta(d) - \beta(c) \big] \,.
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\section{Lebesgue's criterion for Riemann integrability}
+\subsection{Measure zero}
+\begin{definition}[Measure zero]
+    A set $ S \subseteq \R $ is said to have measure zero or to be null set if for every $ \varepsilon > 0 $, there is a countable covering of $ S $ by open intervals, the sum of whose lengths is less than $ \varepsilon $. In other words, we can use open intervals that have arbitrarily small total length to cover $ S $.
+\end{definition}
+
+Countable union of null sets is a null set.
+
+\begin{theorem} \label{thm:countable-union-null}
+    Let $ F = \set{F_1, F_2, \dots} $ where each $ F_i $ has measure zero, then $ \cup F $ has measure zero.
+\end{theorem}
+
+\begin{proof}
+    For every $ \varepsilon > 0 $, each $ F_k $ can be covered by a countable set of open intervals $ S_k $, and the total length of these intervals is less than $ \varepsilon / 2^k $. Now $ S = \bigcup_{k=1}^\infty S_k $ is a countable set of open intervals. $ S $ covers $ F $ and the total length of intervals in $ S $ is less than
+    \[ 
+        \sum_{k=1}^{\infty} \dfrac{\varepsilon}{2^k} = \varepsilon \,.
+    \]
+\end{proof}
+
+\begin{example} Some example of null set:
+    \begin{itemize}
+        \item Finite sets of real numbers $ \set{x_1, \dots, x_n} $
+        \item Countable sets of real numbers $ \set{x_1, x_2, \dots} $: since it's the countable union of sets with single real number
+        \item Set of rational numbers $ \Q $: since it's countable subset of $ \R $
+        \item Cantor set is an uncountable null set
+    \end{itemize}
+\end{example}
+
+\subsection{Oscillation}
+\begin{definition}
+    Assume $ f $ is bounded on an interval $ S $ and $ T \subseteq S $. The number
+    \[ 
+        \Omega_f (T) = \sup \set{f(x) - f(y) \colon x, y \in T}
+    \]
+    is call the oscillation of $ f $ on $ T $. The oscillation at a point $ x $ is defined by
+    \[ 
+        \omega_f (x) = \lim_{r \to 0+} \Omega_f (B(x, r) \cap S) \,.
+    \]
+\end{definition}
+
+If $ T \subseteq S $ then $ \set{f(x) - f(y) \colon x, y \in T} \subseteq \set{f(x) - f(y) \colon x, y \in S} $, therefore $ \Omega_f (T) \leqslant \Omega_f (S) $. This means $ \Omega_f (B(x, r) \cap S) $ is a decreasing bounded function and hence $ \omega_f (x) $ must exists.
+
+Also we have $ \omega_f (x) = 0 $ iff.\ $ f $ is continuous at $ x $.
+
+Next theorem shows that if $ \omega_f (x) < \varepsilon $ on compact interval, then $ \Omega_f ([c, d]) $ can be made less than $ \varepsilon $ if the length is sufficiently small.
+\begin{theorem} \label{thm:oscillation-on-interval-control}
+    Let $ f $ be bounded on $ [a, b] $. Given $ \varepsilon > 0 $, assume that $ \omega_f (x) < \varepsilon $ for $ x \in [a, b] $. Then there exists $ \delta > 0 $ (depending only on $ \varepsilon $), such that for every closed subinterval $ [c, d] \subseteq [a, b] $, $ d - c < \delta $ implies $ \Omega_f ([c, d]) < \varepsilon $.
+\end{theorem}
+
+\begin{proof}
+    For every $ x \in [a, b] $ we can find $ \delta_x > 0 $ (depending on both $ x $ and $ \varepsilon $) such that $ \Omega_f (B(x, \delta_x) \cap [a, b]) < \varepsilon $.
+
+    Since $ [a, b] $ is compact, by Heine-Borel theorem, $ \set{B(x, \delta_x / 2) \colon x \in [a, b]} $ as an open covering of $ [a, b] $ can be reduced to finite subcover $ \set{B(x_1, \delta_{x_1} / 2), \dots, B(x_n, \delta_{x_n} / 2)} $. Let $ \delta = \min \set{\delta_{x_1} / 2, \dots, \delta_{x_n} / 2} $. For an arbitrary closed subinterval $ [c, d] \subseteq [a, b] $ with $ d - c < \delta $, some $ B(x_i, \delta_{x_i} / 2) $ must have intersection with it, so $ [c, d] $ is contained in the bigger ball with same center $ B(x_i, \delta_{x_i}) $. And therefore $ \Omega_f ([c, d]) \leqslant \Omega_f (B(x_i, \delta_{x_i}) \cap [a, b]) < \varepsilon $.
+\end{proof}
+
+\begin{theorem} \label{thm:compact-J}
+    Let $ f $ be a bounded function on $ [a, b] $. For $ \varepsilon > 0 $, define
+    \[ 
+        J_\varepsilon = \set{x \in [a, b] \colon \omega_f (x) \geqslant \varepsilon} \,.
+    \]
+    Then $ J_\varepsilon $ is a closed set for every $ \varepsilon $.
+\end{theorem}
+
+For arbitrary limit point $ p $, there is a sequence in $ J_\varepsilon $ converges to $ p $, each element of the sequence has oscillation $ \omega_f \geqslant \varepsilon $. It natural to think that the oscillation of $ p $ will be affected because points in the sequence can get arbitrarily close to $ p $.
+
+\begin{proof}
+    Given $ \varepsilon > 0 $, let $ p $ be a limit point of $ J_\varepsilon $. For every $ r > 0 $, $ B(p, r) $ contains some point $ x \in J_\varepsilon $ different from $ p $. For this $ x $, since $ \omega_f (x) \geqslant \varepsilon $, we can find $ \delta > 0 $ small enough so that $ B(x, \delta) \subseteq B(p, r) $ and $ \Omega_f (B(x, \delta) \cap [a, b]) \geqslant \varepsilon $. Therefore for every $ r > 0 $:
+    \[ 
+        \Omega_f (B(p, r) \cap [a, b]) \geqslant \Omega_f (B(x, \delta) \cap [a, b]) \geqslant \varepsilon \,.
+    \]
+    This implies that $ \lim_{r\to 0+} \Omega_f (B(p, r) \cap [a, b]) \geqslant \varepsilon $, so $ p \in J_\varepsilon $. Hence $ J_\varepsilon $ contains all its limit points and is closed.
+\end{proof}
+
+\subsection{Lebesgue's criterion}
+\begin{theorem}
+    Let $ f $ be a bounded function on $ [a, b] $ and let $ D $ denote the set of discontinuities of $ f $ in $ [a, b] $. Then $ f \in \Riemann[a, b] $ iff.\ $ D $ has measure zero.
+\end{theorem}
+
+We say a property holds \textit{almost everywhere} on $ S $ if the set of points where this property doesn't hold has measure zero. ``Almost everywhere'' can also be abbreviated as ``a.e.'' for short. Now Lebesgue's criterion can be rephrased: $ f \in \Riemann[a, b] $ if and only if $ f $ is continuous a.e.\ on $ [a, b] $.
+
+Proof sketch ($ \Rightarrow $):
+\begin{enumerate}
+    \item Suppose $ D $ is not null set, then some $ D_r $ is not null set
+    \item Show that Riemann's condition cannot be satisfied
+    \begin{enumerate}
+        \item \textbf{Split} $ U - L $ into $ S_1 + S_2 $ where subintervals in $ S_1 $ contains points of $ D_r $
+        \item Show that $ S_1 \geqslant $ some positive number
+    \end{enumerate}
+\end{enumerate}
+
+
+\begin{proof}
+    ($ \Rightarrow $)
+    Let $ D_r = \set{x \in [a, b] \colon \omega_f (x) \geqslant 1/r } $. Then
+    \[ 
+         D = \bigcup_{r = 1}^\infty D_r \,.
+    \]
+    Suppose $ D $ does not have measure zero, then some $ D_r $ must not have measure zero by theorem \ref{thm:countable-union-null}. Thus there is some $ \varepsilon > 0 $, such that every collection of open intervals that covers $ D_r $ has total length $ \geqslant \varepsilon $.
+    
+    We'll show that for arbitrary partition $ P \in \Partition[a, b] $, the difference $ U(P, f) - L(P, f) $ can not be arbitrarily small. Split this difference into two parts:
+    \[ 
+        U(P, f) - L(P, f) = S_1 + S_2 \,,
+    \]
+    where the subintervals $ [x_{k-1}, x_k] $ in the sum $ S_1 $ contains points in $ D_r $ and $ S_2 $ contains the remainning terms. The corresponding $ (x_{k-1}, x_k) $ in $ S_1 $ covers all except possibly finite points of $ D_r $ (since they happended to be partition points). But the total length of these open intervals is still $ \geqslant \varepsilon $, since finite many points can always be covered by intervals whose total length arbitrarily small. Now for $ S_1 $ we have
+    \[ 
+        S_1 = \sum_{k} \big[ M_k (f) - m_k (f) \big] \Delta x_k \,.
+    \]
+    Inside, $ M_k (f) - m_k (f) \geqslant 1/r $ since every subinterval contains points in $ D_r $. Therefore
+    \[ 
+        S_1 \geqslant \dfrac{1}{r} \sum_k \Delta x_k \geqslant \dfrac{\varepsilon}{r} \,,
+    \]
+    meaning Riemann's condition cannot be satisfied.
+\end{proof}
+
+Proof sketch ($ \Leftarrow $): 
+\begin{enumerate}
+    \item $ D $ is null set, then every $ D_r $ is null set
+    \item $ A $ is union of open intervals that covers $ D_r $ and the total length can be made smaller than arbitrarily $ \varepsilon' $, since $ D_r $ is null set. The part of sum $ U - L $ on $ A $ can be controlled by $ \varepsilon' $ we choosed
+    \item $ B = [a, b] \setminus A $ is union of closed interval. $ B $ doesn't cover $ D_r $ so every point in $ B_r $ has oscillation $ < 1/r $. If we subdivide $ B $ fine enough, every subinterval will have $ M_k - m_k < 1/r $. Thus the part of sum $ U - L $ on $ B $ can be made arbitrarily small for large $ r $
+    \item Together $ U - L $ can be made arbitrarily small
+\end{enumerate}
+
+\begin{proof}
+    ($ \Leftarrow $)
+    Again we have $ D $, $ D_r $, and $ D = \bigcup_{r=1}^\infty D_r $. Since $ D $ is null set, every $ D_r $ is also a null set.
+
+    Since $ D_r $ is compact (theorem \ref{thm:compact-J}), there are finite number of open intervals that covers $ D_r $ and the total length can be less than arbitrary $ \varepsilon' $ we choose. Let $ A_r $ be the open set that is the union of these finite many open intervals. 
+    
+    Let $ B_r = [a, b] \setminus A_r $, then $ B_r $ is an union of finite number of closed sets. Every point in $ B_r $ has oscillation $ < 1/r $, then by theorem \ref{thm:oscillation-on-interval-control}, we can subdivide $ B_r $ to $ B_r' $ so that oscillation on every subinterval of $ B_r' $ is $ < 1/r $.
+
+    Construct a partition from endpoints of $ B_r' $. For every finer partition $ P $,
+    \[ 
+        U(P, f) - L(P, f) = \sum_{A_r} \big[ M_k(f) - m_k(f) \big] \Delta x_k + \sum_{B_r'} \big[ M_k(f) - m_k(f) \big] \Delta x_k \,.
+    \]
+    For sum on $ A_r $, we have $ \sum_{k} \Delta x_k $ can be less than $ \varepsilon' = 1/r $ we choosed, so
+    \begin{align*}
+        \sum_{A_r} \big[ M_k(f) - m_k(f) \big] \Delta x_k \leqslant (\sup f - \inf f) \sum_{A_r} \Delta x_k < \dfrac{\sup f - \inf f}{r} \,.
+    \end{align*}
+    For sum on $ B_r' $, we have $ M_k(f) - m_k(f) < 1 / r $, so
+    \begin{align*}
+        \sum_{B_r'} \big[ M_k(f) - m_k(f) \big] \Delta x_k \leqslant \dfrac{1}{r} \sum_{B_r'} \Delta x_k < \dfrac{b - a}{r} \,.
+    \end{align*}
+    Therefore for every $ r > 0 $,
+    \[ 
+        U(P, f) - L(P, f) < \dfrac{\sup f - \inf f + b - a}{r} \,,
+    \]
+    this can be made arbitrarily small if we choose $ r $ large enough. Hence $ f $ satisfies Riemann's condition and is integrable.
+\end{proof}
+
+Using Lebesgue's criterion, many properties of Riemann integral are now obvious:
+\begin{enumerate}
+    \item $ f \in \BV \Rightarrow f \in \Riemann $
+    \item $ f \in \Riemann[a, b] $ and $ [c, d] \subseteq [a, b] $, then $ f \in \Riemann[c, d] $
+    \item $ f \in \Riemann \Rightarrow \abs{ f } \in \Riemann $
+    \item $ f, g \in \Riemann \Rightarrow fg \in \Riemann $. And $ f / g \in \Riemann $ if $ g $ is bounded away from $ 0 $
+    \item $ f, g $ bounded on $ [a, b] $ and have same discontinuities, then $ f \in \Riemann $ iff.\ $ g \in \Riemann $
+    \item $ g \in \Riemann[a, b] $ and is bounded in a compact interval ($ m \leqslant g \leqslant M $), $ f $ continuous on $ [m, M] $, then $ f \circ g \in \Riemann[a, b] $
+\end{enumerate}
+
+\begin{example} (Using integrability of composite function)
+    Suppose $ f^3 \in \Riemann $ on $ [a, b] $, then $ f \in \Riemann $. Let $ \phi(x) = x^{1/3} $.
+    
+    This is because $ m \leqslant f^3 \leqslant M $ and $ \phi \in C^0([m, M]) $. Therefore $ f = \phi \circ f^3 \in \Riemann $.
+
+    However $ f^2 \in \Riemann $ doesn't implies $ f \in \Riemann $. Consider the counter-example where
+    \[ 
+        f(x) =
+        \begin{cases}
+            1 &, x \in \Q \\
+            -1 &, x \not\in \Q
+        \end{cases} \,.
+    \]
+    $ f^2 = 1 \in \Riemann $ but $ f \not\in \Riemann $. Let $ \psi (x) = \sqrt{x} $. Using the rule can only give us $ \abs{ f } = \psi \circ f^2 \in \Riemann $.
+\end{example}
+
+
+\end{document}

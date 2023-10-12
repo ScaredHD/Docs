@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand*{\proofname}{Proof}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=section]{theorem}
+    \declaretheorem[numberwithin=section]{proposition}
+    \declaretheorem[numberwithin=section]{definition}
+    \declaretheorem[numbered=no]{example}
+\usepackage{esint}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+\usepackage[italic=true]{derivative}
+
+\newcommand{\R}{\mathbb R}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+
+
+\begin{document}
+\section{Supremum}
+\subsection{Sup and arithmetic operations}
+\begin{definition}[Operations on sets]
+    Given two sets $ A $ and $ B $ of real numbers, and $ r \in \R $, define following elementwise operations:
+    \begin{itemize}
+        \item Minkowski addition: $ A + B \coloneq \set{a + b \colon a \in A, b \in B} $
+        \item Scalar addition: $ A + c \coloneq \set{a + c \colon a \in A} $ for some $ c \in \R $
+        \item Scalar multiplication: $ cA = \set{ca \colon a \in A} $ for some $ c \in \R $
+    \end{itemize}
+\end{definition}  
+
+\begin{theorem}
+    For operations defined above, we have:
+    \begin{itemize}
+        \item $ \sup (A + B) = \sup A + \sup B $
+        \item $ \sup (A + c) = \sup A + c $
+        \item $ \sup (cA) = r \sup A $ for $ c \geqslant 0 $
+    \end{itemize}
+\end{theorem}
+
+$ A + c $ can be seen as a special case $ A + \set{c} $.
+
+\subsection{Sup and inequalities}
+\begin{theorem}
+    If $ A \subseteq B $, then $ \sup A \leqslant \sup B $.
+\end{theorem}
+
+\begin{definition}[Set comparison]
+    Given two sets $ A $ and $ B $. If for every $ a \in A $ and every $ b \in B $, we have $ a \leqslant b $. Then we denote that $ A \leqslant B $. If $ A $ is bounded above by a number $ c $, that is, for every $ a \in A $ we have $ a \leqslant c $, then we denote that $ A \leqslant c $.
+\end{definition}
+
+$ A \leqslant c $ can be seen as a special case that $ A \leqslant \set{c} $.
+
+\begin{theorem}[Comparison property] We can take supremum on both sides.
+    \begin{enumerate}
+        \item If $ A \leqslant B $, then $ \sup A \leqslant \sup B $
+        \item If $ A \leqslant c $, then $ \sup A \leqslant c $
+    \end{enumerate}
+\end{theorem}
+
+
+\subsection{Sup and functions}
+Supremum is often applied to a function's range. In this circumstance, we have the following alternative notation of supremum, in which $ \sup $ can be seen as an operator:
+\[ 
+    \sup_{x \in S} f(x) \coloneq \sup \set{f(x) \colon x \in S} \,.
+\]
+
+We ignore the domain and write $ \sup f $, when it is clear from the context.
+
+Relations bewteen functions are defined pointwise. For $ f, g \colon S \to \R $, the relation $ f \leqslant g $ means $ f(x) \leqslant g(x) $ for all $ x \in S $. Arithmetic operations also perform in pointwise manner. For example $ (f + g)(x) = f(x) + g(x) $.
+
+
+\begin{theorem}
+    If $ f \leqslant g $, then we can take supremum of both sides, that is
+    \[ 
+        \sup_{x \in S} f(x) \leqslant \sup_{x \in S} g(x) \,.
+    \]
+\end{theorem}
+
+\begin{proof}
+    For every $ x \in S $, $ f(x) \leqslant g(x) \leqslant \sup g $, this means that $ \sup g $ is an upper bound of $ \set{f(x) \colon x \in S} $, therefore $ \sup f \leqslant \sup g $.
+\end{proof}
+
+As a special case, if $ f \leqslant c $, then $ \sup f \leqslant c $.
+
+
+\begin{theorem}
+    $ \sup (f + g) \leqslant \sup f + \sup g $.
+\end{theorem}
+
+\begin{proof}
+    Note that $ \set{f(x) + g(x) \colon x \in S} \subseteq \set{f(x) \colon x \in S} + \set{g(x) \colon x \in S} $.
+\end{proof}
+
+
+\end{document}

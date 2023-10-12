@@ -1,0 +1,207 @@
+\documentclass{article}
+\hfuzz=4pt
+
+\usepackage{parskip}
+    \setlength{\parindent}{0em}
+\usepackage{geometry}
+    \geometry{left=4cm,right=4cm,top=2cm,bottom=2cm}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{thmtools}
+    \renewcommand*{\proofname}{Proof}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    \declaretheorem[numberwithin=section]{proposition}
+    \declaretheorem[numberwithin=section]{theorem}
+    \declaretheorem[numberwithin=section]{definition}
+    \declaretheorem[numbered=no]{example}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{setspace} 	 % 行间距 \begin{spacing}{arg}
+\usepackage{extarrows}
+\usepackage{esint}
+\usepackage{hyperref}
+    \hypersetup{colorlinks=true,linktoc=all,linkcolor=blue}
+\usepackage[italic=true]{derivative}
+
+\renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
+\renewcommand{\rm}{\mathrm}
+\renewcommand{\cal}{\mathcal}
+\newcommand{\scr}{\mathscr}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\DeclarePairedDelimiter\set{\lbrace}{\rbrace}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclareMathOperator{\BV}{BV}
+
+\title{Functions of bounded variation}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{BV functions}
+\begin{theorem}
+    Suppose $ f, g \in \BV[a, b] $, then $ f + g, f - g, f \cdot g \in \BV[a, b] $. If $ g $ is bounded away from zero, that is $ |f| > m $ for some positive $ m $, then $ f / g \in \BV[a, b] $.
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+Monotonic functions is of bounded variation. 
+
+\begin{theorem} \label{thm:monotonic-implies-BV}
+    If $ f \colon [a, b] \to \R $ is monotonic, then $ f \in \BV[a, b] $.
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+Continuous functions with bounded derivatives in the interior are of bounded variation. But derivative of a BV function is not necessary bounded. See examples below.
+
+\begin{theorem} \label{thm:bounded-derivative}
+    If $ f \in C[a, b] $, and has bounded derivatives on $ (a, b) $, that is, $ |f'(x)| \leqslant M $ for some $ M > 0 $, then $ f \in \BV[a, b] $.
+\end{theorem}
+
+
+\begin{proof}
+    
+\end{proof}
+
+BV functions must be bounded.
+
+\begin{theorem} \label{thm:BV-necessary}
+    If $ f \in \BV[a, b] $, then $ f $ is bounded on $ [a, b] $.
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{example}[BV functions] \ 
+    \begin{itemize}
+        \item $ f(x) = x^{1/3} $, then $ f \in \BV[-a, a] $ for arbitrary finite $ a $, since $ f $ is monotonic on $ \R $ (theorem \ref{thm:monotonic-implies-BV}). Note that $ f'(0) = \infty $
+        \item $ f(x) = x^2 \sin (1 / x) $ and $ f(0) = 0 $. Then $ f \in \BV[0, 1] $ because of theorem \ref{thm:bounded-derivative}
+    \end{itemize}
+\end{example}
+
+\begin{example}[non-BV functions] \ 
+    \begin{itemize}
+        \item $ f(x) = x \cos (\pi / 2x) $ and $ f(0) = 0 $. Then $ f \not\in \BV[0, 1] $. Consider partition $ P = \set{0, 1/2n, 1/(2n - 1), \dots, 1/2, 1} $, as $ n \to \infty $, the sum $ \sum_{k=1}^{2n} |\Delta f_k| \to \infty $
+        \item $ f(x) = 1/x $ and $ f(0) = 0 $. Then $ f \not\in \BV[0, 1] $ since $ f $ is not bouned (theorem \ref{thm:BV-necessary})
+    \end{itemize}
+\end{example}
+
+
+\section{Total variation}
+For a BV function $ f $ on $ [a, b] $, and an arbitrary partition $ P = \set{x_0 < x_1 < \cdots < x_n} $, by definition the sum $ \sum_{k=1}^{n} |\Delta f_k| $ is bounded from above (here $ \Delta f_k = f(x_k) - f(x_{k-1}) $). Therefore for all such sums there must be a least upper bound.
+\begin{definition}[Total variation]
+    If $ f \in \BV[a, b] $, define total variation of $ f $ on $ [a, b] $ by:
+    \[ 
+        V_{a}^{b} (f) = \sup_{P \in \mathcal P} \sum_{P}|\Delta f| \,,
+    \]
+    where $ \sum_{P} |\Delta f| $ for a partition $ P = \set{x_0, \dots, x_n} $ is the sum $ \sum_{k=1}^{n} |\Delta f_k| $.
+\end{definition}
+
+Alternative notation: $ V(f, [a, b]) $.
+
+From definition, we know immediately $ V(f) \geqslant 0 $, and that $ V(f) = 0 $ iff.\ $ f $ is constant.
+
+As a functional on real-valued function space, there are inequalities for total variations and function operations.
+
+\begin{theorem}
+    Assume $ f, g \in \BV[a, b] $, then:
+    \begin{itemize}
+        \item $ V(f \pm g) \leqslant V(f) + V(g) $
+        \item $ V(f \cdot g) \leqslant V(f) \cdot \sup|g| + \sup|f| \cdot V(g) $
+        \item suppose $ |f| \geqslant M > 0 $, then $ V(1/f) \leqslant V(f) / M^2 $
+    \end{itemize}
+\end{theorem}
+
+This theorem shows that $ \BV[a, b] $, with addition and scalar multiplication, is a vector space, because:
+\begin{enumerate}
+    \item $ 0 \in \BV[a, b] $
+    \item if $ f, g \in \BV[a, b] $, then $ f + g \in \BV[a, b] $
+    \item if $ f \in \BV[a, b] $, then $ \lambda f \in \BV[a, b] $ for every $ \lambda \in \R $
+\end{enumerate}
+
+The interval can be divided, and total variation satisfies additive property.
+\begin{theorem}[Additive property]
+    If $ f \in BV[a, b] $, and $ c \in (a, b) $, then $ f \in BV[a, c] \cap BV[c, b] $ and we have:
+    \[ 
+        V_a^b (f) = V_a^c (f) + V_c^b (f) \,.
+    \]
+\end{theorem}
+
+If we keep $ f $ and left endpoint $ a $ fixed, consider right endpoint as a variable, we get a new function. 
+\begin{theorem}
+    Let $ f \in \BV[a, b] $ and define $ V(x) $ to be $ V_a^x (f) $ for $ x \in (a, b] $, and define $ V(a) = 0 $. Then:
+    \begin{itemize}
+        \item $ V $ is increasing on $ [a, b] $
+        \item $ V - f $ is increasing on $ [a, b] $
+    \end{itemize}
+\end{theorem}
+
+This immediately gives us:
+
+\begin{theorem}
+    $ f \in \BV[a, b] $, iff.\ $ f $ can be expressed as $ g - h $ where $ g, h $ are increasing or strictly increasing.
+\end{theorem}
+
+For continuous functions $ f $, it corresponding $ V $ function's continuity depends on $ f $.
+
+\begin{theorem}
+    Let $ \sum_{P} |\Delta f| $ to denote the sum $ \sum_{k=1}^{n} $
+\end{theorem}
+
+\begin{theorem}
+    Suppose $ f \in \BV[a, b] $, then $ f $ is continuous at $ x \in [a, b] $ iff.\ $ V $ is continuous at $ x $.
+\end{theorem}
+
+\begin{proof}
+\end{proof}
+
+\section{Rectifiable curves}
+Let path $ f \colon [a, b] \to \R^n $ and $ P = \set{x_0, \dots, x_n} \in \mathcal{P}[a, b] $, and define $ \Lambda (f, P) $ to be the sum $ \sum_{k=1}^{n} \norm{f(x_{k}) - f (x_{k-1})} $.
+
+\begin{definition}[Rectifiable curves]
+    If $ \set{\Lambda(f, P) \colon P \in \cal P[a, b]} $ is bounded, then path $ f $ is said to be rectifiable and define its arc length by:
+    \[ 
+        \Lambda_{a}^{b}(f) = \sup_{P \in \cal P[a, b]} \Lambda(f, P) \,.
+    \]
+\end{definition}
+
+For vector $ x = (x_1, \dots, x_n) $ we have
+\[ 
+    |x_i| \leqslant \norm{x} \leqslant |x_1| + \cdots + |x_n| \,.
+\]
+This fact is used to prove the following similar relation between arc length and toatl variation.
+
+\begin{theorem}
+    Let $ f = (f_1, \dots, f_n) $ be a path on $ [a, b] $. Then $ f $ is rectifiable iff.\ each component $ f_k $ is of bounded variation. And we have:
+    \begin{align} \label{eq:arclength}
+        V_a^b (f_k) \leqslant \Lambda_a^b (f) \leqslant V_a^b (f_1) + \cdots + V_a^b (f_n) \,.
+    \end{align}
+\end{theorem}
+
+Like total variation, there are additive property for arc length.
+
+\begin{theorem}[Additive property]
+    If $ f $ is rectifiable on $ [a, b] $, and $ c \in (a, b) $, then we have
+    \[ 
+        \Lambda_a^b (f) = \Lambda_a^c (f) + \Lambda_c^b (f) \,.
+    \]
+\end{theorem}
+
+Like total variation, keep $ f $ fixed and consider right endpoint as the variable. Define $ s(x) = \Lambda_a^x (f) $ and let $ s(a) = 0 $.
+
+\begin{theorem}
+    The function $ s $ is increasing and continuous on $ [a, b] $. If there is no subinterval of $ [a, b] $ on which $ f $ is constant, then $ s $ is strictly increasing.
+\end{theorem}
+
+\end{document}
